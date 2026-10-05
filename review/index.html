@@ -1,0 +1,1468 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>國中自然 2上｜CH1 基本測量 × CH2 物質的世界｜複習網站</title>
+<style>
+:root{
+  --surface:#fcfcfb; --bg:#f3f4f1; --card:#ffffff; --line:#e3e3df; --grid:#ebebe7;
+  --text:#0b0b0b; --text2:#52514e; --muted:#7a7974;
+  --c1:#2a78d6; --c1-ink:#1c5cab; --c1-soft:#e8f1fc;
+  --c2:#eb6834; --c2-ink:#b4471d; --c2-soft:#fdeee7;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --good:#1a7f37; --good-soft:#e7f5ea; --bad:#c62828; --bad-soft:#fdecec;
+  --warn:#8a5a00; --warn-soft:#fff5dc;
+  --radius:14px; --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(0,0,0,.05);
+  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC","Heiti TC",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.75;font-size:17px}
+button,input,select{font:inherit;color:inherit}
+sup,sub{line-height:0}
+a{color:var(--c1-ink)}
+
+/* ---------- layout ---------- */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--surface);border-bottom:1px solid var(--line)}
+.topbar h1{font-size:18px;margin:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .grow{flex:1}
+#cylSvg svg{max-width:400px;margin:0 auto}
+#beaker svg{max-width:220px;margin:0 auto}
+.chart .svgbox svg{min-width:500px}
+#stateSvg svg{max-width:640px;margin:0 auto}
+.menu-btn{display:none;white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px;cursor:pointer}
+.prog{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text2);white-space:nowrap}
+.prog-bar{width:120px;height:8px;background:var(--grid);border-radius:99px;overflow:hidden}
+.prog-bar i{display:block;height:100%;background:var(--good);border-radius:99px;transition:width .3s}
+.wrap{display:flex;max-width:1280px;margin:0 auto}
+nav.side{width:260px;flex:none;position:sticky;top:57px;height:calc(100vh - 57px);overflow:auto;padding:18px 12px 40px;border-right:1px solid var(--line);background:var(--surface)}
+nav.side .grp{font-size:13px;font-weight:700;color:var(--muted);margin:18px 10px 6px;letter-spacing:.05em}
+nav.side a{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--text);font-size:15.5px}
+nav.side a:hover{background:var(--bg)}
+nav.side a.active{background:var(--c1-soft);color:var(--c1-ink);font-weight:700}
+nav.side a.ch2.active{background:var(--c2-soft);color:var(--c2-ink)}
+nav.side a .tick{margin-left:auto;font-size:13px;color:var(--good);font-weight:700}
+main{flex:1;min-width:0;padding:28px 32px 80px}
+.page{display:none;max-width:900px;margin:0 auto}
+.page.show{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.scrim{display:none}
+
+@media (max-width:900px){
+  .menu-btn{display:block}
+  nav.side{position:fixed;left:0;top:57px;z-index:40;transform:translateX(-100%);transition:transform .25s;box-shadow:var(--shadow)}
+  nav.side.open{transform:none}
+  .scrim.show{display:block;position:fixed;inset:57px 0 0 0;background:rgba(0,0,0,.25);z-index:35}
+  main{padding:20px 16px 80px}
+  .prog-bar{width:70px}
+  .topbar h1{font-size:16px}
+}
+
+/* ---------- typography & blocks ---------- */
+.page-head{margin-bottom:22px}
+.chip{display:inline-block;font-size:13px;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--c1-soft);color:var(--c1-ink)}
+.ch2 .chip,.chip.ch2{background:var(--c2-soft);color:var(--c2-ink)}
+.page-head h2{font-size:30px;margin:8px 0 4px;line-height:1.3}
+.page-head p{margin:0;color:var(--text2)}
+h3{font-size:21px;margin:0 0 10px;line-height:1.4}
+h4{font-size:17px;margin:16px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:0 0 18px;box-shadow:var(--shadow)}
+.card > :last-child{margin-bottom:0}
+.card p{margin:0 0 10px}
+.card ul,.card ol{margin:0 0 10px;padding-left:1.4em}
+.card li{margin:3px 0}
+.num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--c1);color:#fff;font-size:15px;font-weight:700;margin-right:8px;vertical-align:2px}
+.ch2 .num{background:var(--c2)}
+.box{border-radius:12px;padding:12px 16px;margin:12px 0;border:1px solid}
+.box b.tag{display:inline-block;font-size:13px;padding:1px 8px;border-radius:6px;margin-right:6px;color:#fff;vertical-align:1px}
+.box.key{background:var(--c1-soft);border-color:#c9ddf6}
+.box.key b.tag{background:var(--c1-ink)}
+.ch2 .box.key{background:var(--c2-soft);border-color:#f6d3c3}
+.ch2 .box.key b.tag{background:var(--c2-ink)}
+.box.trap{background:var(--warn-soft);border-color:#f0dca8}
+.box.trap b.tag{background:var(--warn)}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;font-size:20px;font-weight:700;padding:14px;margin:12px 0;background:var(--surface);border:1px dashed #c8c8c2;border-radius:12px;text-align:center}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.3}
+.frac > span:last-child{border-top:2px solid currentColor;padding-top:2px;margin-top:2px}
+table.t{border-collapse:collapse;width:100%;margin:10px 0;font-size:15.5px;background:var(--card)}
+table.t th,table.t td{border:1px solid var(--line);padding:7px 10px;text-align:center}
+table.t th{background:var(--surface);font-weight:700}
+.tbl-scroll{overflow-x:auto}
+details{margin:10px 0;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--text2)}
+details > div{padding:0 16px 12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:640px){.grid2,.grid3{grid-template-columns:1fr}}
+.mini{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface)}
+.mini h4{margin:0 0 4px}
+.mini p{margin:0;font-size:15.5px}
+.muted{color:var(--muted);font-size:14.5px}
+.hl{background:linear-gradient(transparent 60%,#ffe59a 60%);font-weight:700}
+
+/* ---------- widgets ---------- */
+.widget{border:2px solid var(--c1-soft);background:#fbfdff}
+.ch2 .widget{border-color:var(--c2-soft);background:#fffcfa}
+.widget .w-title{display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px;margin-bottom:10px}
+.widget .w-title::before{content:"🎯";}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:600;transition:background .15s,border-color .15s}
+.btn:hover{border-color:#b9b9b3;background:var(--surface)}
+.btn.primary{background:var(--c1);border-color:var(--c1);color:#fff}
+.btn.primary:hover{background:var(--c1-ink)}
+.ch2 .btn.primary{background:var(--c2-ink);border-color:var(--c2-ink)}
+.btn:disabled{opacity:.5;cursor:default}
+input.in{border:1px solid #c8c8c2;border-radius:10px;padding:8px 12px;width:120px;background:#fff}
+input.in:focus{outline:3px solid var(--c1-soft);border-color:var(--c1)}
+.fb{margin-top:10px;padding:10px 14px;border-radius:10px;font-weight:600}
+.fb.ok{background:var(--good-soft);color:var(--good)}
+.fb.no{background:var(--bad-soft);color:var(--bad)}
+.fb.info{background:var(--surface);color:var(--text2);border:1px solid var(--line)}
+.fb:empty{display:none}
+.svgbox{width:100%;overflow-x:auto}
+.svgbox svg{display:block;max-width:100%;height:auto}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:7px 14px;cursor:pointer;font-weight:600}
+.seg button.on{background:var(--c1);color:#fff}
+.ch2 .seg button.on{background:var(--c2-ink)}
+.choice-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-top:10px}
+.big-q{font-size:20px;font-weight:700;padding:14px;background:var(--surface);border-radius:12px;border:1px solid var(--line);text-align:center}
+.score{font-weight:700;color:var(--text2)}
+
+/* chart */
+.chart{position:relative}
+.chart .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--text2);margin-bottom:4px}
+.chart .legend span{display:inline-flex;align-items:center;gap:6px}
+.chart .legend i{display:inline-block;width:16px;height:3px;border-radius:2px}
+.tip{position:absolute;pointer-events:none;background:#1f1f1e;color:#fff;font-size:13.5px;padding:6px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-115%);opacity:0;transition:opacity .1s;z-index:5}
+.tip.show{opacity:1}
+
+/* quiz */
+.quiz-wrap h3::before{content:"📝 "}
+.q-card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--card)}
+.q-num{font-size:13px;font-weight:700;color:var(--muted)}
+.q-stem{margin:4px 0 10px;font-weight:600}
+.q-opts{display:grid;gap:8px}
+.q-opt{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 12px;cursor:pointer;line-height:1.6}
+.q-opt:hover:not(:disabled){border-color:var(--c1);background:var(--c1-soft)}
+.q-opt:disabled{cursor:default}
+.q-letter{flex:none;font-weight:700;width:22px;height:22px;border-radius:6px;background:var(--grid);display:inline-flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px}
+.q-opt.is-right{border-color:var(--good);background:var(--good-soft)}
+.q-opt.is-right .q-letter{background:var(--good);color:#fff}
+.q-opt.is-wrong{border-color:var(--bad);background:var(--bad-soft)}
+.q-opt.is-wrong .q-letter{background:var(--bad);color:#fff}
+.q-fb{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:15.5px}
+.q-fb.ok{background:var(--good-soft)} .q-fb.no{background:var(--bad-soft)}
+.q-fb b{display:block}
+.q-fb.ok b{color:var(--good)} .q-fb.no b{color:var(--bad)}
+.q-summary{position:sticky;bottom:12px;margin-top:14px;padding:12px 16px;border-radius:12px;background:#1f1f1e;color:#fff;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+.q-summary .btn{background:#fff;color:#111;border-color:#fff}
+.done-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border:2px dashed var(--line);border-radius:14px;padding:14px 18px;margin:26px 0 0;background:var(--surface)}
+.done-bar.is-done{border-color:var(--good);background:var(--good-soft)}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.pager a{flex:1;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px 16px;text-decoration:none;color:var(--text)}
+.pager a small{display:block;color:var(--muted)}
+.pager a.next{text-align:right}
+
+/* home */
+.hero{background:linear-gradient(135deg,#1c5cab 0%,#2a78d6 55%,#eb6834 130%);color:#fff;border-radius:20px;padding:30px 28px;margin-bottom:20px}
+.hero h2{font-size:30px;margin:0 0 6px;line-height:1.35}
+.hero p{margin:0;opacity:.95}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:14px 0 22px}
+.tile{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);transition:transform .15s}
+.tile:hover{transform:translateY(-2px)}
+.tile .t-top{display:flex;justify-content:space-between;align-items:center}
+.tile h4{margin:6px 0 2px;font-size:18px}
+.tile p{margin:0;font-size:14.5px;color:var(--text2)}
+.tile .st{font-size:13px;font-weight:700}
+.tile .st.ok{color:var(--good)}
+.tile .st.no{color:var(--muted)}
+.tile.ch1{border-top:4px solid var(--c1)} .tile.ch2{border-top:4px solid var(--c2)} .tile.ex{border-top:4px solid #1baf7a}
+
+/* flashcards */
+.flash{perspective:1000px;margin:10px auto;max-width:560px}
+.flash-inner{position:relative;min-height:230px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-inner{transform:rotateY(180deg)}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);box-shadow:var(--shadow)}
+.flash-front{background:#fff;font-size:22px;font-weight:700}
+.flash-back{background:var(--c1-soft);transform:rotateY(180deg);font-size:17.5px}
+.flash-face small{position:absolute;top:10px;left:14px;font-size:12.5px;color:var(--muted);font-weight:600}
+.cards-list{display:grid;gap:10px}
+.cards-list .mini b{display:block}
+
+/* states diagram */
+.state-lbl{cursor:pointer}
+.state-lbl rect{transition:fill .15s}
+.state-lbl:hover rect,.state-lbl.on rect{fill:#fff3c4}
+
+/* sorting */
+.sort-item{font-size:20px;font-weight:700;text-align:center;padding:18px;border-radius:12px;background:var(--surface);border:1px solid var(--line);margin:8px 0}
+
+/* beaker sim */
+.sim{display:grid;grid-template-columns:220px 1fr;gap:16px;align-items:center}
+@media (max-width:640px){.sim{grid-template-columns:1fr}}
+input[type=range]{width:100%;accent-color:var(--c2-ink)}
+.stat{display:inline-block;padding:3px 10px;border-radius:8px;font-weight:700}
+.stat.un{background:var(--c1-soft);color:var(--c1-ink)}
+.stat.sat{background:var(--good-soft);color:var(--good)}
+.stat.over{background:var(--warn-soft);color:var(--warn)}
+
+/* order game */
+.order-pool,.order-done{display:grid;gap:8px;margin:8px 0}
+.order-pool button{text-align:left}
+.order-done div{padding:8px 12px;border-radius:10px;background:var(--good-soft);border:1px solid #bfe3c8}
+
+@media print{
+  .topbar,nav.side,.done-bar,.pager,.widget,.quiz-wrap{display:none!important}
+  .page{display:block!important}
+  body{background:#fff}
+  .card{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="開啟目錄">☰ 目錄</button>
+  <h1>自然 2上 複習站｜CH1 × CH2</h1>
+  <div class="grow"></div>
+  <div class="prog" title="已讀完的小節"><span id="progTxt">0/6</span><div class="prog-bar"><i id="progBar" style="width:0"></i></div></div>
+</header>
+<div class="scrim" id="scrim"></div>
+
+<div class="wrap">
+<nav class="side" id="side">
+  <a href="#home" data-nav="home">🏠 首頁・使用說明</a>
+  <div class="grp">第 1 章　基本測量</div>
+  <a href="#s1-1" data-nav="s1-1">1-1 長度、質量與時間<span class="tick" data-tick="s1-1"></span></a>
+  <a href="#s1-2" data-nav="s1-2">1-2 測量與估計<span class="tick" data-tick="s1-2"></span></a>
+  <a href="#s1-3" data-nav="s1-3">1-3 體積與密度<span class="tick" data-tick="s1-3"></span></a>
+  <div class="grp">第 2 章　物質的世界</div>
+  <a href="#s2-1" class="ch2" data-nav="s2-1">2-1 認識物質<span class="tick" data-tick="s2-1"></span></a>
+  <a href="#s2-2" class="ch2" data-nav="s2-2">2-2 溶液與濃度<span class="tick" data-tick="s2-2"></span></a>
+  <a href="#s2-3" class="ch2" data-nav="s2-3">2-3 混合物的分離<span class="tick" data-tick="s2-3"></span></a>
+  <div class="grp">考前衝刺</div>
+  <a href="#labs" data-nav="labs">🧪 實驗一點靈</a>
+  <a href="#cards" data-nav="cards">🃏 必背閃卡</a>
+  <a href="#traps" data-nav="traps">⚠️ 易錯陷阱</a>
+  <a href="#exam" data-nav="exam">🏆 模擬測驗</a>
+</nav>
+
+<main>
+
+<!-- ================= HOME ================= -->
+<section class="page" id="home">
+  <div class="hero">
+    <h2>國中自然 2上<br>CH1 基本測量 × CH2 物質的世界</h2>
+    <p>每一節都有：重點整理 → 互動練習 → 小測驗。讀完按「我讀完了」，上方進度條會幫你記錄。</p>
+  </div>
+
+  <div class="card">
+    <h3>📌 怎麼用這個網站？</h3>
+    <ol>
+      <li><b>平常複習</b>：依序讀 1-1 → 2-3，每節最後做小測驗，答錯會看到解析。</li>
+      <li><b>考前一天</b>：先刷「⚠️ 易錯陷阱」，再用「🃏 必背閃卡」自我檢查。</li>
+      <li><b>考前衝刺</b>：做「🏆 模擬測驗」，答錯的題目點連結回到該節複習。</li>
+      <li>看到 <span class="hl">黃色螢光</span> 的字，就是考試最愛考的關鍵字。</li>
+    </ol>
+    <p class="muted">進度只存在這台電腦／手機的瀏覽器裡，換裝置不會同步。</p>
+  </div>
+
+  <h3>第 1 章　基本測量</h3>
+  <div class="tiles">
+    <a class="tile ch1" href="#s1-1"><div class="t-top"><span class="chip">1-1</span><span class="st" data-st="s1-1"></span></div><h4>長度、質量與時間</h4><p>國際單位、單位換算、時間的測量</p></a>
+    <a class="tile ch1" href="#s1-2"><div class="t-top"><span class="chip">1-2</span><span class="st" data-st="s1-2"></span></div><h4>測量與估計</h4><p>上皿天平、準確值與估計值、平均值</p></a>
+    <a class="tile ch1" href="#s1-3"><div class="t-top"><span class="chip">1-3</span><span class="st" data-st="s1-3"></span></div><h4>體積與密度</h4><p>排水法、密度公式、質量－體積圖</p></a>
+  </div>
+  <h3>第 2 章　物質的世界</h3>
+  <div class="tiles">
+    <a class="tile ch2" href="#s2-1"><div class="t-top"><span class="chip ch2">2-1</span><span class="st" data-st="s2-1"></span></div><h4>認識物質</h4><p>三態變化、物理/化學變化與性質、空氣、製氧</p></a>
+    <a class="tile ch2" href="#s2-2"><div class="t-top"><span class="chip ch2">2-2</span><span class="st" data-st="s2-2"></span></div><h4>溶液與濃度</h4><p>重量%、體積%、ppm、溶解度、飽和</p></a>
+    <a class="tile ch2" href="#s2-3"><div class="t-top"><span class="chip ch2">2-3</span><span class="st" data-st="s2-3"></span></div><h4>混合物的分離</h4><p>過濾法、結晶法、濾紙色層分析法</p></a>
+  </div>
+  <h3>考前衝刺</h3>
+  <div class="tiles">
+    <a class="tile ex" href="#labs"><h4>🧪 實驗一點靈</h4><p>5 個實驗／探討活動的目的、步驟、結論</p></a>
+    <a class="tile ex" href="#cards"><h4>🃏 必背閃卡</h4><p>翻卡自我檢查，考前快速掃過</p></a>
+    <a class="tile ex" href="#traps"><h4>⚠️ 易錯陷阱</h4><p>最常被扣分的觀念一次整理</p></a>
+    <a class="tile ex" href="#exam"><h4>🏆 模擬測驗</h4><p>從題庫隨機出題，立即批改</p></a>
+  </div>
+</section>
+
+<!-- ================= 1-1 ================= -->
+<section class="page" id="s1-1">
+  <div class="page-head"><span class="chip">第 1 章　基本測量</span><h2>1-1 長度、質量與時間</h2><p>測量要有「單位」，大家用同一套單位才不會溝通錯誤。</p></div>
+
+  <div class="card">
+    <h3><span class="num">1</span>物理量：基本量與導出量</h3>
+    <p>能用數值表示測量結果的量，叫做<b>物理量</b>。物理量分成兩種：</p>
+    <div class="grid2">
+      <div class="mini"><h4>基本量</h4><p>最基本、不能再拆解的量，共七個。國中最重要的三個：<span class="hl">長度、質量、時間</span>。</p></div>
+      <div class="mini"><h4>導出量</h4><p>由基本量計算出來的量。例：<b>密度</b>＝質量÷體積（g/cm³）、<b>速度</b>＝距離÷時間（m/s）。</p></div>
+    </div>
+    <h4>三大基本量的國際單位（SI）</h4>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>物理量</th><th>國際單位</th><th>符號</th><th>常用（但不是國際單位）</th></tr>
+      <tr><td>長度</td><td><b>公尺（米）</b></td><td>m</td><td>公分、公里、毫米</td></tr>
+      <tr><td>質量</td><td><b>公斤（千克）</b></td><td>kg</td><td>公克、毫克、臺斤</td></tr>
+      <tr><td>時間</td><td><b>秒</b></td><td>s</td><td>分、時、日</td></tr>
+    </table></div>
+    <details><summary>補充：七大基本量（看過就好）</summary><div>
+      <p>長度 m、質量 kg、時間 s、溫度 K（凱氏）、電流 A（安培）、物質的量 mol（莫耳）、發光強度 cd（燭光）。</p>
+    </div></details>
+    <div class="box trap"><b class="tag">易錯</b>質量的國際單位是 <b>公斤 kg</b>，不是公克！小時、分鐘也不是國際單位，<b>秒</b>才是。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>為什麼要統一單位？</h3>
+    <p>古人用身體當尺（「布指知寸，布手知尺」、埃及的腕尺），但每個人的手長不同，結果就不一樣。各國的鞋碼也不同（同一雙腳，到不同國家買鞋，要報的尺碼數字都不一樣）。</p>
+    <div class="box key"><b class="tag">重點</b>統一單位 → 溝通時<b>不容易產生誤解</b>，大家用同一個標準。這就是<b>國際單位制（SI）</b>。</div>
+    <p>生活中還沒統一的例子：臺斤（菜市場）、坪（房子面積）、加侖（牛奶）、吋（螢幕）。1 英寸＝2.54 cm，1 臺寸＝3.03 cm，沒說清楚就會出錯。</p>
+    <h4>「公尺」的定義演變</h4>
+    <ul>
+      <li>1792 年：北極經巴黎到赤道距離的<b>一千萬分之一</b>。</li>
+      <li>1983 年起：光在真空中 <b>1/299,792,458 秒</b>內所走的距離。</li>
+    </ul>
+    <details><summary>科學大事記：公斤原器退役</summary><div>
+      <p>1889 年起用「鉑銥合金公斤原器（大K）」定義公斤，做成圓柱體是為了讓表面積小、減少汙染。但實物會因灰塵、溼氣、指紋等產生微小的質量變化，因此 <b>2018 年</b>改用大自然中固定不變的物理常數重新定義公斤（基布爾秤、矽晶球法）。你的體重不會因此改變喔！</p>
+    </div></details>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>長度與質量的單位換算</h3>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>長度單位</th><th>公里</th><th>公尺</th><th>公寸</th><th>公分</th><th>毫米</th><th>微米</th><th>奈米</th></tr>
+      <tr><th>符號</th><td>km</td><td>m</td><td>dm</td><td>cm</td><td>mm</td><td>μm</td><td>nm</td></tr>
+      <tr><th>換成公尺</th><td>10<sup>3</sup> m</td><td>1 m</td><td>10<sup>−1</sup> m</td><td>10<sup>−2</sup> m</td><td>10<sup>−3</sup> m</td><td>10<sup>−6</sup> m</td><td>10<sup>−9</sup> m</td></tr>
+    </table></div>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>質量單位</th><th>公斤（千克）</th><th>公克（克）</th><th>毫克</th></tr>
+      <tr><th>符號</th><td>kg</td><td>g</td><td>mg</td></tr>
+      <tr><th>換成公克</th><td>10<sup>3</sup> g</td><td>1 g</td><td>10<sup>−3</sup> g</td></tr>
+    </table></div>
+    <div class="box key"><b class="tag">必背</b>
+      <ul>
+        <li>毫米 → 微米 → 奈米：每一級差 <b>1000 倍</b>（10<sup>−3</sup> → 10<sup>−6</sup> → 10<sup>−9</sup> m）</li>
+        <li>1 kg ＝ 1000 g ＝ 10<sup>6</sup> mg；1 公噸 ＝ 1000 kg</li>
+        <li>大單位換小單位 → 數字變大（乘）；小單位換大單位 → 數字變小（除）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：單位換算挑戰</div>
+    <p class="muted">每題選出正確答案，連續答對看看你能答對幾題！</p>
+    <div class="big-q" id="convQ"></div>
+    <div class="choice-grid" id="convOpts"></div>
+    <div class="fb" id="convFb"></div>
+    <div class="row"><button class="btn primary" id="convNext">下一題 ➜</button><span class="score" id="convScore"></span></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span>時間的測量</h3>
+    <p>凡是<span class="hl">有規律、週而復始</span>的現象，都可以用來計時：四季變化（年）、月亮圓缺（月）、日出日落（日）、日影（日晷）。</p>
+    <ul>
+      <li>計時工具演進：日晷、沙漏 → 鐘錶 → <b>銫原子鐘</b>（最精準）</li>
+      <li>時間的國際單位是 <b>秒（s）</b>，現在以<span class="hl">銫原子鐘</span>定義。</li>
+      <li>1 日 ＝ 24 時 ＝ 1440 分 ＝ 86400 秒</li>
+    </ul>
+    <div class="box trap"><b class="tag">易錯</b>沒有規律的現象（例如雲的形狀、下雨）不能拿來計時。</div>
+  </div>
+
+  <div class="card quiz-wrap"><h3>1-1 小測驗</h3><div class="quiz" data-sec="1-1"></div></div>
+  <div class="done-bar" data-done="s1-1"></div>
+  <div class="pager"><a href="#home"><small>上一頁</small>🏠 首頁</a><a class="next" href="#s1-2"><small>下一節</small>1-2 測量與估計 ➜</a></div>
+</section>
+
+<!-- ================= 1-2 ================= -->
+<section class="page" id="s1-2">
+  <div class="page-head"><span class="chip">第 1 章　基本測量</span><h2>1-2 測量與估計</h2><p>測量要選對工具、正確操作、正確讀數，並想辦法減少誤差。</p></div>
+
+  <div class="card">
+    <h3><span class="num">1</span>質量的測量：上皿天平</h3>
+    <ol>
+      <li><b>歸零</b>：用<b>校準螺絲</b>調整，使指針指在中央。（哪一邊的螺絲往外轉，那一邊就變重，指針就偏向那一邊）</li>
+      <li><b>左物右碼</b>：待測物放<b>左盤</b>中央，用<b>砝碼夾</b>把砝碼放在<b>右盤</b>中央。</li>
+      <li><b>由大到小</b>：先放大砝碼，太重就換小的，不足的再用更小的補。</li>
+      <li><b>判斷平衡</b>：指針停在中央，<b>或左右擺動幅度相同</b>，就是平衡，不用等指針停下來。</li>
+      <li><b>讀數</b>：砝碼總質量 ＝ 待測物質量。</li>
+    </ol>
+    <div class="box key"><b class="tag">口訣</b>歸零 → 左物右碼 → 砝碼夾、由大到小 → 擺幅相同即平衡</div>
+    <div class="box trap"><b class="tag">易錯</b>
+      <ul>
+        <li><b>不可用手拿砝碼</b>：手上的汗會讓砝碼生鏽而<b>變重</b> → 測量結果會比實際<b>偏小</b>。</li>
+        <li>秤藥品：<b>先放秤量紙，再歸零</b>，紙的質量就不會被算進去。</li>
+        <li>電子天平：開機、按歸零鈕就能用，操作簡單。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>準確值與估計值</h3>
+    <p>測量時，能準確讀到工具<b>最小刻度</b>的部分叫<b>準確值</b>；比最小刻度更小的部分要用估計的，叫<b>估計值</b>，記錄到<span class="hl">最小刻度的下一位</span>（只有一位）。</p>
+    <div class="formula">測量結果 ＝ 數字（準確值 ＋ 一位估計值）＋ 單位</div>
+    <div class="grid2">
+      <div class="mini"><h4>最小刻度 1 cm 的尺</h4><p>讀到 155.2 cm<br>準確值 155 cm、估計值 0.2 cm<br>→ 記錄到小數第 <b>1</b> 位</p></div>
+      <div class="mini"><h4>最小刻度 0.1 cm 的尺</h4><p>讀到 14.75 cm<br>準確值 14.7 cm、估計值 0.05 cm<br>→ 記錄到小數第 <b>2</b> 位</p></div>
+    </div>
+    <div class="box trap"><b class="tag">易錯</b>物體剛好對齊刻度也要補上估計位的 0！例如最小刻度 1 cm、剛好對齊 6 cm，要記 <b>6.0 cm</b>。同理，量筒最小刻度 1 mL，讀到 5 mL 要記 <b>5.0 mL</b>。</div>
+    <p class="muted">天平的估計：如果連最小的 100 mg 砝碼都調不平（放上去太重、拿掉又太輕），就估一個介於中間的值，例如 50 mg。</p>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：讀尺上的刻度</div>
+    <div class="row"><span>尺的最小刻度：</span><div class="seg" id="rulerMode"><button data-m="1" class="on">1 cm</button><button data-m="0.1">0.1 cm（1 mm）</button></div></div>
+    <div class="svgbox" id="rulerSvg"></div>
+    <div class="row"><label>橡皮擦長度：<input class="in" id="rulerIn" inputmode="decimal" placeholder="例如 6.4"></label> cm
+      <button class="btn primary" id="rulerCheck">檢查</button><button class="btn" id="rulerNew">換一題</button><button class="btn" id="rulerShow">看答案</button></div>
+    <div class="fb" id="rulerFb"></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>平均值與減少誤差</h3>
+    <p>每次測量的估計值可能不同，所以會有<b>誤差</b>。減少誤差的方法：</p>
+    <ul>
+      <li><b>多次（多人）測量取平均</b>。若有明顯錯誤、差太多的數據，要<b>先刪除再平均</b>。</li>
+      <li>使用<b>最小刻度較小</b>的工具（例如改用有 mm 刻度的尺）。</li>
+    </ul>
+    <div class="formula">平均值 ＝ <span class="frac"><span>測量結果總和</span><span>測量次數</span></span></div>
+    <div class="mini"><h4>例題</h4><p>四位同學量書本長度：18.36、18.34、18.37、18.33 cm<br>平均 ＝ (18.36＋18.34＋18.37＋18.33) ÷ 4 ＝ <b>18.35 cm</b></p></div>
+    <div class="box trap"><b class="tag">易錯</b>「增加估計值的位數」不能提高準確性，估計值永遠只有一位。</div>
+  </div>
+
+  <div class="card quiz-wrap"><h3>1-2 小測驗</h3><div class="quiz" data-sec="1-2"></div></div>
+  <div class="done-bar" data-done="s1-2"></div>
+  <div class="pager"><a href="#s1-1"><small>上一節</small>⬅ 1-1 長度、質量與時間</a><a class="next" href="#s1-3"><small>下一節</small>1-3 體積與密度 ➜</a></div>
+</section>
+
+<!-- ================= 1-3 ================= -->
+<section class="page" id="s1-3">
+  <div class="page-head"><span class="chip">第 1 章　基本測量</span><h2>1-3 體積與密度</h2><p>本章最重要、會考最常考的一節！</p></div>
+
+  <div class="card">
+    <h3><span class="num">1</span>體積的測量</h3>
+    <div class="grid3">
+      <div class="mini"><h4>規則固體</h4><p>量邊長用公式算：<br>長方體 V＝長×寬×高<br>正立方體 V＝邊長³<br>圓柱 V＝πr²h</p></div>
+      <div class="mini"><h4>液體</h4><p>用<b>量筒</b>測量。<br>眼睛<span class="hl">平視液面中央最低處</span>，太高或太低看都會有誤差。</p></div>
+      <div class="mini"><h4>不規則固體</h4><p>用<b>排水法</b>：<br>物體排開的水量＝物體體積<br><b>V ＝ V₂ − V₁</b></p></div>
+    </div>
+    <h4>排水法的步驟</h4>
+    <ol>
+      <li>量筒中加入適量的水，記錄 V₁。</li>
+      <li>量筒<b>傾斜</b>，讓物體<b>緩緩滑入</b>（避免打破量筒或濺出水）。</li>
+      <li>物體完全沒入水中後記錄 V₂，物體體積 V＝V₂－V₁。</li>
+    </ol>
+    <div class="box trap"><b class="tag">不適合排水法</b>① 會<b>浮</b>在水上（乒乓球、保麗龍）② 會<b>溶</b>於水（肥皂、方糖）③ 會和水<b>反應</b>（鈉）</div>
+    <h4>容量與體積單位</h4>
+    <div class="formula">1 mL ＝ 1 cc ＝ 1 cm³　｜　1 L ＝ 1000 mL ＝ 1 dm³　｜　1 kL ＝ 1000 L ＝ 1 m³</div>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：排水法讀量筒</div>
+    <p class="muted">量筒最小刻度 1 mL，記得記錄到 0.1 mL。左邊是放入石頭前、右邊是放入後。</p>
+    <div class="svgbox" id="cylSvg"></div>
+    <div class="row"><label>石頭體積：<input class="in" id="cylIn" inputmode="decimal"></label> cm³
+      <button class="btn primary" id="cylCheck">檢查</button><button class="btn" id="cylNew">換一題</button><button class="btn" id="cylShow">看答案</button></div>
+    <div class="fb" id="cylFb"></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>密度</h3>
+    <p>體積相同的鐵塊和黏土，鐵塊比較重；質量相同時，黏土的體積比較大。這是因為組成的物質不同、「緊密程度」不同。</p>
+    <div class="formula">密度 D ＝ <span class="frac"><span>質量 m</span><span>體積 V</span></span>　　單位：g/cm³ 或 kg/m³</div>
+    <ul>
+      <li>密度＝<b>每 1 cm³ 的物質有多少公克</b>，代表物質擠得有多緊密。</li>
+      <li><b>1 g/cm³ ＝ 1000 kg/m³</b></li>
+      <li>在固定溫度、壓力下，<span class="hl">同一種物質的密度通常是定值</span>，與物體的大小、形狀無關 → 可以用來<b>鑑別物質</b>。</li>
+    </ul>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>物質</th><th>金</th><th>銀</th><th>銅</th><th>鐵</th><th>鋁</th><th>水</th><th>酒精</th></tr>
+      <tr><th>密度（g/cm³）</th><td>19.3</td><td>10.5</td><td>8.9</td><td>7.9</td><td>2.7</td><td>1.0</td><td>0.79</td></tr>
+    </table></div>
+    <div class="box key"><b class="tag">比較不同物質</b>
+      <ul>
+        <li><b>體積相同</b> → 密度大的，<b>質量大</b>。</li>
+        <li><b>質量相同</b> → 密度大的，<b>體積小</b>（密度小的體積大）。</li>
+      </ul>
+    </div>
+    <details><summary>補充：水的密度與溫度</summary><div>
+      <p>水在 <b>4 °C</b> 時密度最大（約 1 g/cm³），高於或低於 4 °C 密度都會變小。冰的密度約 0.917 g/cm³，比水小。（第 5 章會再學）</p>
+    </div></details>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>實驗 1-1：質量、體積與密度的關係</h3>
+    <p>用天平量三個不同形狀鋁塊（和銅塊）的質量，用排水法量體積，再把質量和體積<b>相乘</b>與<b>相除</b>比較：</p>
+    <ul>
+      <li>相乘：數值差異很大，<b>沒有規律</b>。</li>
+      <li>相除：數值<b>很接近</b> → 鋁約 2.7 g/cm³、銅約 8.9 g/cm³，這就是<b>密度</b>。</li>
+      <li>同一種物質，<b>質量與體積成正比</b>：質量－體積圖是<span class="hl">通過原點的斜直線</span>，<b>斜率＝密度</b>，線愈陡密度愈大。</li>
+    </ul>
+    <div class="chart" id="mvChart"></div>
+    <details><summary>看數據表</summary><div id="mvTable"></div></details>
+    <div class="box trap"><b class="tag">易錯</b>測<b>液體</b>密度時，若連容器一起秤，質量－體積圖<b>不會通過原點</b>，縱軸截距＝<b>容器的質量</b>；但斜率仍是液體的密度。</div>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：密度偵探（鑑定物質）</div>
+    <p class="muted">輸入質量和體積，算出密度並對照密度表，這個點也會畫在上面的質量－體積圖上。</p>
+    <div class="row">
+      <label>質量 m＝<input class="in" id="dM" inputmode="decimal" value="52.5"></label> g
+      <label>體積 V＝<input class="in" id="dV" inputmode="decimal" value="5.0"></label> cm³
+      <button class="btn primary" id="dGo">計算</button>
+    </div>
+    <div class="row muted">快速帶入：
+      <button class="btn" data-dm="52.5" data-dv="5.0">例題 湯匙</button>
+      <button class="btn" data-dm="27" data-dv="10">神秘金屬 A</button>
+      <button class="btn" data-dm="96.5" data-dv="5">神秘金屬 B</button>
+      <button class="btn" data-dm="47.4" data-dv="6">神秘金屬 C</button>
+    </div>
+    <div class="fb" id="dFb"></div>
+  </div>
+
+  <div class="card quiz-wrap"><h3>1-3 小測驗</h3><div class="quiz" data-sec="1-3"></div></div>
+  <div class="done-bar" data-done="s1-3"></div>
+  <div class="pager"><a href="#s1-2"><small>上一節</small>⬅ 1-2 測量與估計</a><a class="next" href="#s2-1"><small>下一章</small>2-1 認識物質 ➜</a></div>
+</section>
+
+<!-- ================= 2-1 ================= -->
+<section class="page ch2" id="s2-1">
+  <div class="page-head"><span class="chip">第 2 章　物質的世界</span><h2>2-1 認識物質</h2><p>物質的狀態、變化、性質與分類。</p></div>
+
+  <div class="card">
+    <h3><span class="num">1</span>物質的三態與粒子排列</h3>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>狀態</th><th>粒子排列</th><th>形狀</th><th>體積</th><th>例子</th></tr>
+      <tr><td><b>固態</b></td><td>緊密、難移動</td><td>固定</td><td>固定</td><td>冰山</td></tr>
+      <tr><td><b>液態</b></td><td>較鬆、可移動（會流動）</td><td>不固定</td><td>固定</td><td>海水</td></tr>
+      <tr><td><b>氣態</b></td><td>非常鬆散、自由移動</td><td>不固定</td><td>不固定</td><td>水蒸氣</td></tr>
+    </table></div>
+    <p>冰、水、水蒸氣是<b>同一種物質</b>，只是狀態不同。溫度改變會讓粒子的排列方式改變。</p>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動圖：三態變化（點箭頭上的名稱看說明）</div>
+    <div class="svgbox" id="stateSvg"></div>
+    <div class="fb info" id="stateInfo">點選圖上任一個變化名稱，看看它的定義與例子。</div>
+    <h4>考考你：這是哪一種變化？</h4>
+    <div class="big-q" id="stQ"></div>
+    <div class="choice-grid" id="stOpts"></div>
+    <div class="fb" id="stFb"></div>
+    <div class="row"><button class="btn primary" id="stNext">下一題 ➜</button><span class="score" id="stScore"></span></div>
+  </div>
+
+  <div class="box trap" style="margin-bottom:18px"><b class="tag">易錯</b>
+    <ul>
+      <li><b>凝結</b>（氣→液）、<b>凝固</b>（液→固）、<b>凝華</b>（氣→固）別搞混！</li>
+      <li><b>汽化</b>包含<b>蒸發</b>（任何溫度都會發生）和<b>沸騰</b>（達到沸點才發生）。</li>
+      <li>乾冰周圍的<b>白霧是小水滴</b>（空氣中水蒸氣凝結），不是二氧化碳，二氧化碳是無色的。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>物理變化 vs 化學變化</h3>
+    <div class="grid2">
+      <div class="mini"><h4>物理變化</h4><p>組成與本質<b>不變</b>，<b>沒有新物質</b>產生，只改變形狀、狀態。<br>例：冰塊融化、鹽溶進水裡、紙剪成兩半、玻璃杯摔碎</p></div>
+      <div class="mini"><h4>化學變化</h4><p>組成與本質<b>改變</b>，<b>產生新物質</b>。<br>例：鐵生鏽、木材燃燒、生蛋煎熟、牛奶變酸、光合作用</p></div>
+    </div>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：物理變化還是化學變化？</div>
+    <div class="sort-item" id="sortQ"></div>
+    <div class="row" style="justify-content:center"><button class="btn primary" data-sort="物">物理變化</button><button class="btn primary" data-sort="化">化學變化</button></div>
+    <div class="fb" id="sortFb"></div>
+    <div class="row"><span class="score" id="sortScore"></span><button class="btn" id="sortRestart">重新開始</button></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>物理性質 vs 化學性質</h3>
+    <div class="grid2">
+      <div class="mini"><h4>物理性質</h4><p>不需經過化學變化，用<b>感官或儀器</b>就能觀測。<br>例：顏色、氣味、狀態、熔點、沸點、密度、硬度、導電性</p></div>
+      <div class="mini"><h4>化學性質</h4><p>要讓物質<b>真的起化學變化</b>才看得出來。<br>例：<span class="hl">可燃性、助燃性、酸鹼性</span></p></div>
+    </div>
+    <p class="muted">例：「木材是褐色的」→ 物理性質；「木材可以燃燒」→ 化學性質。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">4</span>純物質與混合物</h3>
+    <div class="grid2">
+      <div class="mini"><h4>純物質</h4><p>由<b>單一物質</b>組成，<b>有固定的性質</b>（固定的熔點、沸點、密度）。<br>例：水、氧氣、氮氣、乾冰</p></div>
+      <div class="mini"><h4>混合物</h4><p>由<b>兩種以上純物質</b>混合，組成比例不固定，<b>性質不固定</b>。<br>例：空氣、海水、糖水、合金</p></div>
+    </div>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th></th><th>水（純物質）</th><th>氧氣（純物質）</th><th>空氣（混合物）</th></tr>
+      <tr><th>沸點（°C）</th><td>100</td><td>−183.0</td><td>不固定</td></tr>
+      <tr><th>熔點（°C）</th><td>0</td><td>−218.8</td><td>不固定</td></tr>
+      <tr><th>密度（g/cm³）</th><td>1</td><td>0.0014</td><td>0.0011～0.0013</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">5</span>空氣的組成與常見氣體</h3>
+    <div class="chart" id="airChart"></div>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>氣體</th><th>性質</th><th>應用</th></tr>
+      <tr><td><b>氮氣</b> 78%</td><td>無色無味、不可燃、不助燃，<b>性質穩定</b></td><td>食品包裝填充；液態氮當冷凍劑（消滅紅火蟻）</td></tr>
+      <tr><td><b>氧氣</b> 21%</td><td>無色無味、不可燃、<b>會助燃</b>，性質活潑</td><td>呼吸作用；蠟燭燃燒、鐵生鏽、蘋果肉變色都和氧有關</td></tr>
+      <tr><td><b>氬氣</b> 0.9%</td><td>無色無味、性質<b>極穩定</b></td><td>高溫焊接時阻絕金屬和氧氣反應</td></tr>
+      <tr><td><b>二氧化碳</b>（微量）</td><td>無色無味、不可燃、不助燃、<b>略溶於水</b>、密度比空氣大</td><td>滅火、氣泡水；固態為<b>乾冰</b>（昇華製造舞台煙霧）</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">6</span>實驗 2-1：氧氣的製造與性質</h3>
+    <div class="formula">雙氧水 ──（二氧化錳：加快反應）──▶ 水 ＋ 氧氣</div>
+    <ul>
+      <li><b>薊頭漏斗末端要沒入液面下</b>：避免產生的氧氣從漏斗口逸出。</li>
+      <li><b>排水集氣法</b>：氧氣<span class="hl">難溶於水</span>，所以能用排水集氣法，收集到的氣體<b>較純</b>。</li>
+      <li><b>冒泡一段時間後再收集</b>：一開始冒出的是裝置內原有的<b>空氣</b>。</li>
+      <li>集滿後在水中用玻璃片蓋緊瓶口，取出後<b>瓶口朝上</b>放置。</li>
+      <li><b>檢驗</b>：點燃的線香放入 → <b>燃燒更劇烈</b> → 氧氣有<b>助燃性</b>（化學性質）。</li>
+      <li>雙氧水分解產生氧氣，是<b>化學變化</b>。</li>
+    </ul>
+    <h4>二氧化碳的製造與檢驗</h4>
+    <div class="formula">大理岩 ＋ 稀鹽酸 ──▶ 二氧化碳</div>
+    <ul>
+      <li>線香放入二氧化碳 → <b>熄滅</b>（不助燃）。</li>
+      <li>倒入<b>澄清石灰水</b> → <span class="hl">變混濁</span>（白色碳酸鈣沉澱）→ 檢驗二氧化碳的方法。</li>
+    </ul>
+    <div class="box trap"><b class="tag">易錯</b>線香熄滅<b>不能</b>證明是二氧化碳（氮氣也會讓線香熄滅），要用<b>澄清石灰水變混濁</b>來確認。</div>
+  </div>
+
+  <div class="card quiz-wrap"><h3>2-1 小測驗</h3><div class="quiz" data-sec="2-1"></div></div>
+  <div class="done-bar" data-done="s2-1"></div>
+  <div class="pager"><a href="#s1-3"><small>上一節</small>⬅ 1-3 體積與密度</a><a class="next" href="#s2-2"><small>下一節</small>2-2 溶液與濃度 ➜</a></div>
+</section>
+
+<!-- ================= 2-2 ================= -->
+<section class="page ch2" id="s2-2">
+  <div class="page-head"><span class="chip">第 2 章　物質的世界</span><h2>2-2 溶液與濃度</h2><p>計算題最多的一節，公式一定要會！</p></div>
+
+  <div class="card">
+    <h3><span class="num">1</span>溶液的組成</h3>
+    <div class="formula">溶質（被溶解的）＋ 溶劑（負責溶解的）＝ 溶液</div>
+    <ul>
+      <li>東西均勻溶在水裡、看不出顆粒的液體，叫<b>水溶液</b>，水是溶劑。例：黑糖水中，黑糖是溶質。</li>
+      <li>氣泡水：<b>二氧化碳是溶質</b>，水是溶劑。</li>
+      <li>溶劑不一定是水：油性簽字筆不溶於水，但能溶於<b>酒精</b>；脂溶性維生素可溶於油性藥劑。</li>
+      <li>溶液是混合物，各處組成<b>均勻</b>。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>三種濃度表示法</h3>
+    <p>濃度就是：一定量的溶液裡，溶質放了多少。黑糖水濃度愈高，顏色愈深、愈甜。</p>
+    <h4>① 重量百分率濃度</h4>
+    <div class="formula">重量百分率濃度 ＝ <span class="frac"><span>溶質重量</span><span>溶液重量（溶質＋溶劑）</span></span> × 100%</div>
+    <p>意義：每 <b>100 g 溶液</b>中含有幾 g 溶質。例：糖漿糖分 75% → 每 100 g 糖漿含 75 g 糖。</p>
+    <h4>② 體積百分率濃度</h4>
+    <div class="formula">體積百分率濃度 ＝ <span class="frac"><span>溶質體積</span><span>溶液體積</span></span> × 100%</div>
+    <p>意義：每 <b>100 mL 溶液</b>中含有幾 mL 溶質。酒類常用「<b>度</b>」表示：13.5 度紅酒 ＝ 每 100 mL 含 13.5 mL 酒精。</p>
+    <h4>③ 百萬分點濃度（ppm）</h4>
+    <div class="formula">1 ppm ＝ <span class="frac"><span>1 單位溶質</span><span>100 萬（10<sup>6</sup>）單位溶液</span></span>　例：<span class="frac"><span>1 mg 溶質</span><span>1 kg 溶液</span></span></div>
+    <p>適合表示<b>濃度非常低</b>的物質，例如礦泉水中的微量元素、<b>空氣汙染、水汙染</b>。1 ppm＝0.0001%。</p>
+    <div class="box trap"><b class="tag">易錯</b>
+      <ul>
+        <li>重量百分率的分母是<b>溶液</b>＝溶質＋溶劑！20 g 糖＋180 g 水 → 20÷<b>200</b>×100%＝10%（不是 20÷180）。</li>
+        <li>火鍋湯加水稀釋：濃度變小，但<b>溶質總量不變</b>，全部喝完攝取的鹽一樣多。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：濃度計算機（看完整算式）</div>
+    <div class="seg" id="concTabs"><button class="on" data-t="w">重量%</button><button data-t="v">體積%</button><button data-t="p">ppm</button></div>
+    <div id="concW" class="row">
+      <label>溶質 <input class="in" id="cwA" inputmode="decimal" value="20"> g</label>
+      <label>溶劑（水）<input class="in" id="cwB" inputmode="decimal" value="180"> g</label>
+    </div>
+    <div id="concV" class="row" hidden>
+      <label>溶液體積 <input class="in" id="cvA" inputmode="decimal" value="500"> mL</label>
+      <label>濃度（度數）<input class="in" id="cvB" inputmode="decimal" value="58"> %</label>
+    </div>
+    <div id="concP" class="row" hidden>
+      <label>溶質 <input class="in" id="cpA" inputmode="decimal" value="0.15"> mg</label>
+      <label>溶液 <input class="in" id="cpB" inputmode="decimal" value="1"> kg</label>
+    </div>
+    <div class="fb info" id="concOut"></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>溶解度與飽和溶液</h3>
+    <p><b>溶解度</b>：<span class="hl">定溫下</span>，<b>100 g 溶劑</b>最多能溶解的溶質克數（g/100 g 水）。例：20 °C 時蔗糖溶解度為 203.9 g/100 g 水。</p>
+    <div class="grid2">
+      <div class="mini"><h4>未飽和溶液</h4><p>溶質還沒達到最大量，<b>還能繼續溶解</b>同一種溶質。</p></div>
+      <div class="mini"><h4>飽和溶液</h4><p>溶質已達最大量，再加溶質會<b>沉澱</b>，濃度<b>不再增加</b>。</p></div>
+    </div>
+    <h4>溫度對溶解度的影響</h4>
+    <div class="grid2">
+      <div class="mini"><h4>大部分固體 ⬆</h4><p>溫度升高，溶解度<b>增加</b>（如蔗糖）。<br><span class="muted">少數例外：氫氧化鈣溫度升高溶解度反而降低。</span></p></div>
+      <div class="mini"><h4>氣體 ⬇</h4><p>溫度升高，溶解度<b>降低</b>。<br>汽水變溫、喝下肚後二氧化碳逸出 → 打嗝。</p></div>
+    </div>
+    <div class="box key"><b class="tag">濃度 vs 溶解度</b>濃度描述溶液裡「有多少」溶質，會隨溶質多寡改變；溶解度是定溫下「最多能溶多少」，是<b>定值</b>。</div>
+    <div class="box key"><b class="tag">未飽和 → 飽和</b>加溶質、蒸發溶劑、（對蔗糖等固體）降低溫度。<b>加水、加熱</b>反而會離飽和更遠。</div>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動模擬：蔗糖溶得完嗎？</div>
+    <div class="sim">
+      <div class="svgbox" id="beaker"></div>
+      <div>
+        <label>水溫：<b id="tVal"></b> °C<input type="range" id="tR" min="0" max="60" step="1" value="20"></label>
+        <label>加入蔗糖：<b id="gVal"></b> g（水固定 100 g）<input type="range" id="gR" min="0" max="300" step="1" value="150"></label>
+        <div class="fb info" id="simOut"></div>
+      </div>
+    </div>
+    <div class="chart" id="sugarChart"></div>
+    <details><summary>看數據表</summary><div id="sugarTable"></div></details>
+  </div>
+
+  <div class="card">
+    <h3>氣體溶解度：二氧化碳</h3>
+    <p class="muted">和蔗糖相反，溫度愈高，水中能溶的二氧化碳愈少。</p>
+    <div class="chart" id="co2Chart"></div>
+  </div>
+
+  <div class="card quiz-wrap"><h3>2-2 小測驗</h3><div class="quiz" data-sec="2-2"></div></div>
+  <div class="done-bar" data-done="s2-2"></div>
+  <div class="pager"><a href="#s2-1"><small>上一節</small>⬅ 2-1 認識物質</a><a class="next" href="#s2-3"><small>下一節</small>2-3 混合物的分離 ➜</a></div>
+</section>
+
+<!-- ================= 2-3 ================= -->
+<section class="page ch2" id="s2-3">
+  <div class="page-head"><span class="chip">第 2 章　物質的世界</span><h2>2-3 混合物的分離</h2><p>混合物裡的各種純物質仍保有原來的性質，利用<b>性質差異</b>就能分開它們。</p></div>
+
+  <div class="card">
+    <h3><span class="num">1</span>三種分離方法</h3>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>方法</th><th>原理</th><th>生活例子</th></tr>
+      <tr><td><b>過濾法</b></td><td>利用<span class="hl">顆粒大小</span>不同</td><td>咖啡濾紙、篩麵粉、生命吸管、用篩子分開綠豆和鹽</td></tr>
+      <tr><td><b>結晶法</b></td><td><span class="hl">把水蒸發掉或改變溫度</span>，讓溶不下的溶質變成晶體跑出來</td><td>曬海水得粗鹽（蒸發結晶）、天氣瓶變冷出現羽毛狀結晶（降溫結晶）</td></tr>
+      <tr><td><b>濾紙色層分析法</b></td><td>各成分<span class="hl">被濾紙吸住的程度</span>不同，跟著溶劑跑的速度不一樣</td><td>分離彩色筆墨水的顏料、分離植物色素</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">2</span>實驗 2-2：分離食鹽與細砂</h3>
+    <div class="tbl-scroll"><table class="t">
+      <tr><th>步驟</th><th>方法</th><th>結果</th></tr>
+      <tr><td>1～2 加水攪拌</td><td><b>溶解</b></td><td>食鹽溶於水，細砂不溶</td></tr>
+      <tr><td>3～5 摺濾紙、過濾</td><td><b>過濾</b></td><td>濾紙上留下<b>細砂</b>；濾液是<b>食鹽水</b>（混濁 → 澄清）</td></tr>
+      <tr><td>6～7 加熱蒸發皿</td><td><b>（蒸發）結晶</b></td><td>蒸發皿上留下白色的<b>食鹽</b>結晶</td></tr>
+    </table></div>
+    <h4>操作注意事項</h4>
+    <ul>
+      <li>濾紙對摺再對摺、撕去一角、攤開成圓錐狀，用少量水<b>潤溼</b>使它緊貼漏斗。</li>
+      <li>溶液沿<b>玻棒</b>緩緩倒入；<b>液面不可超過濾紙</b>（否則溶液沒被過濾就流下）。</li>
+      <li>漏斗頸末端<b>緊貼燒杯內壁</b>，避免濾液噴濺。</li>
+      <li>蒸發時<b>快乾就移開火源</b>，讓它自然蒸乾，避免殘留物彈跳。</li>
+    </ul>
+    <div class="box key"><b class="tag">為什麼要先溶解？</b>細砂和食鹽顆粒都比濾紙孔隙大，直接過濾分不開。食鹽溶於水後變成很小的粒子，才能通過濾紙。</div>
+    <div class="box key"><b class="tag">判斷純物質</b>食鹽水能用物理方法分離出食鹽和水 → <b>混合物</b>；水無法再用這些方法分離 → <b>純物質</b>。</div>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：把實驗 2-2 的步驟排好</div>
+    <p class="muted">依正確順序點選步驟。</p>
+    <div class="order-done" id="ordDone"></div>
+    <div class="order-pool" id="ordPool"></div>
+    <div class="fb" id="ordFb"></div>
+    <button class="btn" id="ordReset">重來</button>
+  </div>
+
+  <div class="card">
+    <h3><span class="num">3</span>探討活動 2-1：濾紙色層分析</h3>
+    <ol>
+      <li>用彩色筆在濾紙下緣上方約 1.5 cm 處畫一條線（起始線）。</li>
+      <li>把濾紙下緣放入水中，<b>水面不可超過畫的線</b>。</li>
+      <li>水因<b>毛細現象</b>往上移動，帶動顏料；各種顏料對濾紙吸附力不同，移動距離不同而分開。</li>
+    </ol>
+    <p>結果：<b>黑色</b>彩色筆的墨水，其實是由多種顏色的顏料（例如洋紅、靛青、黃色）混合而成 → 是<b>混合物</b>。此法最早用來分離<b>植物色素</b>。</p>
+  </div>
+
+  <div class="card widget">
+    <div class="w-title">互動練習：該用哪一種分離方法？</div>
+    <div class="big-q" id="sepQ"></div>
+    <div class="choice-grid" id="sepOpts"></div>
+    <div class="fb" id="sepFb"></div>
+    <div class="row"><button class="btn primary" id="sepNext">下一題 ➜</button><span class="score" id="sepScore"></span></div>
+  </div>
+
+  <div class="card quiz-wrap"><h3>2-3 小測驗</h3><div class="quiz" data-sec="2-3"></div></div>
+  <div class="done-bar" data-done="s2-3"></div>
+  <div class="pager"><a href="#s2-2"><small>上一節</small>⬅ 2-2 溶液與濃度</a><a class="next" href="#labs"><small>考前衝刺</small>🧪 實驗一點靈 ➜</a></div>
+</section>
+
+<!-- ================= LABS ================= -->
+<section class="page" id="labs">
+  <div class="page-head"><span class="chip">考前衝刺</span><h2>🧪 實驗一點靈</h2><p>每次段考都會考實驗，目的、關鍵步驟、結論一次看。</p></div>
+
+  <div class="card">
+    <h3>探討活動 1-1　排水法</h3>
+    <p><b>目的</b>：測量不規則物體的體積。</p>
+    <ul><li>物體排開的水量＝物體體積，V＝V₂－V₁。</li><li>讀數時平視液面中央最低處。</li><li>量筒傾斜，物體緩緩滑入。</li></ul>
+  </div>
+  <div class="card">
+    <h3>實驗 1-1　質量、體積與密度的關係</h3>
+    <p><b>目的</b>：由質量與體積的關係，找出物質的特性——密度。</p>
+    <ul><li>器材：鋁塊、銅塊各 3 個、100 mL 量筒、上皿天平。</li><li>相乘無規律；相除數值相近（鋁 ≈ 2.7、銅 ≈ 8.9 g/cm³）。</li><li>同一物質質量與體積成正比；不同物質密度不同。</li></ul>
+  </div>
+  <div class="card ch2">
+    <h3>實驗 2-1　氧氣的製造與性質</h3>
+    <p><b>目的</b>：自己動手做出氧氣、把它收集起來並檢驗，看看氧氣有哪些性質。</p>
+    <ul><li>雙氧水 → 水＋氧氣；二氧化錳加快分解。</li><li>薊頭漏斗末端沒入液面下：防止氧氣逸出。</li><li>氧氣難溶於水 → 排水集氣法；先排掉一段空氣再收集。</li><li>線香燃燒更劇烈 → 助燃性。</li></ul>
+  </div>
+  <div class="card ch2">
+    <h3>實驗 2-2　混合物的分離</h3>
+    <p><b>目的</b>：把混在一起的食鹽和細砂分開，學會分離混合物的方法和背後的道理。</p>
+    <ul><li>溶解（1～2）→ 過濾（3～5）→ 結晶（6～7）。</li><li>濾紙上：細砂；蒸發皿上：食鹽。</li><li>能用物理方法分離 → 混合物。</li></ul>
+  </div>
+  <div class="card ch2">
+    <h3>探討活動 2-1　濾紙色層分析</h3>
+    <ul><li>水面不可超過起始線。</li><li>黑色墨水由多種顏料組成。</li><li>原理：對濾紙吸附能力不同。</li></ul>
+  </div>
+</section>
+
+<!-- ================= CARDS ================= -->
+<section class="page" id="cards">
+  <div class="page-head"><span class="chip">考前衝刺</span><h2>🃏 必背閃卡</h2><p>先看題目自己回答，再點卡片翻面對答案。</p></div>
+  <div class="card">
+    <div class="row"><span>範圍：</span><div class="seg" id="fcRange"><button class="on" data-r="all">全部</button><button data-r="1">第 1 章</button><button data-r="2">第 2 章</button></div>
+      <button class="btn" id="fcShuffle">🔀 洗牌</button><button class="btn" id="fcList">📋 清單模式</button></div>
+    <div id="fcCardMode">
+      <div class="flash" id="flash"><div class="flash-inner"><div class="flash-face flash-front"><small id="fcTagF"></small><div id="fcFront"></div></div><div class="flash-face flash-back"><small id="fcTagB"></small><div id="fcBack"></div></div></div></div>
+      <div class="row" style="justify-content:center"><button class="btn" id="fcPrev">⬅ 上一張</button><span class="score" id="fcPos"></span><button class="btn primary" id="fcNext">下一張 ➜</button></div>
+      <p class="muted" style="text-align:center">點卡片翻面；電腦可用 ← → 切換、空白鍵翻面。</p>
+    </div>
+    <div id="fcListMode" class="cards-list" hidden></div>
+  </div>
+</section>
+
+<!-- ================= TRAPS ================= -->
+<section class="page" id="traps">
+  <div class="page-head"><span class="chip">考前衝刺</span><h2>⚠️ 易錯陷阱</h2><p>這些是最常被扣分的地方，考前一定要看一遍。</p></div>
+  <div id="trapList"></div>
+</section>
+
+<!-- ================= EXAM ================= -->
+<section class="page" id="exam">
+  <div class="page-head"><span class="chip">考前衝刺</span><h2>🏆 模擬測驗</h2><p>從題庫隨機抽題，每題答完立即看解析，最後統計答錯的小節。</p></div>
+  <div class="card">
+    <div class="row"><span>範圍：</span><div class="seg" id="exRange"><button class="on" data-r="all">CH1＋CH2</button><button data-r="1">只考 CH1</button><button data-r="2">只考 CH2</button></div></div>
+    <div class="row"><span>題數：</span><div class="seg" id="exN"><button data-n="10">10 題</button><button class="on" data-n="20">20 題</button><button data-n="999">全部</button></div>
+      <button class="btn primary" id="exStart">開始測驗</button></div>
+    <p class="muted" id="exBest"></p>
+  </div>
+  <div id="exArea"></div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ================= utilities ================= */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const el = (tag, cls, html) => { const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; };
+const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const rnd = (a,b) => a + Math.floor(Math.random()*(b-a+1));
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem('nat2a:'+k); return v==null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem('nat2a:'+k, JSON.stringify(v)); }catch(e){} }
+};
+const fmt = (x, d=2) => { const r = Math.round(x*10**d)/10**d; return String(r); };
+const parseNum = s => { s=String(s).trim().replace(/[^\d.\-]/g,''); return s===''?NaN:Number(s); };
+const SEC_IDS = ['s1-1','s1-2','s1-3','s2-1','s2-2','s2-3'];
+const SEC_NAME = {'1-1':'1-1 長度、質量與時間','1-2':'1-2 測量與估計','1-3':'1-3 體積與密度','2-1':'2-1 認識物質','2-2':'2-2 溶液與濃度','2-3':'2-3 混合物的分離'};
+
+/* ================= question bank ================= */
+const BANK = [
+/* 1-1 */
+{s:'1-1',q:'下列物理量與其國際單位（SI）的配對，何者正確？',o:['長度：公尺','質量：公克','時間：小時','時間：分鐘'],a:0,e:'三大基本量的國際單位：長度 公尺（m）、質量 公斤（kg）、時間 秒（s）。公克、小時、分鐘都是常用單位，但不是國際單位。'},
+{s:'1-1',q:'阿翰做健康檢查，下列物理量與單位的配對何者較適當？',o:['身高：公斤','體重：公分','身高：公分','體重：毫克'],a:2,e:'身高是長度，用公分（cm）；體重是質量，用公斤（kg）。毫克太小，不適合描述體重。'},
+{s:'1-1',q:'下列哪一個物理量屬於「導出量」？',o:['長度','質量','時間','密度'],a:3,e:'密度＝質量÷體積，是由基本量計算出來的，所以是導出量。速度（距離÷時間）也是導出量。'},
+{s:'1-1',q:'1 奈米（nm）等於多少公尺？',o:['10<sup>−3</sup> m','10<sup>−6</sup> m','10<sup>−9</sup> m','10<sup>−12</sup> m'],a:2,e:'毫米 10<sup>−3</sup> m → 微米 10<sup>−6</sup> m → 奈米 10<sup>−9</sup> m，每一級差 1000 倍。'},
+{s:'1-1',q:'2.5 公斤等於多少毫克？',o:['2.5×10<sup>3</sup> mg','2.5×10<sup>6</sup> mg','2.5×10<sup>9</sup> mg','2.5×10<sup>−6</sup> mg'],a:1,e:'1 kg＝1000 g，1 g＝1000 mg，所以 1 kg＝10<sup>6</sup> mg。2.5 kg＝2.5×10<sup>6</sup> mg。'},
+{s:'1-1',q:'現在國際上「秒」的定義，是依據什麼來訂定的？',o:['日晷的影子','單擺擺動的時間','銫原子鐘','地球繞太陽一圈'],a:2,e:'秒是以不易受環境影響的「銫原子鐘」來定義，非常精準。'},
+{s:'1-1',q:'2018 年國際上決定不再用「公斤原器」定義公斤，主要原因是？',o:['鉑銥合金太稀少','圓柱體很難製作','實物容易產生微小的質量變化，不夠穩定','原器用太久了，想換個方法'],a:2,e:'公斤原器會因灰塵、溼氣、汙漬等產生微小質量變化，所以改用大自然中固定不變的物理常數來定義。'},
+{s:'1-1',q:'下列哪一個現象「最不適合」用來測量時間？',o:['日出日落','月亮的陰晴圓缺','季節變化','天上雲朵的形狀'],a:3,e:'能用來計時的現象必須「有規律、週而復始」。雲的形狀沒有規律，不能用來計時。'},
+/* 1-2 */
+{s:'1-2',q:'用最小刻度為 0.1 公分的尺測量原子筆，記錄為 14.25 公分，其中的「估計值」是多少？',o:['14.25 cm','4.25 cm','0.25 cm','0.05 cm'],a:3,e:'最小刻度 0.1 cm 能準確讀到 14.2 cm（準確值），最後一位 0.05 cm 是估計出來的（估計值）。'},
+{s:'1-2',q:'用最小刻度為 1 公分的尺測量鉛筆長度，下列哪一個記錄最合理？',o:['15 cm','15.2 cm','15.25 cm','15.250 cm'],a:1,e:'測量要記錄到「最小刻度的下一位」。最小刻度 1 cm，所以記錄到 0.1 cm，例如 15.2 cm。'},
+{s:'1-2',q:'下列關於上皿天平的操作，何者正確？',o:['待測物放右盤，砝碼放左盤','可以直接用手拿砝碼','砝碼要由小到大依序放上','指針左右擺動的幅度相同，就可以視為平衡'],a:3,e:'口訣「左物右碼、砝碼夾、由大到小」。不必等指針完全停下，左右擺幅相同就是平衡。'},
+{s:'1-2',q:'小明用手拿砝碼，使砝碼生鏽變重。用這些砝碼測量物體質量，測得的結果會？',o:['比實際大','比實際小','與實際相同','無法判斷'],a:1,e:'生鏽的砝碼比標示的重，只要較少的「標示質量」就能平衡，所以讀出的數值會比實際質量小。'},
+{s:'1-2',q:'測量課本厚度時，下列哪一種做法可以增加測量的準確性？',o:['增加估計值的位數','使用刻度較小的直尺','使用刻度較大的直尺','用手指估計就好'],a:1,e:'最小刻度愈小，準確值的位數愈多，測量愈精確。估計值永遠只能有一位。'},
+{s:'1-2',q:'四位同學測量同一本書的長度：18.36、18.34、18.37、18.33 cm，書的長度應記錄為多少？',o:['18.36 cm','18.35 cm','18.34 cm','18.4 cm'],a:1,e:'平均值＝(18.36＋18.34＋18.37＋18.33)÷4＝18.35 cm。多次測量取平均可以減少誤差。'},
+{s:'1-2',q:'四位同學測量同一支筆：12.31、12.33、12.35、13.31 cm，筆的長度應記錄為多少？',o:['12.33 cm','12.58 cm','12.32 cm','13.31 cm'],a:0,e:'13.31 cm 與其他數據差太多，是明顯的錯誤，要先刪除再平均：(12.31＋12.33＋12.35)÷3＝12.33 cm。'},
+{s:'1-2',q:'用上皿天平秤量藥品時，正確的做法是？',o:['藥品直接倒在秤盤上','先放秤量紙，再把天平歸零','秤完再放秤量紙','秤量紙放在右盤'],a:1,e:'先放秤量紙再歸零，秤量紙的質量就不會被算進去，可以減少誤差。'},
+{s:'1-2',q:'記錄測量結果時，哪兩樣東西缺一不可？',o:['數字和單位','準確值和單位','估計值和單位','數字和工具名稱'],a:0,e:'測量結果＝數字（準確值＋一位估計值）＋單位，例如 155.2 cm。少了單位就不知道是多少。'},
+/* 1-3 */
+{s:'1-3',q:'量筒內原有水 30.0 mL，放入一顆石頭後水面升到 42.5 mL，石頭的體積是多少？',o:['30.0 cm³','42.5 cm³','12.5 cm³','72.5 cm³'],a:2,e:'排水法：物體體積＝V₂－V₁＝42.5－30.0＝12.5 mL＝12.5 cm³。'},
+{s:'1-3',q:'下列哪一個物體「不適合」用排水法測量體積？',o:['鐵釘','玻璃彈珠','乒乓球','銅塊'],a:2,e:'排水法不適合：①會浮在水面（乒乓球）②會溶於水（肥皂、方糖）③會和水反應的物質。'},
+{s:'1-3',q:'讀取量筒中水的體積時，眼睛應該怎麼看？',o:['從上往下看液面','從下往上看液面','平視液面中央最低處','看液面最高的邊緣'],a:2,e:'視線要與液面中央最低處平視，視角過高或過低都會產生誤差。'},
+{s:'1-3',q:'一支湯匙質量 52.5 g，體積 5.0 cm³。對照密度表（金 19.3、銀 10.5、銅 8.9、鐵 7.9、鋁 2.7 g/cm³），湯匙最可能是？',o:['金','銀','銅','鐵'],a:1,e:'D＝m÷V＝52.5÷5.0＝10.5 g/cm³，和銀相同。同一種物質密度通常是定值，可以用來鑑別物質。'},
+{s:'1-3',q:'把一塊密度 2.7 g/cm³ 的鋁塊切成大小不同的兩塊，小塊的密度是多少？',o:['比 2.7 小','2.7 g/cm³','比 2.7 大','無法判斷'],a:1,e:'密度是物質的特性，與大小、形狀無關。切開後質量和體積都變小，但比值（密度）不變。'},
+{s:'1-3',q:'體積相同的鐵塊和鋁塊，哪一個質量較大？',o:['鐵塊','鋁塊','一樣大','無法判斷'],a:0,e:'體積相同時，密度大的質量大。鐵 7.9 > 鋁 2.7，所以鐵塊較重。'},
+{s:'1-3',q:'質量相同的金塊和鋁塊，哪一個體積較大？',o:['金塊','鋁塊','一樣大','無法判斷'],a:1,e:'質量相同時，密度小的體積大。鋁 2.7 < 金 19.3，所以鋁塊體積較大。'},
+{s:'1-3',q:'1 公升（L）等於多少立方公分（cm³）？',o:['10','100','1000','1000000'],a:2,e:'1 L＝1000 mL＝1000 cm³＝1 dm³。1 mL＝1 cc＝1 cm³。'},
+{s:'1-3',q:'以質量為縱軸、體積為橫軸，畫出「同一種物質」的質量－體積關係圖，會是什麼形狀？',o:['水平線','通過原點的斜直線','不通過原點的斜直線','曲線'],a:1,e:'同一種物質質量和體積成正比，圖形是通過原點的斜直線，斜率就是密度；線愈陡，密度愈大。'},
+{s:'1-3',q:'測量液體密度時，把「容器＋液體」的總質量對液體體積作圖，得到的直線有什麼特色？',o:['通過原點','不通過原點，與縱軸的交點是容器的質量','斜率是容器的質量','是水平線'],a:1,e:'體積為 0 時，秤到的還有容器的質量，所以直線不通過原點，縱軸截距＝容器質量；斜率仍是液體密度。'},
+{s:'1-3',q:'2.7 g/cm³ 換算成 kg/m³ 是多少？',o:['2.7','27','270','2700'],a:3,e:'1 g/cm³＝1000 kg/m³，所以 2.7 g/cm³＝2700 kg/m³。'},
+{s:'1-3',q:'實驗 1-1 中，把同一種金屬的質量和體積「相乘」與「相除」，會發現什麼？',o:['相乘的值很接近','相除的值很接近','兩種都很接近','兩種都沒有規律'],a:1,e:'相乘差異很大、沒有規律；相除（質量÷體積）的值很接近，這個值就是密度。'},
+/* 2-1 */
+{s:'2-1',q:'冬天早晨，草地上出現白色的霜，這是水的哪一種狀態變化？',o:['凝固','凝結','凝華','昇華'],a:2,e:'霜是空氣中的水蒸氣（氣態）遇冷直接變成冰（固態），氣→固 叫做凝華。'},
+{s:'2-1',q:'冰涼的飲料杯外壁出現小水珠，這是哪一種變化？',o:['熔化','凝結','汽化','凝華'],a:1,e:'空氣中的水蒸氣遇到冷杯子變成小水滴，氣→液 叫做凝結。'},
+{s:'2-1',q:'乾冰放在桌上一段時間後完全消失，沒有留下液體，這是哪一種變化？',o:['熔化','汽化','昇華','凝華'],a:2,e:'乾冰（固態二氧化碳）直接變成氣體，固→氣 叫做昇華。'},
+{s:'2-1',q:'「形狀不固定，但體積固定」描述的是哪一種狀態？',o:['固態','液態','氣態','三態都是'],a:1,e:'固態：形狀、體積都固定；液態：形狀不固定、體積固定；氣態：形狀、體積都不固定。'},
+{s:'2-1',q:'下列何者是物理變化？',o:['生米煮成熟飯','食物發臭腐爛','鉛筆折成兩半','燃燒木材'],a:2,e:'物理變化沒有產生新物質，只改變形狀或狀態。其他選項都產生了新物質，是化學變化。'},
+{s:'2-1',q:'下列何者是在描述物質的「化學性質」？',o:['二氧化碳是無色氣體','酒精具有可燃性','水在常溫下是液態','油的密度比水小'],a:1,e:'化學性質要讓物質真的發生化學變化才看得出來，例如可燃性、助燃性、酸鹼性。顏色、狀態、密度都是物理性質。'},
+{s:'2-1',q:'下列何者是混合物？',o:['純水','液態氮','空氣','乾冰'],a:2,e:'空氣由氮氣、氧氣、氬氣等多種純物質混合而成，組成比例不固定，是混合物。'},
+{s:'2-1',q:'乾燥空氣中，含量最多的氣體是？',o:['氧氣','氮氣','二氧化碳','氬氣'],a:1,e:'乾燥空氣（體積比）：氮氣約 78%、氧氣約 21%、氬氣約 0.9%、其他約 0.1%。'},
+{s:'2-1',q:'洋芋片包裝內常填充哪一種氣體來防止食物變質？',o:['氧氣','氮氣','二氧化碳','氫氣'],a:1,e:'氮氣常溫下性質穩定，幾乎不與其他物質反應，可以避免食物接觸氧氣而變質。'},
+{s:'2-1',q:'要確認一瓶氣體是不是二氧化碳，最好的方法是？',o:['放入點燃的線香，看是否燒得更旺','倒入澄清石灰水，看是否變混濁','聞聞看有沒有味道','看氣體的顏色'],a:1,e:'二氧化碳會使澄清石灰水變混濁（產生白色碳酸鈣沉澱）。線香熄滅只能證明不助燃，氮氣也會使線香熄滅。'},
+{s:'2-1',q:'關於雙氧水製造氧氣的實驗，下列敘述何者正確？',o:['薊頭漏斗末端沒入液面下，是為了增加氧氣的產量','氧氣易溶於水，所以用排水集氣法收集','雙氧水分解產生氧氣是物理變化','氧氣能使線香燃燒更劇烈，表示具有助燃性，這是化學性質'],a:3,e:'A：沒入液面是避免氧氣從漏斗逸出；B：氧氣「難」溶於水才能用排水集氣法；C：產生新物質是化學變化。'},
+{s:'2-1',q:'製氧實驗中，為什麼要等導管冒泡一段時間後才開始收集氣體？',o:['等雙氧水變熱','一開始冒出的是裝置內原有的空氣，晚一點收集的氧氣較純','讓二氧化錳溶解','讓水槽的水變少'],a:1,e:'一開始排出的是裝置中原本的空氣，先讓它排掉，收集到的氧氣才會比較純。'},
+{s:'2-1',q:'製氧實驗中加入二氧化錳的目的是？',o:['提供氧氣','加快雙氧水分解產生氧氣','讓氧氣變成藍色','吸收水分'],a:1,e:'雙氧水本來就會自己慢慢分解成水和氧氣，二氧化錳可以加快分解速度。'},
+{s:'2-1',q:'舞台上用乾冰製造的白色煙霧，主要是什麼？',o:['二氧化碳氣體','乾冰的小碎片','空氣中水蒸氣凝結成的小水滴','氧氣'],a:2,e:'乾冰昇華使周圍溫度降低，空氣中的水蒸氣凝結成小水滴，看起來就是白霧。二氧化碳本身是無色的。'},
+{s:'2-1',q:'純物質和混合物最大的不同是？',o:['純物質一定是固體','純物質有固定的性質（如沸點、熔點、密度）','混合物一定看得出好幾種成分','混合物都是液體'],a:1,e:'純物質由單一物質組成，性質固定；混合物由兩種以上純物質組成，比例不固定，性質也不固定。'},
+/* 2-2 */
+{s:'2-2',q:'二氧化碳溶於水製成氣泡水，下列敘述何者正確？',o:['二氧化碳是溶劑','二氧化碳是溶質','二氧化碳和水都是溶劑','二氧化碳和水都是溶質'],a:1,e:'被溶解的是溶質（二氧化碳），負責溶解的是溶劑（水）。'},
+{s:'2-2',q:'將 20 公克砂糖完全溶在 180 公克水中，糖水的重量百分率濃度是多少？',o:['10%','11.1%','20%','18%'],a:0,e:'分母是「溶液」不是「溶劑」：20÷(180＋20)×100%＝10%。選 11.1% 的人是把分母寫成 180 了！'},
+{s:'2-2',q:'一瓶 0.5 公升的 58 度高粱酒，含有多少毫升的酒精？',o:['58 mL','29 mL','290 mL','580 mL'],a:2,e:'58 度＝體積百分率 58%。酒精體積＝500 mL × 58%＝290 mL。'},
+{s:'2-2',q:'飲用水的鋁含量不得高於 0.15 ppm，代表 1 公斤水中鋁含量不得高於多少？',o:['0.15 g','0.15 mg','15 mg','150 mg'],a:1,e:'1 ppm＝1 mg 溶質／1 kg 溶液（1 kg＝10<sup>6</sup> mg）。所以 0.15 ppm 就是 1 kg 水中最多 0.15 mg。'},
+{s:'2-2',q:'水汙染物濃度通常極低，最適合用哪一種方式表示？',o:['密度','重量百分率濃度','體積百分率濃度','百萬分點濃度（ppm）'],a:3,e:'濃度非常低時用百分比會出現很多 0（例如 0.0001%），用 ppm 比較方便。1 ppm＝0.0001%。'},
+{s:'2-2',q:'小華泡了一杯還沒飽和的糖水，怎樣做可以讓它變成飽和？',o:['加水','加入更多蔗糖','加熱','以上皆可'],a:1,e:'加水、加熱都會讓它更能溶解（離飽和更遠）。加入溶質（或蒸發水分、降溫）才能讓它達到飽和。'},
+{s:'2-2',q:'汽水放在溫暖的地方，打開時冒出更多氣泡，原因是？',o:['氣體的溶解度隨溫度升高而降低','氣體的溶解度隨溫度升高而增加','汽水變成未飽和溶液','糖從汽水中析出'],a:0,e:'大部分固體的溶解度隨溫度升高而增加，但氣體正好相反：溫度愈高，溶解度愈低，二氧化碳就跑出來了。'},
+{s:'2-2',q:'關於「濃度」與「溶解度」的敘述，何者正確？',o:['兩者意思完全相同','定溫下，某物質在水中的溶解度是定值，濃度則可以改變','溶解度會隨著加入的溶質量改變','濃度一定等於溶解度'],a:1,e:'濃度描述溶液中「有多少」溶質，可以變；溶解度是定溫下「最多能溶多少」，是定值。'},
+{s:'2-2',q:'火鍋湯太鹹，加白開水稀釋後把湯全部喝完，攝取的鹽量會？',o:['變少','變多','不變','無法判斷'],a:2,e:'加水只是讓溶劑變多、濃度變小，湯裡的鹽（溶質）總量沒有改變。'},
+{s:'2-2',q:'20 °C 時蔗糖溶解度為 203.9 g／100 g 水。在 100 g、20 °C 的水中加入 250 g 蔗糖並充分攪拌，結果是？',o:['全部溶解，為未飽和溶液','恰好飽和，沒有沉澱','形成飽和溶液，約有 46.1 g 蔗糖沉澱','形成飽和溶液，約有 250 g 蔗糖沉澱'],a:2,e:'最多只能溶 203.9 g，250－203.9＝46.1 g 溶不了而沉澱，溶液是飽和溶液。'},
+{s:'2-2',q:'將 25 g 食鹽溶於水，配成 250 g 的食鹽水，重量百分率濃度是多少？',o:['10%','11.1%','25%','9.1%'],a:0,e:'題目給的是「溶液」250 g，直接 25÷250×100%＝10%。看清楚題目給的是溶液還是溶劑！'},
+{s:'2-2',q:'油性簽字筆的筆跡用水擦不掉，但用酒精可以擦掉，這說明了什麼？',o:['酒精比水重','物質在不同溶劑中的溶解情形不同','水不是溶劑','筆跡是純物質'],a:1,e:'有些物質難溶於水，卻能溶在其他溶劑（例如酒精、油）中。溶劑不一定是水。'},
+/* 2-3 */
+{s:'2-3',q:'下列哪一種分離混合物的方式屬於「結晶法」？',o:['用陽光曝曬海水得到鹽','用濾網把湯和佐料分開','用磁鐵分開鐵砂和沙子','用濾紙濾掉水中雜質'],a:0,e:'曬鹽是讓水分蒸發，鹽溶不下了，就變成晶體出現，屬於結晶法。'},
+{s:'2-3',q:'過濾法是利用物質的什麼性質差異來分離？',o:['顏色','顆粒大小','密度','沸點'],a:1,e:'過濾法利用顆粒大小不同：小於濾紙孔隙的（水、溶解的食鹽）能通過，大的（細砂）留在濾紙上。'},
+{s:'2-3',q:'濾紙色層分析法是利用什麼原理分離物質？',o:['顆粒大小不同','各物質被濾紙吸住的程度不同，跟著溶劑跑的速度也不同','沸點不同','磁性不同'],a:1,e:'各種色素隨水移動時，對濾紙的吸附能力不同，移動速度不同，就分開了。'},
+{s:'2-3',q:'實驗 2-2「分離食鹽和細砂」中，過濾後留在濾紙上的是什麼？',o:['食鹽','細砂','食鹽和細砂','什麼都沒有'],a:1,e:'食鹽溶於水變成很小的粒子，能通過濾紙；細砂不溶於水，顆粒比濾紙孔隙大，留在濾紙上。'},
+{s:'2-3',q:'實驗 2-2 中，把濾液放在蒸發皿加熱，最後留下的白色結晶是？',o:['細砂','食鹽','糖','濾紙纖維'],a:1,e:'濾液是食鹽水，水分蒸發後，食鹽就析出成為白色結晶。'},
+{s:'2-3',q:'實驗 2-2 分離食鹽和細砂的正確步驟順序是？',o:['過濾→溶解→蒸發結晶','溶解→過濾→蒸發結晶','蒸發結晶→溶解→過濾','溶解→蒸發結晶→過濾'],a:1,e:'先加水「溶解」食鹽 → 「過濾」除去細砂 → 濾液「蒸發結晶」取回食鹽。'},
+{s:'2-3',q:'過濾時，漏斗中的液面不可以超過濾紙的高度，原因是？',o:['怕濾紙破掉','避免部分溶液沒有經過濾紙就流下去','加快過濾速度','讓濾紙乾得比較快'],a:1,e:'液面超過濾紙，溶液會從濾紙和漏斗之間流下，沒有被過濾。'},
+{s:'2-3',q:'做濾紙色層分析時，用彩色筆畫的起始線應該？',o:['泡在水裡','在水面上方','畫在濾紙最上緣','先把濾紙沾溼再畫'],a:1,e:'線若泡在水裡，顏料會直接溶進水中，無法隨水往上移動分離。所以水面不可超過畫的線。'},
+{s:'2-3',q:'蒸發結晶時，加熱到蒸發皿「快要蒸乾」時應該？',o:['加大火力','移開火源，讓它自然蒸乾','加水進去','立刻用手拿起蒸發皿'],a:1,e:'快乾時移開火源，可以避免殘留物彈跳出來，靠餘熱自然蒸乾即可。'},
+{s:'2-3',q:'綠豆中不小心混入鹽粒，最簡單的分離方法是？',o:['加熱蒸發','用孔隙比綠豆小、比鹽粒大的篩子篩','用濾紙色層分析','加水攪拌後喝掉'],a:1,e:'綠豆和鹽粒顆粒大小差很多，用篩子（過濾法的原理）就能分開。'},
+{s:'2-3',q:'要判斷一種物質是純物質還是混合物，簡單的方式是？',o:['看它的顏色','看它能不能用物理方法（如過濾、結晶）分離出不同物質','聞它的味道','看它是固體還是液體'],a:1,e:'能用物理方法分離出不同物質的是混合物（如食鹽水）；水無法再用這些方法分離，是純物質。'}
+];
+
+/* ================= quiz component ================= */
+function renderQuiz(root, qs, opt={}){
+  root.innerHTML='';
+  let answered=0, correct=0; const wrong=[];
+  qs.forEach((item,i)=>{
+    const card=el('div','q-card');
+    card.append(el('div','q-num', `第 ${i+1} 題${opt.showSec?`｜${SEC_NAME[item.s]}`:''}`));
+    card.append(el('p','q-stem', item.q));
+    const opts=el('div','q-opts'); const fb=el('div','q-fb'); fb.hidden=true;
+    item.o.forEach((t,j)=>{
+      const b=el('button','q-opt',`<span class="q-letter">${'ABCD'[j]}</span><span>${t}</span>`); b.type='button';
+      b.addEventListener('click',()=>{
+        if(card.dataset.done) return; card.dataset.done='1'; answered++;
+        const ok = j===item.a; if(ok) correct++; else wrong.push(item);
+        [...opts.children].forEach((bb,k)=>{ bb.disabled=true; if(k===item.a) bb.classList.add('is-right'); if(k===j && !ok) bb.classList.add('is-wrong'); });
+        fb.hidden=false; fb.className='q-fb '+(ok?'ok':'no');
+        fb.innerHTML = `<b>${ok?'✓ 答對了！':'✗ 答錯了，正確答案是 '+'ABCD'[item.a]}</b>${item.e}${(!ok&&opt.showSec)?` <a href="#s${item.s}">→ 回 ${item.s} 複習</a>`:''}`;
+        update();
+      });
+      opts.append(b);
+    });
+    card.append(opts, fb); root.append(card);
+  });
+  const sum=el('div','q-summary'); root.append(sum);
+  function update(){
+    const done = answered===qs.length;
+    let html=`<span>已作答 ${answered}／${qs.length}　答對 <b>${correct}</b> 題</span>`;
+    if(done){
+      const pct=Math.round(correct/qs.length*100);
+      html=`<span>完成！得分 <b>${pct}</b> 分（${correct}／${qs.length}）${pct===100?' 🎉 全對！':pct>=80?' 👍 很不錯！':' 💪 再複習一下吧'}</span>`;
+      if(opt.key){ const best=store.get('best:'+opt.key,0); if(pct>best) store.set('best:'+opt.key,pct); }
+      if(opt.onDone) opt.onDone(correct, wrong);
+    }
+    sum.innerHTML=html;
+    if(done){ const r=el('button','btn', opt.retryLabel||'🔄 再做一次'); r.onclick=()=>opt.onRetry?opt.onRetry():renderQuiz(root, qs, opt); sum.append(r); refreshProgress(); }
+  }
+  update();
+}
+$$('.quiz[data-sec]').forEach(q=>{ const s=q.dataset.sec; renderQuiz(q, BANK.filter(b=>b.s===s), {key:s}); });
+
+/* ================= progress & done bars ================= */
+function refreshProgress(){
+  const done = SEC_IDS.filter(id=>store.get('done:'+id,false)).length;
+  $('#progTxt').textContent=`${done}/6 節`;
+  $('#progBar').style.width=(done/6*100)+'%';
+  SEC_IDS.forEach(id=>{
+    const d=store.get('done:'+id,false), best=store.get('best:'+id.slice(1),null);
+    const t=$(`[data-tick="${id}"]`); if(t) t.textContent=d?'✓':'';
+    const st=$(`[data-st="${id}"]`); if(st){ st.className='st '+(d?'ok':'no'); st.textContent=(d?'✓ 已讀完':'尚未讀完')+(best!=null?`｜測驗最佳 ${best} 分`:''); }
+  });
+}
+$$('.done-bar').forEach(bar=>{
+  const id=bar.dataset.done;
+  const draw=()=>{
+    const d=store.get('done:'+id,false);
+    bar.classList.toggle('is-done',d);
+    bar.innerHTML = d ? `<span>✓ 這一節已讀完，太棒了！</span>` : `<span>讀完重點、做完練習和小測驗了嗎？</span>`;
+    const b=el('button', d?'btn':'btn primary', d?'取消標記':'✓ 我讀完了'); b.onclick=()=>{ store.set('done:'+id,!d); draw(); refreshProgress(); };
+    bar.append(b);
+  };
+  draw();
+});
+refreshProgress();
+
+/* ================= router ================= */
+function route(){
+  let id=(location.hash||'#home').slice(1);
+  if(!document.getElementById(id) || !$('#'+CSS.escape(id)).classList.contains('page')) id='home';
+  $$('.page').forEach(p=>p.classList.toggle('show', p.id===id));
+  $$('nav.side a').forEach(a=>a.classList.toggle('active', a.dataset.nav===id));
+  closeNav(); window.scrollTo(0,0);
+  document.title = (id==='home'?'':($(`[data-nav="${id}"]`)?.textContent.replace('✓','').trim()+'｜'))+'自然 2上 複習站';
+}
+const side=$('#side'), scrim=$('#scrim');
+function closeNav(){ side.classList.remove('open'); scrim.classList.remove('show'); }
+$('#menuBtn').onclick=()=>{ side.classList.toggle('open'); scrim.classList.toggle('show'); };
+scrim.onclick=closeNav;
+window.addEventListener('hashchange', route);
+
+/* ================= chart helper ================= */
+function lineChart(host, cfg){
+  const W=600,H=330,m={l:62,r:96,t:18,b:52};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  const X=v=>m.l+(v-cfg.x.min)/(cfg.x.max-cfg.x.min)*iw;
+  const Y=v=>m.t+ih-(v-cfg.y.min)/(cfg.y.max-cfg.y.min)*ih;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.title||''}" style="font-family:inherit">`;
+  cfg.y.ticks.forEach(t=>{ s+=`<line x1="${m.l}" x2="${m.l+iw}" y1="${Y(t)}" y2="${Y(t)}" stroke="#ebebe7"/><text x="${m.l-8}" y="${Y(t)+4}" text-anchor="end" font-size="12.5" fill="#52514e">${t}</text>`; });
+  cfg.x.ticks.forEach(t=>{ s+=`<text x="${X(t)}" y="${m.t+ih+20}" text-anchor="middle" font-size="12.5" fill="#52514e">${t}</text>`; });
+  s+=`<line x1="${m.l}" x2="${m.l+iw}" y1="${m.t+ih}" y2="${m.t+ih}" stroke="#9a9993"/>`;
+  s+=`<text x="${m.l+iw/2}" y="${H-8}" text-anchor="middle" font-size="13.5" fill="#52514e">${cfg.x.label}</text>`;
+  s+=`<text transform="translate(16 ${m.t+ih/2}) rotate(-90)" text-anchor="middle" font-size="13.5" fill="#52514e">${cfg.y.label}</text>`;
+  const hits=[];
+  cfg.series.forEach(se=>{
+    const d=se.pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join(' ');
+    s+=`<path d="${d}" fill="none" stroke="${se.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    se.pts.forEach(p=>{ if(se.markers!==false) s+=`<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="4" fill="${se.color}" stroke="#fff" stroke-width="2"/>`; hits.push({x:X(p[0]),y:Y(p[1]),tip:se.tip(p)}); });
+    const last=se.pts[se.pts.length-1], ly=Y(last[1])+(se.labelDy||0);
+    s+=`<line x1="${X(last[0])+8}" x2="${X(last[0])+20}" y1="${ly}" y2="${ly}" stroke="${se.color}" stroke-width="3" stroke-linecap="round"/><text x="${X(last[0])+24}" y="${ly+4}" font-size="13.5" fill="#0b0b0b" font-weight="600">${se.label}</text>`;
+  });
+  if(cfg.point){
+    const p=cfg.point, px=X(Math.min(Math.max(p.x,cfg.x.min),cfg.x.max)), py=Y(Math.min(Math.max(p.y,cfg.y.min),cfg.y.max));
+    s+=`<circle cx="${px}" cy="${py}" r="7" fill="#0b0b0b" stroke="#fff" stroke-width="2"/><text x="${px+11}" y="${py-9}" font-size="13" font-weight="700" fill="#0b0b0b">${p.label}</text>`;
+    hits.push({x:px,y:py,tip:p.tip});
+  }
+  hits.forEach((h,i)=>{ s+=`<circle data-h="${i}" cx="${h.x}" cy="${h.y}" r="13" fill="transparent" style="cursor:pointer"/>`; });
+  s+='</svg>';
+  host.innerHTML=(cfg.title?`<div style="font-weight:700;margin:4px 0">${cfg.title}</div>`:'')
+    +(cfg.legend?`<div class="legend">${cfg.series.map(se=>`<span><i style="background:${se.color}"></i>${se.name}</span>`).join('')}</div>`:'')
+    +`<div class="svgbox">${s}</div><div class="tip"></div>`;
+  const svg=host.querySelector('svg'), tip=host.querySelector('.tip');
+  const show=e=>{ const i=e.target.dataset.h; if(i==null) return; const r=svg.getBoundingClientRect(), hr=host.getBoundingClientRect(), k=r.width/W;
+    tip.innerHTML=hits[i].tip; tip.style.left=(r.left-hr.left+hits[i].x*k)+'px'; tip.style.top=(r.top-hr.top+hits[i].y*k)+'px'; tip.classList.add('show'); };
+  svg.addEventListener('pointerover',show); svg.addEventListener('click',show);
+  svg.addEventListener('pointerout',e=>{ if(e.target.dataset.h!=null) tip.classList.remove('show'); });
+}
+const tableHTML=(head,rows)=>`<div class="tbl-scroll"><table class="t"><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+
+/* ================= 1-1 unit conversion ================= */
+(()=>{
+  const L={km:3,m:0,dm:-1,cm:-2,mm:-3,'μm':-6,nm:-9}, M={kg:3,g:0,mg:-3};
+  const sup=n=>`10<sup>${n<0?'−'+(-n):n}</sup>`;
+  let score=0,total=0,cur;
+  function gen(){
+    const tbl=Math.random()<.6?L:M, keys=Object.keys(tbl);
+    let a,b; do{ a=keys[rnd(0,keys.length-1)]; b=keys[rnd(0,keys.length-1)]; }while(a===b);
+    const p=tbl[a]-tbl[b], ans=sup(p);
+    const set=new Set([p]); while(set.size<4){ const c=p+[-6,-3,-2,-1,1,2,3,6][rnd(0,7)]; set.add(c); }
+    const base=tbl===L?'m':'g', pw=n=>n===0?'1':sup(n);
+    cur={a,b,q:`1 ${a} ＝ ？ ${b}`, ans, opts:shuffle([...set]).map(sup), exp:`1 ${a} ＝ ${pw(tbl[a])} ${base}，1 ${b} ＝ ${pw(tbl[b])} ${base}，所以 1 ${a} ＝ ${pw(tbl[a])} ÷ ${pw(tbl[b])} ＝ ${ans} ${b}`};
+    $('#convQ').innerHTML=cur.q; $('#convFb').textContent=''; $('#convFb').className='fb';
+    const box=$('#convOpts'); box.innerHTML='';
+    cur.opts.forEach(o=>{ const b=el('button','btn',o); b.onclick=()=>{ if(box.dataset.lock) return; box.dataset.lock=1; total++;
+      const ok=o===cur.ans; if(ok) score++;
+      $('#convFb').className='fb '+(ok?'ok':'no'); $('#convFb').innerHTML=(ok?'✓ 正確！':`✗ 正確答案：1 ${cur.a} ＝ ${cur.ans} ${cur.b}`)+'<br><span style="font-weight:400">'+cur.exp+'</span>';
+      $('#convScore').textContent=`答對 ${score}／${total}`; }; box.append(b); });
+    delete box.dataset.lock;
+  }
+  $('#convNext').onclick=gen; gen();
+})();
+
+/* ================= 1-2 ruler reading ================= */
+(()=>{
+  let mode=1, L=0;
+  function draw(){
+    const range = mode===1?10:5, W=640, x0=24, x1=W-24, k=(x1-x0)/range;
+    let s=`<svg viewBox="0 0 ${W} 150">`;
+    s+=`<rect x="${x0}" y="22" width="${L*k}" height="40" rx="5" fill="#f4b6c2" stroke="#c75a72"/><text x="${x0+L*k/2}" y="47" text-anchor="middle" font-size="14" fill="#5b1f2c">橡皮擦</text>`;
+    s+=`<rect x="${x0-14}" y="70" width="${x1-x0+28}" height="62" rx="6" fill="#fff6d6" stroke="#c9b26a"/>`;
+    const step = mode===1?1:0.1, n=Math.round(range/step);
+    for(let i=0;i<=n;i++){ const v=i*step, x=x0+v*k; const major=Math.abs(v-Math.round(v))<1e-9; const half=mode!==1 && i%5===0 && !major;
+      const h= major?26:(half?18:11); s+=`<line x1="${x}" x2="${x}" y1="70" y2="${70+h}" stroke="#333" stroke-width="${major?1.6:1}"/>`;
+      if(major) s+=`<text x="${x}" y="${70+h+15}" text-anchor="middle" font-size="13" fill="#222">${Math.round(v)}</text>`; }
+    s+=`<text x="${x1}" y="128" text-anchor="end" font-size="12" fill="#666">單位：cm</text>`;
+    s+=`<line x1="${x0+L*k}" x2="${x0+L*k}" y1="16" y2="70" stroke="#c75a72" stroke-dasharray="3 3"/>`;
+    s+='</svg>';
+    $('#rulerSvg').innerHTML=s;
+  }
+  function gen(){
+    if(mode===1){ L=rnd(2,9)+rnd(1,9)/10; }
+    else { L=rnd(1,4)+rnd(0,9)/10+rnd(1,9)/100; }
+    L=Math.round(L*100)/100;
+    $('#rulerIn').value=''; $('#rulerFb').textContent=''; $('#rulerFb').className='fb'; draw();
+  }
+  function check(){
+    const raw=$('#rulerIn').value.trim().replace(/cm/i,'').trim(); const v=Number(raw);
+    const fb=$('#rulerFb'); if(raw===''||isNaN(v)){ fb.className='fb no'; fb.textContent='請輸入數字喔！'; return; }
+    const dec=(raw.split('.')[1]||'').length, need=mode===1?1:2, tol=mode===1?0.2:0.02;
+    const acc = mode===1?Math.floor(L):Math.floor(L*10)/10;
+    if(dec!==need){ fb.className='fb no'; fb.innerHTML=`✗ 位數不對！這把尺最小刻度 ${mode===1?'1 cm':'0.1 cm'}，要記錄到「最小刻度的下一位」→ 小數點後第 <b>${need}</b> 位。`; return; }
+    if(Math.abs(v-L)<=tol+1e-9){ fb.className='fb ok'; fb.innerHTML=`✓ 很好！準確值 ${fmt(acc,need-1)} cm，估計值約 ${fmt(L-acc,need)} cm（每個人估計值可能略有不同，在 ±${tol} cm 內都算合理）。`; }
+    else { fb.className='fb no'; fb.innerHTML=`✗ 差有點多喔。先看橡皮擦末端超過哪一個刻度（準確值），再估計剩下的部分。`; }
+  }
+  $$('#rulerMode button').forEach(b=>b.onclick=()=>{ $$('#rulerMode button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); mode=Number(b.dataset.m); gen(); });
+  $('#rulerCheck').onclick=check; $('#rulerIn').addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+  $('#rulerNew').onclick=gen;
+  $('#rulerShow').onclick=()=>{ const need=mode===1?1:2; const acc=mode===1?Math.floor(L):Math.floor(L*10)/10; $('#rulerFb').className='fb info'; $('#rulerFb').innerHTML=`參考答案：約 <b>${L.toFixed(need)} cm</b>（準確值 ${acc.toFixed(need-1)} cm ＋ 估計值 ${(L-acc).toFixed(need)} cm）`; };
+  gen();
+})();
+
+/* ================= 1-3 cylinder ================= */
+(()=>{
+  let v1=0,v2=0;
+  function cyl(x,level,stone){
+    const top=30,bot=330,max=50,k=(bot-top)/max, w=70;
+    let s=`<rect x="${x}" y="${top-10}" width="${w}" height="${bot-top+10}" rx="6" fill="#fff" stroke="#888" stroke-width="1.5"/>`;
+    s+=`<rect x="${x+1}" y="${bot-level*k}" width="${w-2}" height="${level*k}" fill="#cfe5fb"/>`;
+    s+=`<path d="M${x+1} ${bot-level*k-3} Q ${x+w/2} ${bot-level*k+5} ${x+w-1} ${bot-level*k-3}" fill="none" stroke="#2a78d6" stroke-width="1.5"/>`;
+    for(let i=0;i<=max;i++){ const y=bot-i*k, big=i%10===0, mid=i%5===0;
+      s+=`<line x1="${x+w}" x2="${x+w-(big?22:mid?15:9)}" y1="${y}" y2="${y}" stroke="#333" stroke-width="${big?1.4:.8}"/>`;
+      if(big) s+=`<text x="${x+w+6}" y="${y+4}" font-size="12" fill="#222">${i}</text>`; }
+    if(stone) s+=`<ellipse cx="${x+28}" cy="${bot-14}" rx="20" ry="12" fill="#8d8478" stroke="#5c554c"/>`;
+    return s;
+  }
+  function gen(){
+    v1=rnd(15,30); v2=Math.round((v1+rnd(4,15)+rnd(1,9)/10)*10)/10;
+    $('#cylSvg').innerHTML=`<svg viewBox="0 0 360 370">${cyl(40,v1,false)}${cyl(230,v2,true)}<text x="75" y="360" text-anchor="middle" font-size="14" fill="#333">放入前 V₁</text><text x="265" y="360" text-anchor="middle" font-size="14" fill="#333">放入後 V₂</text><text x="180" y="190" text-anchor="middle" font-size="22" fill="#999">➜</text><text x="350" y="18" text-anchor="end" font-size="12" fill="#666">單位：mL</text></svg>`;
+    $('#cylIn').value=''; $('#cylFb').textContent=''; $('#cylFb').className='fb';
+  }
+  function check(){
+    const raw=$('#cylIn').value.trim(), v=parseNum(raw), fb=$('#cylFb');
+    if(isNaN(v)){ fb.className='fb no'; fb.textContent='請輸入數字喔！'; return; }
+    const ans=v2-v1;
+    if(Math.abs(v-ans)<=0.5+1e-9){ fb.className='fb ok'; fb.innerHTML=`✓ 正確！V₁＝${v1.toFixed(1)} mL，V₂≈${v2.toFixed(1)} mL，石頭體積 ≈ ${ans.toFixed(1)} cm³（估計位差一點點沒關係）。`+((raw.split('.')[1]||'').length!==1?'<br>小提醒：量筒最小刻度 1 mL，記錄到 0.1 mL 會更完整喔。':''); }
+    else { fb.className='fb no'; fb.innerHTML=`✗ 再試試！先讀 V₁、V₂（平視液面中央最低處），再算 V₂ − V₁。`; }
+  }
+  $('#cylCheck').onclick=check; $('#cylIn').addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+  $('#cylNew').onclick=gen;
+  $('#cylShow').onclick=()=>{ $('#cylFb').className='fb info'; $('#cylFb').innerHTML=`V₁＝${v1.toFixed(1)} mL，V₂＝${v2.toFixed(1)} mL → 石頭體積＝${v2.toFixed(1)}－${v1.toFixed(1)}＝<b>${(v2-v1).toFixed(1)} cm³</b>`; };
+  gen();
+})();
+
+/* ================= 1-3 m-V chart + density detective ================= */
+const MATS=[['金',19.3],['銀',10.5],['銅',8.9],['鐵',7.9],['鋁',2.7],['水',1.0],['酒精',0.79]];
+function drawMV(point){
+  const xs=[0,5,10,15,20];
+  lineChart($('#mvChart'),{
+    title:'質量－體積關係圖（同一物質：通過原點的斜直線）', legend:true,
+    x:{min:0,max:20,ticks:[0,5,10,15,20],label:'體積 V（cm³）'}, y:{min:0,max:200,ticks:[0,50,100,150,200],label:'質量 m（g）'},
+    series:[
+      {name:'銅（8.9 g/cm³）',label:'銅 斜率 8.9',color:'#eb6834',pts:xs.map(v=>[v,+(8.9*v).toFixed(1)]),tip:p=>`銅：V＝${p[0]} cm³，m＝${p[1]} g`},
+      {name:'鋁（2.7 g/cm³）',label:'鋁 斜率 2.7',color:'#2a78d6',pts:xs.map(v=>[v,+(2.7*v).toFixed(1)]),tip:p=>`鋁：V＝${p[0]} cm³，m＝${p[1]} g`}
+    ],
+    point
+  });
+}
+$('#mvTable').innerHTML=tableHTML(['體積（cm³）','鋁 質量（g）','銅 質量（g）','鋁 m÷V','銅 m÷V'],[5,10,15,20].map(v=>[v,(2.7*v).toFixed(1),(8.9*v).toFixed(1),'2.7','8.9']));
+function density(){
+  const m=parseNum($('#dM').value), v=parseNum($('#dV').value), fb=$('#dFb');
+  if(!(m>0)||!(v>0)){ fb.className='fb no'; fb.textContent='質量和體積都要輸入大於 0 的數字。'; drawMV(null); return; }
+  const D=m/v; let best=MATS[0]; MATS.forEach(x=>{ if(Math.abs(x[1]-D)<Math.abs(best[1]-D)) best=x; });
+  const close=Math.abs(best[1]-D)/best[1]<0.04;
+  fb.className='fb '+(close?'ok':'info');
+  fb.innerHTML=`D ＝ m ÷ V ＝ ${m} ÷ ${v} ＝ <b>${fmt(D,2)} g/cm³</b><br>`+(close?`🔍 和<b>${best[0]}</b>（${best[1]} g/cm³）相符，最可能是${best[0]}！`:`表中沒有密度相符的物質（最接近的是${best[0]} ${best[1]} g/cm³）。`);
+  drawMV({x:v,y:m,label:'你的物體',tip:`你的物體：V＝${v} cm³，m＝${m} g，D＝${fmt(D,2)}`+((v>20||m>200)?'（超出圖範圍，畫在邊界）':'')});
+}
+$('#dGo').onclick=density;
+$$('[data-dm]').forEach(b=>b.onclick=()=>{ $('#dM').value=b.dataset.dm; $('#dV').value=b.dataset.dv; density(); });
+drawMV(null);
+
+/* ================= 2-1 states diagram ================= */
+const ST={
+  '熔化':{from:'固',to:'液',heat:true,d:'固態 → 液態',ex:'冰遇熱熔化成水、巧克力熔化'},
+  '凝固':{from:'液',to:'固',heat:false,d:'液態 → 固態',ex:'水在低溫時凝固成冰'},
+  '汽化':{from:'液',to:'氣',heat:true,d:'液態 → 氣態（包含蒸發和沸騰）',ex:'水沸騰、晾衣服變乾（蒸發）'},
+  '凝結':{from:'氣',to:'液',heat:false,d:'氣態 → 液態',ex:'浴室鏡子起霧、冰飲料杯外冒出的水珠'},
+  '昇華':{from:'固',to:'氣',heat:true,d:'固態 → 氣態（不經過液態）',ex:'乾冰消失、樟腦丸變小、固態碘遇熱變紫色碘蒸氣'},
+  '凝華':{from:'氣',to:'固',heat:false,d:'氣態 → 固態（不經過液態）',ex:'霜、雪的形成，碘蒸氣遇冷變回固態碘'}
+};
+(()=>{
+  const P={固:[110,250],液:[490,250],氣:[300,62]};
+  const W='#c2410c', C='#1c5cab';
+  let s=`<svg viewBox="0 0 600 320"><defs>
+    <marker id="aw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${W}"/></marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${C}"/></marker></defs>`;
+  const off=(a,b,o)=>{ const dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy), nx=-dy/L*o, ny=dx/L*o, sx=dx/L*48, sy=dy/L*48;
+    return [a[0]+sx+nx,a[1]+sy+ny,b[0]-sx+nx,b[1]-sy+ny]; };
+  Object.entries(ST).forEach(([name,v])=>{
+    const a=P[v.from], b=P[v.to], [x1,y1,x2,y2]=off(a,b,14), col=v.heat?W:C;
+    s+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="2.5" marker-end="url(#${v.heat?'aw':'ac'})"/>`;
+    const mx=(x1+x2)/2, my=(y1+y2)/2, dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy), lx=mx-dy/L*24, ly=my+dx/L*24;
+    s+=`<g class="state-lbl" data-st="${name}"><rect x="${lx-30}" y="${ly-15}" width="60" height="28" rx="8" fill="#fff" stroke="${col}"/><text x="${lx}" y="${ly+5}" text-anchor="middle" font-size="15" font-weight="700" fill="${col}">${name}</text></g>`;
+  });
+  const node=(k,sub)=>{ const [x,y]=P[k]; return `<circle cx="${x}" cy="${y}" r="42" fill="#fdeee7" stroke="#b4471d" stroke-width="2"/><text x="${x}" y="${y+2}" text-anchor="middle" font-size="22" font-weight="700" fill="#0b0b0b">${k}態</text><text x="${x}" y="${y+22}" text-anchor="middle" font-size="11.5" fill="#52514e">${sub}</text>`; };
+  s+=node('固','冰')+node('液','水')+node('氣','水蒸氣');
+  s+=`<g font-size="13"><line x1="20" x2="44" y1="306" y2="306" stroke="${W}" stroke-width="2.5"/><text x="50" y="310" fill="#0b0b0b">加熱（吸熱）方向</text><line x1="190" x2="214" y1="306" y2="306" stroke="${C}" stroke-width="2.5"/><text x="220" y="310" fill="#0b0b0b">冷卻（放熱）方向</text></g></svg>`;
+  $('#stateSvg').innerHTML=s;
+  $$('#stateSvg .state-lbl').forEach(g=>g.addEventListener('click',()=>{
+    $$('#stateSvg .state-lbl').forEach(x=>x.classList.remove('on')); g.classList.add('on');
+    const v=ST[g.dataset.st]; $('#stateInfo').innerHTML=`<b>${g.dataset.st}</b>：${v.d}<br>例子：${v.ex}`;
+  }));
+})();
+(()=>{
+  const Q=[['冰塊放在室溫中變成水','熔化'],['水放進冷凍庫結成冰','凝固'],['晾在外面的衣服變乾','汽化'],['水煮到沸騰冒泡','汽化'],['冰飲料杯外壁出現水珠','凝結'],['冬天呼氣時出現白霧','凝結'],['乾冰放在桌上慢慢消失','昇華'],['衣櫃裡的樟腦丸愈來愈小','昇華'],['加熱固態碘，冒出紫色的碘蒸氣','昇華'],['寒冷的早晨，草地上結了一層霜','凝華'],['高空中的水蒸氣直接變成冰晶（雪）','凝華'],['蠟燭點燃後，燭芯旁的蠟變成液體','熔化'],['碘蒸氣碰到冷的燒瓶底部，變回固態碘','凝華'],['熔化的蠟滴到桌上又變硬','凝固']];
+  let order=shuffle(Q), i=-1, score=0, total=0;
+  function next(){
+    i=(i+1)%order.length; if(i===0) order=shuffle(Q);
+    const [q,a]=order[i]; $('#stQ').textContent=q; $('#stFb').textContent=''; $('#stFb').className='fb';
+    const box=$('#stOpts'); box.innerHTML=''; delete box.dataset.lock;
+    Object.keys(ST).forEach(n=>{ const b=el('button','btn',n); b.onclick=()=>{ if(box.dataset.lock) return; box.dataset.lock=1; total++; const ok=n===a; if(ok) score++;
+      $('#stFb').className='fb '+(ok?'ok':'no'); $('#stFb').innerHTML=(ok?'✓ 答對了！':`✗ 答案是「${a}」。`)+`<span style="font-weight:400">（${ST[a].d}）</span>`; $('#stScore').textContent=`答對 ${score}／${total}`; }; box.append(b); });
+  }
+  $('#stNext').onclick=next; next();
+})();
+
+/* ================= 2-1 physical vs chemical sort ================= */
+(()=>{
+  const ITEMS=[['咖啡豆磨成粉','物','只是變小顆，還是咖啡豆'],['光合作用','化','產生葡萄糖和氧氣等新物質'],['糖溶於水','物','糖還是糖，把水蒸乾就能取回'],['巧克力熔化','物','只是狀態改變（固→液）'],['自來水煮沸','物','水變成水蒸氣，只是狀態改變'],['鉛筆芯折斷','物','只是形狀改變'],['牛奶變酸','化','產生了新的酸性物質'],['紙錢燃燒','化','燃燒產生新物質（灰燼、二氧化碳）'],['水結成冰','物','只是狀態改變（液→固）'],['鐵生鏽','化','產生新的褐色物質（鐵鏽）'],['生蛋煎熟','化','蛋白質性質改變，無法變回生蛋'],['木材燃燒','化','產生灰燼、二氧化碳等新物質'],['酒精蒸發','物','只是狀態改變（液→氣）'],['樟腦丸昇華','物','只是狀態改變（固→氣）'],['食物腐敗','化','產生新物質，發出臭味'],['雙氧水分解產生氧氣','化','產生新物質：水和氧氣'],['切開橡皮擦','物','只是形狀改變'],['燈泡通電發光','物','沒有產生新物質'],['呼吸作用','化','產生二氧化碳和水'],['漂白衣物','化','色素被破壞，產生新物質']];
+  let list,i,score;
+  function start(){ list=shuffle(ITEMS).slice(0,10); i=0; score=0; show(); }
+  function show(){
+    const fb=$('#sortFb'); fb.textContent=''; fb.className='fb';
+    if(i>=list.length){ $('#sortQ').innerHTML=`🎉 完成！答對 ${score}／${list.length}`; $$('[data-sort]').forEach(b=>b.disabled=true); $('#sortScore').textContent=''; return; }
+    $$('[data-sort]').forEach(b=>b.disabled=false);
+    $('#sortQ').textContent=list[i][0]; $('#sortScore').textContent=`第 ${i+1}／${list.length} 題　答對 ${score}`;
+  }
+  $$('[data-sort]').forEach(b=>b.onclick=()=>{
+    const it=list[i], ok=b.dataset.sort===it[1]; if(ok) score++;
+    $$('[data-sort]').forEach(x=>x.disabled=true);
+    const fb=$('#sortFb'); fb.className='fb '+(ok?'ok':'no'); fb.innerHTML=(ok?'✓ 正確！':`✗ 是${it[1]==='物'?'物理':'化學'}變化。`)+`<span style="font-weight:400">${it[2]}</span>`;
+    i++; setTimeout(show, 1500);
+  });
+  $('#sortRestart').onclick=start; start();
+})();
+
+/* ================= 2-1 air composition ================= */
+(()=>{
+  const parts=[['氮氣',78,'#2a78d6'],['氧氣',21,'#eb6834'],['氬氣',0.9,'#1baf7a'],['其他（二氧化碳、臭氧等）',0.1,'#9a9993']];
+  const W=600, x0=10, w=W-20; let x=x0, s=`<svg viewBox="0 0 ${W} 70">`, i=0;
+  parts.forEach(p=>{ const pw=Math.max(p[1]/100*w,2); s+=`<rect data-h="${i++}" x="${x}" y="10" width="${Math.max(pw-2,1.5)}" height="34" rx="4" fill="${p[2]}" style="cursor:pointer"/>`; x+=pw; });
+  s+=`<text x="${x0+78/100*w/2}" y="32" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">氮氣 78%</text><text x="${x0+78/100*w+21/100*w/2}" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">氧氣 21%</text>`;
+  s+=`<text x="${W-10}" y="62" text-anchor="end" font-size="12.5" fill="#52514e">右端細條：氬氣 0.9%、其他 0.1%</text></svg>`;
+  const host=$('#airChart');
+  host.innerHTML=`<div style="font-weight:700;margin:4px 0">乾燥空氣的組成（體積比）</div><div class="legend">${parts.map(p=>`<span><i style="background:${p[2]};height:10px;width:10px;border-radius:3px"></i>${p[0]} ${p[1]}%</span>`).join('')}</div><div class="svgbox">${s}</div><div class="tip"></div>`;
+  const svg=host.querySelector('svg'), tip=host.querySelector('.tip');
+  svg.addEventListener('pointermove',e=>{ const i=e.target.dataset.h; if(i==null){tip.classList.remove('show');return;} const hr=host.getBoundingClientRect();
+    tip.textContent=`${parts[i][0]}：約 ${parts[i][1]}%`; tip.style.left=(e.clientX-hr.left)+'px'; tip.style.top=(e.clientY-hr.top)+'px'; tip.classList.add('show'); });
+  svg.addEventListener('pointerleave',()=>tip.classList.remove('show'));
+})();
+
+/* ================= 2-2 concentration calculator ================= */
+(()=>{
+  let tab='w';
+  function calc(){
+    const out=$('#concOut');
+    if(tab==='w'){ const a=parseNum($('#cwA').value), b=parseNum($('#cwB').value);
+      if(!(a>=0)||!(b>=0)||a+b===0){ out.textContent='請輸入正確的數字。'; return; }
+      out.innerHTML=`溶液重量 ＝ 溶質 ＋ 溶劑 ＝ ${a} ＋ ${b} ＝ <b>${fmt(a+b)} g</b><br>重量百分率濃度 ＝ ${a} ÷ ${fmt(a+b)} × 100% ＝ <b>${fmt(a/(a+b)*100,2)}%</b><br><span class="muted">⚠️ 常見錯誤：${a} ÷ ${b} × 100% ＝ ${b>0?fmt(a/b*100,2)+'%':'—'}（分母誤用溶劑）</span>`; }
+    if(tab==='v'){ const a=parseNum($('#cvA').value), b=parseNum($('#cvB').value);
+      if(!(a>=0)||!(b>=0)||b>100){ out.textContent='請輸入正確的數字（濃度 0～100）。'; return; }
+      out.innerHTML=`溶質（酒精）體積 ＝ 溶液體積 × 濃度 ＝ ${a} mL × ${b}% ＝ <b>${fmt(a*b/100,2)} mL</b><br><span class="muted">${b} 度 ＝ 每 100 mL 溶液含 ${b} mL 溶質</span>`; }
+    if(tab==='p'){ const a=parseNum($('#cpA').value), b=parseNum($('#cpB').value);
+      if(!(a>=0)||!(b>0)){ out.textContent='請輸入正確的數字。'; return; }
+      out.innerHTML=`溶液 ${b} kg ＝ ${b}×10<sup>6</sup> mg<br>濃度 ＝ ${a} mg ÷ (${b}×10<sup>6</sup> mg) × 10<sup>6</sup> ＝ <b>${fmt(a/b,4)} ppm</b><br><span class="muted">簡單記：1 ppm ＝ 每 1 kg 溶液含 1 mg 溶質</span>`; }
+  }
+  $$('#concTabs button').forEach(b=>b.onclick=()=>{ $$('#concTabs button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); tab=b.dataset.t;
+    $('#concW').hidden=tab!=='w'; $('#concV').hidden=tab!=='v'; $('#concP').hidden=tab!=='p'; calc(); });
+  $$('#concW input,#concV input,#concP input').forEach(i=>i.addEventListener('input',calc));
+  calc();
+})();
+
+/* ================= 2-2 solubility sim + charts ================= */
+const SUGAR=[[0,179.2],[10,190.5],[20,203.9],[30,219.5],[40,238.1],[50,260.4],[60,287.3]];
+const CO2=[[0,0.335],[10,0.232],[20,0.169],[30,0.126],[40,0.097],[50,0.076],[60,0.058]];
+const interp=(tbl,t)=>{ for(let i=0;i<tbl.length-1;i++){ const [a,ya]=tbl[i],[b,yb]=tbl[i+1]; if(t>=a&&t<=b) return ya+(yb-ya)*(t-a)/(b-a);} return tbl[tbl.length-1][1]; };
+function drawSugar(pt){
+  lineChart($('#sugarChart'),{title:'蔗糖的溶解度曲線（溫度愈高，溶解度愈大）',
+    x:{min:0,max:60,ticks:[0,10,20,30,40,50,60],label:'溫度（°C）'}, y:{min:0,max:300,ticks:[0,50,100,150,200,250,300],label:'溶解度（g / 100 g 水）'},
+    series:[{name:'蔗糖',label:'蔗糖',color:'#eb6834',pts:SUGAR,tip:p=>`${p[0]} °C：最多溶 ${p[1]} g`}], point:pt});
+}
+function sim(){
+  const T=Number($('#tR').value), g=Number($('#gR').value), S=interp(SUGAR,T);
+  $('#tVal').textContent=T; $('#gVal').textContent=g;
+  const dissolved=Math.min(g,S), extra=Math.max(g-S,0);
+  let st,msg;
+  if(Math.abs(g-S)<0.5){ st='<span class="stat sat">恰好飽和</span>'; msg='剛好溶完，沒有沉澱，再多加一點就會沉澱。'; }
+  else if(g<S){ st='<span class="stat un">未飽和溶液</span>'; msg=`還能再溶解約 <b>${fmt(S-g,1)} g</b> 蔗糖。`; }
+  else { st='<span class="stat over">飽和溶液＋沉澱</span>'; msg=`溶不完！約 <b>${fmt(extra,1)} g</b> 蔗糖沉在杯底。試試把溫度調高 ⬆`; }
+  const P=dissolved/(100+dissolved)*100;
+  $('#simOut').innerHTML=`${st}<br>${T} °C 的溶解度 ≈ <b>${fmt(S,1)} g</b>／100 g 水<br>${msg}<br><span class="muted">此時溶液的重量百分率濃度 ＝ ${fmt(dissolved,1)} ÷ (100＋${fmt(dissolved,1)}) × 100% ≈ ${fmt(P,1)}%</span>`;
+  const lvl=150, sed=Math.min(extra/300*90,90), tint=0.15+0.6*(dissolved/290);
+  let crystals=''; const n=Math.round(sed/90*60); for(let i=0;i<n;i++){ const x=40+((i*37)%120), y=228-((i*13)%Math.max(sed,4)); crystals+=`<rect x="${x}" y="${y}" width="6" height="6" fill="#fff" stroke="#b9a37a" transform="rotate(${(i*29)%90} ${x+3} ${y+3})"/>`; }
+  $('#beaker').innerHTML=`<svg viewBox="0 0 220 260"><path d="M30 30 L30 235 Q30 245 40 245 L180 245 Q190 245 190 235 L190 30" fill="none" stroke="#777" stroke-width="3"/><rect x="32" y="${245-lvl-60}" width="156" height="${lvl+58}" fill="rgba(235,104,52,${tint.toFixed(2)})" opacity=".55"/>${crystals}<text x="110" y="22" text-anchor="middle" font-size="13" fill="#52514e">100 g 水＋${g} g 蔗糖・${T} °C</text></svg>`;
+  drawSugar({x:T,y:Math.min(g,300),label:g>S?'加入量（超過曲線→沉澱）':'加入量',tip:`${T} °C 加入 ${g} g（溶解度 ${fmt(S,1)} g）`});
+}
+$('#tR').addEventListener('input',sim); $('#gR').addEventListener('input',sim);
+$('#sugarTable').innerHTML=tableHTML(['溫度（°C）',...SUGAR.map(p=>p[0])],[['蔗糖溶解度（g/100 g 水）',...SUGAR.map(p=>p[1])]]);
+sim();
+lineChart($('#co2Chart'),{title:'二氧化碳的溶解度曲線（溫度愈高，溶解度愈小）',
+  x:{min:0,max:60,ticks:[0,10,20,30,40,50,60],label:'溫度（°C）'}, y:{min:0,max:0.4,ticks:[0,0.1,0.2,0.3,0.4],label:'溶解度（g / 100 g 水）'},
+  series:[{name:'二氧化碳',label:'二氧化碳',color:'#2a78d6',pts:CO2,tip:p=>`${p[0]} °C：約 ${p[1]} g`}]});
+
+/* ================= 2-3 order game ================= */
+(()=>{
+  const STEPS=['把食鹽和細砂倒入燒杯混合','加入 20 mL 水，用玻棒攪拌（溶解）','摺好濾紙放入漏斗，加少量水潤溼','溶液沿玻棒緩緩倒入漏斗（過濾）','取一部分濾液倒入蒸發皿','加熱蒸發皿，快乾時移開火源','冷卻後觀察蒸發皿上的白色結晶'];
+  let next=0;
+  function reset(){ next=0; $('#ordDone').innerHTML=''; $('#ordFb').textContent=''; $('#ordFb').className='fb'; const pool=$('#ordPool'); pool.innerHTML='';
+    shuffle(STEPS.map((s,i)=>[s,i])).forEach(([s,i])=>{ const b=el('button','btn',s); b.onclick=()=>{
+      const fb=$('#ordFb');
+      if(i===next){ next++; b.remove(); $('#ordDone').append(el('div','',`${next}. ${s}`)); fb.className='fb ok'; fb.textContent= next===STEPS.length?'🎉 全部排對了！溶解 → 過濾 → 結晶':'✓ 對！繼續下一步';
+      } else { fb.className='fb no'; fb.textContent='✗ 不是這一步喔，想想看現在應該做什麼？'; }
+    }; pool.append(b); }); }
+  $('#ordReset').onclick=reset; reset();
+})();
+
+/* ================= 2-3 separation matcher ================= */
+(()=>{
+  const Q=[['用咖啡濾紙把咖啡渣和咖啡液分開','過濾法'],['曬海水得到粗鹽','結晶法'],['用篩子分開細麵粉和結塊麵粉','過濾法'],['分離黑色彩色筆墨水中的各種顏料','濾紙色層分析法'],['天氣變冷，天氣瓶中出現羽毛狀結晶','結晶法'],['分離植物葉片中不同顏色的色素','濾紙色層分析法'],['除去泥沙水中的泥沙','過濾法'],['把食鹽水加熱，取得食鹽','結晶法'],['生命吸管把河水中的雜質濾掉','過濾法'],['綠豆中混入鹽粒，用篩子分開','過濾法']];
+  const WHY={'過濾法':'利用顆粒大小不同','結晶法':'讓水變少或溫度改變，溶質溶不下而跑出來','濾紙色層分析法':'各成分被濾紙吸住的程度不同'};
+  let order=shuffle(Q), i=-1, score=0, total=0;
+  function next(){ i=(i+1)%order.length; if(i===0) order=shuffle(Q); const [q,a]=order[i];
+    $('#sepQ').textContent=q; $('#sepFb').textContent=''; $('#sepFb').className='fb';
+    const box=$('#sepOpts'); box.innerHTML=''; delete box.dataset.lock;
+    Object.keys(WHY).forEach(n=>{ const b=el('button','btn',n); b.onclick=()=>{ if(box.dataset.lock) return; box.dataset.lock=1; total++; const ok=n===a; if(ok) score++;
+      $('#sepFb').className='fb '+(ok?'ok':'no'); $('#sepFb').innerHTML=(ok?'✓ 正確！':`✗ 答案是「${a}」。`)+`<span style="font-weight:400">原理：${WHY[a]}</span>`; $('#sepScore').textContent=`答對 ${score}／${total}`; }; box.append(b); }); }
+  $('#sepNext').onclick=next; next();
+})();
+
+/* ================= flashcards ================= */
+const CARDS=[
+[1,'三大基本物理量與國際單位？','長度：公尺 m<br>質量：公斤 kg<br>時間：秒 s'],
+[1,'基本量與導出量的差別？','基本量：最基本的量（長度、質量、時間…）<br>導出量：由基本量計算得到（密度、速度）'],
+[1,'長度單位換算（km、m、cm、mm、μm、nm）','1 km＝10<sup>3</sup> m；1 cm＝10<sup>−2</sup> m；1 mm＝10<sup>−3</sup> m<br>1 μm＝10<sup>−6</sup> m；1 nm＝10<sup>−9</sup> m'],
+[1,'1 kg ＝ ? g ＝ ? mg','1 kg ＝ 10<sup>3</sup> g ＝ 10<sup>6</sup> mg'],
+[1,'現在「秒」用什麼定義？','銫原子鐘'],
+[1,'什麼樣的現象能用來計時？','有規律、週而復始的現象（日夜、月相、四季）'],
+[1,'為什麼要統一單位？','溝通時不容易產生誤解（國際單位制 SI）'],
+[1,'上皿天平操作口訣？','歸零 → 左物右碼 → 砝碼夾、由大到小 → 指針左右擺幅相同即平衡'],
+[1,'用手拿砝碼使砝碼生鏽，測量值會？','偏小（砝碼變重了）'],
+[1,'什麼是估計值？','不到一格、要用眼睛估的那一位；比最小刻度再多一位，而且只寫一位'],
+[1,'最小刻度 0.1 cm 的尺，要記錄到哪一位？','0.01 cm（小數點後第 2 位），例 14.25 cm'],
+[1,'減少測量誤差的方法？','多次測量取平均（先刪除明顯錯誤的數據）、使用刻度較小的工具'],
+[1,'讀量筒的正確方法？','視線平視液面中央最低處'],
+[1,'排水法公式？哪些東西不適合？','V＝V₂－V₁<br>不適合：會浮、會溶於水、會和水反應的物體'],
+[1,'1 mL、1 L、1 m³ 的換算？','1 mL＝1 cc＝1 cm³<br>1 L＝1000 mL＝1 dm³<br>1 m³＝1000 L＝1 kL'],
+[1,'密度的公式和單位？','D＝m÷V<br>g/cm³ 或 kg/m³（1 g/cm³＝1000 kg/m³）'],
+[1,'水、鋁、鐵、銅、銀、金的密度？','水 1.0、鋁 2.7、鐵 7.9、銅 8.9、銀 10.5、金 19.3（g/cm³）'],
+[1,'同一物質的質量－體積圖？','通過原點的斜直線（成正比），斜率＝密度'],
+[1,'不同物質，體積相同／質量相同時？','體積相同：密度大 → 質量大<br>質量相同：密度大 → 體積小'],
+[2,'固、液、氣三態的形狀與體積？','固：都固定<br>液：形狀不固定、體積固定<br>氣：都不固定'],
+[2,'六種三態變化？','熔化 固→液、凝固 液→固<br>汽化 液→氣、凝結 氣→液<br>昇華 固→氣、凝華 氣→固'],
+[2,'物理變化 vs 化學變化？','物理：沒有新物質（三態變化、溶解、切開）<br>化學：產生新物質（生鏽、燃燒、腐敗）'],
+[2,'物理性質 vs 化學性質？','物理：感官或儀器可觀測（顏色、熔點、密度）<br>化學：要透過化學變化（可燃性、助燃性、酸鹼性）'],
+[2,'純物質 vs 混合物？','純物質：單一物質，性質固定<br>混合物：兩種以上純物質，性質不固定（空氣、糖水）'],
+[2,'乾燥空氣的組成？','氮氣 78%、氧氣 21%、氬氣 0.9%、其他 0.1%'],
+[2,'氮氣、氬氣、二氧化碳的用途？','氮：食品包裝、液態氮冷凍<br>氬：焊接時隔絕氧氣<br>二氧化碳：滅火、汽水、乾冰'],
+[2,'實驗室怎麼製造氧氣？怎麼檢驗？','雙氧水＋二氧化錳（加快反應）→ 水＋氧氣<br>線香燃燒更劇烈（助燃性）'],
+[2,'怎麼製造和檢驗二氧化碳？','大理岩＋稀鹽酸<br>澄清石灰水變混濁；線香熄滅'],
+[2,'為什麼氧氣可用排水集氣法收集？','氧氣不太溶於水；而且這樣收集的氣體比較不會混到空氣'],
+[2,'溶液的組成？','溶液＝溶質（被溶解）＋溶劑（負責溶解）'],
+[2,'重量百分率濃度公式？','溶質重量 ÷ 溶液重量（溶質＋溶劑）× 100%'],
+[2,'體積百分率濃度？「58 度」是什麼意思？','溶質體積 ÷ 溶液體積 × 100%<br>58 度＝每 100 mL 酒含 58 mL 酒精'],
+[2,'1 ppm 的意義？','百萬分之一：1 kg 溶液中含 1 mg 溶質；用於極低濃度（汙染）'],
+[2,'溶解度的定義？','定溫下，100 g 溶劑最多能溶解的溶質克數'],
+[2,'溫度對溶解度的影響？','大部分固體：溫度↑ 溶解度↑<br>氣體：溫度↑ 溶解度↓'],
+[2,'過濾法、結晶法、色層分析的原理？','過濾：顆粒大小<br>結晶：讓水變少或讓溫度改變，溶質溶不下就會跑出來<br>色層：對濾紙吸附能力不同'],
+[2,'實驗 2-2 分離食鹽與細砂的步驟？','溶解 → 過濾（濾紙上細砂）→ 蒸發結晶（得食鹽）']
+];
+(()=>{
+  let range='all', deck=[], i=0, list=false;
+  function build(keepOrder){ deck=CARDS.filter(c=>range==='all'||String(c[0])===range); if(!keepOrder) i=0; show(); renderList(); }
+  function show(){ const c=deck[i]; $('#flash').classList.remove('flip'); setTimeout(()=>{ $('#fcFront').innerHTML=c[1]; $('#fcBack').innerHTML=c[2]; },120);
+    $('#fcTagF').textContent=`第 ${c[0]} 章・題目`; $('#fcTagB').textContent=`第 ${c[0]} 章・答案`; $('#fcPos').textContent=`${i+1}／${deck.length}`; }
+  function renderList(){ $('#fcListMode').innerHTML=deck.map(c=>`<div class="mini"><b>${c[1]}</b><p>${c[2]}</p></div>`).join(''); }
+  $('#flash').onclick=()=>$('#flash').classList.toggle('flip');
+  $('#fcNext').onclick=()=>{ i=(i+1)%deck.length; show(); };
+  $('#fcPrev').onclick=()=>{ i=(i-1+deck.length)%deck.length; show(); };
+  $('#fcShuffle').onclick=()=>{ deck=shuffle(deck); i=0; show(); renderList(); };
+  $('#fcList').onclick=()=>{ list=!list; $('#fcListMode').hidden=!list; $('#fcCardMode').hidden=list; $('#fcList').textContent=list?'🃏 卡片模式':'📋 清單模式'; };
+  $$('#fcRange button').forEach(b=>b.onclick=()=>{ $$('#fcRange button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); range=b.dataset.r; build(); });
+  document.addEventListener('keydown',e=>{ if(!$('#cards').classList.contains('show')||list||e.target.tagName==='INPUT') return;
+    if(e.key==='ArrowRight') $('#fcNext').click(); else if(e.key==='ArrowLeft') $('#fcPrev').click(); else if(e.key===' '){ e.preventDefault(); $('#flash').click(); } });
+  build();
+})();
+
+/* ================= traps ================= */
+const TRAPS=[
+['1-1','質量的國際單位是公斤（kg），不是公克（g）；時間的國際單位是秒，小時和分鐘都不是。'],
+['1-1','大單位換小單位，數字變大：1 kg＝10<sup>6</sup> mg（不是 10<sup>−6</sup>）。'],
+['1-2','估計值只有一位！最小刻度 1 cm → 記到 0.1 cm；最小刻度 0.1 cm → 記到 0.01 cm。'],
+['1-2','剛好對齊刻度也要補 0：最小刻度 1 cm 量到 6 cm → 記 6.0 cm。'],
+['1-2','砝碼生鏽變重 → 測量值偏小；砝碼磨損變輕 → 測量值偏大。'],
+['1-2','求平均值前，要先刪除明顯錯誤（差很多）的數據。'],
+['1-3','密度與大小、形狀無關：一塊鋁切成兩半，每一半密度仍是 2.7 g/cm³。'],
+['1-3','量筒讀數要平視液面「中央最低處」，最小刻度 1 mL 要記到 0.1 mL（如 5.0 mL）。'],
+['1-3','液體連容器一起秤的質量－體積圖不通過原點，截距是容器質量，斜率仍是密度。'],
+['1-3','1 g/cm³＝1000 kg/m³（不是 1 kg/m³）。'],
+['2-1','凝結（氣→液）、凝固（液→固）、凝華（氣→固）不要混淆；霜和雪是凝華。'],
+['2-1','乾冰的白霧是空氣中水蒸氣凝結成的小水滴，不是二氧化碳。'],
+['2-1','糖溶於水是物理變化（沒有新物質）；雙氧水分解是化學變化（產生氧氣）。'],
+['2-1','「可燃性」「助燃性」是化學性質；「顏色」「密度」「熔點」是物理性質。'],
+['2-1','線香熄滅不能證明是二氧化碳，要用澄清石灰水變混濁來確認。'],
+['2-1','氧氣是「難」溶於水，所以能用排水集氣法；一開始冒的氣泡是空氣，不要收集。'],
+['2-2','重量百分率的分母是「溶液」＝溶質＋溶劑。20 g 糖＋180 g 水 → 10%，不是 11.1%。'],
+['2-2','加水稀釋：濃度變小，但溶質的量不變。'],
+['2-2','溶解度是定溫下的定值；濃度會隨溶質多寡改變。'],
+['2-2','氣體的溶解度隨溫度升高而「降低」，跟大部分固體相反。'],
+['2-2','未飽和→飽和：加溶質、蒸發水、（固體）降溫。加水或加熱不行！'],
+['2-3','過濾前要先「溶解」食鹽，否則食鹽和細砂都會留在濾紙上。'],
+['2-3','色層分析的起始線要在水面上方，否則顏料會直接溶進水裡。'],
+['2-3','結晶法不只是「蒸發」，降低溫度也能使溶質析出（天氣瓶）。']
+];
+$('#trapList').innerHTML=['1','2'].map(ch=>`<div class="card ${ch==='2'?'ch2':''}"><h3>第 ${ch} 章</h3>${TRAPS.filter(t=>t[0][0]===ch).map((t,i)=>`<div class="box trap"><b class="tag">${t[0]}</b>${t[1]}</div>`).join('')}</div>`).join('');
+
+/* ================= exam ================= */
+(()=>{
+  let range='all', n=20;
+  const segPick=(id,attr,cb)=>$$(id+' button').forEach(b=>b.onclick=()=>{ $$(id+' button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); cb(b.dataset[attr]); });
+  segPick('#exRange','r',v=>range=v); segPick('#exN','n',v=>n=Number(v));
+  const showBest=()=>{ const b=store.get('best:exam',null); $('#exBest').textContent=b!=null?`你的模擬測驗最佳成績：${b} 分`:''; };
+  function start(){
+    const pool=BANK.filter(q=>range==='all'||q.s[0]===range);
+    const qs=shuffle(pool).slice(0,Math.min(n,pool.length));
+    const area=$('#exArea'); area.innerHTML='';
+    const box=el('div','card quiz-wrap'); box.append(el('h3','',`模擬測驗（${qs.length} 題）`)); const qz=el('div'); box.append(qz); area.append(box);
+    renderQuiz(qz, qs, {showSec:true, key:'exam', retryLabel:'🔄 再抽一次新題目', onRetry:start, onDone:(c,wrong)=>{
+      showBest();
+      if(!wrong.length) return;
+      const cnt={}; wrong.forEach(w=>cnt[w.s]=(cnt[w.s]||0)+1);
+      const tip=el('div','card',`<h3>📊 答錯題目分布</h3><p>建議回去複習：</p><ul>${Object.entries(cnt).sort((a,b)=>b[1]-a[1]).map(([s,c])=>`<li><a href="#s${s}">${SEC_NAME[s]}</a>：錯 ${c} 題</li>`).join('')}</ul>`);
+      area.append(tip);
+    }});
+    area.scrollIntoView({behavior:'smooth'});
+  }
+  $('#exStart').onclick=start; showBest();
+})();
+
+route();
+</script>
+</body>
+</html>

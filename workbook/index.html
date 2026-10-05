@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>八年級自然(上) 習作解答講解 CH1–CH2</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--pri:#0f766e;--pri-l:#ccfbf1;--ok:#16a34a;--ok-l:#dcfce7;--warn:#d97706}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.7}
+button{font:inherit;cursor:pointer}
+header{background:linear-gradient(120deg,#115e59,#0d9488);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+header h1{font-size:19px;margin:0;font-weight:700;flex:1;white-space:nowrap}
+.etabs{display:flex;gap:6px;flex-wrap:wrap}
+.etabs button{background:rgba(255,255,255,.16);border:0;color:#fff;padding:6px 14px;border-radius:8px}
+.etabs button:hover{background:rgba(255,255,255,.28)}
+.etabs button.on{background:#fff;color:var(--pri);font-weight:700}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 60px;display:grid;grid-template-columns:270px 1fr;gap:18px;align-items:start}
+.side{background:var(--card);border-radius:14px;padding:14px 16px;border:1px solid var(--line);position:sticky;top:78px}
+.side .rng{font-size:13px;color:var(--muted);margin-bottom:4px}
+.side .sec{font-size:14px;color:var(--pri);font-weight:700;margin:10px 0 5px}
+.dots{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.dot{height:36px;border-radius:8px;border:1px solid var(--line);background:#fff;font-weight:700;color:#475569;padding:0}
+.dot:hover{border-color:var(--pri);background:#f0fdfa}
+.dot.seen{background:#f1f5f9}
+.dot.cur{background:var(--pri);border-color:var(--pri);color:#fff}
+.side .tip{font-size:12px;color:var(--muted);margin-top:12px}
+.qcard{background:var(--card);border-radius:14px;padding:22px 24px;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.qmeta{display:flex;gap:8px;align-items:center;margin-bottom:10px;font-size:15px;flex-wrap:wrap}
+.tag{padding:2px 10px;border-radius:99px;font-weight:700;font-size:13px}
+.t0{background:#fef3c7;color:#92400e}.t1{background:#e0e7ff;color:#3730a3}.t2{background:#dcfce7;color:#166534}
+.pg{margin-left:auto;color:var(--muted);font-size:13px}
+.ctx{background:#f1f5f9;border-left:4px solid #94a3b8;padding:10px 14px;border-radius:6px;margin-bottom:12px;font-size:16px}
+.ctx.long{max-height:340px;overflow:auto}
+.stem{font-size:18px;margin-bottom:10px}
+.box{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:8px 0;font-size:16px}
+.tb{border-collapse:collapse;margin:8px 0;font-size:16px;background:#fff}
+.tb th,.tb td{border:1px solid #99d5cf;padding:4px 12px;text-align:center}
+.tb th{background:#e6f6f4;font-weight:600}
+.tb.sm td{font-size:14px;text-align:left;vertical-align:top}
+.lb{color:#b91c1c;font-weight:700;font-size:13px}
+.fig{text-align:center;margin:10px 0 14px}
+.fig img{max-width:100%;max-height:320px;border:1px solid var(--line);border-radius:8px;padding:6px;background:#fff;cursor:zoom-in}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;gap:12px;align-items:center;border:1.5px solid var(--line);background:#fff;border-radius:11px;padding:10px 14px;font-size:17px}
+.opt .L{flex:none;width:30px;height:30px;border-radius:50%;background:#eef2f7;display:grid;place-items:center;font-weight:800;color:#475569}
+.opt.ck .L{border-radius:6px}
+.opt .mark{margin-left:auto;font-weight:700;font-size:14px;white-space:nowrap;color:var(--ok)}
+.opt.right{border-color:var(--ok);background:var(--ok-l)}
+.opt.right .L{background:var(--ok);color:#fff}
+.ans{margin-top:16px;font-size:20px;font-weight:800;color:var(--ok)}
+.exp{margin-top:8px;border-radius:11px;padding:14px 16px;background:#fffbeb;border:1px solid #fde68a}
+.exp .lbl{font-weight:700;color:var(--warn)}
+.skill{display:inline-block;background:#dc2626;color:#fff;font-size:13px;font-weight:700;border-radius:5px;padding:0 7px;margin-right:6px;vertical-align:1px}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 4px}
+.frac span:first-child{border-bottom:1.5px solid currentColor;padding:0 4px}
+.nav{display:flex;gap:10px;margin-top:18px;align-items:center}
+.nav .sp{flex:1;text-align:center;color:var(--muted);font-size:14px}
+.btn{border:0;border-radius:10px;padding:9px 16px;font-weight:700;background:var(--pri);color:#fff}
+.btn.gray{background:#eef0f4;color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:default}
+#zoom{position:fixed;inset:0;background:rgba(15,23,42,.85);display:grid;place-items:center;z-index:50;cursor:zoom-out}
+#zoom img{max-width:94vw;max-height:92vh;background:#fff;border-radius:8px;padding:10px}
+.book{background:#f0fdfa;border:1px dashed #5eead4;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:16px}
+.book b{color:var(--pri)}
+.grp{font-size:14px;color:#475569;background:#f1f5f9;border-radius:6px;padding:4px 10px;display:inline-block;margin-bottom:10px}
+.topic{font-size:19px;font-weight:700;margin:4px 0 6px}
+.tipbox{margin-top:10px;border-radius:11px;padding:10px 14px;font-size:16px}
+.tipbox.warn{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.tipbox.idea{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a}
+.graph{display:block;margin:12px auto 0;max-width:470px;width:100%;background:#fff;border:1px solid var(--line);border-radius:8px}
+.foot{max-width:1100px;margin:-40px auto 30px;padding:0 16px;font-size:12px;color:var(--muted);text-align:center}
+.hidden{display:none!important}
+#q{scroll-margin-top:120px}
+@media (max-width:820px){
+  main{grid-template-columns:1fr}
+  .side{position:static}
+  .dots{grid-template-columns:repeat(8,1fr)}
+  .dot{height:32px;font-size:13px}
+  header h1{font-size:16px}
+  .qcard{padding:16px}
+  body{font-size:16px}
+  .tb{font-size:14px}.tb th,.tb td{padding:3px 6px}
+  .ctx{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔬 八年級自然(上)・習作解答講解</h1>
+  <div class="etabs" id="etabs"></div>
+</header>
+<main>
+  <aside class="side" id="side"></aside>
+  <section id="q"></section>
+</main>
+<div class="foot">本頁為教師自編之解答與講解，請搭配自己的習作本使用。</div>
+<div id="zoom" class="hidden"><img alt=""></div>
+
+<script>
+// 習作「解答講解版」：不收錄題目、選項與出版社圖片，只有題號、答案與自編講解
+// C(章id, 標題, 範圍) 新增一章；S(大題名) 設定大題；P(頁碼) 設定習作頁碼；G(題組提示) 題組說明
+// Q(題號, 考點, 答案, 講解, 提醒) 提醒以 '⚠' 開頭表示易錯，其餘為觀念補充
+const CHS = [];
+let _C, _S, _P, _G = null;
+function C(id, title, range) { _C = { id, title, range, secs: [], qs: [] }; CHS.push(_C); _G = null; }
+function S(name) { _S = name; _C.secs.push({ name }); _G = null; }
+function P(p) { _P = p; }
+function G(t) { _G = t || null; }
+function Q(n, topic, ans, exp, tip, svg) { _C.qs.push({ sec: _S, page: _P, n, topic, ans, exp, tip: tip || '', svg: svg || '', grp: _G }); }
+const CM3 = 'cm<sup>3</sup>', GCM = 'g/cm<sup>3</sup>';
+
+/* ======================= CH1 基本測量 ======================= */
+C('ch1', 'CH1 基本測量', '1-1 長度、質量與時間～1-3 體積與密度');
+
+S('一、名詞配合'); P(8);
+Q(1, '名詞：物理量', '(C)', '可以用「數值＋單位」描述的量，例如長度、時間、質量、體積，都叫物理量。');
+Q(2, '名詞：國際單位制', '(E)', '全世界科學界共同約定的單位系統，簡稱 SI。像長度用 m、質量用 kg、時間用 s。');
+Q(3, '名詞：質量', '(G)', '物體含有多少物質，就是質量。用天平量，物體換地方、熔化或結冰都不會改變。');
+Q(4, '名詞：測量結果', '(B)', '用工具量出來的結果一定要寫「數字」加上「單位」，少一樣都不算完整。');
+Q(5, '名詞：估計值', '(F)', '刻度之間不到一格的部分，只能用眼睛估一位數字，這一位就是估計值，也是誤差最主要的來源。');
+Q(6, '名詞：排水法', '(A)', '把物體放進水裡，水面升高多少，就代表物體占了多少體積。形狀不規則的東西最適合用這招。');
+Q(7, '名詞：密度', '(D)', '密度＝質量 ÷ 體積，代表「每 1 cm<sup>3</sup> 裡塞了多少公克的物質」，用來看物質有多緊密。');
+
+S('二、選擇題'); P(8);
+Q(1, '國際單位制的單位', 'B', '公尺、公斤、秒都是 SI 單位；「磅」是英美慣用的英制單位，不屬於國際單位制，所以寫在國際論文裡最不恰當。');
+Q(2, 'mm 與其他長度單位換算', 'B', 'mm 是毫米，1 m＝1000 mm，也就是 1 mm＝10<sup>−3</sup> m。長度的 SI 基本單位是 m 而不是 mm；微米是 μm，比 mm 小 1000 倍。',
+  '💡 由大到小：km → m → cm → mm → μm → nm，相鄰的 m、mm、μm、nm 之間都差 1000 倍。');
+Q(3, '完整的測量結果', 'B', '逐一檢查每個選項有沒有單位：只有身高那一項只寫了數字 165.8，沒有寫 cm，所以不完整。');
+P(9);
+Q(4, '讀刻度與估計值', 'C', '這把尺最小一格是 1 mm（0.1 cm），讀數要再多估一位，也就是估到 0.01 cm。書的邊緣剛好對齊 3 cm 的刻度線，就要寫成 3.00 cm，後面的 0 不能省略。',
+  '⚠ 剛好對齊刻度時，估計位要補「0」，0 代表你有估過，不是多寫。');
+Q(5, '如何提高測量準確度', 'B', '用刻度更細的尺、小心操作、多量幾次取平均，都能讓結果更準。但改用較短的尺，量長的東西得分好幾段量再加起來，每一段都會帶進誤差，反而更不準。');
+Q(6, '上皿天平的操作', 'D', '前三項都是正確操作。天平如果事先已經調平，兩邊放的質量相等才會平衡；這時把物體和砝碼左右對調，兩邊質量還是相等，所以<b>仍然會平衡</b>。題目說「不會平衡」是錯的。');
+Q(7, '天平讀數與估計值', 'C', '把盤上的砝碼加起來：50＋10＋10＋0.5＋0.1＋0.1＝70.7 g。最小的砝碼是 0.1 g，代表準確到 0.1 g，還要多估一位到 0.01 g，所以記錄為 70.70 g。',
+  '⚠ 先仔細數清楚每一種砝碼各有幾個，再相加。');
+Q(8, '多次測量取平均', 'A', '取平均可以讓誤差互相抵消一部分，所以平均值通常比較接近真實值。但它仍然有誤差，也不等於真正的數值；小數位數要依照工具的刻度決定，不是越多越好。');
+P(10);
+Q(9, '排水法求體積', 'B', '物體的體積＝放入後的水位－放入前的水位＝23.0－17.0＝6.0 cm<sup>3</sup>。量筒最小刻度是 1 mL，要估到小數點後一位，所以寫 6.0 而不是 6。',
+  '⚠ 讀量筒要看凹液面的最低處，眼睛和液面同高。');
+Q(10, '測量很小的量：累積法', 'A', '一滴水太少，直接量誤差太大。先滴很多滴（例如 100 滴）量總體積，再除以滴數，就能算出一滴的體積。這跟量 100 張紙的厚度再除以 100 是同一種想法。');
+Q(11, '狀態改變時質量不變', 'D', `水的質量＝密度 × 體積＝1 × 100＝100 g。水結成冰，體積會變大、密度會變小，但物質的量沒有增加或減少，所以質量還是 100 g。`,
+  '⚠ 不要拿 100 去乘或除以 0.92，題目問的是質量，而質量沒有改變。');
+Q(12, '用水求容器容積，再求密度', 'B', `兩個容器一樣大，所以裝滿的水和裝滿的果汁體積相同。<br>① 水的質量＝250.0－50.0＝200.0 g，水的密度是 1 ${GCM}，所以容積＝200 ${CM3}。<br>② 果汁的質量＝270.0－50.0＝220.0 g。<br>③ 果汁的密度＝220.0 ÷ 200＝1.1 ${GCM}。`,
+  '💡 「用水當量杯」：水的密度是 1，所以水有幾公克，體積就是幾 cm<sup>3</sup>。');
+Q(13, '用質量–體積圖判斷物質種類', 'B', '同一種物質的密度固定，畫在質量–體積圖上，會落在同一條通過原點的直線上。把圖上的點和原點連起來，可以分成三條斜率不同的直線，所以至少有三種物質。',
+  '💡 直線越陡，代表密度越大。');
+P(11);
+Q(14, '用密度找出同一種物質', 'B', `先算出鋁的密度：54.0 ÷ 20.0＝2.70 ${GCM}。接著在上一題的三條直線中，找出密度最接近 2.7 的那一條（中間那條），數一數線上有幾個點：3 個。`);
+Q(15, '讀體積–質量圖比較密度', 'C', `注意這張圖的縱軸是體積、橫軸是質量，和常見的圖相反。<br>甲線：24 g 對應 3 ${CM3}，密度＝24 ÷ 3＝8 ${GCM}。<br>乙線：16 g 對應 4 ${CM3}，密度＝16 ÷ 4＝4 ${GCM}。<br>所以甲的密度比乙大。至於質量和體積，要看是哪一顆球，沒辦法說誰一定比較大。`,
+  '⚠ 這張圖越陡的線，密度反而越小，一定要先看清楚兩個軸各是什麼。');
+Q(16, '空心球的密度', 'C', `把四顆球的密度都算出來：甲 222.5 ÷ 25.0＝8.9；乙 40.5 ÷ 15.0＝2.7；丙 37.5 ÷ 15.0＝2.5；丁 67.5 ÷ 25.0＝2.7（單位 ${GCM}）。<br>空心的鋁球裡面有空氣，平均起來的密度會比實心的鋁（2.7）還小，只有丙符合。`,
+  '💡 乙和丁的密度剛好是 2.7，比較可能是實心的鋁球。');
+
+S('三、閱讀素養題'); P(12);
+G('題組：量筒裝液體秤重（第 1～3 題）');
+Q(1, '描點作圖', '依表格描 5 個點，連成直線', '把表格中的 5 組數據描點，用直尺畫出一條穿過這些點的直線。往左延長後，直線會和縱軸交在 15 g，不會通過原點，因為秤到的質量還包含量筒本身。',
+  '⚠ 直線要穿過大部分的點，不要硬把線拉到原點，也不要把點一個一個用折線連起來。', 'graph');
+Q(2, '從數據變化求液體密度', 'A', `體積每多 10 ${CM3}，質量就多 12 g，所以液體密度＝12 ÷ 10＝1.2 ${GCM}。`,
+  '⚠ 不能直接拿 27.0 ÷ 10.0，因為 27.0 g 裡面還有量筒的質量。');
+Q(3, '求容器（量筒）的質量', 'C', `10 ${CM3} 的液體是 10 × 1.2＝12 g，所以量筒＝27.0－12.0＝15.0 g。從圖上看，就是直線和縱軸的交點（體積為 0 時的質量）。`);
+P(13);
+G('題組：密度與浮沉（第 4～6 題）');
+Q(4, '用浮沉判斷密度範圍', 'B', `在純水（1.0）中下沉，代表物體密度比 1.0 大；在食鹽水（1.2）中浮起來，代表物體密度比 1.2 小。所以密度介於 1.0 和 1.2 之間，只有 1.1 符合。`,
+  '💡 物體的密度比液體大就沉，比液體小就浮。');
+Q(5, '用密度較小的液體封住易揮發液體', 'B', `要讓另一種液體蓋在甲的上面，那種液體的密度必須比甲（3.5）小。表中比 3.5 小的只有乙（1.9）和丙（0.7）。這和用水封住水銀是一樣的道理。`);
+Q(6, '油類火災不能用水滅火', 'D', '大多數油比水輕，會浮在水面上繼續燒，水一流動還會把著火的油帶開，讓火勢擴大。所以油類起火不能潑水，要用砂、乾粉或泡沫隔絕空氣。');
+P(14);
+G('題組：琥珀的真偽（第 7～8 題）');
+Q(7, '用兩種液體夾出密度範圍', 'C', `天然琥珀在自來水中會沉，所以密度大於 1.00；在飽和食鹽水中會浮，所以密度小於 1.20。答案的整個範圍都必須落在 1.00～1.20 之間，只有 1.05～1.10 符合。`,
+  '⚠ 範圍題要檢查兩端：上限、下限都不能超出。');
+Q(8, '推理商人的造假手法（勾選題）', '勾「使整體密度下降」「填充空氣」「選擇較不透明材質」',
+  '一般的人造琥珀太重，放在食鹽水裡也會沉。要讓它浮起來，就得降低整體密度，最簡單的方法是在裡面包空氣。為了不讓人看出裡面有氣泡，外層會選比較不透明的材料遮住。');
+
+/* ======================= CH2 物質的世界 ======================= */
+C('ch2', 'CH2 物質的世界', '2-1 認識物質～2-3 混合物的分離');
+
+S('一、名詞配合'); P(25);
+Q(1, '名詞：昇華', '(D)', '固體不經過液體，直接變成氣體，例如乾冰、樟腦丸慢慢變小。');
+Q(2, '名詞：水溶液', '(E)', '以水當溶劑、溶質均勻溶解在水中所形成的溶液，例如糖水、鹽水。');
+Q(3, '名詞：飽和溶液', '(A)', '在固定的溫度下，溶質已經溶到最多，再加也溶不進去，濃度不會再上升。');
+Q(4, '名詞：百萬分點濃度（ppm）', '(B)', '每一百萬份溶液中有幾份溶質。適合用在濃度非常低的情況，例如空氣汙染物、消毒水。',
+  '💡 1 ppm＝1 mg 的溶質溶在 1 kg 的溶液中。');
+Q(5, '名詞：排水集氣法', '(C)', '讓氣體跑進裝滿水、倒立在水中的瓶子裡，把水擠出去而收集起來，適用於不易溶於水的氣體（例如氧氣）。');
+
+S('二、選擇題'); P(25);
+Q(1, '三態的形狀與體積', 'A', '固體的形狀和體積都固定；液體的體積固定，但形狀會隨容器改變；氣體的形狀和體積都不固定，會充滿整個容器。');
+Q(2, '冰塊周圍的「白煙」', 'B', '冰塊附近很冷，空氣中看不見的水蒸氣遇冷凝結成很多小水滴，看起來就像白煙。',
+  '⚠ 白煙是液態的小水滴，不是氣體，水蒸氣是看不見的。');
+Q(3, '三態變化的名稱', 'D', '遇熱會一路從固體變成液體再變成氣體，所以甲是固態、乙是液態、丙是氣態。甲到乙是熔化，乙到丙是汽化，甲直接到丙是昇華。');
+Q(4, '純物質與混合物的區別', 'C', '純物質的熔點、沸點固定；混合物的成分比例不同，熔點、沸點也會跟著改變。所以看熔點是否固定就能區分。可燃性、有沒有三態變化、常溫下的狀態，都不能用來區分。');
+P(26);
+Q(5, '辨認三種氣體', 'D', '讓澄清石灰水變混濁的是二氧化碳，所以甲是二氧化碳；能幫助燃燒的是氧氣，所以乙是氧氣；剩下的丙就是氮氣。');
+Q(6, '空氣的組成', 'D', '空氣中約 78% 是氮氣，性質穩定，所以常充填在食品包裝中；約 21% 是氧氣，性質活潑；約 0.9% 是氬氣，屬於鈍氣，汽水裡加壓溶進去的則是二氧化碳。其餘的微量氣體（例如水氣、二氧化碳）含量會隨時間和地點改變。',
+  '⚠ 防止食物變質的是氮氣，不是氧氣。');
+Q(7, '溶質與溶劑', 'C', '被溶解的是溶質（紅糖），負責溶解別人的是溶劑（水），混在一起的紅糖水是混合物。說紅糖是溶劑是錯的。');
+Q(8, '飽和溶液的濃度變化', 'D', '已經飽和的鹽水，再加鹽也溶不進去，濃度不變；倒入一樣的飽和鹽水，濃度也不變；讓水蒸發，鹽會跟著析出，仍然是飽和，濃度一樣不變。只有加水，溶質不變、溶液變多，濃度才會下降。',
+  '💡 定溫下，飽和溶液的濃度是固定的最大值。');
+P(27);
+Q(9, '降溫析出與溶解度', 'A', '降溫後杯底出現沉澱，代表溶不下了，溶液已經達到飽和。會溶不下，是因為蔗糖的溶解度隨溫度下降而變小。');
+Q(10, '酒精濃度「度」的意思', 'D', '酒的「度」是體積百分率濃度：每 100 mL 的酒（整瓶溶液）中含有幾 mL 的酒精。12 度就是 100 mL 的紅酒中有 12 mL 的酒精。',
+  '⚠ 分母是整瓶酒（溶液），不是水。');
+Q(11, '溶解度的意義', 'A', `溶解度是在某個溫度下，100 g 的水<b>最多</b>能溶解多少溶質。所以 30 ℃ 時，100 g 水最多溶 0.15 g。它不代表水裡一定有這麼多；溫度不同，溶解度也會不同；換算成飽和濃度約是 0.15%，也不是 45%。`);
+Q(12, '用 ppm 計算消毒水濃度', 'D', `① 漂白水 100 cc，密度約 1，所以約 100 g，其中 5% 是氯：100 × 5%＝5 g＝5000 mg。<br>② 消毒水總質量＝清水 10 kg（10 公升）＋漂白水 0.1 kg＝10.1 kg。<br>③ 濃度＝5000 mg ÷ 10.1 kg ≈ 495 ppm，約 500 ppm。`,
+  '💡 mg ÷ kg 直接就是 ppm（兩者剛好差一百萬倍）。');
+P(28);
+Q(13, '分離砂與鹽水', 'D', '第一步先過濾，把不溶於水的細砂留在濾紙上；第二步讓濾液裡的水蒸發，食鹽就會結晶出來。所以要用過濾法和結晶法。');
+Q(14, '分離油性筆的色素', 'D', '想知道墨水裡有哪些色素，要用色層分析法。油性筆的墨水不溶於水，所以要用酒精當溶劑，色素才會跟著酒精往上移動、分開。',
+  '⚠ 水性筆可以用水，油性筆要用酒精。');
+G('題組：三種固體的分離（第 15 題，會考改編）');
+Q(15, '依溶解度分離混合物', 'D', '第一步加水過濾：只有乙不溶於水，會留在濾紙上，所以 □ 是乙。<br>第二步加熱濾液：丙的溶解度會隨溫度升高而<b>變小</b>，所以加熱時丙先析出（▲），留在溶液中的 ● 是甲。',
+  '💡 一般物質越熱越能溶，丙剛好相反，這是本題的關鍵。');
+
+S('三、閱讀素養題'); P(29);
+G('題組：PM2.5 與空氣品質標準（第 1～4 題）');
+Q(1, 'PM2.5 中「2.5」的意思', 'B', 'PM2.5 的 2.5 指的是微粒的直徑是 2.5 微米（μm），直徑是長度，所以 2.5 代表長度。');
+Q(2, '找出不是濃度的敘述', 'B', '「每立方公尺多少微克」「μg/m<sup>3</sup>」「ppm」都是在說空氣中有多少汙染物，都是濃度。「死亡率下降」說的是健康上的變化，不是濃度。');
+Q(3, 'PM2.5 標準的濃度單位', 'D', '看表格的標題就知道：各國的 PM2.5 標準用的單位是「微克／立方公尺」，也就是每立方公尺空氣中有多少微克的微粒。');
+Q(4, '比較哪個標準最嚴格', 'A', '標準是「允許的最高濃度」，數字越小代表越嚴格。表中世界衛生組織的數值最小（5），所以最嚴格。');
+P(30);
+G('題組：分池晒鹽（第 5～7 題）');
+Q(5, '大蒸發池分離出什麼', 'A', '海水在大蒸發池裡靜置，泥沙等雜質會沉到池底。這些雜質不溶於水，所以分離出來的物質特性是「不溶於水」。');
+Q(6, '溶解度低的先析出', 'A', '水分蒸發時，溶解度比較小的物質會先達到飽和、先析出結晶。氯化鈉的溶解度（36.0）比氯化鎂（54.2）小，所以氯化鈉先析出，晒鹽就是利用這個原理把苦味的氯化鎂留在苦鹵中排掉。');
+Q(7, '鋪瓦片的目的', 'C', '瓦片吸熱快，能讓池水溫度升高，加快水分蒸發，鹽就能更快結晶。這裡沒有凝固、凝結或沸騰的現象。');
+
+</script>
+<script>
+const L = 'ABCDEFGH';
+const seen = new Set();
+let ch = 0, cur = 0;   // 目前的章、題目索引
+
+function renderTabs() {
+  document.getElementById('etabs').innerHTML = CHS.map((c, k) =>
+    `<button class="${k === ch ? 'on' : ''}" data-c="${k}">${c.title}</button>`).join('');
+  document.querySelectorAll('[data-c]').forEach(b => b.onclick = () => show(+b.dataset.c, 0));
+}
+
+function renderSide() {
+  const c = CHS[ch];
+  let html = `<div class="rng">${c.title}：${c.range}</div>`;
+  c.secs.forEach(s => {
+    html += `<div class="sec">${s.name}</div><div class="dots">${c.qs.map((q, k) => q.sec !== s.name ? '' :
+      `<button class="dot ${k === cur ? 'cur' : seen.has(ch + '-' + k) ? 'seen' : ''}" data-k="${k}">${q.n}</button>`).join('')}</div>`;
+  });
+  html += `<div class="tip">👆 點題號看題目與詳解<br>⌨️ 鍵盤 ← → 可換題</div>`;
+  const side = document.getElementById('side');
+  side.innerHTML = html;
+  side.querySelectorAll('.dot').forEach(b => b.onclick = () => show(ch, +b.dataset.k, true));
+}
+
+function graphSvg() {
+  // 依習作表格數據畫 m–V 圖（自繪參考答案）
+  const V = [10, 20, 30, 40, 50], M = [27, 39, 51, 63, 75];
+  const X = v => 50 + v * 5.5, Y = m => 260 - m * 2.8;
+  let s = '<svg class="graph" viewBox="0 0 470 300" font-size="12" font-family="sans-serif">';
+  for (let v = 0; v <= 60; v += 10) s += `<line x1="${X(v)}" y1="${Y(0)}" x2="${X(v)}" y2="${Y(80)}" stroke="#e5e7eb"/><text x="${X(v)}" y="${Y(0) + 16}" text-anchor="middle">${v}</text>`;
+  for (let m = 0; m <= 80; m += 10) s += `<line x1="${X(0)}" y1="${Y(m)}" x2="${X(60)}" y2="${Y(m)}" stroke="#e5e7eb"/><text x="${X(0) - 6}" y="${Y(m) + 4}" text-anchor="end">${m}</text>`;
+  s += `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(62)}" y2="${Y(0)}" stroke="#333"/><line x1="${X(0)}" y1="${Y(0)}" x2="${X(0)}" y2="${Y(84)}" stroke="#333"/>`;
+  s += `<text x="${X(62)}" y="${Y(0) + 4}">V（cm³）</text><text x="${X(0) - 10}" y="${Y(84) - 4}">m（g）</text>`;
+  s += `<line x1="${X(0)}" y1="${Y(15)}" x2="${X(54)}" y2="${Y(15 + 1.2 * 54)}" stroke="#dc2626" stroke-width="2"/>`;
+  V.forEach((v, i) => s += `<circle cx="${X(v)}" cy="${Y(M[i])}" r="4" fill="#dc2626"/>`);
+  s += `<text x="${X(4)}" y="${Y(15) + 22}" fill="#dc2626">← 交在 15 g（量筒質量）</text></svg>`;
+  return s;
+}
+
+function renderQ() {
+  const c = CHS[ch], q = c.qs[cur];
+  const si = c.secs.findIndex(s => s.name === q.sec);
+  seen.add(ch + '-' + cur);
+  const isLetter = /^\(?[A-H]\)?$/.test(q.ans);
+  const tip = q.tip ? `<div class="tipbox ${q.tip.startsWith('⚠') ? 'warn' : 'idea'}">${q.tip}</div>` : '';
+  const box = document.getElementById('q');
+  box.innerHTML = `<div class="qcard">
+    <div class="qmeta"><span class="tag t${si}">${q.sec}</span><b>第 ${q.n} 題</b>
+      <span class="pg">習作 p.${q.page}</span></div>
+    <div class="book">📖 請翻開<b>習作 p.${q.page}</b>，找到「${q.sec}」第 <b>${q.n}</b> 題，先自己作答再看解答。</div>
+    ${q.grp ? `<div class="grp">${q.grp}</div>` : ''}
+    <div class="topic">🎯 考點：${q.topic}</div>
+    <div class="ans">✔ 答案：${isLetter && !q.ans.startsWith('(') ? '(' + q.ans + ')' : q.ans}</div>
+    <div class="exp"><span class="lbl">📘 講解：</span>${q.exp}${q.svg === 'graph' ? graphSvg() : ''}</div>
+    ${tip}
+    <div class="nav">
+      <button class="btn gray" id="prev" ${cur ? '' : 'disabled'}>← 上一題</button>
+      <span class="sp">${cur + 1} / ${c.qs.length}</span>
+      <button class="btn" id="next" ${cur < c.qs.length - 1 ? '' : 'disabled'}>下一題 →</button>
+    </div></div>`;
+  document.getElementById('prev').onclick = () => show(ch, cur - 1);
+  document.getElementById('next').onclick = () => show(ch, cur + 1);
+}
+
+function show(c, k, fromSide) {
+  ch = c; cur = Math.min(Math.max(k, 0), CHS[ch].qs.length - 1);
+  renderTabs(); renderQ(); renderSide();
+  // 手機版題號在上方，點題號後捲到題目
+  if (fromSide && window.innerWidth <= 820) document.getElementById('q').scrollIntoView({ behavior: 'smooth' });
+  else window.scrollTo(0, 0);
+}
+
+function zoom(src) {
+  const z = document.getElementById('zoom');
+  z.querySelector('img').src = src; z.classList.remove('hidden');
+}
+document.getElementById('zoom').onclick = () => document.getElementById('zoom').classList.add('hidden');
+
+document.addEventListener('keydown', ev => {
+  if (ev.key === 'ArrowRight') show(ch, cur + 1);
+  else if (ev.key === 'ArrowLeft') show(ch, cur - 1);
+  else if (ev.key === 'Escape') document.getElementById('zoom').classList.add('hidden');
+});
+
+show(0, 0);
+</script>
+</body>
+</html>
