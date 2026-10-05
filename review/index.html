@@ -1550,6 +1550,7 @@ function runTask(id) {
     let ok, why = '';
     if (q.type === 'num') {
       const v = inp.value; if (!v.trim()) return;
+      if (isNaN(parseSci(v))) { const fb = $('#tFb'); fb.hidden = false; fb.className = 'q-fb no'; fb.innerHTML = '<b>請輸入數字</b>只能輸入數字（可以有小數點，很大或很小的數可寫成 2.5e6）。這次不算答錯，改好再送出。'; inp.focus(); return; }
       ok = q.check(v);
       if (!ok && q.digits && decimals(v) !== q.digits && !isNaN(parseSci(v))) why = `位數不對：這次要寫到小數點後第 ${q.digits} 位。`;
     } else {
