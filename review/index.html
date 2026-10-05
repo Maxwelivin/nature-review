@@ -215,6 +215,38 @@ input[type=range]{width:100%;accent-color:var(--c2-ink)}
 .order-pool button{text-align:left}
 .order-done div{padding:8px 12px;border-radius:10px;background:var(--good-soft);border:1px solid #bfe3c8}
 
+/*TASKS-CSS*/
+/* ---------- 學習任務 ---------- */
+.tb-top{display:flex;gap:18px;align-items:center}
+.tb-rate{text-align:center;min-width:90px}
+.tb-rate div{font-size:22px;color:var(--text2)}
+.tb-rate b{font-size:40px;color:var(--good)}
+.tb-rate small{color:var(--muted)}
+.prog-bar.big{width:100%;height:14px}
+.ident .row{margin-top:6px}
+.task-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:10px 0 24px}
+.task{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--line);border-left:5px solid var(--c1);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);transition:transform .15s}
+.task.ch2{border-left-color:var(--c2)}
+.task:hover{transform:translateY(-2px)}
+.task.done{background:var(--good-soft);border-left-color:var(--good)}
+.task.bonus{border-style:dashed;border-left-style:solid}
+.task-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.task h4{margin:8px 0 6px;font-size:17px;line-height:1.5}
+.task .codes{margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.task .codes span{font-size:12.5px;color:var(--text2);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:0 7px}
+.tk{font-size:13px;font-weight:700;white-space:nowrap}
+.tk.ok{color:var(--good)} .tk.go{color:var(--c2-ink)} .tk.no{color:var(--muted)}
+.streak{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-weight:700;color:var(--text2)}
+.streak i{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:var(--card)}
+.streak i.on{background:var(--good);border-color:var(--good)}
+.task-q .q-stem{font-size:18px;line-height:1.8}
+.task-q .step{margin:12px 0 6px;font-weight:700;color:var(--text2)}
+.task-q .q-opt.sel{border-color:var(--c1);background:var(--c1-soft);font-weight:700}
+input.in.wide{width:180px;font-size:18px}
+.pass-box{margin-top:14px;padding:16px 18px;border-radius:14px;background:var(--good-soft);border:2px solid var(--good)}
+.pass-box p{margin:6px 0 10px}
+@media (max-width:640px){.tb-top{flex-direction:column;align-items:stretch}.tb-rate{display:flex;gap:10px;align-items:baseline;justify-content:center}}
+/*END-TASKS-CSS*/
 @media print{
   .topbar,nav.side,.done-bar,.pager,.widget,.quiz-wrap{display:none!important}
   .page{display:block!important}
@@ -229,13 +261,14 @@ input[type=range]{width:100%;accent-color:var(--c2-ink)}
   <button class="menu-btn" id="menuBtn" aria-label="開啟目錄">☰ 目錄</button>
   <h1>自然 2上 複習站｜CH1 × CH2</h1>
   <div class="grow"></div>
-  <div class="prog" title="已讀完的小節"><span id="progTxt">0/6</span><div class="prog-bar"><i id="progBar" style="width:0"></i></div></div>
+  <div class="prog" title="通過的學習任務"><span id="progTxt">0/6</span><div class="prog-bar"><i id="progBar" style="width:0"></i></div></div>
 </header>
 <div class="scrim" id="scrim"></div>
 
 <div class="wrap">
 <nav class="side" id="side">
-  <a href="#home" data-nav="home">🏠 首頁・使用說明</a>
+  <!--TASKS-NAV--><a href="#tasks" data-nav="tasks">🎯 學習任務（從這裡開始）</a><!--END-TASKS-NAV-->
+  <a href="#home" data-nav="home">📚 複習資源總覽</a>
   <div class="grp">第 1 章　基本測量</div>
   <a href="#s1-1" data-nav="s1-1">1-1 長度、質量與時間<span class="tick" data-tick="s1-1"></span></a>
   <a href="#s1-2" data-nav="s1-2">1-2 測量與估計<span class="tick" data-tick="s1-2"></span></a>
@@ -253,6 +286,13 @@ input[type=range]{width:100%;accent-color:var(--c2-ink)}
 
 <main>
 
+<!--TASKS-HTML-->
+<section class="page" id="tasks">
+  <div class="page-head"><span class="chip">從這裡開始</span><h2>🎯 學習任務</h2><p>每個任務對應一個課綱學習內容。全部通過，就代表你真的理解了第 1、2 章！</p></div>
+  <div id="taskBoard"></div>
+</section>
+<section class="page" id="taskrun"><div id="taskRun"></div></section>
+<!--END-TASKS-HTML-->
 <!-- ================= HOME ================= -->
 <section class="page" id="home">
   <div class="hero">
@@ -263,6 +303,7 @@ input[type=range]{width:100%;accent-color:var(--c2-ink)}
   <div class="card">
     <h3>📌 怎麼用這個網站？</h3>
     <ol>
+      <li><b>先做 <a href="#tasks">🎯 學習任務</a></b>：全部通過，代表觀念真的懂了；卡住時再回來讀各節重點。</li>
       <li><b>平常複習</b>：依序讀 1-1 → 2-3，每節最後做小測驗，答錯會看到解析。</li>
       <li><b>考前一天</b>：先刷「⚠️ 易錯陷阱」，再用「🃏 必背閃卡」自我檢查。</li>
       <li><b>考前衝刺</b>：做「🏆 模擬測驗」，答錯的題目點連結回到該節複習。</li>
@@ -1020,10 +1061,494 @@ $$('.done-bar').forEach(bar=>{
 });
 refreshProgress();
 
+/*TASKS-JS*/
+/* ================= 學習任務（表現任務）=================
+   每個任務：連續答對 PASS 題即通過；題目即時生成或從情境題庫隨機抽出
+   通過時回傳到老師的 Google 試算表（SHEET_URL 留空則不回傳） */
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbze_RHP4FSaRdN54hviuC_IamEAJ2X6_7oAd322CKOEuLhbBvGGjWimZxbGmlrSAbVm-Q/exec';
+const PASS = 3;
+const TSTORE = { get: k => store.get('task:' + k, {}), set: (k, v) => store.set('task:' + k, v) };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const round = (x, d) => Math.round(x * 10 ** d) / 10 ** d;
+const fx = (x, d) => round(x, d).toFixed(d);
+
+// 解析學生輸入：支援 2.5e6、2.5×10^6、2.5x10^-3、千分位逗號
+function parseSci(s) {
+  s = String(s).trim().replace(/,/g, '').replace(/[−–]/g, '-').replace(/\s+/g, '');
+  const m = s.match(/^(-?[\d.]+)[×xX*]10\^?(-?\d+)$/);
+  if (m) return Number(m[1]) * 10 ** Number(m[2]);
+  return s === '' ? NaN : Number(s);
+}
+const decimals = s => { s = String(s).trim(); const i = s.indexOf('.'); return i < 0 ? 0 : s.length - i - 1; };
+const near = (x, y, rel = 1e-6, abs = 0) => Math.abs(x - y) <= Math.max(Math.abs(y) * rel, abs);
+const sci = x => {                       // 很大或很小的數用科學記號顯示
+  if (x === 0) return '0';
+  const e = Math.floor(Math.log10(Math.abs(x)));
+  if (e >= -3 && e <= 5) return String(round(x, 6));
+  const m = round(x / 10 ** e, 4);
+  return `${m}×10<sup>${e}</sup>`;
+};
+
+/* ---------- SVG 小工具 ---------- */
+function rulerSvg(L, mode) {                    // mode 'mm'：最小刻度 0.1 cm；'cm'：最小刻度 1 cm
+  const R = mode === 'mm' ? 8 : 10, px = mode === 'mm' ? 80 : 60, x0 = 30, W = x0 * 2 + R * px;
+  let s = `<svg viewBox="0 0 ${W} 150" style="max-width:${W}px">`;
+  s += `<rect x="${x0}" y="20" width="${L * px}" height="34" rx="4" fill="#ffd27a" stroke="#c98a12"/>`;
+  s += `<rect x="${x0 - 12}" y="62" width="${R * px + 24}" height="64" rx="6" fill="#f6f1e3" stroke="#a89d82"/>`;
+  const step = mode === 'mm' ? 0.1 : 1;
+  for (let v = 0; v <= R + 1e-9; v += step) {
+    const x = x0 + v * px, major = Math.abs(v - Math.round(v)) < 1e-6, half = mode === 'mm' && Math.abs(v * 10 % 10 - 5) < 1e-6;
+    s += `<line x1="${x}" y1="62" x2="${x}" y2="${62 + (major ? 26 : half ? 18 : 11)}" stroke="#333" stroke-width="${major ? 1.6 : 1}"/>`;
+    if (major) s += `<text x="${x}" y="110" text-anchor="middle" font-size="17">${Math.round(v)}</text>`;
+  }
+  s += `<text x="${x0 + R * px}" y="140" text-anchor="end" font-size="13" fill="#666">單位：cm</text></svg>`;
+  return s;
+}
+function cylinderSvg(level, lo) {                 // 量筒局部放大：lo～lo+10 mL，最小刻度 1 mL
+  const px = 26, top = 20, H = 10 * px, x0 = 90, w = 120;
+  const Y = v => top + (lo + 10 - v) * px;
+  let s = `<svg viewBox="0 0 320 ${H + 60}" style="max-width:320px">`;
+  s += `<rect x="${x0}" y="${top - 10}" width="${w}" height="${H + 30}" fill="#f4f8fb" stroke="#7a8a99"/>`;
+  const yl = Y(level);
+  s += `<path d="M${x0} ${yl - 7} Q${x0 + w / 2} ${yl + 7} ${x0 + w} ${yl - 7} L${x0 + w} ${top + H + 20} L${x0} ${top + H + 20} Z" fill="#9fd0f5" opacity=".85"/>`;
+  for (let v = lo; v <= lo + 10; v++) {
+    const y = Y(v), major = v % 5 === 0;
+    s += `<line x1="${x0}" y1="${y}" x2="${x0 + (major ? 40 : 24)}" y2="${y}" stroke="#333" stroke-width="${major ? 1.6 : 1}"/>`;
+    if (major) s += `<text x="${x0 - 8}" y="${y + 6}" text-anchor="end" font-size="17">${v}</text>`;
+  }
+  s += `<text x="${x0 + w + 8}" y="${top + 6}" font-size="13" fill="#666">mL</text>`;
+  s += `<text x="160" y="${H + 52}" text-anchor="middle" font-size="13" fill="#666">（局部放大；讀凹液面最低處）</text></svg>`;
+  return s;
+}
+function mvChart(lines, opt = {}) {               // lines: [{name, f(x), pts:[[x,y]], color}]
+  const W = 440, H = 300, m = { l: 52, r: 20, t: 16, b: 46 }, iw = W - m.l - m.r, ih = H - m.t - m.b;
+  const X = v => m.l + v / opt.xmax * iw, Y = v => m.t + ih - v / opt.ymax * ih;
+  let s = `<svg viewBox="0 0 ${W} ${H}" style="max-width:${W}px" font-size="13">`;
+  for (let i = 0; i <= 5; i++) {
+    const xv = opt.xmax / 5 * i, yv = opt.ymax / 5 * i;
+    s += `<line x1="${X(xv)}" y1="${m.t}" x2="${X(xv)}" y2="${m.t + ih}" stroke="#e5e5e0"/><text x="${X(xv)}" y="${m.t + ih + 18}" text-anchor="middle">${round(xv, 1)}</text>`;
+    s += `<line x1="${m.l}" y1="${Y(yv)}" x2="${m.l + iw}" y2="${Y(yv)}" stroke="#e5e5e0"/><text x="${m.l - 6}" y="${Y(yv) + 4}" text-anchor="end">${round(yv, 1)}</text>`;
+  }
+  s += `<line x1="${m.l}" y1="${m.t + ih}" x2="${m.l + iw}" y2="${m.t + ih}" stroke="#333"/><line x1="${m.l}" y1="${m.t}" x2="${m.l}" y2="${m.t + ih}" stroke="#333"/>`;
+  s += `<text x="${m.l + iw}" y="${H - 6}" text-anchor="end" font-weight="700">${opt.xl}</text><text x="${m.l + 4}" y="${m.t + 10}" font-weight="700">${opt.yl}</text>`;
+  lines.forEach(L => {
+    let xe = opt.xmax; if (L.f(xe) > opt.ymax) xe = L.inv(opt.ymax);
+    s += `<line x1="${X(0)}" y1="${Y(L.f(0))}" x2="${X(xe)}" y2="${Y(L.f(xe))}" stroke="${L.color}" stroke-width="2.5"/>`;
+    const ly = Y(L.f(xe)) < m.t + 18 ? Y(L.f(xe)) + 20 : Y(L.f(xe)) - 8;
+    s += `<text x="${X(xe) - 10}" y="${ly}" text-anchor="end" fill="${L.color}" font-weight="700" font-size="15">${L.name}</text>`;
+    (L.pts || []).forEach(([a, b]) => s += `<circle cx="${X(a)}" cy="${Y(b)}" r="4.5" fill="${L.color}"/><text x="${X(a) + 7}" y="${Y(b) + 16}" fill="${L.color}">(${a}, ${b})</text>`);
+  });
+  return s + '</svg>';
+}
+
+/* ---------- 共用的題型建構 ---------- */
+const NUM = (stem, ans, exp, check, extra = {}) => ({ type: 'num', stem, ans, exp, check, ...extra });
+const MC = (stem, opts, a, exp, extra = {}) => ({ type: 'mc', stem, opts, a, exp, ...extra });
+const TT = (stem, opts, a, ropts, ra, exp, extra = {}) => ({ type: 'tt', stem, opts, a, ropts, ra, exp, ...extra });
+const fromBank = bank => () => { const b = pick(bank); return b.r ? TT(b.q, b.o, b.a, b.r, b.ra, b.e) : MC(b.q, b.o, b.a, b.e); };
+
+/* ---------- 情境題庫（自編） ---------- */
+const ERR_BANK = [
+  { q: '小安讀量筒時，眼睛從液面<b>下方往上看</b>。他讀到的體積會？', o: ['比實際大', '比實際小', '和實際一樣'], a: 1,
+    r: ['仰視時視線斜向上，對到的是較低的刻度', '仰視時視線斜向下，對到的是較高的刻度', '視線角度不影響讀數'], ra: 0, e: '仰視（由下往上）會讀到較低的刻度，所以偏小；俯視則偏大。口訣「俯大仰小」。' },
+  { q: '小芸讀量筒時，眼睛從液面<b>上方往下看</b>。她讀到的體積會？', o: ['比實際大', '比實際小', '和實際一樣'], a: 0,
+    r: ['俯視時視線斜向下，對到的是較高的刻度', '俯視時視線斜向上，對到的是較低的刻度', '視線角度不影響讀數'], ra: 0, e: '俯視（由上往下）視線會落在較高的刻度，所以偏大。' },
+  { q: '某組的砝碼因為常用手拿而<b>生鏽變重</b>，用它測物體質量，結果會？', o: ['比實際大', '比實際小', '和實際一樣'], a: 1,
+    r: ['砝碼實際比標示重，用較少的「標示質量」就能平衡', '砝碼變重，要放更多砝碼才能平衡', '生鏽不會改變砝碼質量'], ra: 0, e: '生鏽的砝碼比上面寫的重，加起來的標示數字就會比物體實際質量小。' },
+  { q: '某組的砝碼因為長期使用而<b>磨損變輕</b>，用它測物體質量，結果會？', o: ['比實際大', '比實際小', '和實際一樣'], a: 0,
+    r: ['砝碼實際比標示輕，要放更多「標示質量」才能平衡', '砝碼變輕，用較少的砝碼就能平衡', '磨損不會改變砝碼質量'], ra: 0, e: '磨損的砝碼比上面寫的輕，要多放一些才能平衡，標示數字加起來就比實際大。' },
+  { q: '上皿天平沒有歸零，空盤時指針就<b>偏向左邊</b>。直接把物體放左盤測量，結果會？', o: ['比實際大', '比實際小', '和實際一樣'], a: 0,
+    r: ['左盤原本就比較重，右邊要多放砝碼才能平衡', '左盤原本比較輕，右邊少放砝碼就能平衡', '指針偏向不影響結果'], ra: 0, e: '指針偏左代表左邊本來就重，砝碼要多放一些才能平衡，讀數偏大。所以測量前一定要先歸零。' },
+  { q: '直尺的前端斷了一截，阿哲把物體一端對齊 <b>1 cm</b> 的刻度，另一端對到 6.35 cm，就直接記錄 6.35 cm。這個紀錄會？', o: ['比實際大', '比實際小', '剛好正確'], a: 0,
+    r: ['起點不是 0，要用 6.35－1＝5.35 cm', '斷掉的尺量起來都會偏小', '只要有對齊刻度就正確'], ra: 0, e: '長度＝末端讀數－起點讀數。起點在 1 cm，正確長度是 5.35 cm，他多算了 1 cm。' },
+  { q: '想量一張影印紙的厚度，下列哪個方法誤差最小？', o: ['用直尺直接量一張', '量 100 張的總厚度再除以 100', '用手指感覺', '量一張再乘以 100'], a: 1,
+    r: ['一張太薄，比最小刻度還小；疊很多張再平均，誤差被分攤', '直尺量越少張越準', '只要估計值寫多幾位就準'], ra: 0, e: '要量的東西比最小刻度還小時，可以累積很多份一起量再平均，誤差就被分攤掉了。' },
+  { q: '同一個物體量了 5 次再取平均，下列說法何者正確？', o: ['平均值就完全沒有誤差了', '平均值通常更接近真實值，但仍有誤差', '量越多次，估計值可以寫越多位', '只要量一次就和平均一樣準'], a: 1,
+    r: ['每次的誤差有大有小，平均後可以互相抵消一部分', '平均可以把誤差變成 0', '平均是為了讓數字看起來比較漂亮'], ra: 0, e: '取平均能減少誤差，但不能消除；估計值永遠只有一位。' },
+  { q: '用最小刻度 0.1 cm 的尺，記錄成 <b>12.3456 cm</b>。這樣寫好嗎？', o: ['很好，位數越多越精確', '不好，應該寫成 12.35 cm', '不好，應該寫成 12 cm'], a: 1,
+    r: ['只能估到最小刻度的下一位，多寫的位數沒有意義', '小數點後一定要寫兩位', '整數比較好讀'], ra: 0, e: '最小刻度 0.1 cm，準確到 0.1，再估一位到 0.01，所以寫到小數點後第二位就好。' },
+];
+const STATE_BANK = [
+  ['冬天清晨，草葉上結了一層白霜', '凝華', 1], ['冰涼飲料的杯子外面冒出水珠', '凝結', 1], ['乾冰放在桌上，慢慢變小不見，桌面沒有濕', '昇華', 0],
+  ['洗好的衣服晾在陽光下變乾', '汽化', 0], ['冰塊放在室溫下變成水', '熔化', 0], ['把水放進冷凍庫變成冰塊', '凝固', 1],
+  ['衣櫃裡的樟腦丸越放越小', '昇華', 0], ['洗熱水澡時，浴室鏡子起霧', '凝結', 1], ['點燃的蠟燭流下蠟油，滴到桌上變硬', '凝固', 1],
+  ['煮湯時，鍋子裡的水越煮越少', '汽化', 0], ['巧克力拿在手上變軟、融化', '熔化', 0], ['寒流時，冰箱冷凍庫內壁長出一層冰霜', '凝華', 1],
+];
+const STATE_NAMES = ['熔化', '凝固', '汽化', '凝結', '昇華', '凝華'];
+const STATE_REASON = ['粒子之間的距離變大、排列變得比較散亂（吸收熱量）', '粒子之間的距離變小、排列變得比較緊密（放出熱量）', '粒子本身變大或變小', '產生了新的粒子（新物質）'];
+const CHANGE_BANK = [
+  ['鐵釘放在潮濕的地方生鏽', 1], ['把紙張剪成碎片', 0], ['牛奶放太久變酸', 1], ['冰塊融化成水', 0], ['燃燒木炭烤肉', 1],
+  ['鹽溶進水裡', 0], ['切開的蘋果放一陣子變成褐色', 1], ['玻璃杯摔破', 0], ['生雞蛋煮成熟蛋', 1], ['把橡皮筋拉長', 0],
+  ['酒精具有可燃性', 3], ['銅是紅褐色、有金屬光澤', 2], ['水的沸點是 100 ℃（一大氣壓）', 2], ['鐵在潮濕的空氣中容易生鏽', 3],
+  ['氧氣可以幫助燃燒', 3], ['鋁的密度是 2.7 g/cm³', 2], ['糖容易溶於水', 2], ['小蘇打遇到醋會冒出氣泡', 3],
+];
+const CHANGE_CAT = ['物理變化', '化學變化', '物理性質', '化學性質'];
+const CHANGE_REASON = ['沒有產生新物質，只改變形狀、大小或狀態', '產生了新的物質', '描述物質本身的特徵，不必讓它起化學變化就能觀察', '要讓物質發生化學變化，才能觀察到的特徵'];
+const PURE_BANK = [
+  ['一杯液體加熱沸騰時，溫度<b>一直慢慢上升</b>，沒有停在固定值', 1, 1], ['某固體加熱熔化時，溫度<b>停在 80.5 ℃</b>直到全部熔化', 0, 0],
+  ['某金屬塊測了好幾次，密度都是 <b>8.9 g/cm³</b>', 0, 0], ['某種果汁不同瓶測到的密度在 <b>1.03～1.06 g/cm³</b> 之間', 1, 1],
+  ['一杯透明無色的液體，<b>蒸乾後</b>杯底留下白色固體', 1, 2], ['某液體用過濾、蒸發都分不出其他物質，沸點固定 100 ℃', 0, 0],
+  ['空氣', 1, 3], ['蒸餾水', 0, 4], ['氧氣', 0, 4], ['海水', 1, 3], ['乾冰（固態二氧化碳）', 0, 4], ['不鏽鋼（鐵加入其他金屬製成）', 1, 3], ['糖水', 1, 3],
+];
+const PURE_REASON = ['性質（熔點、沸點、密度）固定', '性質不固定，會隨成分比例改變', '可以用物理方法分出其他物質', '由兩種以上物質混合而成', '只由一種物質組成'];
+const LAB_BANK = [
+  { q: '想確認瓶子裡收集到的是<b>氧氣</b>，最好的方法是？', o: ['放入帶有火星的線香，看是否燒得更旺', '倒入澄清石灰水，看是否變混濁', '聞聞看有沒有味道', '看瓶子裡的顏色'], a: 0,
+    r: ['氧氣能幫助燃燒（助燃性）', '氧氣會和石灰水反應', '氧氣有特殊氣味'], ra: 0, e: '氧氣具有助燃性，帶火星的線香放進去會燒得更旺。' },
+  { q: '想確認瓶子裡的氣體是<b>二氧化碳</b>，最好的方法是？', o: ['倒入澄清石灰水，搖一搖看是否變混濁', '放入點燃的線香，看是否熄滅', '看是不是無色', '把瓶子倒過來看氣體會不會流出'], a: 0,
+    r: ['二氧化碳會讓澄清石灰水變混濁，這是它特有的反應', '會讓線香熄滅的只有二氧化碳', '只有二氧化碳是無色的'], ra: 0, e: '線香熄滅只能說明「不助燃」，氮氣也會讓線香熄滅；石灰水變混濁才能確定是二氧化碳。' },
+  { q: '製造氧氣時，常用<b>排水集氣法</b>收集，主要是因為氧氣？', o: ['很難溶於水', '比空氣重', '容易溶於水', '有顏色'], a: 0,
+    r: ['不太溶於水才不會被水吸走，而且收集到的氣體比較純', '比空氣重所以會沉到水底', '溶於水後比較好保存'], ra: 0, e: '氣體要不易溶於水，才能用排水集氣法，而且這樣收集到的氣體不易混入空氣。' },
+  { q: '雙氧水製氧時反應太劇烈，液體快從薊頭漏斗噴出來，應該怎麼處理？', o: ['把橡皮導管移出水面', '用夾子夾緊導管', '再加入更多雙氧水', '把薊頭漏斗塞住'], a: 0,
+    r: ['讓氣體直接排出，瓶內壓力降低', '讓氣體留在瓶內，增加產量', '讓反應變得更快'], ra: 0, e: '把導管移出水面，氣體不必推開水就能排出，瓶內壓力下降，液體就不會噴出。夾緊或塞住反而更危險。' },
+  { q: '薊頭漏斗的下端要伸到錐形瓶（或吸濾瓶）的<b>液面以下</b>，目的是？', o: ['避免產生的氣體從漏斗跑掉', '讓雙氧水流得更快', '增加氧氣的產量', '讓二氧化錳溶解'], a: 0,
+    r: ['管口泡在液體裡，等於把漏斗這條出口封住', '液體可以把氣體壓進漏斗', '管子越長反應越快'], ra: 0, e: '漏斗下端沒入液面，氣體就只能從導管出去，不會從漏斗漏掉。' },
+  { q: '導管剛開始冒出的氣泡，為什麼<b>先不要收集</b>？', o: ['那是裝置裡原本的空氣', '那是水蒸氣', '那是有毒氣體', '那時氧氣太熱'], a: 0,
+    r: ['先讓原有空氣排掉，之後收集的氧氣才比較純', '水蒸氣會讓瓶子破掉', '剛開始的氣體會爆炸'], ra: 0, e: '一開始被擠出來的是瓶子和管子裡的空氣，等一下再收集才是比較純的氧氣。' },
+  { q: '製氧時加入的<b>二氧化錳</b>，作用是？', o: ['讓雙氧水分解得比較快', '提供氧氣的來源', '讓氧氣的總量變多', '吸收多餘的水'], a: 0,
+    r: ['它只改變反應快慢，本身不會被用掉，也不改變產量', '氧氣是從二氧化錳分解出來的', '加越多二氧化錳，氧氣越多'], ra: 0, e: '氧氣來自雙氧水；二氧化錳只是加快分解，反應後仍留在瓶中。想要更多氧氣要加雙氧水。' },
+  { q: '收集滿<b>二氧化碳</b>的集氣瓶，蓋上玻璃片後應該怎麼放？', o: ['瓶口朝上正放', '瓶口朝下倒放', '橫放', '怎麼放都一樣'], a: 0,
+    r: ['二氧化碳比空氣重，瓶口朝上比較不容易跑掉', '二氧化碳比空氣輕，會往上飄', '二氧化碳會溶解玻璃片'], ra: 0, e: '二氧化碳密度比空氣大，正放時氣體會留在瓶底，不容易逸散。' },
+  { q: '實驗室製造<b>二氧化碳</b>，常用哪兩種藥品？', o: ['大理石（碳酸鈣）和稀鹽酸', '雙氧水和二氧化錳', '食鹽和水', '小蘇打和水'], a: 0, e: '大理石（碳酸鈣）加稀鹽酸會產生二氧化碳；雙氧水加二氧化錳是製造氧氣。' },
+];
+const SEP_BANK = [
+  { q: '要從<b>混有細砂的食鹽</b>中取回乾淨的食鹽，正確的步驟是？', o: ['加水溶解 → 過濾 → 濾液蒸發', '過濾 → 加水溶解 → 蒸發', '直接加熱 → 過濾', '加水 → 蒸發 → 過濾'], a: 0,
+    r: ['先讓食鹽溶進水裡，細砂顆粒大會被濾紙擋下，再把水蒸發掉留下食鹽', '細砂會溶在水裡，食鹽會被擋下', '加熱就能讓細砂消失'], ra: 0, e: '溶解 → 過濾（擋下細砂）→ 蒸發結晶（取回食鹽）。' },
+  { q: '<b>泥水</b>想變清澈，最適合的方法是？', o: ['過濾', '結晶', '濾紙色層分析', '加熱沸騰'], a: 0,
+    r: ['泥沙顆粒比濾紙孔隙大，會被擋下來', '泥沙會溶在水裡被蒸發掉', '泥沙會隨水往上爬而分開'], ra: 0, e: '泥沙不溶於水、顆粒較大，用過濾就能分開。' },
+  { q: '想從<b>海水</b>得到鹽，最適合的方法是？', o: ['結晶法（讓水蒸發）', '過濾法', '濾紙色層分析', '用磁鐵吸'], a: 0,
+    r: ['水蒸發後，鹽溶不下就會變成晶體留下來', '鹽的顆粒很大，會被濾紙擋下', '鹽會被磁鐵吸起來'], ra: 0, e: '鹽溶在水中，過濾擋不住；讓水蒸發，鹽就結晶出來。' },
+  { q: '想知道<b>黑色水性彩色筆</b>的墨水由哪些色素組成，最適合的方法是？', o: ['濾紙色層分析（用水當溶劑）', '過濾', '結晶', '用磁鐵'], a: 0,
+    r: ['各種色素跟著水在濾紙上移動的距離不同，就會分開', '色素顆粒大小不同，會被濾紙擋下', '加熱後色素會變成晶體'], ra: 0, e: '把墨水點在濾紙上，讓溶劑往上爬，不同色素移動距離不同，就會分成不同顏色。' },
+  { q: '想分析<b>油性簽字筆</b>的色素，做濾紙色層分析時應該用什麼當溶劑？', o: ['酒精', '水', '鹽水', '糖水'], a: 0,
+    r: ['油性墨水不溶於水，但能溶在酒精中', '酒精比水便宜', '水會把濾紙弄破'], ra: 0, e: '溶劑要能溶解墨水，色素才會跟著移動；油性墨水要用酒精。' },
+  { q: '<b>沙子和糖</b>混在一起，想把糖取回來，正確的步驟是？', o: ['加水溶解 → 過濾 → 濾液蒸發', '直接過濾', '直接加熱', '用濾紙色層分析'], a: 0,
+    r: ['糖溶於水、沙不溶；過濾擋下沙子，再蒸發水分得到糖', '沙子會溶於水', '糖的顆粒比沙子大'], ra: 0, e: '和食鹽加細砂一樣：溶解 → 過濾 → 蒸發結晶。' },
+  { q: '<b>鐵粉混在水中</b>，想分開兩者，可以用下列哪一個方法？（鐵粉不溶於水）', o: ['過濾', '濾紙色層分析', '加更多水', '攪拌'], a: 0,
+    r: ['鐵粉不溶於水、顆粒會被濾紙擋下', '鐵粉會跟著水往上爬', '鐵粉會溶在水裡'], ra: 0, e: '不溶於水的固體都可以用過濾和水分開。' },
+  { q: '蒸發食鹽水取鹽時，蒸發皿裡<b>快要乾</b>的時候應該？', o: ['移開火源，讓餘熱把它烘乾', '火開更大加快速度', '再加一些水', '直接用手拿起來'], a: 0,
+    r: ['避免鹽粒受熱爆開噴出來', '移開火源才能讓鹽變多', '用手拿可以感覺乾了沒'], ra: 0, e: '快乾時鹽粒容易噴濺，移開火源用餘熱蒸乾比較安全。' },
+];
+
+/* ---------- 任務定義 ---------- */
+const TASKS = [
+  { id: 1, ch: 1, can: '選擇適當的單位，並正確換算', lc: 'INc-IV-2', lp: '分析與發現（pa）', help: 's1-1', gen: genUnit },
+  { id: 2, ch: 1, can: '正確讀出刻度，記錄測量結果', lc: 'Ea-IV-3', lp: '計畫與執行（pe）', help: 's1-2', gen: genRead },
+  { id: 3, ch: 1, can: '判斷誤差的來源，並說出改進方法', lc: 'Ea-IV-3', lp: '批判思辨（tc）', help: 's1-2', gen: fromBank(ERR_BANK) },
+  { id: 4, ch: 1, can: '用排水法測量各種物體的體積', lc: 'Ea-IV-1', lp: '計畫與執行（pe）', help: 's1-3', gen: genVolume },
+  { id: 5, ch: 1, can: '計算密度，用密度鑑定物質', lc: 'Ea-IV-1', lp: '推理論證（tr）', help: 's1-3', gen: genDensity },
+  { id: 6, ch: 1, can: '從質量–體積圖分析出結論', lc: 'Ea-IV-1', lp: '分析與發現（pa）', help: 's1-3', gen: genGraph },
+  { id: 7, ch: 2, can: '說出三態變化的名稱，並用粒子觀點解釋', lc: 'Ab-IV-1、Ab-IV-2', lp: '建立模型（tm）', help: 's2-1', gen: genState },
+  { id: 8, ch: 2, can: '區分物理變化／化學變化、物理性質／化學性質', lc: 'Ab-IV-3', lp: '推理論證（tr）', help: 's2-1', gen: genChange },
+  { id: 9, ch: 2, can: '用證據判斷純物質或混合物', lc: 'Ab-IV-4', lp: '推理論證（tr）', help: 's2-1', gen: genPure },
+  { id: 10, ch: 2, can: '製造並檢驗氧氣與二氧化碳', lc: 'Ab-IV-3（實驗 2-1）', lp: '計畫與執行（pe）', help: 'labs', gen: fromBank(LAB_BANK) },
+  { id: 11, ch: 2, can: '計算並解讀生活中的濃度', lc: 'Jb-IV-4', lp: '分析與發現（pa）', help: 's2-2', gen: genConc },
+  { id: 12, ch: 2, can: '為混合物選擇分離方法、排出流程', lc: 'Ca-IV-1', lp: '計畫與執行（pe）', help: 's2-3', gen: fromBank(SEP_BANK) },
+  { id: 13, ch: 2, can: '用溶解度判斷溶液是否飽和', lc: '加深學習', lp: '分析與發現（pa）', help: 's2-2', gen: genSat, bonus: true },
+];
+const CORE = TASKS.filter(t => !t.bonus);
+
+/* ---------- 各任務的出題器 ---------- */
+function genUnit() {
+  if (Math.random() < 0.35) {
+    const it = pick([['一根頭髮的直徑', 'μm'], ['教室的長度', 'm'], ['一隻螞蟻的長度', 'mm'], ['臺北到高雄的距離', 'km'], ['一支鉛筆的長度', 'cm'],
+      ['流感病毒的大小', 'nm'], ['一顆西瓜的質量', 'kg'], ['一粒米的質量', 'mg'], ['一包洋芋片的質量', 'g'], ['一瓶寶特瓶飲料的容量', 'mL']]);
+    const pool = it[1].match(/g$/) ? ['kg', 'g', 'mg', 'm'] : it[1] === 'mL' ? ['mL', 'kg', 'cm', 'm'] : ['km', 'm', 'cm', 'mm', 'μm', 'nm'];
+    const opts = shuffle([it[1], ...shuffle(pool.filter(u => u !== it[1])).slice(0, 3)]);
+    return MC(`描述「${it[0]}」最適合用哪一個單位？`, opts, opts.indexOf(it[1]), `${it[0]}用 ${it[1]} 表示，數字不會太大也不會太小，最容易理解。`);
+  }
+  const sys = pick([
+    { u: ['km', 'm', 'cm', 'mm', 'μm', 'nm'], v: [1e3, 1, 1e-2, 1e-3, 1e-6, 1e-9] },
+    { u: ['kg', 'g', 'mg'], v: [1e3, 1, 1e-3] },
+    { u: ['L', 'mL', 'cm³'], v: [1e3, 1, 1] },
+  ]);
+  let i, j; do { i = rnd(0, sys.u.length - 1); j = rnd(0, sys.u.length - 1); } while (i === j || Math.abs(Math.log10(sys.v[i] / sys.v[j])) > 6);
+  const x = pick([2.5, 0.8, 3.6, 12, 45, 0.35, 7.2, 150]);
+  const ans = x * sys.v[i] / sys.v[j];
+  return NUM(`${x} ${sys.u[i]} ＝ ？ ${sys.u[j]}`, ans,
+    `1 ${sys.u[i]} ＝ ${sci(sys.v[i] / sys.v[j])} ${sys.u[j]}，所以 ${x} ${sys.u[i]} ＝ ${sci(ans)} ${sys.u[j]}。`,
+    s => near(parseSci(s), ans, 1e-6), { unit: sys.u[j], hint: '很大或很小的數可以寫成 2.5e6 或 2.5×10^6' });
+}
+function genRead() {
+  const k = Math.random();
+  if (k < 0.45) {
+    const onTick = Math.random() < 0.25, L = onTick ? rnd(25, 70) / 10 : rnd(200, 760) / 100;
+    return NUM(`用這把尺（最小刻度 0.1 cm）量黃色紙條，長度應記錄為多少 cm？`, L,
+      `最小刻度 0.1 cm，要再估一位到 0.01 cm，所以小數點後要有<b>兩位</b>。這次的正確讀數約為 ${fx(L, 2)} cm${onTick ? '（剛好對齊刻度，估計位要補 0）' : ''}。`,
+      s => decimals(s) === 2 && near(parseSci(s), L, 0, 0.021), { svg: rulerSvg(L, 'mm'), unit: 'cm', digits: 2 });
+  }
+  if (k < 0.75) {
+    const L = rnd(22, 88) / 10;
+    return NUM(`這把尺只有 1 cm 的刻度（最小刻度 1 cm）。黃色紙條長度應記錄為多少 cm？`, L,
+      `最小刻度 1 cm，要估到 0.1 cm，所以小數點後<b>一位</b>。正確讀數約為 ${fx(L, 1)} cm。`,
+      s => decimals(s) === 1 && near(parseSci(s), L, 0, 0.21), { svg: rulerSvg(L, 'cm'), unit: 'cm', digits: 1 });
+  }
+  const lo = pick([10, 20, 30, 40]), v = lo + rnd(12, 88) / 10;
+  return NUM(`量筒的最小刻度是 1 mL。水的體積應記錄為多少 mL？`, v,
+    `最小刻度 1 mL，要估到 0.1 mL。看凹液面最低處，約為 ${fx(v, 1)} mL。`,
+    s => decimals(s) === 1 && near(parseSci(s), v, 0, 0.21), { svg: cylinderSvg(v, lo), unit: 'mL', digits: 1 });
+}
+function genVolume() {
+  const t = rnd(0, 3);
+  if (t === 0) {
+    const a = rnd(200, 400) / 10, b = round(a + rnd(30, 150) / 10, 1);
+    return NUM(`量筒原本有水 ${fx(a, 1)} mL，放入一顆會沉的石頭後，水面升到 ${fx(b, 1)} mL。石頭的體積是多少 cm³？`, b - a,
+      `石頭體積＝放入後－放入前＝${fx(b, 1)}－${fx(a, 1)}＝${fx(b - a, 1)} cm³（1 mL＝1 cm³）。`, s => near(parseSci(s), b - a, 0, 0.051), { unit: 'cm³' });
+  }
+  if (t === 1) {
+    const v1 = rnd(50, 70) * 2, v2 = v1 + rnd(8, 20), obj = rnd(10, 40), v3 = v2 + obj;
+    return NUM(`軟木塞會浮在水面。先在量筒裝水 ${v1}.0 mL；綁上一個鐵塊只讓鐵塊沉入，水面到 ${v2}.0 mL；再讓鐵塊和軟木塞一起沉入，水面到 ${v3}.0 mL。軟木塞的體積是多少 cm³？`, obj,
+      `軟木塞的體積＝兩個一起沉入時－只有鐵塊沉入時＝${v3}.0－${v2}.0＝${obj}.0 cm³。第一個數字 ${v1}.0 用不到。`, s => near(parseSci(s), obj, 0, 0.051), { unit: 'cm³' });
+  }
+  if (t === 2) {
+    const sand = rnd(300, 600) / 10, look = round(sand + rnd(80, 200) / 10, 1), w = pick([50, 80, 100]), tot = round(sand + w, 1);
+    return NUM(`把一些乾砂倒進量筒，砂面在 ${fx(look, 1)} mL。再倒入 ${w}.0 mL 的水，水面升到 ${fx(tot, 1)} mL（砂粒間的空隙都被水填滿）。砂子真正的體積是多少 cm³？`, sand,
+      `砂粒之間有空氣，${fx(look, 1)} mL 不是砂子真正的體積。總體積＝砂＋水，所以砂＝${fx(tot, 1)}－${w}.0＝${fx(sand, 1)} cm³。`, s => near(parseSci(s), sand, 0, 0.051), { unit: 'cm³' });
+  }
+  const m = rnd(120, 480) / 10;
+  return NUM(`把一塊石頭放進裝滿水的杯子，溢出的水質量是 ${fx(m, 1)} g（水的密度 1 g/cm³）。石頭的體積是多少 cm³？`, m,
+    `溢出的水的體積就是石頭的體積：${fx(m, 1)} g ÷ 1 g/cm³＝${fx(m, 1)} cm³。`, s => near(parseSci(s), m, 0, 0.051), { unit: 'cm³' });
+}
+const METALS = [['金', 19.3], ['鉛', 11.3], ['銀', 10.5], ['銅', 8.9], ['鐵', 7.9], ['鋁', 2.7]];
+const METAL_TABLE = `<div class="tbl-scroll"><table class="t"><tr><th>物質</th>${METALS.map(m => `<th>${m[0]}</th>`).join('')}</tr><tr><th>密度（g/cm³）</th>${METALS.map(m => `<td>${m[1]}</td>`).join('')}</tr></table></div>`;
+function genDensity() {
+  const t = rnd(0, 3), mt = pick(METALS);
+  if (t === 0) {
+    const V = rnd(20, 120) / 10, M = round(mt[1] * V, 1);
+    const opts = shuffle([mt[0], ...shuffle(METALS.filter(x => x !== mt).map(x => x[0])).slice(0, 3)]);
+    return MC(`一個金屬塊質量 ${fx(M, 1)} g、體積 ${fx(V, 1)} cm³。對照下表，它最可能是哪一種金屬？${METAL_TABLE}`, opts, opts.indexOf(mt[0]),
+      `密度＝${fx(M, 1)} ÷ ${fx(V, 1)} ≈ ${fx(M / V, 1)} g/cm³，最接近${mt[0]}（${mt[1]}）。`);
+  }
+  if (t === 1) {
+    const base = pick([['鋁', 2.7], ['鐵', 7.9], ['銅', 8.9]]), names = ['甲', '乙', '丙', '丁'], hollow = rnd(0, 3);
+    const rows = names.map((n, i) => { const V = rnd(10, 30); const d = i === hollow ? base[1] * pick([0.6, 0.75, 0.85]) : base[1]; return [n, round(d * V, 1), V]; });
+    return MC(`四顆${base[0]}球（${base[0]}的密度 ${base[1]} g/cm³）的測量結果如下，哪一顆最可能是<b>空心</b>的？<div class="tbl-scroll"><table class="t"><tr><th></th>${rows.map(r => `<th>${r[0]}</th>`).join('')}</tr><tr><th>質量（g）</th>${rows.map(r => `<td>${fx(r[1], 1)}</td>`).join('')}</tr><tr><th>體積（cm³）</th>${rows.map(r => `<td>${r[2]}.0</td>`).join('')}</tr></table></div>`,
+      names, hollow, `算出每顆的密度：${rows.map(r => `${r[0]} ${fx(r[1] / r[2], 2)}`).join('、')}。空心球裡有空氣，平均密度會<b>小於</b>${base[1]}，所以是${names[hollow]}。`);
+  }
+  if (t === 2) {
+    return NUM(`一塊${mt[0]}的密度是 ${mt[1]} g/cm³。把它切成大小不同的兩塊，<b>小的那塊</b>密度是多少 g/cm³？`, mt[1],
+      `密度是物質的特性，和大小無關。切開後質量、體積一起變小，比值不變，還是 ${mt[1]} g/cm³。`, s => near(parseSci(s), mt[1], 1e-6), { unit: 'g/cm³' });
+  }
+  const [a, b] = shuffle(METALS).slice(0, 2), same = pick(['質量', '體積']);
+  const big = same === '質量' ? (a[1] < b[1] ? a : b) : (a[1] > b[1] ? a : b);
+  return TT(`${same}相同的${a[0]}塊（${a[1]} g/cm³）和${b[0]}塊（${b[1]} g/cm³），哪一塊的${same === '質量' ? '體積' : '質量'}比較大？`, [a[0] + '塊', b[0] + '塊', '一樣大'], big === a ? 0 : 1,
+    same === '質量' ? ['質量相同時，密度越小，體積越大', '質量相同時，密度越大，體積越大', '質量相同，體積就一定相同'] : ['體積相同時，密度越大，質量越大', '體積相同時，密度越小，質量越大', '體積相同，質量就一定相同'], 0,
+    same === '質量' ? '體積＝質量 ÷ 密度，質量一樣時，密度小的那塊比較「佔空間」。' : '質量＝密度 × 體積，體積一樣時，密度大的那塊比較重。');
+}
+function genGraph() {
+  const t = rnd(0, 2);
+  if (t === 0) {
+    const ds = shuffle([0.5, 0.8, 1.5, 2, 2.5, 4, 5]).slice(0, 2), Vp = [4, 5, 8, 10];
+    const L = ds.map((d, i) => { const v = pick(Vp.filter(v => Number.isInteger(d * v))) || 10; return { name: '甲乙'[i], d, f: x => d * x, inv: y => y / d, pts: [[v, round(d * v, 1)]], color: i ? '#eb6834' : '#2a78d6' }; });
+    const ask = rnd(0, 1);
+    const svg = mvChart(L, { xmax: 20, ymax: 50, xl: 'V（cm³）', yl: 'm（g）' });
+    return NUM(`下圖是兩種物質的質量（m）–體積（V）關係圖。<b>${L[ask].name}</b>的密度是多少 g/cm³？`, L[ask].d,
+      `取${L[ask].name}線上標示的點：${L[ask].pts[0][1]} ÷ ${L[ask].pts[0][0]}＝${L[ask].d} g/cm³。線越陡，密度越大。`, s => near(parseSci(s), L[ask].d, 0.01), { svg, unit: 'g/cm³' });
+  }
+  if (t === 1) {
+    const d = pick([0.8, 1.2, 1.5, 2]), c = pick([20, 25, 30, 40]), v1 = 10, v2 = 30;
+    const L = [{ name: '', f: x => c + d * x, inv: y => (y - c) / d, pts: [[v1, round(c + d * v1, 1)], [v2, round(c + d * v2, 1)]], color: '#1baf7a' }];
+    const svg = mvChart(L, { xmax: 50, ymax: 150, xl: '液體 V（cm³）', yl: '總質量（g）' });
+    return Math.random() < 0.5
+      ? NUM(`把液體倒進量筒，秤「量筒＋液體」的總質量，畫成下圖。<b>液體的密度</b>是多少 g/cm³？`, d,
+        `要用兩點的差：（${round(c + d * v2, 1)}－${round(c + d * v1, 1)}）÷（${v2}－${v1}）＝${d} g/cm³。不能直接拿總質量除以體積，因為裡面有量筒的質量。`, s => near(parseSci(s), d, 0.01), { svg, unit: 'g/cm³' })
+      : NUM(`把液體倒進量筒，秤「量筒＋液體」的總質量，畫成下圖。<b>空量筒的質量</b>是多少 g？`, c,
+        `液體密度＝（${round(c + d * v2, 1)}－${round(c + d * v1, 1)}）÷（${v2}－${v1}）＝${d}。${v1} cm³ 的液體是 ${round(d * v1, 1)} g，所以量筒＝${round(c + d * v1, 1)}－${round(d * v1, 1)}＝${c} g，也就是直線和縱軸的交點。`, s => near(parseSci(s), c, 0.01), { svg, unit: 'g' });
+  }
+  const ds = shuffle([1, 2, 4, 8]).slice(0, 2);
+  const L = ds.map((d, i) => ({ name: '甲乙'[i], f: x => x / d, inv: y => y * d, pts: [[2 * d, 2]], color: i ? '#eb6834' : '#2a78d6' }));
+  const svg = mvChart(L, { xmax: 20, ymax: 5, xl: 'm（g）', yl: 'V（cm³）' });
+  const hi = ds[0] > ds[1] ? 0 : 1;
+  return TT(`注意這張圖：<b>縱軸是體積 V、橫軸是質量 m</b>。甲、乙哪一個密度比較大？`, ['甲', '乙', '一樣大'], hi,
+    ['取相同的體積來比較，質量比較大的，密度比較大', '不管軸怎麼放，線越陡的密度一定越大', '線畫得越長，密度越大'], 0,
+    `看標示的點：甲 ${L[0].pts[0][0]} g 佔 2 cm³，密度 ${ds[0]}；乙 ${L[1].pts[0][0]} g 佔 2 cm³，密度 ${ds[1]}。軸對調時「越陡越大」就不成立了，一定要先看軸。`, { svg });
+}
+function genState() {
+  const [sit, name, r] = pick(STATE_BANK), opts = shuffle(STATE_NAMES.slice()).slice(0, 4);
+  if (!opts.includes(name)) opts[rnd(0, 3)] = name;
+  return TT(`「${sit}」屬於哪一種三態變化？`, opts, opts.indexOf(name), STATE_REASON, r,
+    `${sit}：${name}。${r === 0 ? '吸熱後粒子活動變劇烈，彼此距離變大、排列變亂。' : '放熱後粒子活動變慢，彼此靠近、排列變緊密。'}三態變化時粒子本身不變，也沒有產生新物質。`);
+}
+function genChange() {
+  const [sit, c] = pick(CHANGE_BANK);
+  return TT(`「${sit}」屬於下列哪一類？`, CHANGE_CAT, c, CHANGE_REASON, c,
+    `${CHANGE_CAT[c]}：${CHANGE_REASON[c]}。${c < 2 ? '「變化」是正在發生的過程；' : '「性質」是物質本身的特徵；'}判斷關鍵是有沒有新物質產生。`);
+}
+function genPure() {
+  const [sit, a, r] = pick(PURE_BANK);
+  const isData = r <= 2;
+  const ropts = isData ? PURE_REASON.slice(0, 3) : PURE_REASON.slice(3);
+  return TT(isData ? `根據這個觀察：「${sit}」。這種物質比較可能是？` : `「${sit}」是純物質還是混合物？`, ['純物質', '混合物'], a, ropts, isData ? r : r - 3,
+    `${a ? '混合物' : '純物質'}：${PURE_REASON[r]}。純物質只有一種成分，熔點、沸點、密度都固定；混合物的性質會隨比例改變，也能用物理方法分開。`);
+}
+function genConc() {
+  const t = rnd(0, 4);
+  if (t === 0) {
+    const s = pick([10, 15, 20, 25, 30]), w = pick([85, 90, 135, 170, 180, 270]);
+    const ans = s / (s + w) * 100;
+    return NUM(`把 ${s} g 的糖完全溶在 ${w} g 的水中，糖水的重量百分率濃度是多少 %？（四捨五入到小數第一位）`, ans,
+      `濃度＝溶質 ÷ 溶液 × 100%＝${s} ÷（${s}＋${w}）× 100% ≈ ${fx(ans, 1)}%。分母是「溶液」（糖＋水），不是只有水。`, x => near(parseSci(x), ans, 0, 0.06), { unit: '%' });
+  }
+  if (t === 1) {
+    const tot = pick([200, 250, 400, 500]), p = pick([5, 8, 10, 12, 20]), s = tot * p / 100;
+    return NUM(`要配製 ${tot} g、濃度 ${p}% 的食鹽水，需要多少 g 的食鹽？`, s,
+      `溶質＝溶液 × 濃度＝${tot} × ${p}%＝${s} g（其餘 ${tot - s} g 是水）。`, x => near(parseSci(x), s, 0, 0.051), { unit: 'g' });
+  }
+  if (t === 2) {
+    const v = pick([300, 330, 500, 600, 750]), deg = pick([4, 5, 12, 15, 40, 58]), a = v * deg / 100;
+    return NUM(`一瓶 ${v} mL 的酒，標示「酒精度 ${deg} 度」。裡面有多少 mL 的酒精？`, a,
+      `「度」是體積百分率濃度。酒精體積＝${v} × ${deg}%＝${round(a, 1)} mL。`, x => near(parseSci(x), a, 0, 0.051), { unit: 'mL' });
+  }
+  if (t === 3) {
+    const mg = pick([0.2, 0.5, 2, 3, 6, 15]), kg = pick([1, 2, 5, 10]), ans = mg / kg;
+    return NUM(`${kg} kg 的水樣中，含有某汙染物 ${mg} mg。濃度是多少 ppm？`, ans,
+      `1 ppm＝每 1 kg 溶液含 1 mg 溶質。${mg} mg ÷ ${kg} kg＝${round(ans, 3)} ppm。`, x => near(parseSci(x), ans, 0.01), { unit: 'ppm' });
+  }
+  const lim = pick([0.15, 0.2, 0.5, 2, 4]), kg = pick([2, 3, 5]);
+  return NUM(`飲用水的某物質標準是「不得超過 ${lim} ppm」。${kg} kg 的水最多可以含有多少 mg？`, lim * kg,
+    `${lim} ppm 代表每 1 kg 最多 ${lim} mg，${kg} kg 最多 ${lim} × ${kg}＝${round(lim * kg, 2)} mg。`, x => near(parseSci(x), lim * kg, 0.01), { unit: 'mg' });
+}
+function genSat() {
+  const S = pick([36, 40, 50, 64, 110, 204]), w = pick([50, 100, 200]), cap = S * w / 100, add = round(cap * pick([0.6, 0.8, 1.3, 1.5]), 0);
+  if (Math.random() < 0.5) {
+    const sat = add >= cap;
+    return TT(`某物質在 20 ℃ 的溶解度是 ${S} g／100 g 水。在 ${w} g、20 ℃ 的水中加入 ${add} g 並充分攪拌，結果是？`, ['未飽和，全部溶解', '飽和，杯底有沉澱'], sat ? 1 : 0,
+      [`${w} g 水最多只能溶 ${round(cap, 1)} g`, `${w} g 水最多可以溶 ${S} g`, '只要攪拌夠久，都能溶完'], 0,
+      `${w} g 水最多溶 ${S} × ${w}／100＝${round(cap, 1)} g。加入 ${add} g ${sat ? `超過了，會有 ${round(add - cap, 1)} g 沉澱，溶液飽和` : '沒超過，全部溶解，未飽和'}。`);
+  }
+  const extra = Math.max(0, add - cap);
+  return NUM(`某物質在 20 ℃ 的溶解度是 ${S} g／100 g 水。在 ${w} g、20 ℃ 的水中加入 ${add} g，充分攪拌後，杯底會有多少 g 沉澱？（全部溶解就填 0）`, extra,
+    `${w} g 水最多溶 ${round(cap, 1)} g，沉澱＝${add}－${round(cap, 1)}＝${round(extra, 1)} g${extra ? '' : '（不到上限，沒有沉澱）'}。`, x => near(parseSci(x), extra, 0, 0.051), { unit: 'g' });
+}
+
+/* ---------- 身分與回傳 ---------- */
+const ident = () => store.get('ident', null);
+function sendRecord(rec) {
+  const q = store.get('outbox', []); q.push(rec); store.set('outbox', q); flushOutbox();
+}
+async function flushOutbox() {
+  if (!SHEET_URL) return;
+  const q = store.get('outbox', []); if (!q.length) return;
+  try {
+    await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(q) });
+    store.set('outbox', []); renderBoard();
+  } catch (e) { /* 離線時下次再送 */ }
+}
+window.addEventListener('online', flushOutbox);
+
+/* ---------- 任務總覽 ---------- */
+const SELF = ['我覺得我會', '不太確定', '我覺得還不會'];
+function taskState(t) { return TSTORE.get(t.id); }
+function renderBoard() {
+  const host = $('#taskBoard'); if (!host) return;
+  const me = ident(), passed = CORE.filter(t => taskState(t).passed).length, pct = Math.round(passed / CORE.length * 100);
+  let h = `<div class="card tb-top"><div class="tb-rate"><div><b>${passed}</b> / ${CORE.length}</div><small>任務通過</small></div>
+    <div class="grow"><div class="prog-bar big"><i style="width:${pct}%"></i></div>
+    <p class="muted" style="margin:6px 0 0">每個任務<b>連續答對 ${PASS} 題</b>就通過。題目每次都不一樣，背答案沒有用，要真的理解才能過關！</p></div></div>`;
+  h += `<div class="card ident">${me ? `👤 <b>${me.cls} 班 ${me.seat} 號</b>　<button class="btn" id="idEdit">修改</button>` :
+    `<b>開始前，先輸入你的班級和座號：</b><div class="row"><input class="in" id="idCls" placeholder="班級，如 801" inputmode="numeric" maxlength="3"><input class="in" id="idSeat" placeholder="座號" inputmode="numeric" maxlength="2"><button class="btn primary" id="idSave">確定</button></div><div class="fb" id="idFb"></div>`}
+    ${SHEET_URL && store.get('outbox', []).length ? `<div class="muted">⏳ 有 ${store.get('outbox', []).length} 筆通過紀錄等待上傳（連上網路後會自動送出）</div>` : ''}</div>`;
+  [1, 2].forEach(ch => {
+    h += `<h3>${ch === 1 ? '第 1 章　基本測量' : '第 2 章　物質的世界'}</h3><div class="task-list">`;
+    TASKS.filter(t => t.ch === ch).forEach(t => {
+      const s = taskState(t), st = s.passed ? `<span class="tk ok">✅ 通過</span>` : s.n ? `<span class="tk go">連對 ${s.streak || 0}/${PASS}</span>` : `<span class="tk no">⬜ 未開始</span>`;
+      h += `<a class="task ${ch === 2 ? 'ch2' : ''} ${s.passed ? 'done' : ''} ${t.bonus ? 'bonus' : ''}" href="#t${t.id}">
+        <div class="task-top"><span class="chip ${ch === 2 ? 'ch2' : ''}">任務 ${t.id}${t.bonus ? '・挑戰' : ''}</span>${st}</div>
+        <h4>我能${t.can}</h4><p class="codes"><span>學習內容 ${t.lc}</span><span>學習表現：${t.lp}</span></p></a>`;
+    });
+    h += `</div>`;
+  });
+  h += `<p class="muted">挑戰任務不列入完成率。想先複習觀念，可以從左邊目錄進入各小節。</p>`;
+  host.innerHTML = h;
+  $('#idSave')?.addEventListener('click', () => {
+    const c = $('#idCls').value.trim(), s = $('#idSeat').value.trim();
+    if (!/^\d{3}$/.test(c) || !/^\d{1,2}$/.test(s)) { $('#idFb').className = 'fb no'; $('#idFb').textContent = '班級請輸入 3 位數字（例如 801），座號輸入 1～2 位數字。'; return; }
+    store.set('ident', { cls: c, seat: String(Number(s)) }); renderBoard();
+  });
+  $('#idEdit')?.addEventListener('click', () => { if (confirm('要修改班級座號嗎？')) { store.set('ident', null); renderBoard(); } });
+  refreshTaskProg();
+}
+function refreshTaskProg() {
+  const passed = CORE.filter(t => taskState(t).passed).length;
+  $('#progTxt').textContent = `任務 ${passed}/${CORE.length}`;
+  $('#progBar').style.width = (passed / CORE.length * 100) + '%';
+}
+
+/* ---------- 任務作答 ---------- */
+function runTask(id) {
+  const t = TASKS.find(x => x.id === id), host = $('#taskRun');
+  if (!t) { location.hash = '#tasks'; return; }
+  if (!ident()) { location.hash = '#tasks'; setTimeout(() => alert('請先輸入班級和座號，再開始任務。'), 50); return; }
+  const s = taskState(t);
+  const head = `<div class="page-head"><span class="chip ${t.ch === 2 ? 'ch2' : ''}">任務 ${t.id}${t.bonus ? '・挑戰' : ''}｜學習內容 ${t.lc}｜${t.lp}</span><h2>我能${t.can}</h2></div>`;
+  if (s.self == null) {                     // 作答前先自評
+    host.innerHTML = head + `<div class="card"><h3>開始之前，先問問自己：</h3><p>對於「${t.can}」，你覺得自己——</p>
+      <div class="row">${SELF.map((x, i) => `<button class="btn ${i ? '' : 'primary'}" data-self="${i}">${x}</button>`).join('')}</div>
+      <p class="muted">這只是讓你之後比較：自己的感覺和實際表現一不一樣。</p></div>`;
+    $$('[data-self]', host).forEach(b => b.onclick = () => { TSTORE.set(t.id, { ...s, self: +b.dataset.self, streak: 0, n: 0 }); runTask(id); });
+    return;
+  }
+  const q = t.gen(); window.__q = q;   // 方便自動測試
+  let h = head + `<div class="streak">${Array.from({ length: PASS }, (_, i) => `<i class="${i < (s.streak || 0) ? 'on' : ''}"></i>`).join('')}<span>連續答對 ${s.streak || 0} / ${PASS}${s.passed ? '　（已通過，現在是加練）' : ''}</span></div>`;
+  h += `<div class="card q-card task-q"><p class="q-stem">${q.stem}</p>${q.svg ? `<div class="svgbox">${q.svg}</div>` : ''}`;
+  if (q.type === 'num') h += `<div class="row"><input class="in wide" id="tAns" autocomplete="off" inputmode="decimal" placeholder="輸入答案">${q.unit ? `<span>${q.unit}</span>` : ''}<button class="btn primary" id="tGo">送出</button></div>${q.hint ? `<p class="muted">${q.hint}</p>` : ''}${q.digits ? `<p class="muted">提醒：記錄測量結果要包含估計值。</p>` : ''}`;
+  else {
+    const order = shuffle(q.opts.map((_, i) => i));
+    h += `<p class="step">${q.type === 'tt' ? '① 答案：' : ''}</p><div class="q-opts" id="tO">${order.map(i => `<button class="q-opt" data-i="${i}"><span>${q.opts[i]}</span></button>`).join('')}</div>`;
+    if (q.type === 'tt') { const ro = shuffle(q.ropts.map((_, i) => i)); h += `<p class="step">② 理由：</p><div class="q-opts" id="tR">${ro.map(i => `<button class="q-opt" data-i="${i}"><span>${q.ropts[i]}</span></button>`).join('')}</div>`; }
+    h += `<div class="row"><button class="btn primary" id="tGo" disabled>送出</button></div>`;
+  }
+  h += `<div class="q-fb" id="tFb" hidden></div></div>`;
+  h += `<div class="row"><a class="btn" href="#tasks">← 回任務總覽</a><a class="btn" href="#${t.help}">🔍 卡住了？看這裡</a></div>`;
+  host.innerHTML = h;
+
+  let pa = null, pr = null;
+  const ready = () => { $('#tGo').disabled = pa == null || (q.type === 'tt' && pr == null); };
+  $$('#tO .q-opt', host).forEach(b => b.onclick = () => { $$('#tO .q-opt').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); pa = +b.dataset.i; ready(); });
+  $$('#tR .q-opt', host).forEach(b => b.onclick = () => { $$('#tR .q-opt').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); pr = +b.dataset.i; ready(); });
+  const inp = $('#tAns'); if (inp) { inp.focus(); inp.onkeydown = e => { if (e.key === 'Enter') $('#tGo').click(); }; }
+  $('#tGo').onclick = () => {
+    let ok, why = '';
+    if (q.type === 'num') {
+      const v = inp.value; if (!v.trim()) return;
+      ok = q.check(v);
+      if (!ok && q.digits && decimals(v) !== q.digits && !isNaN(parseSci(v))) why = `位數不對：這次要寫到小數點後第 ${q.digits} 位。`;
+    } else {
+      ok = pa === q.a && (q.type !== 'tt' || pr === q.ra);
+      if (!ok && q.type === 'tt' && pa === q.a) why = '答案對了，但理由不對，這題不算過關。';
+      $$('#tO .q-opt').forEach(b => { b.disabled = true; b.classList.remove('sel'); if (+b.dataset.i === q.a) b.classList.add('is-right'); else if (+b.dataset.i === pa) b.classList.add('is-wrong'); });
+      $$('#tR .q-opt').forEach(b => { b.disabled = true; b.classList.remove('sel'); if (+b.dataset.i === q.ra) b.classList.add('is-right'); else if (+b.dataset.i === pr) b.classList.add('is-wrong'); });
+    }
+    if (inp) inp.disabled = true;
+    const cur = taskState(t), streak = ok ? (cur.streak || 0) + 1 : 0, n = (cur.n || 0) + 1;
+    const nowPass = !cur.passed && streak >= PASS;
+    TSTORE.set(t.id, { ...cur, streak, n, passed: cur.passed || nowPass, passAt: nowPass ? new Date().toISOString() : cur.passAt, passN: nowPass ? n : cur.passN });
+    if (nowPass && !t.bonus) { const me = ident(); sendRecord({ time: new Date().toISOString(), cls: me.cls, seat: me.seat, task: t.id, name: t.can, tries: n, self: SELF[cur.self] }); }
+    const fb = $('#tFb'); fb.hidden = false; fb.className = 'q-fb ' + (ok ? 'ok' : 'no');
+    fb.innerHTML = `<b>${ok ? '✓ 答對了！' : '✗ 還差一點'}</b>${why ? `<p>${why}</p>` : ''}${!ok && q.type === 'num' ? `<p>正確答案：${sci(q.ans)}${q.unit ? ' ' + q.unit : ''}</p>` : ''}<p>${q.exp}</p>`;
+    const go = $('#tGo'); go.disabled = false;
+    if (nowPass) {
+      go.remove();
+      fb.insertAdjacentHTML('afterend', `<div class="pass-box">🎉 <b>任務 ${t.id} 通過！</b><p>你作答開始前覺得「${SELF[cur.self]}」，實際用了 <b>${n}</b> 題達成連續答對 ${PASS} 題。${n === PASS ? '一次到位，觀念很穩！' : cur.self === 0 && n > PASS * 2 ? '比你想的多花了一些題，可以回頭看看哪裡容易錯。' : '多練幾題就穩了，很棒！'}</p>
+        <div class="row"><a class="btn primary" href="#tasks">回任務總覽</a><button class="btn" id="tMore">再加練一題</button></div></div>`);
+      $('#tMore').onclick = () => runTask(id);
+    } else { go.textContent = '下一題 →'; go.onclick = () => runTask(id); go.focus(); }
+    $('.streak', host).outerHTML = `<div class="streak">${Array.from({ length: PASS }, (_, i) => `<i class="${i < streak ? 'on' : ''}"></i>`).join('')}<span>連續答對 ${streak} / ${PASS}</span></div>`;
+    refreshTaskProg();
+  };
+}
+// 上方進度條改顯示任務完成率（原本的「讀完幾節」仍保留在目錄打勾）
+const __origRP = refreshProgress;
+refreshProgress = function () { __origRP(); refreshTaskProg(); };
+refreshTaskProg();
+flushOutbox();
+/*END-TASKS-JS*/
 /* ================= router ================= */
 function route(){
-  let id=(location.hash||'#home').slice(1);
-  if(!document.getElementById(id) || !$('#'+CSS.escape(id)).classList.contains('page')) id='home';
+  let id=(location.hash||'#tasks').slice(1);
+  const tm=id.match(/^t(\d+)$/);
+  if(tm){ $$('.page').forEach(p=>p.classList.toggle('show', p.id==='taskrun')); $$('nav.side a').forEach(a=>a.classList.toggle('active', a.dataset.nav==='tasks')); closeNav(); window.scrollTo(0,0); runTask(+tm[1]); return; }
+  if(!document.getElementById(id) || !$('#'+CSS.escape(id)).classList.contains('page') || id==='taskrun') id='tasks';
+  if(id==='tasks') renderBoard();
   $$('.page').forEach(p=>p.classList.toggle('show', p.id===id));
   $$('nav.side a').forEach(a=>a.classList.toggle('active', a.dataset.nav===id));
   closeNav(); window.scrollTo(0,0);
