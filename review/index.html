@@ -1067,7 +1067,10 @@ refreshProgress();
    通過時回傳到老師的 Google 試算表（SHEET_URL 留空則不回傳） */
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbze_RHP4FSaRdN54hviuC_IamEAJ2X6_7oAd322CKOEuLhbBvGGjWimZxbGmlrSAbVm-Q/exec';
 const PASS = 3;
-const TSTORE = { get: k => store.get('task:' + k, {}), set: (k, v) => store.set('task:' + k, v) };
+// 任務進度依「班級-座號」分開存，同一台裝置換人也不會混在一起
+const who = () => { const m = store.get('ident', null); return m ? m.cls + '-' + m.seat : 'anon'; };
+const TSTORE = { get: k => store.get('task:' + who() + ':' + k, {}), set: (k, v) => store.set('task:' + who() + ':' + k, v) };
+const FILE_MODE = location.protocol === 'file:';   // 直接打開檔案時無法回傳
 const pick = a => a[Math.floor(Math.random() * a.length)];
 const round = (x, d) => Math.round(x * 10 ** d) / 10 ** d;
 const fx = (x, d) => round(x, d).toFixed(d);
@@ -1453,7 +1456,7 @@ const ident = () => store.get('ident', null);
 let flushTimer = null, flushing = false;
 function sendRecord(rec, now = false) {
   const me = ident(); if (!me) return;
-  rec = { time: new Date().toISOString(), cls: me.cls, seat: me.seat, ...rec };
+  rec = { time: new Date().toISOString(), rid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7), cls: me.cls, seat: me.seat, ...rec };
   let q = store.get('outbox', []);
   if (rec.kind === 'prog') q = q.filter(r => !(r.kind === 'prog' && r.task === rec.task));
   q.push(rec); store.set('outbox', q);
@@ -1461,7 +1464,7 @@ function sendRecord(rec, now = false) {
 }
 async function flushOutbox(keepalive = false) {
   clearTimeout(flushTimer); flushTimer = null;
-  if (!SHEET_URL || flushing) return;
+  if (!SHEET_URL || flushing || FILE_MODE) return;
   const q = store.get('outbox', []); if (!q.length) return;
   flushing = true;
   try {
@@ -1484,6 +1487,7 @@ function renderBoard() {
   let h = `<div class="card tb-top"><div class="tb-rate"><div><b>${passed}</b> / ${CORE.length}</div><small>任務通過</small></div>
     <div class="grow"><div class="prog-bar big"><i style="width:${pct}%"></i></div>
     <p class="muted" style="margin:6px 0 0">每個任務<b>連續答對 ${PASS} 題</b>就通過。題目每次都不一樣，背答案沒有用，要真的理解才能過關！</p></div></div>`;
+  if (FILE_MODE && SHEET_URL) h += `<div class="card" style="border:2px solid #c62828;background:#fdecec">⚠ <b>你現在是直接打開檔案</b>，作答紀錄<b>不會</b>送給老師。請改用老師給的網址或 QR code 打開。</div>`;
   h += `<div class="card ident">${me ? `👤 <b>${me.cls} 班 ${me.seat} 號</b>　<button class="btn" id="idEdit">修改</button>` :
     `<b>開始前，先輸入你的班級和座號：</b><div class="row"><input class="in" id="idCls" placeholder="班級，如 801" inputmode="numeric" maxlength="3"><input class="in" id="idSeat" placeholder="座號" inputmode="numeric" maxlength="2"><button class="btn primary" id="idSave">確定</button></div><div class="fb" id="idFb"></div>`}
     ${SHEET_URL && !navigator.onLine && store.get('outbox', []).length ? `<div class="muted">⏳ 目前離線，有 ${store.get('outbox', []).length} 筆紀錄等待上傳（連上網路後會自動送出）</div>` : ''}</div>`;
@@ -1504,7 +1508,7 @@ function renderBoard() {
     if (!/^\d{3}$/.test(c) || !/^\d{1,2}$/.test(s)) { $('#idFb').className = 'fb no'; $('#idFb').textContent = '班級請輸入 3 位數字（例如 801），座號輸入 1～2 位數字。'; return; }
     store.set('ident', { cls: c, seat: String(Number(s)) }); renderBoard();
   });
-  $('#idEdit')?.addEventListener('click', () => { if (confirm('要修改班級座號嗎？')) { store.set('ident', null); renderBoard(); } });
+  $('#idEdit')?.addEventListener('click', () => { if (confirm('要修改班級座號嗎？（每個班級座號的進度分開記錄，改回來原本的進度還在）')) { store.set('ident', null); renderBoard(); } });
   refreshTaskProg();
 }
 function refreshTaskProg() {
@@ -1592,6 +1596,13 @@ function runTask(id) {
 // 上方進度條改顯示任務完成率（原本的「讀完幾節」仍保留在目錄打勾）
 const __origRP = refreshProgress;
 refreshProgress = function () { __origRP(); refreshTaskProg(); };
+// 舊版沒有分班級座號的進度，搬到目前的班級座號底下
+(function migrate() {
+  const me = store.get('ident', null); if (!me) return;
+  TASKS.forEach(t => { const k = 'nat2a:task:' + t.id, old = localStorage.getItem(k); if (old == null) return;
+    if (localStorage.getItem('nat2a:task:' + who() + ':' + t.id) == null) localStorage.setItem('nat2a:task:' + who() + ':' + t.id, old);
+    localStorage.removeItem(k); });
+})();
 refreshTaskProg();
 flushOutbox();
 /*END-TASKS-JS*/
