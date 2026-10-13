@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>波動與聲音互動學習</title>
+<style>
+:root{
+  --bg:#f3f8fc;--card:#ffffff;--ink:#1d2b3a;--sub:#5b6b7b;--line:#d6e2ee;
+  --brand:#1f7ae0;--brand-d:#1559a8;--ok:#1a9b57;--okbg:#e3f6ec;--bad:#d4412f;--badbg:#fdeae6;
+  --warn:#e69a00;--soft:#e8f1fb;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#10171f;--card:#192330;--ink:#e8eef5;--sub:#9fb0c1;--line:#2c3b4c;--brand:#5aa6ff;--brand-d:#8ec1ff;
+    --ok:#4cd08a;--okbg:#14382a;--bad:#ff7a66;--badbg:#42201b;--warn:#ffc04d;--soft:#1f2d3e;}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:17px}
+header{background:linear-gradient(135deg,#1f7ae0,#16a0c9);color:#fff;padding:18px 16px 14px}
+header h1{margin:0;font-size:1.45rem}
+header p{margin:4px 0 0;opacity:.92;font-size:.95rem}
+.wrap{max-width:900px;margin:0 auto;padding:0 14px}
+.prog{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:.95rem}
+.bar{flex:1;height:10px;background:rgba(255,255,255,.3);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:#ffe27a;width:0;transition:width .4s}
+nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px;margin:14px 0}
+nav button{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:6px 4px;cursor:pointer;font:inherit;font-size:.82rem;line-height:1.3;min-height:58px}
+nav button b{display:block;font-size:1.05rem}
+nav button.cur{border-color:var(--brand);background:var(--soft)}
+nav button.done{border-color:var(--ok)}
+nav button.done b::after{content:" ⭐"}
+main{padding-bottom:50px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.panel h2{margin:0 0 6px;font-size:1.25rem}
+.goal{background:var(--soft);border-left:5px solid var(--brand);padding:8px 12px;border-radius:8px;margin:8px 0 12px;font-size:.98rem}
+.goal b{color:var(--brand-d)}
+.tag{display:inline-block;background:var(--brand);color:#fff;border-radius:20px;padding:0 10px;font-size:.8rem;margin-right:6px}
+.cv{width:100%;display:block;background:var(--soft);border-radius:12px;border:1px solid var(--line)}
+.ctl{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.ctl span{min-width:5.5em;font-weight:600}
+.ctl input[type=range]{flex:1;min-width:140px;accent-color:var(--brand);height:28px}
+.ctl b{min-width:6em;text-align:right;color:var(--brand-d);font-variant-numeric:tabular-nums}
+button.btn{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:9px 16px;font:inherit;font-size:.98rem;cursor:pointer;margin:4px 6px 4px 0}
+button.btn.alt{background:var(--card);color:var(--brand-d);border:2px solid var(--brand)}
+button.btn.on{background:var(--brand-d);color:#fff}
+button.btn:active{transform:scale(.97)}
+.note{background:var(--soft);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:.95rem}
+.note.good{background:var(--okbg)} .note.warn{background:var(--badbg)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:8px;border:2px dashed var(--line);border-radius:12px}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:20px;cursor:pointer;font:inherit;font-size:.95rem}
+.chip.sel{border-color:var(--brand);background:var(--soft);box-shadow:0 0 0 3px rgba(31,122,224,.25)}
+.chip.ok{border-color:var(--ok);background:var(--okbg)} .chip.bad{border-color:var(--bad);background:var(--badbg)}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.bin{border:2px solid var(--brand);border-radius:12px;padding:8px;cursor:pointer;min-height:100px}
+.bin h4{margin:0 0 6px;color:var(--brand-d);font-size:1rem}
+.bin .chips{border:0;padding:0}
+.quiz{margin-top:6px}
+.qcard{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+.qtext{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 12px;margin:6px 0;font:inherit;font-size:.98rem;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--brand)}
+.opt.ok{border-color:var(--ok);background:var(--okbg)} .opt.bad{border-color:var(--bad);background:var(--badbg)}
+.fb{margin-top:6px;font-size:.95rem;color:var(--sub)}
+.fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)}
+.done-banner{background:var(--okbg);border:2px solid var(--ok);border-radius:14px;padding:12px;margin-top:12px;text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem;color:var(--sub);margin:6px 0}
+table.t{border-collapse:collapse;width:100%;font-size:.95rem}
+table.t td,table.t th{border:1px solid var(--line);padding:6px 8px;text-align:left}
+table.t th{background:var(--soft)}
+footer{color:var(--sub);font-size:.85rem;text-align:center;padding:14px}
+@media (max-width:520px){body{font-size:16px}.ctl b{text-align:left}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>🌊 波動與聲音｜互動學習</h1>
+  <p>國中自然 · 十個學習目標，每關：動手玩 → 小測驗 → 拿星星</p>
+  <div class="prog"><span id="progText">0 / 10</span><div class="bar"><i id="progBar"></i></div></div>
+</div></header>
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="stage"></main>
+</div>
+<footer>題目與說明為自編，數據多為約略值，僅供學習使用。</footer>
+
+<script>
+'use strict';
+/* ---------- 小工具 ---------- */
+const el=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+let AC=null;
+function audio(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC;}
+function tone(f,gain,dur,type){const a=audio();if(!a||gain<=0)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.value=f;
+  const t=a.currentTime;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(gain,t+0.03);g.gain.setValueAtTime(gain,t+dur-0.08);g.gain.linearRampToValueAtTime(0,t+dur);
+  o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+dur+0.02);}
+function mkCanvas(parent,hpx){const c=el('canvas','cv');c.style.height=hpx+'px';parent.appendChild(c);
+  const o={c,ctx:c.getContext('2d'),w:0,h:hpx};
+  o.fit=()=>{const r=c.getBoundingClientRect();const d=window.devicePixelRatio||1;const w=Math.max(220,Math.round(r.width));
+    if(c.width!==Math.round(w*d)||c.height!==Math.round(hpx*d)){c.width=Math.round(w*d);c.height=Math.round(hpx*d);}
+    o.ctx.setTransform(d,0,0,d,0,0);o.w=w;o.h=hpx;o.ctx.clearRect(0,0,w,hpx);return o;};
+  return o;}
+function slider(p,label,min,max,step,val,fmt){const w=el('label','ctl');const sp=el('span',null,label);const inp=el('input');inp.type='range';
+  inp.min=min;inp.max=max;inp.step=step;inp.value=val;const out=el('b');
+  const o={get:()=>+inp.value,set:v=>{inp.value=v;upd();},on:null};
+  const upd=()=>{out.textContent=fmt(+inp.value);};
+  inp.addEventListener('input',()=>{upd();if(o.on)o.on(+inp.value);});upd();w.append(sp,inp,out);p.appendChild(w);return o;}
+function btn(p,text,fn,cls){const b=el('button','btn'+(cls?' '+cls:''),text);b.type='button';b.addEventListener('click',fn);p.appendChild(b);return b;}
+const COL={wave:'#1f7ae0',ball:'#e8503a',ink:'#1d2b3a',water:'rgba(31,122,224,.35)',acc:'#e69a00',ok:'#1a9b57'};
+function isDark(){return window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;}
+const INK=()=>isDark()?'#e8eef5':'#1d2b3a';
+
+/* ---------- 題庫（每題第一個選項為正解，顯示時隨機排序） ---------- */
+const Q=[
+/*1*/[
+ {q:'水面上漂著一顆球，水波從球旁經過時，球會怎麼動？',o:['在原處上下振動，不會跟著波前進','跟著水波一起往前漂','先往前再往後來回走很遠','完全不會動'],e:'波動只傳遞能量，介質（水）在原處振動，不會跟著波往前移動。'},
+ {q:'波動傳播的是什麼？',o:['能量','物質','介質本身','振源'],e:'波可以把能量從一處傳到另一處，但不會把介質搬過去。'},
+ {q:'手上下抖動繩子，繩波往右傳。繩子上綁的彩帶會？',o:['只在原處上下擺動','跟著波跑到右邊','跑到左邊','靜止不動'],e:'彩帶（介質）只在原處振動，並沒有隨波前進。'}],
+/*2*/[
+ {q:'下列哪一種波「不需要」介質就能傳播？',o:['無線電波','水波','聲波','繩波'],e:'無線電波屬於電磁波，不需要介質；水波、聲波、繩波都是力學波。'},
+ {q:'下列哪一組全部都是力學波？',o:['水波、聲波、彈簧波','水波、可見光、聲波','微波、繩波、紫外線','無線電波、彈簧波、光'],e:'力學波需要介質；光、微波、紫外線、無線電波是電磁波。'},
+ {q:'在真空中，下列哪一種波仍然能傳播？',o:['可見光','聲波','水波','繩波'],e:'可見光是電磁波，不需要介質，所以能在真空中傳播。'}],
+/*3*/[
+ {q:'介質振動方向與波前進方向「互相垂直」的波稱為？',o:['橫波','縱波','電磁波','超聲波'],e:'垂直 → 橫波，波形呈現高低起伏。'},
+ {q:'前後推拉彈簧，產生疏密相間的波，這是什麼波？',o:['縱波','橫波','電磁波','不是波'],e:'介質振動方向與波前進方向平行 → 縱波，波形是疏密相間。'},
+ {q:'聲波在空氣中傳播時屬於哪一種波？',o:['縱波','橫波','兩種都不是','電磁波'],e:'空氣被前後擠壓、拉開，形成疏密相間，所以聲波是縱波。'}],
+/*4*/[
+ {q:'「波長」指的是？',o:['相鄰兩個波峰（或兩個波谷）之間的距離','波峰到波谷的高度','一秒內振動的次數','波走一秒的距離'],e:'波長 = 相鄰兩波峰（或波谷）的距離。'},
+ {q:'某波頻率是 5 Hz，波長是 2 m，它的波速是多少？（波速 = 頻率 × 波長）',o:['10 m/s','2.5 m/s','7 m/s','0.4 m/s'],e:'v = f × λ = 5 × 2 = 10 m/s。'},
+ {q:'在同一條繩子上，波速保持不變。如果頻率變大，波長會？',o:['變短','變長','不變','先變長再變短'],e:'v = f × λ，v 不變時，f 變大 λ 就變小。'},
+ {q:'只把波的振幅加大（頻率不變），波形會怎麼改變？',o:['波峰變高、波谷變深','波長變長','頻率變大','波速變快'],e:'振幅是離平衡位置的最大位移，振幅大 → 波峰更高、波谷更深。'}],
+/*5*/[
+ {q:'聲音是怎麼產生的？',o:['物體振動','物體靜止','物體發光','物體受熱膨脹'],e:'敲音叉、說話時聲帶振動，都會產生聲音。'},
+ {q:'抽掉鐘罩內的空氣，鈴聲會越來越小，這個實驗說明了？',o:['聲音的傳播需要介質','聲音不是由振動產生的','空氣會吸收光','鈴會停止振動'],e:'空氣越少，傳聲的介質越少，所以聲音越來越小；真空中無法傳聲。'},
+ {q:'太空人在月球表面（幾乎真空）必須用無線電通話，是因為？',o:['真空沒有介質，聲波無法傳播','太空衣會擋住光','月球上沒有重力','月球上沒有人聽得到'],e:'真空沒有介質，聲波（力學波）傳不出去；無線電波是電磁波，不需要介質。'}],
+/*6*/[
+ {q:'一般情況下，聲音在哪一種介質中傳播得最快？',o:['固體（如鋼鐵）','液體（如水）','氣體（如空氣）','三者一樣快'],e:'一般而言 固體 > 液體 > 氣體。'},
+ {q:'在空氣中，溫度升高時聲速會？',o:['變快','變慢','不變','先變慢再變快'],e:'空氣溫度越高，聲速越快（0℃ 約 331 m/s，25℃ 約 346 m/s）。'},
+ {q:'看到閃電後 3 秒才聽到雷聲，若聲速約 340 m/s，閃電約在多遠處？（光的傳播時間忽略不計）',o:['1020 m','340 m','113 m','3 m'],e:'距離 = 聲速 × 時間 = 340 × 3 = 1020 m。'}],
+/*7*/[
+ {q:'對著遠方山壁大喊，2 秒後聽到回聲。若聲速為 340 m/s，山壁離你多遠？',o:['340 m','680 m','170 m','1360 m'],e:'聲音來回共 2 秒，單程 1 秒，距離 = 340 × 1 = 340 m。'},
+ {q:'蝙蝠與海軍聲納能「看到」物體，主要利用了聲波的什麼性質？',o:['反射','折射','消失','變成電磁波'],e:'發出聲波，再接收反射回來的回聲，就能算出距離。'},
+ {q:'想減少房間裡的回聲，牆面最適合用什麼材料？',o:['柔軟、粗糙的吸音材料','光滑堅硬的瓷磚','光滑的玻璃','光滑的鐵板'],e:'柔軟粗糙的材料（如吸音棉、窗簾）能吸收聲音，減少反射。'}],
+/*8*/[
+ {q:'「超聲波」是指頻率什麼的聲波？',o:['高於人耳聽覺上限（約 20000 Hz）','低於 20 Hz','剛好在 1000 Hz','音量非常大'],e:'超聲波 = 頻率高於人耳可聽範圍（約 20000 Hz）的聲波。'},
+ {q:'頻率 50000 Hz 的聲波，人耳聽得到嗎？',o:['聽不到，因為超過 20000 Hz','聽得到，因為音量夠大','聽得到，但很小聲','要看溫度'],e:'人耳約可聽 20～20000 Hz，超過就是超聲波，人耳聽不到。'},
+ {q:'下列哪一項是超聲波的應用？',o:['產檢時觀察胎兒','用電話通話','用收音機聽廣播','用鏡子反射光'],e:'超聲波可用於醫療檢查、清洗、測距等。'}],
+/*9*/[
+ {q:'聲音的「音調」高低，主要和什麼有關？',o:['頻率','振幅','波形','波速'],e:'頻率越高，音調越高。'},
+ {q:'聲音的「響度」（大小聲）主要和什麼有關？',o:['振幅','頻率','波長','介質種類'],e:'振幅越大，響度越大。'},
+ {q:'吉他和小提琴演奏同樣高、同樣大聲的音，我們還是能分辨，是因為它們的什麼不同？',o:['音色（波形）','音調','響度','波速'],e:'音色由波形決定，不同樂器波形不同，音色就不同。'},
+ {q:'吉他的弦越短、越緊、越細，發出的音調會？',o:['越高','越低','不變','消失'],e:'弦短、緊、細 → 振動頻率高 → 音調高。'}],
+/*10*/[
+ {q:'聲音強度（噪音大小）常用的單位是？',o:['分貝（dB）','赫茲（Hz）','公尺（m）','公尺／秒（m/s）'],e:'分貝（dB）是表示聲音強弱的單位；赫茲是頻率單位。'},
+ {q:'下列哪一種做法「不能」降低噪音的影響？',o:['把音響的音量調大來蓋過噪音','在道路旁設置隔音牆','在房間牆壁貼吸音棉','使用耳塞保護耳朵'],e:'調大音量只會增加噪音，傷害聽力。'},
+ {q:'下列哪一種聲音可以被視為噪音？',o:['半夜隔壁傳來、讓人睡不著的音樂','悅耳的歌聲（剛好想聽）','溪水的潺潺聲（想放鬆時）','朋友的歡呼加油聲'],e:'只要讓人感到不舒服或干擾到生活的聲音，都可能是噪音，即使是音樂。'}]
+];
+
+/* ---------- 各關互動 ---------- */
+// 1 波只傳能量
+function L1(p){
+  const cv=mkCanvas(p,230);const sp=slider(p,'波速',1,6,0.5,2.5,v=>v+' 級');
+  p.appendChild(el('div','note','👀 觀察：兩顆球隨波一起上下，但它們的左右位置（虛線）<b>從來沒有改變</b>。波往右傳，球卻沒有跟著跑。'));
+  return t=>{const {ctx,w,h}=cv.fit();const base=h*0.55,A=22,k=2*Math.PI/160,v=sp.get()*40,om=v*k;
+    const y=x=>base-A*Math.sin(k*x-om*t);
+    ctx.beginPath();ctx.moveTo(0,h);for(let x=0;x<=w;x+=4)ctx.lineTo(x,y(x));ctx.lineTo(w,h);ctx.closePath();ctx.fillStyle=COL.water;ctx.fill();
+    ctx.beginPath();for(let x=0;x<=w;x+=4){x?ctx.lineTo(x,y(x)):ctx.moveTo(x,y(x));}ctx.strokeStyle=COL.wave;ctx.lineWidth=3;ctx.stroke();
+    [[w*0.3,'⚽ 足球'],[w*0.7,'🔴 浮球']].forEach(([bx,lab])=>{
+      ctx.setLineDash([5,5]);ctx.strokeStyle=INK();ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(bx,20);ctx.lineTo(bx,h-6);ctx.stroke();ctx.setLineDash([]);
+      ctx.beginPath();ctx.arc(bx,y(bx)-10,10,0,7);ctx.fillStyle=COL.ball;ctx.fill();
+      ctx.fillStyle=INK();ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillText(lab,bx,16);});
+    ctx.textAlign='left';ctx.fillStyle=INK();ctx.font='bold 14px sans-serif';ctx.fillText('波前進方向 →',10,h-10);};
+}
+// 2 力學波 vs 電磁波
+function L2(p){
+  const items=[['水波','m'],['聲波','m'],['繩波','m'],['彈簧波','m'],['可見光','e'],['無線電波','e'],['微波','e'],['紫外線','e']];
+  p.appendChild(el('p',null,'先<b>點一個波</b>，再<b>點下面的籃子</b>放進去。全部放好後按「檢查」。'));
+  const pool=el('div','chips');let sel=null;
+  const bins={};const binWrap=el('div','bins');
+  [['m','需要介質（力學波）'],['e','不需要介質（電磁波）']].forEach(([k,name])=>{const b=el('div','bin');b.appendChild(el('h4',null,name));const c=el('div','chips');b.appendChild(c);b._list=c;binWrap.appendChild(b);bins[k]=b;
+    b.addEventListener('click',()=>{if(sel){c.appendChild(sel);sel.classList.remove('sel','ok','bad');sel=null;msg.textContent='';}});});
+  pool.addEventListener('click',e=>{if(sel&&e.target===pool){pool.appendChild(sel);sel.classList.remove('sel');sel=null;}});
+  shuffle(items).forEach(([n,k])=>{const c=el('button','chip',n);c.type='button';c._k=k;c.addEventListener('click',e=>{e.stopPropagation();if(sel)sel.classList.remove('sel');sel=(sel===c)?null:c;if(sel)c.classList.add('sel');});pool.appendChild(c);});
+  p.append(pool,binWrap);
+  const msg=el('div','note');msg.textContent='';
+  btn(p,'檢查',()=>{let ok=0,n=0,left=0;[...document.querySelectorAll('.chip')].forEach(c=>{if(!c._k)return;n++;const par=c.parentElement;let where=null;
+      if(par===bins.m._list)where='m';else if(par===bins.e._list)where='e';c.classList.remove('ok','bad');
+      if(where===null){left++;return;}if(where===c._k){c.classList.add('ok');ok++;}else c.classList.add('bad');});
+    msg.className='note '+(ok===n?'good':'warn');
+    msg.textContent=left?`還有 ${left} 個沒放進籃子喔！`:(ok===n?'🎉 全對！力學波需要介質，電磁波不需要。':`答對 ${ok} / ${n}，紅色的放錯了，點它再重放。`);});
+  btn(p,'重來',()=>{[...document.querySelectorAll('.chip')].forEach(c=>{if(c._k){pool.appendChild(c);c.classList.remove('ok','bad','sel');}});sel=null;msg.textContent='';msg.className='note';},'alt');
+  p.appendChild(msg);
+  return null;
+}
+// 3 橫波縱波
+function L3(p){
+  let mode='t';const bar=el('div');p.appendChild(bar);
+  const bt=btn(bar,'橫波（上下抖）',()=>{mode='t';upd();},'on'),bl=btn(bar,'縱波（前後推拉）',()=>{mode='l';upd();},'alt');
+  const cv=mkCanvas(p,230);const info=el('div','note');p.appendChild(info);
+  const upd=()=>{bt.className='btn '+(mode==='t'?'on':'alt');bl.className='btn '+(mode==='l'?'on':'alt');
+    info.innerHTML=mode==='t'?'<b>橫波</b>：介質振動方向（紅色↕）與波前進方向（→）<b>垂直</b>，波形有波峰、波谷。例：繩波、水波。':'<b>縱波</b>：介質振動方向（紅色↔）與波前進方向（→）<b>平行</b>，波形有疏部、密部。例：聲波、前後推拉的彈簧波。';};
+  upd();
+  return t=>{const {ctx,w,h}=cv.fit();const cols=36,rows=5,pad=34,dx=(w-2*pad)/(cols-1),dy=22,k=2*Math.PI/(9*dx),om=2.4,top=h/2-2*dy-8;
+    const A=mode==='t'?13:0.55*dx;
+    for(let r=0;r<rows;r++)for(let i=0;i<cols;i++){const x0=pad+i*dx,d=A*Math.sin(k*i*dx-om*t);let x=x0,y=top+r*dy;if(mode==='t')y+=d;else x+=d;
+      const red=(i===18&&r===2);ctx.beginPath();ctx.arc(x,y,red?6:4,0,7);ctx.fillStyle=red?COL.ball:COL.wave;ctx.fill();}
+    const cx=pad+18*dx,cy=top+2*dy;ctx.strokeStyle=COL.ball;ctx.fillStyle=COL.ball;ctx.lineWidth=2;
+    const arrow=(x1,y1,x2,y2)=>{ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1);[1,-1].forEach(s=>{ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-9*Math.cos(a-s*0.5),y2-9*Math.sin(a-s*0.5));ctx.stroke();});};
+    if(mode==='t'){arrow(cx+16,cy,cx+16,cy-26);arrow(cx+16,cy,cx+16,cy+26);}else{arrow(cx,cy-30,cx-26,cy-30);arrow(cx,cy-30,cx+26,cy-30);}
+    ctx.strokeStyle=INK();ctx.fillStyle=INK();arrow(pad,h-16,pad+110,h-16);ctx.font='bold 14px sans-serif';ctx.textAlign='left';ctx.fillText('波前進方向',pad+118,h-11);
+    ctx.fillStyle=COL.ball;ctx.fillText('● 紅點：觀察它怎麼振動',w-190,18);};
+}
+// 4 波的特徵
+function L4(p){
+  const cv=mkCanvas(p,260);
+  const sA=slider(p,'振幅 A',1,4,0.5,2,v=>v+' cm'),sL=slider(p,'波長 λ',2,8,0.5,5,v=>v+' cm'),sF=slider(p,'頻率 f',0.5,4,0.5,1.5,v=>v+' Hz');
+  let show=true;const tg=btn(p,'顯示標示：開',()=>{show=!show;tg.textContent='顯示標示：'+(show?'開':'關');},'alt');
+  const out=el('div','note');p.appendChild(out);
+  return t=>{const {ctx,w,h}=cv.fit();const base=h*0.55,pxc=34;const A=sA.get(),L=sL.get(),f=sF.get(),Apx=A*20,Lpx=L*pxc;
+    const yy=x=>base-Apx*Math.sin(2*Math.PI*(x/Lpx-f*t*0.5));
+    ctx.strokeStyle='#8a9aaa';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(0,base);ctx.lineTo(w,base);ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle=COL.wave;ctx.lineWidth=3;ctx.beginPath();for(let x=0;x<=w;x+=3){x?ctx.lineTo(x,yy(x)):ctx.moveTo(x,yy(x));}ctx.stroke();
+    if(show){const ph=f*t*0.5;let n=Math.ceil((40/Lpx)-(0.25+ph))+0;let xc=Lpx*(0.25+ph+n);while(xc<40)xc+=Lpx;
+      ctx.font='bold 13px sans-serif';ctx.lineWidth=2;
+      ctx.fillStyle=COL.ball;ctx.beginPath();ctx.arc(xc,yy(xc),6,0,7);ctx.fill();ctx.fillText('波峰',xc-14,yy(xc)-12);
+      const xt=xc+Lpx/2;if(xt<w-20){ctx.fillStyle=COL.acc;ctx.beginPath();ctx.arc(xt,yy(xt),6,0,7);ctx.fill();ctx.fillText('波谷',xt-14,yy(xt)+22);}
+      ctx.strokeStyle=COL.ok;ctx.fillStyle=COL.ok;ctx.beginPath();ctx.moveTo(xc,base);ctx.lineTo(xc,base-Apx);ctx.stroke();ctx.fillText('振幅 A',xc+6,base-Apx/2);
+      if(xc+Lpx<w-10){const by=24;ctx.strokeStyle=INK();ctx.fillStyle=INK();ctx.beginPath();ctx.moveTo(xc,by);ctx.lineTo(xc+Lpx,by);ctx.moveTo(xc,by-5);ctx.lineTo(xc,by+5);ctx.moveTo(xc+Lpx,by-5);ctx.lineTo(xc+Lpx,by+5);ctx.stroke();ctx.fillText('波長 λ',xc+Lpx/2-22,by-8);
+        ctx.setLineDash([2,4]);ctx.beginPath();ctx.moveTo(xc,by);ctx.lineTo(xc,yy(xc));ctx.moveTo(xc+Lpx,by);ctx.lineTo(xc+Lpx,yy(xc+Lpx));ctx.stroke();ctx.setLineDash([]);}}
+    out.innerHTML=`週期 T = 1 ÷ f = <b>${(1/f).toFixed(2)} 秒</b>　｜　波速 v = f × λ = ${f} × ${L} = <b>${(f*L).toFixed(2)} cm/s</b><br>試試看：只改<b>振幅</b>，波速變嗎？只改<b>頻率</b>，波速變嗎？（此動畫中，λ 與 f 決定 v）`;};
+}
+// 5 聲音需要介質
+function L5(p){
+  const cv=mkCanvas(p,230);const air=slider(p,'鐘罩內空氣量',0,100,5,100,v=>v+' %');
+  let ring=-9,vol=0;
+  btn(p,'🔔 按鈴',()=>{ring=performance.now()/1000;const a=air.get()/100;vol=a<0.06?0:a*a;tone(880,0.2*vol,1.2,'sine');
+    msg.className='note '+(vol>0?'':'warn');msg.textContent=vol>0?`聽到的音量約 ${Math.round(vol*100)}%`:'🔇 幾乎真空了，聽不到鈴聲！但鈴確實在振動。';});
+  const msg=el('div','note','把空氣抽掉（滑桿往左），再按鈴，比較聽到的聲音。');p.appendChild(msg);
+  const pts=[];for(let i=0;i<70;i++)pts.push([Math.random(),Math.random(),Math.random()*6.28]);
+  return t=>{const {ctx,w,h}=cv.fit();const jx=w*0.25,jy=18,jw=w*0.5,jh=h-50;
+    ctx.strokeStyle=INK();ctx.lineWidth=3;ctx.strokeRect(jx,jy,jw,jh);ctx.fillStyle='rgba(120,170,230,.12)';ctx.fillRect(jx,jy,jw,jh);
+    const n=Math.round(pts.length*air.get()/100);ctx.fillStyle='rgba(31,122,224,.55)';
+    for(let i=0;i<n;i++){const [a,b,ph]=pts[i];const x=jx+8+a*(jw-16)+Math.sin(t*2+ph)*3,y=jy+8+b*(jh-16)+Math.cos(t*2.3+ph)*3;ctx.beginPath();ctx.arc(x,y,2.6,0,7);ctx.fill();}
+    const cx=jx+jw/2,cy=jy+jh/2;const e=t-ring;const shake=(e>=0&&e<1.5)?Math.sin(t*60)*3:0;
+    ctx.font='34px sans-serif';ctx.textAlign='center';ctx.fillText('🔔',cx+shake,cy+10);
+    if(e>=0&&e<1.5&&vol>0){for(let r=0;r<3;r++){const rr=((e*60+r*28)%90)+20;ctx.strokeStyle=`rgba(230,154,0,${vol*(1-rr/130)})`;ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy,rr,0,7);ctx.stroke();}}
+    ctx.font='28px sans-serif';ctx.fillText('👂',w-34,h/2);ctx.font='bold 13px sans-serif';ctx.fillStyle=INK();ctx.fillText('聽到的音量',w-48,h/2+26);
+    ctx.fillStyle=COL.ok;ctx.fillRect(w-76,h/2+34,56*Math.min(1,air.get()>=6?(air.get()/100)**2:0),8);ctx.strokeStyle=INK();ctx.lineWidth=1;ctx.strokeRect(w-76,h/2+34,56,8);
+    ctx.textAlign='left';};
+}
+// 6 聲速
+function L6(p){
+  const media=[['空氣 0℃',331],['空氣 25℃',346],['水（約）',1500],['鋼鐵（約）',5100]];const D=1000;
+  const cv=mkCanvas(p,230);let t0=null,slow=1;
+  btn(p,'🏁 出發（距離 1000 m）',()=>{t0=performance.now()/1000;});
+  const tg=btn(p,'慢動作 ÷3：關',()=>{slow=slow===1?1/3:1;tg.textContent='慢動作 ÷3：'+(slow===1?'關':'開');},'alt');
+  const tb=el('table','t');tb.innerHTML='<tr><th>介質</th><th>聲速（約）</th><th>跑 1000 m 要</th></tr>'+media.map(m=>`<tr><td>${m[0]}</td><td>${m[1]} m/s</td><td>${(D/m[1]).toFixed(2)} 秒</td></tr>`).join('');p.appendChild(tb);
+  p.appendChild(el('div','note','同樣是空氣，溫度高聲速較快；固體 &gt; 液體 &gt; 氣體。（水、鋼鐵的數值為約略值）'));
+  return t=>{const {ctx,w,h}=cv.fit();const lh=h/4,x0=118,x1=w-30;ctx.font='13px sans-serif';
+    media.forEach((m,i)=>{const y=lh*i+lh/2;ctx.fillStyle=INK();ctx.textAlign='left';ctx.fillText(m[0],8,y+4);
+      ctx.strokeStyle='#8a9aaa';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(x1,y-12);ctx.lineTo(x1,y+12);ctx.stroke();
+      let prog=0;if(t0!==null){prog=Math.min(1,(t-t0)*slow*m[1]/D);}
+      const x=x0+(x1-x0)*prog;ctx.beginPath();ctx.arc(x,y,9,0,7);ctx.fillStyle=prog>=1?COL.ok:COL.ball;ctx.fill();
+      if(prog>=1){ctx.fillStyle=COL.ok;ctx.font='bold 13px sans-serif';ctx.fillText(`✔ ${(D/m[1]).toFixed(2)} 秒`,x1-80,y-14);ctx.font='13px sans-serif';}});};
+}
+// 7 反射與回聲
+function L7(p){
+  const V=340;const cv=mkCanvas(p,200);const sd=slider(p,'牆壁距離',5,500,5,100,v=>v+' m');const out=el('div','note');p.appendChild(out);
+  p.appendChild(el('div','legend','<span>聲速取 340 m/s</span><span>動畫已放慢</span><span>回聲時間 = 2 × 距離 ÷ 聲速</span>'));
+  return t=>{const {ctx,w,h}=cv.fit();const d=sd.get(),xs=50,xw=60+(w-130)*d/500;const sp=200,T=2*(xw-xs)/sp,per=T+0.8;const ph=t%per;
+    ctx.fillStyle='#8a9aaa';ctx.fillRect(xw,30,12,h-60);ctx.font='30px sans-serif';ctx.textAlign='center';ctx.fillText('🗣️',xs-6,h/2+8);
+    let px=null,back=false;if(ph<T/2){px=xs+sp*ph;}else if(ph<T){px=xw-sp*(ph-T/2);back=true;}
+    if(px!==null){ctx.strokeStyle=back?COL.acc:COL.wave;ctx.lineWidth=4;for(let i=0;i<3;i++){const r=6+i*9;const dir=back?-1:1;ctx.beginPath();ctx.arc(px,h/2,r,dir>0?-0.9:Math.PI-0.9,dir>0?0.9:Math.PI+0.9);ctx.stroke();}}
+    ctx.fillStyle=INK();ctx.font='bold 13px sans-serif';ctx.fillText(d+' m',(xs+xw)/2,h-14);
+    const tt=2*d/V;out.className='note '+(tt>=0.1?'good':'warn');
+    out.innerHTML=`聲音來回時間 t = 2 × ${d} ÷ 340 = <b>${tt.toFixed(2)} 秒</b>。`+(tt>=0.1?'　回聲和原聲相隔夠久（約 0.1 秒以上），耳朵<b>能分辨出回聲</b>。':'　相隔太短，回聲和原聲<b>混在一起</b>，聽不出回聲。（約需 17 m 以上）');};
+}
+// 8 超聲波
+function L8(p){
+  const an=[['人',20,20000],['大象',16,12000],['狗',67,45000],['貓',45,64000],['蝙蝠',1000,120000],['海豚',150,150000]];
+  const cv=mkCanvas(p,250);const s=slider(p,'聲音頻率',1,5.3,0.01,3,v=>fmtF(Math.pow(10,v)));
+  function fmtF(f){f=Math.round(f<100?f:f<1000?Math.round(f/5)*5:Math.round(f/50)*50);return f+' Hz';}
+  const out=el('div','note');p.appendChild(out);
+  btn(p,'▶ 播放這個頻率',()=>{const f=Math.pow(10,s.get());if(f<100||f>12000){out.className='note warn';out.textContent='這個頻率太低或太高，一般喇叭播不出來（人耳也不一定聽得到）。請選 100～12000 Hz。';return;}tone(f,0.12,1.0,'sine');});
+  p.appendChild(el('div','legend','<span>各動物聽覺範圍為約略值</span><span>超過 20000 Hz = 超聲波</span>'));
+  const X=(f,w)=>40+(Math.log10(f)-1)/(5.4-1)*(w-60);
+  return t=>{const {ctx,w,h}=cv.fit();const f=Math.pow(10,s.get());const rowH=(h-44)/an.length;
+    ctx.fillStyle='rgba(230,80,58,.12)';ctx.fillRect(X(20000,w),0,w,h-26);
+    ctx.fillStyle=COL.ball;ctx.font='bold 12px sans-serif';ctx.textAlign='left';ctx.fillText('超聲波',X(20000,w)+6,14);
+    ctx.fillStyle=INK();ctx.textAlign='center';[10,100,1000,10000,100000].forEach(v=>{const x=X(v,w);ctx.strokeStyle='#9aabbb';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,18);ctx.lineTo(x,h-26);ctx.stroke();ctx.fillText(v>=1000?(v/1000)+'k':v,x,h-8);});
+    ctx.textAlign='left';const heard=[];
+    an.forEach(([n,lo,hi],i)=>{const y=22+i*rowH;const can=f>=lo&&f<=hi;if(can)heard.push(n);
+      ctx.fillStyle=can?COL.ok:'#7f9bb8';ctx.globalAlpha=can?1:.55;ctx.fillRect(X(lo,w),y+4,X(hi,w)-X(lo,w),rowH-10);ctx.globalAlpha=1;
+      ctx.fillStyle=INK();ctx.font='bold 13px sans-serif';ctx.fillText(n,X(lo,w)+4,y+rowH/2+3);});
+    ctx.strokeStyle=COL.ball;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(X(f,w),16);ctx.lineTo(X(f,w),h-26);ctx.stroke();
+    out.className='note '+(heard.length?'good':'warn');
+    out.innerHTML=`${fmtF(f)}${f>20000?'（超聲波）':''}　聽得到的：<b>${heard.length?heard.join('、'):'都聽不到'}</b>`+(f>20000&&!heard.includes('人')?'　→ 人耳聽不到超聲波':'');};
+}
+// 9 三要素
+function L9(p){
+  p.appendChild(el('h3',null,'A. 音調與響度'));
+  const cv=mkCanvas(p,170);const sf=slider(p,'頻率',150,1000,10,330,v=>v+' Hz'),sa=slider(p,'振幅',10,100,5,60,v=>v+' %');
+  btn(p,'▶ 播放',()=>tone(sf.get(),0.02+0.18*Math.pow(sa.get()/100,1.6),1.0,'sine'));
+  p.appendChild(el('div','note','頻率 ↑ → 一秒內振動更多次（波更密）→ <b>音調高</b>；振幅 ↑ → 波更高 → <b>響度大</b>。'));
+  p.appendChild(el('h3',null,'B. 音色（波形）'));
+  const cv2=mkCanvas(p,150);let type='sine';const names={sine:'聲音 1',square:'聲音 2',sawtooth:'聲音 3'};
+  const bar=el('div');p.appendChild(bar);
+  Object.keys(names).forEach(k=>btn(bar,'▶ '+names[k],()=>{type=k;tone(330,k==='sine'?0.16:0.07,1.0,k);},'alt'));
+  p.appendChild(el('div','note','三個聲音的<b>頻率相同、振幅相同</b>（音調、音量一樣），但<b>波形不同</b>，聽起來就不一樣——這就是<b>音色</b>。'));
+  return t=>{let {ctx,w,h}=cv.fit();const cyc=sf.get()/100,A=h*0.4*sa.get()/100;
+    ctx.strokeStyle='#8a9aaa';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle=COL.wave;ctx.lineWidth=3;ctx.beginPath();for(let x=0;x<=w;x+=2){const y=h/2-A*Math.sin(2*Math.PI*(cyc*x/w)-t*3);x?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();
+    ({ctx,w,h}=cv2.fit());ctx.strokeStyle='#8a9aaa';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();ctx.setLineDash([]);
+    ctx.strokeStyle=COL.ball;ctx.lineWidth=3;ctx.beginPath();const cy=3.5,B=h*0.36;
+    for(let x=0;x<=w;x+=2){const ph=((cy*x/w)%1+1)%1;let v;if(type==='sine')v=Math.sin(2*Math.PI*ph);else if(type==='square')v=ph<0.5?1:-1;else v=2*ph-1;const y=h/2-B*v;x?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();
+    ctx.fillStyle=INK();ctx.font='bold 14px sans-serif';ctx.fillText('目前波形：'+names[type]+'（按上面按鈕切換並聆聽）',8,18);};
+}
+// 10 噪音
+function L10(p){
+  p.appendChild(el('h3',null,'A. 由小聲到大聲排排看'));
+  const items=[['🌿 樹葉沙沙聲',20],['💬 一般交談',60],['🚗 吵雜的街道',80],['🏍️ 近距離的機車',95],['🎸 演唱會現場',110],['✈️ 噴射機起飛（近處）',130]];
+  const pool=el('div','chips');const row=el('div','note','你點的順序：');let order=[];const msg=el('div','note');
+  const chips=shuffle(items).map(it=>{const c=el('button','chip',it[0]);c.type='button';c.addEventListener('click',()=>{if(c.disabled)return;c.disabled=true;c.classList.add('sel');order.push(it);row.textContent='你點的順序：'+order.map(o=>o[0]).join(' → ');
+      if(order.length===items.length){const ok=order.every((o,i)=>i===0||order[i-1][1]<=o[1]);
+        msg.className='note '+(ok?'good':'warn');msg.innerHTML=ok?'🎉 順序正確！（約略分貝）<br>'+order.map(o=>`${o[0]} ≈ ${o[1]} dB`).join('<br>'):'順序不太對，按「重排」再試一次。';}});pool.appendChild(c);return c;});
+  p.append(pool,row,msg);btn(p,'重排',()=>{order=[];row.textContent='你點的順序：';msg.textContent='';msg.className='note';chips.forEach(c=>{c.disabled=false;c.classList.remove('sel');});},'alt');
+  p.appendChild(el('h3',null,'B. 哪些是有效的防噪方法？（可複選）'));
+  const ways=[['在馬路旁設置隔音牆',1],['在牆面貼吸音棉',1],['配戴耳塞保護聽力',1],['購買低噪音的設備',1],['把音響音量開到最大蓋過噪音',0],['拆掉窗戶的隔音玻璃',0]];
+  const box=el('div');p.appendChild(box);const checks=[];
+  shuffle(ways).forEach(([t,g])=>{const l=el('label','ctl');const c=el('input');c.type='checkbox';c._g=g;l.append(c,el('span',null,t));l.firstChild.style.width='22px';l.firstChild.style.height='22px';l.lastChild.style.minWidth='0';box.appendChild(l);checks.push([c,l]);});
+  const m2=el('div','note');btn(p,'檢查',()=>{const ok=checks.every(([c])=>!!c.checked===!!c._g);checks.forEach(([c,l])=>{l.style.color=(!!c.checked===!!c._g)?'':'var(--bad)';});
+    m2.className='note '+(ok?'good':'warn');m2.textContent=ok?'🎉 完全正確！防噪的方向：減少噪音產生、阻擋傳播、保護接收者。':'有些選錯了（紅字），再想想：能「降低」噪音的才選。';});
+  p.appendChild(m2);
+  return null;
+}
+
+/* ---------- 關卡資料 ---------- */
+const LV=[
+ {n:'波與能量',t:'波動傳遞的是能量，不是物質',g:'知道波動是傳遞能量的方式，介質只在原處振動，不會隨波前進。',i:'投一顆石子入水，水面會出現圈圈波紋。波往外傳，水面上的落葉卻只是上下晃動。',f:L1},
+ {n:'力學波與電磁波',t:'誰需要介質？',g:'能依「是否需要介質」，把波分成力學波與電磁波。',i:'需要靠介質振動才能傳播的波稱為<b>力學波</b>；不需介質的稱為<b>電磁波</b>。',f:L2},
+ {n:'橫波與縱波',t:'看振動方向',g:'能比較介質振動方向與波前進方向，區分橫波與縱波。',i:'彈簧左右（上下）抖動會產生橫波；前後推拉會產生縱波。聲波是縱波。',f:L3},
+ {n:'波的特徵',t:'波峰、波長、振幅、頻率、波速',g:'認識波峰、波谷、波長、振幅、週期、頻率，並知道波速 = 頻率 × 波長。',i:'拖曳滑桿，看看波形怎麼變；打開「顯示標示」，認識每個名稱的位置。',f:L4},
+ {n:'聲音的產生',t:'振動與介質',g:'知道聲音由物體振動產生，且需要介質才能傳播。',i:'敲鼓、說話、彈吉他都會振動。若周圍沒有空氣（介質），聲音就傳不出去。',f:L5},
+ {n:'聲速',t:'影響聲音傳播速率的因素',g:'知道介質的種類、狀態與溫度會影響聲速。',i:'按「出發」，讓聲音在不同介質中賽跑 1000 公尺，看誰先到。',f:L6},
+ {n:'聲波反射',t:'回聲與測距',g:'知道聲波會反射，並能用回聲時間計算距離。',i:'聲音遇到障礙物會反射形成回聲。距離 = 聲速 × 來回時間 ÷ 2。蝙蝠與聲納都靠它。',f:L7},
+ {n:'超聲波',t:'人耳聽不到的聲音',g:'知道超聲波的定義（高於約 20000 Hz），以及人耳聽不到。',i:'拖曳頻率，看看哪些動物聽得到。超過 20000 Hz 的聲音稱為超聲波。',f:L8},
+ {n:'聲音三要素',t:'音調、響度、音色',g:'能說明音調、響度、音色分別和頻率、振幅、波形有關。',i:'聲音有三個要素：<b>音調</b>（高低，看頻率）、<b>響度</b>（大小，看振幅）、<b>音色</b>（特色，看波形）。請戴耳機或調整音量後再播放。',f:L9},
+ {n:'噪音',t:'認識與防治噪音',g:'知道噪音的來源、危害（可用分貝表示強弱），並能提出防治方法。',i:'讓人不舒服或干擾生活的聲音就是噪音。長期處在太吵的環境會傷害聽力。分貝（dB）表示聲音的強弱。',f:L10}
+];
+
+/* ---------- 小測驗引擎 ---------- */
+function runQuiz(parent,qs,cb){
+  const box=el('div','quiz');const attempts=qs.map(()=>0),done=qs.map(()=>false);
+  qs.forEach((q,qi)=>{const card=el('div','qcard');card.appendChild(el('p','qtext',`${qi+1}. ${q.tag?`<span class="tag">${q.tag}</span>`:''}${q.q}`));
+    const fb=el('div','fb');const opts=shuffle(q.o.map((t,k)=>({t,ok:k===0})));const bs=[];
+    opts.forEach(o=>{const b=el('button','opt',o.t);b.type='button';b.addEventListener('click',()=>{if(done[qi])return;attempts[qi]++;
+      if(o.ok){done[qi]=true;b.classList.add('ok');bs.forEach(x=>x.disabled=true);fb.className='fb ok';fb.textContent='✔ 答對了！'+q.e;if(cb.onAnswer)cb.onAnswer(qi,attempts[qi]===1);if(done.every(Boolean))cb.onDone(attempts);}
+      else{b.classList.add('bad');b.disabled=true;fb.className='fb bad';fb.textContent='✘ 再想想看，還有機會。';}});bs.push(b);card.appendChild(b);});
+    card.appendChild(fb);box.appendChild(card);});
+  parent.appendChild(box);return box;}
+
+/* ---------- 進度與畫面 ---------- */
+let prog=new Array(10).fill(false);
+try{const s=JSON.parse(localStorage.getItem('wave-sound-progress')||'null');if(Array.isArray(s)&&s.length===10)prog=s.map(Boolean);}catch(e){}
+function saveProg(){try{localStorage.setItem('wave-sound-progress',JSON.stringify(prog));}catch(e){}}
+let cur=0,active=null;
+const navEl=document.getElementById('nav'),stage=document.getElementById('stage');
+function renderNav(){navEl.innerHTML='';
+  LV.forEach((l,i)=>{const b=el('button',(i===cur?'cur ':'')+(prog[i]?'done':''),`<b>${i+1}</b>${l.n}`);b.addEventListener('click',()=>show(i));navEl.appendChild(b);});
+  const f=el('button',cur===10?'cur':'',`<b>🏆</b>總複習`);f.addEventListener('click',()=>show(10));navEl.appendChild(f);
+  const n=prog.filter(Boolean).length;document.getElementById('progText').textContent=`${n} / 10`;document.getElementById('progBar').style.width=(n*10)+'%';}
+function show(i){cur=i;active=null;stage.innerHTML='';renderNav();window.scrollTo({top:0,behavior:'smooth'});
+  if(i===10)return showFinal();
+  const L=LV[i];const wrap=el('section','panel');
+  wrap.appendChild(el('h2',null,`第 ${i+1} 關｜${L.t}`));
+  wrap.appendChild(el('div','goal',`<b>學習目標：</b>${L.g}`));wrap.appendChild(el('p',null,L.i));
+  const play=el('div');wrap.appendChild(play);stage.appendChild(wrap);
+  const fn=L.f(play);active=fn;
+  const qp=el('section','panel');qp.appendChild(el('h2',null,'📝 小測驗'));qp.appendChild(el('p','fb','全部答對就能獲得星星 ⭐（答錯可以再選）'));stage.appendChild(qp);
+  const banner=el('div','done-banner');banner.style.display='none';
+  banner.innerHTML=`🎉 第 ${i+1} 關完成！獲得一顆星星 ⭐`;
+  const nx=btn(banner,i<9?'前往下一關 →':'前往總複習 →',()=>show(i+1));qp.appendChild(banner);
+  const showBanner=()=>{banner.style.display='block';};if(prog[i])showBanner();
+  runQuiz(qp,Q[i],{onDone:()=>{if(!prog[i]){prog[i]=true;saveProg();renderNav();}showBanner();}});
+}
+function showFinal(){
+  const wrap=el('section','panel');wrap.appendChild(el('h2',null,'🏆 總複習：10 題隨機挑戰'));
+  wrap.appendChild(el('div','goal','<b>目標：</b>每個學習目標隨機抽一題，檢查自己學會了多少。'));
+  const qs=Q.map((arr,i)=>{const q=arr[Math.floor(Math.random()*arr.length)];return Object.assign({},q,{tag:`第${i+1}關`});});
+  const res=el('div','done-banner');res.style.display='none';let first=0,ans=0;
+  runQuiz(wrap,qs,{onAnswer:(qi,ok)=>{ans++;if(ok)first++;},onDone:()=>{res.style.display='block';
+    const msg=first===10?'太厲害了，全部一次答對！':first>=8?'很棒！只差一點點就滿分。':first>=6?'不錯喔！把錯的題目回到該關再玩一次。':'再複習一下各關的互動，一定會進步！';
+    res.innerHTML=`第一次就答對 <b>${first} / 10</b> 題<br>${msg}<br>`;btn(res,'再來一次',()=>show(10));}});
+  wrap.appendChild(res);stage.appendChild(wrap);
+}
+function loop(ms){if(active){try{active(ms/1000);}catch(e){}}requestAnimationFrame(loop);}
+renderNav();show(0);requestAnimationFrame(loop);
+</script>
+</body>
+</html>
