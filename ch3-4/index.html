@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>國中自然 2上｜第3、4章 段考複習（檢核＋複習）</title>
+<style>:root{
+  --bg:#f5f7fa;--card:#fff;--line:#dfe4ea;--text:#1d2733;--text2:#46566a;--muted:#6b7a8c;
+  --c3:#0e7c86;--c3s:#e3f4f5;--c4:#5b45b8;--c4s:#ece8fa;--good:#1f8a4c;--goods:#e6f5ec;--bad:#c62828;--bads:#fdecec;--warn:#b26a00;--warns:#fff4dc;
+  --sh:0 1px 3px rgba(20,40,70,.08),0 4px 14px rgba(20,40,70,.05);--r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;-webkit-text-size-adjust:100%}
+a{color:var(--c3)}
+h1,h2,h3,h4{line-height:1.4;margin:.2em 0 .5em}
+h2{font-size:24px} h3{font-size:19px} h4{font-size:16.5px}
+p{margin:.5em 0}
+.muted{color:var(--muted);font-size:14.5px}
+/* 上方列 */
+.top{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 6px rgba(20,40,70,.06)}
+.top-in{max-width:1080px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:17px;color:var(--text);text-decoration:none;white-space:nowrap}
+.brand small{font-weight:500;color:var(--muted);margin-left:6px}
+.nav{display:flex;gap:6px;margin-left:auto}
+.nav a{padding:6px 14px;border-radius:999px;text-decoration:none;color:var(--text2);font-weight:700;border:1.5px solid transparent;white-space:nowrap}
+.nav a.on{background:var(--c3);color:#fff}
+.nav a:hover:not(.on){border-color:var(--line)}
+.me{font-size:13.5px;color:var(--text2);white-space:nowrap}
+.pbar{height:6px;background:#e7ebf0}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c3),var(--good));transition:width .4s}
+main{max-width:1080px;margin:0 auto;padding:18px 16px 70px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px 18px;margin:12px 0}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
+.grow{flex:1;min-width:0}
+.btn{font:inherit;font-weight:700;padding:8px 16px;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--text);cursor:pointer;text-decoration:none;display:inline-block;line-height:1.5}
+.btn:hover{border-color:var(--c3)}
+.btn.primary{background:var(--c3);border-color:var(--c3);color:#fff}
+.btn.ok{background:var(--good);border-color:var(--good);color:#fff}
+.btn.warn{background:var(--warns);border-color:#e6b95c;color:var(--warn)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.in{font:inherit;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;width:120px}
+.in.wide{width:190px;font-size:18px}
+.chip{display:inline-block;font-size:12.5px;font-weight:700;padding:1px 10px;border-radius:999px;background:var(--c3s);color:var(--c3)}
+.chip.c4{background:var(--c4s);color:var(--c4)}
+.chip.gray{background:#eef1f5;color:var(--text2)}
+/* 首頁 */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+.hero a{display:block;text-decoration:none;color:var(--text);border-radius:18px;padding:22px 22px 18px;border:2px solid var(--line);background:#fff;box-shadow:var(--sh)}
+.hero a:hover{transform:translateY(-2px)}
+.hero .h1{border-color:#9fd2d6;background:linear-gradient(180deg,#f2fbfb,#fff)}
+.hero .h2{border-color:#c5baf0;background:linear-gradient(180deg,#f6f3ff,#fff)}
+.hero a>b{font-size:22px;display:block}
+.hero span{color:var(--text2);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0}
+.steps div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14.5px}
+.steps b{display:block;color:var(--c3)}
+.ident .row{margin:6px 0 0}
+.prog-big{display:flex;gap:18px;align-items:center}
+.prog-big .num{font-size:40px;font-weight:800;color:var(--good);line-height:1}
+.prog-big .num small{font-size:20px;color:var(--text2);font-weight:600}
+/* 章節與任務列表 */
+.sec-h{display:flex;align-items:center;gap:10px;margin:22px 0 6px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+.sec-h h3{margin:0}
+.sec-h .sp{margin-left:auto;font-size:14px;color:var(--muted)}
+.ch-h{margin:28px 0 4px;padding:8px 14px;border-radius:12px;color:#fff;font-size:20px;font-weight:800}
+.ch-h.c3{background:var(--c3)} .ch-h.c4{background:var(--c4)}
+.tl{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;margin:8px 0}
+.tk{display:block;text-decoration:none;color:var(--text);background:#fff;border:1px solid var(--line);border-left:6px solid var(--c3);border-radius:14px;padding:12px 14px;box-shadow:var(--sh)}
+.tk.c4{border-left-color:var(--c4)}
+.tk:hover{transform:translateY(-2px)}
+.tk.done{background:var(--goods);border-left-color:var(--good)}
+.tk .tt{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.tk h4{margin:6px 0 4px;font-size:16px}
+.tk .codes{font-size:12.5px;color:var(--muted)}
+.st{font-size:13px;font-weight:700;white-space:nowrap}
+.st.ok{color:var(--good)} .st.go{color:var(--c4)} .st.no{color:var(--muted)} .st.hint{color:var(--warn)}
+.tk .tl2{display:flex;gap:6px;margin-top:8px}
+.tk .tl2 a{font-size:13px;font-weight:700;padding:2px 10px;border-radius:8px;border:1px solid var(--line);text-decoration:none;color:var(--text2)}
+/* 作答 */
+.streak{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-weight:700;color:var(--text2)}
+.streak i{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:#fff}
+.streak i.on{background:var(--good);border-color:var(--good)}
+.q-stem{font-size:18px;line-height:1.85;margin-top:0}
+.svgbox{margin:8px 0;text-align:center}
+.svgbox svg{max-width:100%;height:auto}
+.q-opts{display:grid;gap:8px;margin:6px 0}
+.q-opt{font:inherit;text-align:left;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;line-height:1.6}
+.q-opt:hover:not(:disabled){border-color:var(--c3)}
+.q-opt.sel{border-color:var(--c3);background:var(--c3s);font-weight:700}
+.q-opt.is-right{border-color:var(--good);background:var(--goods)}
+.q-opt.is-wrong{border-color:var(--bad);background:var(--bads)}
+.step{margin:12px 0 4px;font-weight:700;color:var(--text2)}
+.fb{margin-top:12px;padding:12px 16px;border-radius:12px;line-height:1.75}
+.fb.ok{background:var(--goods);border:1.5px solid var(--good)}
+.fb.no{background:var(--bads);border:1.5px solid var(--bad)}
+.fb p{margin:4px 0}
+.pass-box{margin-top:14px;padding:16px 18px;border-radius:14px;background:var(--goods);border:2px solid var(--good)}
+.rv-box{margin-top:12px;padding:12px 16px;border-radius:12px;background:var(--warns);border:1.5px solid #e6b95c}
+.warn-box{padding:12px 16px;border-radius:12px;background:var(--bads);border:2px solid var(--bad);margin:10px 0}
+/* 複習卡 */
+.rcard h2{margin-top:6px}
+.rcard .goal{font-size:17px;font-weight:700;margin:2px 0 8px}
+.kp{margin:10px 0;padding:12px 16px;border-left:5px solid var(--c3);background:var(--c3s);border-radius:0 12px 12px 0}
+.kp.c4{border-left-color:var(--c4);background:var(--c4s)}
+.kp b.t{display:block;margin-bottom:2px}
+.trap{margin:10px 0;padding:12px 16px;border-left:5px solid var(--bad);background:var(--bads);border-radius:0 12px 12px 0}
+.trap ul,.kp ul{margin:4px 0 4px 1.2em;padding:0}
+table.t{border-collapse:collapse;width:100%;margin:8px 0;font-size:15px}
+table.t th,table.t td{border:1px solid var(--line);padding:6px 10px;text-align:center;vertical-align:middle}
+table.t th{background:#eef2f7}
+table.t td.l{text-align:left}
+.tbl-scroll{overflow-x:auto}
+details.qc{margin:10px 0;border:1px solid var(--line);border-radius:12px;padding:8px 14px;background:#fff}
+details.qc summary{cursor:pointer;font-weight:700}
+.nav2{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:16px 0}
+/* 模擬 */
+.sim{margin:14px 0;border:2px solid #b9c7d8;border-radius:16px;background:#fbfcfe;padding:12px 14px}
+.sim .sh{display:flex;gap:8px;align-items:center;font-weight:800;margin-bottom:6px}
+.sim .sh .chip{background:#fff3d6;color:#8a5a00}
+.sim .obs{margin:0 0 8px;font-size:15px;color:var(--text2)}
+.sim svg{width:100%;max-width:760px;margin:0 auto;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px;touch-action:none}
+.sim .ctl{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:8px 0}
+.sim .ctl label{display:flex;gap:6px;align-items:center;font-size:14.5px;font-weight:600}
+.sim .ctl input[type=range]{width:150px}
+.sim .out{font-size:15px;background:#fff;border:1px dashed #b9c7d8;border-radius:10px;padding:6px 12px;margin-top:6px;line-height:1.7}
+.sim .seg button{font:inherit;font-size:14px;font-weight:700;padding:4px 12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;border-radius:8px}
+.sim .seg button.on{background:var(--c3);border-color:var(--c3);color:#fff}
+/* 地圖 */
+.map-sec{margin:12px 0}
+.mp{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.mp a{display:flex;gap:10px;align-items:flex-start;text-decoration:none;color:var(--text);padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.mp a:hover{border-color:var(--c3)}
+.mp a.done{background:var(--goods);border-color:#9fd5b3}
+.mp a.sugg{background:var(--warns);border-color:#e6b95c}
+.mp .id{font-weight:800;color:var(--c3);min-width:32px}
+.mp .c4 .id{color:var(--c4)}
+@media (max-width:720px){
+  .hero{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}
+  .top-in{padding:6px 10px}.brand small{display:none}.nav{margin-left:0;width:100%;justify-content:space-between}
+  .nav a{flex:1;text-align:center;padding:6px 8px}
+  main{padding:12px 10px 60px}.card{padding:14px}.q-stem{font-size:17px}
+  .sim .ctl input[type=range]{width:120px}
+}
+</style></head><body>
+<header class="top"><div class="top-in"><a class="brand" href="#/">段考複習<small>第3章 波動與聲音 × 第4章 光、影像與顏色</small></a>
+<nav class="nav"><a data-k="home" href="#/">首頁</a><a data-k="check" href="#/check">🎯 檢核</a><a data-k="review" href="#/review">📖 複習</a></nav>
+<span class="me">👤 <span id="me"></span>　通過 <b id="ptxt"></b></span></div><div class="pbar"><i id="pbar"></i></div></header>
+<main id="view"></main>
+<script>
+/* ---- a_base.js ---- */
+'use strict';
+/* ===== 國中自然 2上 第3、4章 段考複習：基礎工具、題型建構、任務／複習卡登錄 ===== */
+const EXAM = 'e2';                 // 第二次段考（回傳時用來分開兩次段考的紀錄）
+const PASS = 3;                    // 連續答對幾題才算通過
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbze_RHP4FSaRdN54hviuC_IamEAJ2X6_7oAd322CKOEuLhbBvGGjWimZxbGmlrSAbVm-Q/exec';
+const FILE_MODE = location.protocol === 'file:';
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = a => a[rnd(0, a.length - 1)];
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = rnd(0, i);[a[i], a[j]] = [a[j], a[i]]; } return a; };
+const round = (x, d = 0) => Math.round(x * 10 ** d) / 10 ** d;
+const near = (x, y, rel = 1e-6, abs = 1e-9) => Math.abs(x - y) <= Math.max(Math.abs(y) * rel, abs);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const strip = s => String(s).replace(/<[^>]+>/g, '');
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('nat2e2:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('nat2e2:' + k, JSON.stringify(v)); } catch (e) { } },
+};
+function parseNum(s) {                    // 支援 2.5e6、2.5×10^6、千分位逗號
+  s = String(s).trim().replace(/,/g, '').replace(/[−–]/g, '-').replace(/\s+/g, '');
+  const m = s.match(/^(-?[\d.]+)[×xX*]10\^?(-?\d+)$/);
+  if (m) return Number(m[1]) * 10 ** Number(m[2]);
+  return s === '' ? NaN : Number(s);
+}
+const fmt = x => {                        // 數字顯示：很大或很小用科學記號
+  if (x === 0) return '0';
+  const e = Math.floor(Math.log10(Math.abs(x)));
+  if (e >= -3 && e <= 5) return String(round(x, 6));
+  return `${round(x / 10 ** e, 4)}×10<sup>${e}</sup>`;
+};
+
+/* ---------- 題型：選擇／兩階層（答案＋理由）／數值 ---------- */
+const MC = (stem, opts, a, exp, extra = {}) => ({ type: 'mc', stem, opts, a, exp, ...extra });
+const TT = (stem, opts, a, ropts, ra, exp, extra = {}) => ({ type: 'tt', stem, opts, a, ropts, ra, exp, ...extra });
+const NUM = (stem, ans, unit, exp, extra = {}) => ({ type: 'num', stem, ans, unit, exp, ...extra });
+
+/* 題庫：每筆 {t:錯誤類型, q, o:[選項], a:正解索引, r:[理由], ra, e:解釋, tf:true/false(是非題), svg} */
+const _last = {};
+function bank(id, arr) {
+  return () => {
+    let b, n = 0;
+    do { b = pick(arr); } while (arr.length > 1 && _last[id] === b.q && ++n < 30);
+    _last[id] = b.q;
+    const extra = { tag: b.t || id, svg: typeof b.svg === 'function' ? b.svg() : b.svg };
+    if (b.tf !== undefined) return MC(b.q, ['正確', '錯誤'], b.tf ? 0 : 1, b.e, { ...extra, fixed: true });
+    return b.r ? TT(b.q, b.o, b.a, b.r, b.ra, b.e, extra) : MC(b.q, b.o, b.a, b.e, extra);
+  };
+}
+/* 題庫＋出題器混合：約 45% 用出題器（隨機生成），其餘抽題庫 */
+const mixGen = (id, bk, gens) => { const g0 = bank(id, bk); return () => Math.random() < .45 ? pick(gens)() : g0(); };
+/* 讓出題器自動補上 tag（錯誤類型） */
+const tagged = (tag, q) => { q.tag = q.tag || tag; return q; };
+
+/* ---------- 章節、任務、複習卡登錄 ---------- */
+const SECS = [
+  { id: '3-1', ch: 3, name: '3-1 波的傳播與特徵' }, { id: '3-2', ch: 3, name: '3-2 聲音的形成' },
+  { id: '3-3', ch: 3, name: '3-3 多變的聲音' }, { id: '3-4', ch: 3, name: '3-4 聲波的傳播與應用' },
+  { id: '4-1', ch: 4, name: '4-1 光的傳播' }, { id: '4-2', ch: 4, name: '4-2 光的反射與面鏡成像' },
+  { id: '4-3', ch: 4, name: '4-3 光的折射' }, { id: '4-4', ch: 4, name: '4-4 透鏡成像' }, { id: '4-5', ch: 4, name: '4-5 色散與顏色' },
+];
+const TASKS = [], TASK = {}, CARDS = {};
+function def(id, o) { const t = { id, ch: +o.sec[0], ...o }; TASKS.push(t); TASK[id] = t; }
+function card(id, o) { CARDS[id] = o; }
+const SIMS = {};           // 互動模擬：SIMS[名稱] = (host) => {...}
+
+/* ---------- 複習卡的版面小工具 ---------- */
+const kp = (t, h, c4) => `<div class="kp ${c4 ? 'c4' : ''}"><b class="t">${t}</b>${h}</div>`;
+const tbl = (head, rows) => `<div class="tbl-scroll"><table class="t"><tr>${head.map(x => `<th>${x}</th>`).join('')}</tr>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+
+/* ---- b_svg.js ---- */
+/* ===== SVG 圖形工具（題目附圖與複習卡用） ===== */
+const COL = { k: '#222', r: '#d32f2f', b: '#1565c0', o: '#e07b00', g: '#2e7d32', p: '#7b1fa2', gr: '#8a97a6' };
+const arrowDefs = () => ['k', 'r', 'b', 'o', 'g', 'p'].map(c => `<marker id="ah-${c}" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="${COL[c]}"/></marker>`).join('');
+const SVG = (w, h, inner, style = '') => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="14" style="max-width:${w}px;${style}"><defs>${arrowDefs()}</defs>${inner}</svg>`;
+const line = (x1, y1, x2, y2, c = 'k', w = 2, extra = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${COL[c] || c}" stroke-width="${w}" ${extra}/>`;
+const arrow = (x1, y1, x2, y2, c = 'k', w = 2.5, extra = '') => line(x1, y1, x2, y2, c, w, `marker-end="url(#ah-${c})" ${extra}`);
+const text = (x, y, s, c = 'k', size = 14, anchor = 'middle', extra = '') => `<text x="${x}" y="${y}" fill="${COL[c] || c}" font-size="${size}" text-anchor="${anchor}" ${extra}>${s}</text>`;
+const d2r = d => d * Math.PI / 180;
+
+/* ---- 週期波（橫波）：公分格線，用來讀波長、振幅 ---- */
+function waveSvg({ lam, amp, n = 2, mark = false }) {
+  const px = Math.min(34, Math.floor(430 / (lam * n))), ypx = 24;
+  const W = lam * n * px + 70, H = (2 * amp + 2) * ypx + 44, x0 = 38, y0 = H / 2 - 8;
+  let s = '';
+  for (let i = 0; i <= lam * n; i++) {
+    s += line(x0 + i * px, 8, x0 + i * px, H - 34, '#e3e8ee', 1);
+    if (px >= 20 || i % 2 === 0) s += text(x0 + i * px, H - 18, i, 'gr', 12);
+  }
+  for (let j = -amp - 1; j <= amp + 1; j++) {
+    s += line(x0, y0 - j * ypx, x0 + lam * n * px, y0 - j * ypx, '#e3e8ee', 1);
+    if (j !== 0 && j % 1 === 0 && j >= -amp && j <= amp) s += text(x0 - 6, y0 - j * ypx + 4, Math.abs(j), 'gr', 12, 'end');
+  }
+  s += line(x0, y0, x0 + lam * n * px + 8, y0, 'k', 1.6) + text(x0 + lam * n * px + 12, H - 18, '公分', 'gr', 12, 'start');
+  let d = '';
+  for (let i = 0; i <= 160 * n; i++) { const x = i / 160 * lam; d += (i ? 'L' : 'M') + (x0 + x * px).toFixed(1) + ',' + (y0 - amp * ypx * Math.sin(2 * Math.PI * x / lam)).toFixed(1); }
+  s += `<path d="${d}" fill="none" stroke="${COL.b}" stroke-width="3"/>`;
+  s += text(8, y0 - 2, '0', 'gr', 12, 'start') + text(x0 + 4, 14, '↑ 高度（公分）', 'gr', 12, 'start');
+  return SVG(W, H, s);
+}
+
+/* ---- 波形比較（響度、音調、音色）：items=[{label,type,amp,cyc}] ---- */
+function wf(type, ph) {            // ph 為週期數
+  const t = ph - Math.floor(ph);
+  if (type === 'sine') return Math.sin(2 * Math.PI * ph);
+  if (type === 'tri') return t < .25 ? 4 * t : t < .75 ? 2 - 4 * t : 4 * t - 4;
+  if (type === 'sq') { const v = Math.sin(2 * Math.PI * ph); return Math.max(-1, Math.min(1, v * 3.2)); }
+  if (type === 'saw') return 2 * t - 1;
+  if (type === 'noise') return (Math.sin(2 * Math.PI * ph * 1.0) * .5 + Math.sin(2 * Math.PI * ph * 2.73 + 1) * .35 + Math.sin(2 * Math.PI * ph * 5.17 + 2) * .45 + Math.sin(2 * Math.PI * ph * 8.9) * .3) / 1.1;
+  return 0;
+}
+function cmpWaves(items, { w = 460, rowH = 92 } = {}) {
+  const H = items.length * rowH + 8; let s = '';
+  items.forEach((it, k) => {
+    const y0 = 8 + k * rowH + rowH / 2, A = it.amp * (rowH / 2 - 8), x0 = 54, L = w - x0 - 10;
+    s += `<rect x="${x0}" y="${y0 - rowH / 2 + 4}" width="${L}" height="${rowH - 8}" fill="#fbfdff" stroke="#dbe3ec"/>`;
+    s += line(x0, y0, x0 + L, y0, '#cfd8e3', 1);
+    s += text(28, y0 + 5, it.label, 'k', 16, 'middle', 'font-weight="700"');
+    let d = '';
+    for (let i = 0; i <= 300; i++) { const x = i / 300; d += (i ? 'L' : 'M') + (x0 + x * L).toFixed(1) + ',' + (y0 - A * wf(it.type || 'sine', x * it.cyc)).toFixed(1); }
+    s += `<path d="${d}" fill="none" stroke="${COL.b}" stroke-width="2.4"/>`;
+  });
+  s += text(w - 10, H - 0, '時間 →', 'gr', 12, 'end');
+  return SVG(w, H + 6, s);
+}
+
+/* ---- 平面鏡反射：theta=入射角；lab={i:'?',r:'?'}；showAngleMirror 顯示與鏡面的夾角 ---- */
+function mirrorSvg({ theta, lab = {}, mirrorAngle = null, rays = true } = {}) {
+  const W = 440, H = 250, cx = 220, cy = 195, L = 150, sn = Math.sin(d2r(theta)), cs = Math.cos(d2r(theta));
+  let s = `<rect x="70" y="${cy}" width="300" height="16" fill="#cfd8e3"/>` + line(70, cy, 370, cy, 'k', 3);
+  for (let x = 80; x < 370; x += 14) s += line(x, cy + 16, x - 10, cy + 6, '#8a97a6', 1.2);
+  s += text(385, cy + 12, '平面鏡', 'k', 13, 'start');
+  s += line(cx, cy, cx, 40, 'k', 1.5, 'stroke-dasharray="6 5"') + text(cx, 32, '法線', 'k', 14);
+  if (rays) {
+    s += arrow(cx - L * sn, cy - L * cs, cx - 3 * sn, cy - 3 * cs, 'o');
+    s += arrow(cx, cy, cx + L * sn, cy - L * cs, 'r');
+    s += text(cx - L * sn - 8, cy - L * cs - 6, '入射線', 'o', 14, 'end') + text(cx + L * sn + 8, cy - L * cs - 6, '反射線', 'r', 14, 'start');
+    const r = 52;
+    s += `<path d="M${cx},${cy - r} A${r},${r} 0 0 0 ${cx - r * sn},${cy - r * cs}" fill="none" stroke="${COL.o}" stroke-width="2"/>`;
+    s += `<path d="M${cx},${cy - r - 8} A${r + 8},${r + 8} 0 0 1 ${cx + (r + 8) * sn},${cy - (r + 8) * cs}" fill="none" stroke="${COL.r}" stroke-width="2"/>`;
+    const mid = d2r(theta / 2), lr = r + 20;
+    if (lab.i != null) s += text(cx - lr * Math.sin(mid) - 6, cy - lr * Math.cos(mid) + 4, lab.i, 'o', 15, 'middle', 'font-weight="700"');
+    if (lab.r != null) s += text(cx + lr * Math.sin(mid) + 6, cy - lr * Math.cos(mid) + 4, lab.r, 'r', 15, 'middle', 'font-weight="700"');
+    if (mirrorAngle != null) {
+      const r2 = 78, a = d2r(90 - theta);
+      s += `<path d="M${cx - r2},${cy} A${r2},${r2} 0 0 1 ${cx - r2 * Math.cos(a)},${cy - r2 * Math.sin(a)}" fill="none" stroke="${COL.p}" stroke-width="2"/>`;
+      s += text(cx - r2 - 4, cy - 24, mirrorAngle, 'p', 15, 'middle', 'font-weight="700"');
+    }
+  }
+  return SVG(W, H, s);
+}
+
+/* ---- 折射示意：n1（入射側）→ n2；dir 'down' 入射介質在上，'up' 入射介質在下 ---- */
+function refractSvg({ n1, n2, theta, top, bottom, dir = 'down', lab = true, colors = ['#f4f9ff', '#cfe7fb'] }) {
+  const W = 440, H = 290, cx = 220, cy = 145, L = 125;
+  let sn2 = n1 * Math.sin(d2r(theta)) / n2; const th2 = Math.asin(Math.min(1, sn2)) * 180 / Math.PI;
+  const a = Math.sin(d2r(theta)), b = Math.cos(d2r(theta)), a2 = Math.sin(d2r(th2)), b2 = Math.cos(d2r(th2));
+  let s = `<rect x="10" y="10" width="${W - 20}" height="${cy - 10}" fill="${colors[0]}"/><rect x="10" y="${cy}" width="${W - 20}" height="${H - cy - 10}" fill="${colors[1]}"/>`;
+  s += line(10, cy, W - 10, cy, 'k', 2) + line(cx, 18, cx, H - 18, 'k', 1.4, 'stroke-dasharray="6 5"');
+  s += text(24, 30, top, 'k', 15, 'start', 'font-weight="700"') + text(24, H - 20, bottom, 'k', 15, 'start', 'font-weight="700"');
+  if (dir === 'down') {
+    s += arrow(cx - L * a, cy - L * b, cx - 2 * a, cy - 2 * b, 'o') + arrow(cx, cy, cx + L * a2, cy + L * b2, 'r');
+    if (lab) s += text(cx - L * a - 6, cy - L * b - 6, '入射線', 'o', 14, 'end') + text(cx + L * a2 + 8, cy + L * b2 + 14, '折射線', 'r', 14, 'start');
+  } else {
+    s += arrow(cx - L * a, cy + L * b, cx - 2 * a, cy + 2 * b, 'o') + arrow(cx, cy, cx + L * a2, cy - L * b2, 'r');
+    if (lab) s += text(cx - L * a - 6, cy + L * b + 16, '入射線', 'o', 14, 'end') + text(cx + L * a2 + 8, cy - L * b2 - 6, '折射線', 'r', 14, 'start');
+  }
+  if (lab) s += text(cx + 6, 30, '法線', 'k', 13, 'start');
+  return { svg: SVG(W, H, s), th2 };
+}
+
+/* ---- 透鏡的三條特殊光線（只畫入射線；showOut 才畫出射線） ---- */
+function lensRaySvg({ kind, ray, showOut = false }) {
+  const W = 500, H = 250, cx = 250, cy = 125, f = 90;
+  let s = line(10, cy, W - 10, cy, 'gr', 1.2) + text(W - 12, cy - 6, '主軸', 'gr', 12, 'end');
+  if (kind === 'convex') s += `<path d="M${cx},${cy - 80} Q${cx + 16},${cy} ${cx},${cy + 80} Q${cx - 16},${cy} ${cx},${cy - 80}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2"/>`;
+  else s += `<path d="M${cx - 12},${cy - 80} Q${cx - 2},${cy} ${cx - 12},${cy + 80} L${cx + 12},${cy + 80} Q${cx + 2},${cy} ${cx + 12},${cy - 80}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2"/>`;
+  [[cx - f, '焦點 F'], [cx + f, '焦點 F']].forEach(([x, t]) => s += `<circle cx="${x}" cy="${cy}" r="4" fill="${COL.k}"/>` + text(x, cy + 20, t, 'k', 12));
+  s += text(cx, cy + 108, '鏡心在正中央（透鏡中心）', 'gr', 12);
+  let y1, p1, p2, inLine, out, back = '';
+  if (ray === 'parallel') {
+    y1 = cy - 60; inLine = arrow(40, y1, cx, y1, 'o');
+    if (kind === 'convex') { const dx = f, dy = 60; out = arrow(cx, y1, cx + dx * 1.6, y1 + dy * 1.6, 'r'); }
+    else { out = arrow(cx, y1, cx + f * 1.5, y1 - 60 * 1.5, 'r'); back = line(cx, y1, cx - f, cy, 'r', 1.6, 'stroke-dasharray="5 4"'); }
+  } else if (ray === 'center') {
+    inLine = arrow(50, cy - 70, cx, cy, 'o'); out = arrow(cx, cy, cx + 200, cy + 77.8, 'r');
+  } else if (ray === 'focus') {
+    if (kind === 'convex') { const sl = (cy - (cy + 80)) / ((cx - f) - 40); y1 = cy + sl * (cx - f - 40) * 0 + (cy + 80) + sl * (cx - 40 - 0); const yy = (cy + 80) + sl * (cx - 40); inLine = arrow(40, cy + 80, cx, yy, 'o'); out = arrow(cx, yy, cx + 200, yy, 'r'); }
+    else { const sl = (cy - 30) / ((cx + f) - 50); const yy = 30 + sl * (cx - 50); inLine = arrow(50, 30, cx, yy, 'o'); back = line(cx, yy, cx + f, cy, 'o', 1.6, 'stroke-dasharray="5 4"'); out = arrow(cx, yy, cx + 200, yy, 'r'); }
+  }
+  s += inLine + back;
+  if (showOut) s += out;
+  return SVG(W, H, s);
+}
+
+/* ---- c_q_l.js ---- */
+/* ===== 4-1 ~ 4-3 光的傳播、反射與面鏡、折射：L1–L3, R1–R4, F1–F3（題目皆為自擬） ===== */
+
+/* L1 光源與光的直進性 */
+def('L1', { sec: '4-1', can: '說明光源、光的直進性，並解釋影子的形成', lc: 'Ka-IV-6', gen: bank('L1', [
+  { t: '光源', q: '下列哪一個物體是「光源」（自己會發光）？', o: ['通電的燈泡', '課本', '鏡子', '木頭桌子'], a: 0, e: '太陽、通電的燈泡、燭火這類能自己發光的物體稱為光源（發光體）。' },
+  { t: '看見物體', q: '課本本身不會發光，我們卻看得到它。比較合理的說明是？', o: ['光源的光照到課本後反射，進入我們的眼睛', '課本自己會發出微弱的光', '眼睛發出光線去照課本', '課本把光吸收後送進眼睛'], a: 0, e: '不發光的物體要等它反射的光跑進眼睛，我們才看得到。' },
+  { t: '光的直進性', q: '光在真空中或均勻的介質中，會沿著什麼路徑前進？', o: ['直線', '曲線', '圓弧', '折線'], a: 0, e: '這個性質稱為光的直進性。' },
+  { t: '影子的形成', q: '手電筒的光被一本書擋住，牆上出現書的影子。影子的形成說明了什麼？', o: ['光沿直線前進，被不透明物擋住就到不了後方', '光會繞過書本', '書本會發光', '光會被牆壁吸收'], a: 0, r: ['光具有直進性', '光會轉彎', '光需要介質', '光速很慢'], ra: 0, e: '影子是光被不透明的物體擋住後，在後方形成的暗區；若光會轉彎，就不會有影子。' },
+  { t: '影子的大小', q: '在暗室用蠟燭做手影遊戲，想讓牆上的影子「變大」，手應該怎麼移動？', o: ['靠近蠟燭（遠離牆壁）', '遠離蠟燭（靠近牆壁）', '貼著牆壁', '手不用動，把蠟燭吹熄'], a: 0, e: '手離光源愈近，擋住的光愈多，影子愈大。' },
+  { t: '影子的應用', q: '古代的計時工具「日晷」，主要利用了什麼原理？', o: ['光的直進性造成的影子', '光的折射', '光的色散', '聲音的反射'], a: 0, e: '日晷的晷針被陽光照射，影子的位置會隨太陽改變，可用來指出時間。' },
+  { t: '光的直進性', tf: false, q: '光遇到不透明的物體時，會繞過物體，所以不會有影子。', e: '光沿直線前進，被不透明物擋住就不能繼續走，才會有影子。' },
+  { t: '光的直進性', tf: true, q: '電影院裡有人站起來，布幕上會出現他的黑色剪影，是因為他擋住了投影機射出的光。', e: '光沿直線前進，被人擋住，布幕上就出現影子。' },
+  { t: '光源', q: '下列哪一個物體「不是」光源？', o: ['月亮', '太陽', '燭火', '正在播放畫面的電視螢幕'], a: 0, e: '月亮自己不會發光，是反射太陽的光，所以不是光源；太陽、燭火、發亮的螢幕都是自己發光的光源。' },
+  { t: '光的直進性', q: '如果光可以像水一樣繞過障礙物，下列哪一種現象就「不會」出現？', o: ['不透明物體後面的影子', '光源會發光', '我們能看見物體', '光在鏡面反射'], a: 0, e: '影子是光被擋住、無法轉彎才形成的；若光會繞過障礙物，後方就不會有暗區。' },
+  { t: '影子的形成', q: '晴天時，立在操場上的竹竿，影子的位置早上與傍晚不同。這主要是因為？', o: ['太陽位置改變，光被竹竿擋住的方向也跟著改變', '竹竿長高了', '光線會轉彎', '影子自己會移動'], a: 0, e: '光沿直線前進，太陽的位置改變，被擋住的光所形成的影子位置也隨著改變。' },
+  { t: '光源', tf: true, q: '月亮看起來很亮，但它是靠反射太陽光才被我們看見，不是光源。', e: '光源是能自己發光的物體；月亮本身不發光，只是反射太陽光。' },
+  { t: '光的直進性', q: '清晨的樹林裡，常看到一道一道筆直的陽光射向地面。這個現象最能說明光的哪一項性質？', o: ['在均勻介質中沿直線前進', '會繞過樹葉', '需要介質才能傳播', '速率比聲音慢'], a: 0, e: '光束呈現筆直的樣子，顯示光在空氣這種均勻介質中沿直線前進。' },
+  { t: '影子的形成', tf: false, q: '影子是光被不透明物體擋住後，在物體後方形成的亮區。', e: '影子是光到不了的「暗區」，不是亮區。' },
+  { t: '影子的應用', q: '皮影戲把光照在皮製人偶上，白布幕上就出現人偶的影子。這個表演利用了光的哪一項性質？', o: ['直進性', '折射', '色散', '可逆性'], a: 0, e: '光沿直線前進，被不透明的皮偶擋住，布幕上才會出現影子。' },
+]) });
+
+/* L2 針孔成像 */
+def('L2', { sec: '4-1', can: '說明針孔成像的像的性質，與距離、孔大小的關係', lc: 'Ka-IV-6', gen: bank('L2', [
+  { t: '針孔成像的像', q: '用紙杯做針孔成像，在描圖紙上看到蠟燭火焰的像。這個像和原來的火焰相比，是？', o: ['上下顛倒、左右相反', '上下顛倒、左右相同', '上下相同、左右相反', '和火焰完全相同'], a: 0, e: '光線沿直線通過小孔，在描圖紙上交錯，所以像整個倒過來（上下、左右都反）。' },
+  { t: '針孔成像的像', q: '針孔成像在紙屏上出現的像，是實像還是虛像？', o: ['實像，因為由真實光線形成，可以出現在紙屏上', '虛像，因為上下顛倒', '虛像，因為像比較小', '實像，因為像是正立的'], a: 0, e: '針孔成像時真實的光線抵達了屏幕，所以可以用紙屏接到，稱為實像。' },
+  { t: '針孔成像的像', q: '針孔成像的結果，可以用來驗證光的什麼性質？', o: ['直進性', '可逆性', '色散', '折射'], a: 0, e: '光沿直線前進，通過小孔後交錯，才會形成倒立的像。' },
+  { t: '距離與像的大小', q: '其他條件不變，把針孔「移得離光源更遠」，描圖紙上的像會？', o: ['變小', '變大', '大小不變', '消失'], a: 0, e: '針孔離光源愈遠，成像愈小；愈近，成像愈大。' },
+  { t: '針孔的數量與大小', q: '在紙杯底部多戳兩個小洞（共三個），看到什麼？', o: ['出現三個光源的像', '只有一個像，但變亮', '完全看不到像', '像變成正立的'], a: 0, e: '每個針孔各自成一個像，所以有幾個洞就有幾個像。' },
+  { t: '針孔的數量與大小', q: '把針孔「弄得大很多」，描圖紙上的像會怎樣？', o: ['變亮，但變得模糊', '變暗，但更清楚', '變成虛像', '像上下不再顛倒'], a: 0, e: '孔變大，相當於許多小孔的像交錯重疊，所以變亮但形狀變模糊。' },
+  { t: '針孔成像', tf: false, q: '針孔成像的像是用手電筒光直接投射出來的，所以不會上下顛倒。', e: '針孔成像因光的直進交錯，像一定是上下顛倒、左右相反的。' },
+  { t: '針孔成像', q: '針孔成像的紙杯換成更長的紙杯（針孔到描圖紙的距離變長），其他條件不變。像會？', o: ['變大', '變小', '一樣大', '變成正立'], a: 0, e: '紙杯變長，針孔到屏幕的距離變大，成的像會變大。' },
+  { t: '針孔成像的像', q: '針孔成像裝置中，杯口蓋的那張描圖紙，作用是？', o: ['讓光落在上面，使我們能看見像', '自己發出光', '把光反射回光源', '把光源放大'], a: 0, e: '描圖紙是半透明的屏幕，光線在上面形成像，我們才看得到。' },
+  { t: '針孔成像的像', q: '用針孔成像裝置觀察一個箭頭（↑）形狀的光源，描圖紙上的像最可能是？', o: ['朝下的箭頭（↓）', '朝上的箭頭（↑）', '朝右的箭頭（→）', '看不到任何像'], a: 0, e: '針孔成像的像，上下和左右方向都會反過來，所以朝上的箭頭在屏幕上變成朝下的箭頭。' },
+  { t: '距離與像的大小', q: '想讓針孔成像的像「變大」（其他條件不變），可以怎麼做？', o: ['把針孔移近光源', '把針孔移離光源', '把針孔戳大', '把光源關掉'], a: 0, e: '針孔離光源愈近，成像愈大；離愈遠，成像愈小。' },
+  { t: '針孔成像', tf: true, q: '針孔成像在屏幕上出現的像，可以用紙接到，所以是實像。', e: '實像由真實光線形成，能呈現在屏幕上；針孔成像就是實像。' },
+  { t: '針孔成像的應用', q: '樹蔭下的地面，常出現許多圓圓的小光斑，其實是太陽的像。它的形成原理與下列何者相同？', o: ['針孔成像', '平面鏡成像', '色散', '折射'], a: 0, e: '樹葉間的小縫隙像針孔，讓陽光穿過後在地面形成太陽的像，原理與針孔成像相同。' },
+  { t: '針孔的數量與大小', q: '在暗室裡，窗簾上有一個小洞，牆上出現窗外景物倒立的像。若想讓這個像更清楚（比較不模糊），小洞應該？', o: ['縮小一些', '放大一些', '洞的大小不影響清晰度', '改用鏡子取代'], a: 0, e: '洞愈大，像愈亮但愈模糊；洞縮小像會比較清楚（但比較暗）。' },
+  { t: '距離與像的大小', tf: false, q: '針孔離光源愈遠，針孔成像的像就愈大。', e: '針孔離光源愈遠，成像愈小；愈近，成像愈大。' },
+]) });
+
+/* L3 光速與光的傳播 */
+(() => {
+  const g = () => {
+    const k = pick([2, 5, 10, 60, 100]), d = 3e5 * k;
+    return NUM(`光在真空中的速率約為 3×10⁵ 公里／秒。一個物體距離我們 ${fmt(d)} 公里，光從那裡傳到我們這裡要多少秒？`, k, '秒', `時間 ＝ 距離 ÷ 速率 ＝ ${fmt(d)} ÷ (3×10⁵) ＝ ${k} 秒。`, { tag: '光速的計算', hint: '科學記號可以寫成 6e5 或 6×10^5。' });
+  };
+  def('L3', { sec: '4-1', can: '說出光速的大小、光不需介質，並比較光在各介質中的速率', lc: 'Ka-IV-7', gen: () => Math.random() < .3 ? g() : bank('L3', [
+    { t: '光速的大小', q: '光在真空中的速率約為多少？', o: ['3×10⁸ 公尺／秒', '331 公尺／秒', '3×10⁵ 公尺／秒', '3×10⁴ 公尺／秒'], a: 0, e: '光速在真空中約 3×10⁸ 公尺／秒（3×10⁵ 公里／秒），比聲音快很多。' },
+    { t: '光速的比較', q: '光在真空、空氣、水、玻璃中的速率，由快到慢的順序是？', o: ['真空 ＞ 空氣 ＞ 水 ＞ 玻璃', '玻璃 ＞ 水 ＞ 空氣 ＞ 真空', '空氣 ＞ 真空 ＞ 玻璃 ＞ 水', '四者一樣快'], a: 0, e: '光在真空中最快（約 3×10⁸ m/s），空氣中約略相同，水中較慢，玻璃中更慢。' },
+    { t: '光不需介質', tf: true, q: '真空裡沒有任何介質，光還是走得過去。', e: '這是光和聲音的重要差別：聲音需要介質，光不需要。' },
+    { t: '光速與聲速', q: '看到閃電後，過一會兒才聽到雷聲。這個現象說明了什麼？', o: ['光在空氣中的速率比聲音快很多', '聲音比光傳得快', '光和聲音一樣快', '閃電會先把聲音吸收'], a: 0, e: '閃電的光和雷聲幾乎同時產生，但光傳得快得多，所以先看到光、後聽到聲。' },
+    { t: '光速的比較', q: '光線由空氣進入水中，速率會？', o: ['變慢', '變快', '不變', '先變快再變慢'], a: 0, e: '光在水中的速率（約 2.25×10⁸ m/s）比在空氣中慢。' },
+    { t: '光不需介質', q: '下列哪一項可以說明「光不需要介質也能傳播」？', o: ['太陽光穿過幾乎真空的太空到達地球', '聽到水中喇叭的聲音', '敲牆壁時隔壁聽得到', '把音叉放入水中會濺起水花'], a: 0, e: '太陽與地球之間大多是真空，光仍能傳到地球，表示光不需要介質。' },
+    { t: '光速的大小', q: '下列哪一個速率最大？', o: ['光在真空中的速率', '聲音在空氣中的速率', '聲音在鐵中的速率', '高速公路上行駛的汽車速率'], a: 0, e: '光速約 3×10⁸ 公尺／秒，比聲音和汽車快得多。' },
+    { t: '光速的比較', q: '光線由真空進入水中，傳播速率會怎樣？', o: ['變慢', '變快', '不變', '變成 0'], a: 0, e: '光在水中的速率比在真空中慢。' },
+    { t: '光速的比較', q: '下表是光在不同介質中的速率：真空 3×10⁸、水 2.25×10⁸、玻璃 2×10⁸（單位：公尺／秒）。光在哪一種介質中傳播得最慢？', o: ['玻璃', '水', '真空', '三者一樣慢'], a: 0, e: '數字最小的就是最慢，玻璃中的 2×10⁸ 最小，所以光在玻璃中最慢。' },
+    { t: '光速的比較', tf: false, q: '光在空氣中傳播的速率，比在水中還要慢。', e: '光在空氣中的速率大約和真空相同，比在水中快。' },
+    { t: '光不需介質', tf: false, q: '光必須靠空氣才能傳播，所以太空中的星光無法傳到地球。', e: '光不需要介質，可以穿過真空傳播，所以星光能越過幾乎真空的太空傳到地球。' },
+    { t: '光速的大小', q: '光在真空中的速率約 3×10⁸ 公尺／秒，也就是每秒約幾公里？', o: ['30 萬公里', '3 百公里', '3 萬公里', '3 千公里'], a: 0, e: '3×10⁸ 公尺 ＝ 3×10⁵ 公里 ＝ 30 萬公里，所以光一秒鐘約走 30 萬公里。' },
+    { t: '光速與聲速', q: '看遠處的人用鎚子敲打鐵樁時，會先看到鎚子落下，過一會兒才聽到敲擊聲。當距離變得更遠時，看到與聽到之間的時間差會？', o: ['變大', '變小', '不變', '變成 0'], a: 0, e: '光速遠比聲速快，光幾乎立刻傳到；距離愈遠，聲音落後的時間愈長，時間差就愈大。' },
+    { t: '光速的比較', tf: true, q: '光在水中的速率和光在玻璃中的速率並不一樣大。', e: '光在真空、空氣中最快，在水中較慢，在玻璃中更慢。' },
+  ])() });
+})();
+
+/* R1 反射定律與作圖 */
+(() => {
+  const TH = [20, 25, 30, 35, 40, 45, 50, 55, 60];
+  const g = () => {
+    const th = pick(TH), k = rnd(0, 3);
+    if (k === 0) return NUM('光線照射平面鏡，入射角是 ' + th + '°。反射角是幾度？', th, '度', `反射定律：入射角 ＝ 反射角，所以是 ${th}°。`, { svg: mirrorSvg({ theta: th, lab: { i: th + '°', r: '？' } }), tag: '反射定律' });
+    if (k === 1) return NUM(`圖中入射線與「鏡面」的夾角是 ${90 - th}°。反射角是幾度？`, th, '度', `入射角是入射線與「法線」的夾角，法線垂直鏡面：入射角 ＝ 90° − ${90 - th}° ＝ ${th}°，反射角 ＝ 入射角 ＝ ${th}°。`, { svg: mirrorSvg({ theta: th, mirrorAngle: (90 - th) + '°', lab: { r: '？' } }), tag: '入射角與鏡面夾角混淆' });
+    if (k === 2) return NUM(`入射線與反射線之間的夾角是 ${2 * th}°。入射角是幾度？`, th, '度', `入射角 ＝ 反射角，兩者相加是 ${2 * th}°，所以入射角是 ${2 * th} ÷ 2 ＝ ${th}°。`, { svg: mirrorSvg({ theta: th, lab: { i: '？', r: '？' } }), tag: '由夾角求入射角' });
+    return NUM(`光線經平面鏡反射，反射線與「法線」的夾角是 ${th}°。入射線與「鏡面」的夾角是幾度？`, 90 - th, '度', `入射角 ＝ 反射角 ＝ ${th}°，入射線與鏡面夾角 ＝ 90° − ${th}° ＝ ${90 - th}°。`, { svg: mirrorSvg({ theta: th, lab: { r: th + '°' }, mirrorAngle: '？' }), tag: '入射角與鏡面夾角混淆' });
+  };
+  def('R1', { sec: '4-2', can: '說出反射定律，並畫出法線、入射角與反射角', lc: 'Ka-IV-8', gen: () => Math.random() < .65 ? g() : bank('R1', [
+    { t: '反射定律', q: '關於光的反射定律，下列敘述何者正確？', o: ['入射角等於反射角', '入射角大於反射角', '入射角小於反射角', '入射角和反射角沒有關係'], a: 0, e: '反射定律：入射角 ＝ 反射角。' },
+    { t: '法線', q: '「法線」是怎樣的一條線？', o: ['通過入射點、垂直於界面的直線', '沿著鏡面的直線', '入射線的延長線', '反射線的延長線'], a: 0, e: '法線是在入射點作的、垂直界面（鏡面）的直線。' },
+    { t: '入射角的意思', q: '「入射角」是哪兩條線之間的夾角？', o: ['入射線與法線', '入射線與鏡面', '入射線與反射線', '反射線與鏡面'], a: 0, e: '入射角是入射線與法線的夾角；反射角是反射線與法線的夾角。' },
+    { t: '反射定律', q: '下列哪一項「不是」光的反射定律的內容？', o: ['光進入另一介質時會偏折', '入射線和反射線落在法線的不同邊', '入射線、反射線和法線在同一個平面上', '入射角等於反射角'], a: 0, e: '光進入另一介質發生偏折，是「折射」，不是反射定律。' },
+    { t: '反射定律', tf: true, q: '入射線、反射線、法線都在同一張平面上。', e: '這是反射定律的內容之一；若紙板向後摺，就看不到反射線。' },
+    { t: '反射角的意思', q: '「反射角」是哪兩條線之間的夾角？', o: ['反射線與法線', '反射線與鏡面', '入射線與反射線', '法線與鏡面'], a: 0, e: '反射角是反射線與法線的夾角，不是和鏡面的夾角。' },
+    { t: '反射定律', q: '光線斜向射到平面鏡，入射線與反射線的位置關係是？', o: ['分別在法線的兩側', '都在法線的同一側', '都貼在鏡面上', '都在鏡子後面'], a: 0, e: '入射線與反射線分別在法線的兩側。' },
+    { t: '反射定律', tf: false, q: '光線斜射到鏡面時，有一部分光被鏡子吸收了，所以入射角比反射角大一點。', e: '不論鏡子吸收多少光，入射角都等於反射角；被吸收只會讓反射光變暗。' },
+    { t: '反射定律', tf: false, q: '光線照到粗糙的牆壁時，並不遵守反射定律。', e: '光在任何表面反射都遵守反射定律；粗糙表面凹凸不平，各處的法線方向不同，反射光才向四面八方散開（漫反射）。' },
+    { t: '反射定律', q: '光線以愈來愈大的入射角射向平面鏡，反射角會怎樣？', o: ['跟著愈來愈大', '愈來愈小', '保持不變', '變成 0°'], a: 0, e: '入射角等於反射角，所以入射角變大，反射角也跟著變大。' },
+    { t: '反射定律', q: '實驗時，把紙板沿著法線向後折，折過去的那一半紙板上看不到反射光。這是因為？', o: ['入射線、法線與反射線並不位於同一個平面', '光被紙板吸收了', '法線消失了', '光速變成 0'], a: 0, e: '反射線必須和入射線、法線位在同一個平面上，紙板折開後，反射線不在這片紙板上。' },
+    { t: '反射定律', q: '入射線與法線的夾角是 30°。下列關於反射線的敘述何者正確？', o: ['在法線另一側，與法線夾 30°', '在法線同一側，與法線夾 30°', '在法線另一側，與鏡面夾 30°', '在法線另一側，與法線夾 60°'], a: 0, e: '入射角 ＝ 反射角 ＝ 30°，而且反射線和入射線在法線的兩側。' },
+    { t: '漫反射', q: '陽光照在平滑的玻璃窗上很刺眼，照在粗糙的牆壁上卻不刺眼。比較合理的原因是？', o: ['平滑表面把平行光反射成同方向的光，粗糙表面把光反射向各個方向', '粗糙的牆壁把光全部吸收', '玻璃窗會自己發出強光', '牆壁讓光穿透過去'], a: 0, e: '平滑表面反射後仍是平行光，眼睛位在反射光方向就覺得刺眼；粗糙表面使反射光散向四面八方，從各角度都看得到但不刺眼。' },
+    { t: '入射角與鏡面夾角混淆', q: '光線射向平面鏡，入射線與「鏡面」的夾角是 θ（θ 小於 90°）。這束光的反射角等於多少？', o: ['90° − θ', 'θ', '2θ', '90° ＋ θ'], a: 0, e: '入射角是入射線與法線的夾角，法線與鏡面垂直，所以入射角 ＝ 90° − θ，反射角與入射角相等。' },
+  ])() });
+})();
+
+/* R2 光的可逆性與垂直入射 */
+(() => {
+  const g = () => {
+    const th = pick([20, 30, 40, 50, 60]);
+    return NUM(`一束雷射光以入射角 ${th}° 射向平面鏡，反射後照在牆上的 A 點。若另一束雷射光改從 A 點沿著原來的反射光路徑射向鏡子，這束光的「入射角」是幾度？`, th, '度', `光具有可逆性，會沿原路徑反向走回去；從 A 點射向鏡子的光，入射角就是原本的反射角 ${th}°。`, { tag: '光的可逆性', hint: '想想：光的路徑反過來走，角度會變嗎？' });
+  };
+  def('R2', { sec: '4-2', can: '說明光的可逆性，以及垂直入射時的情形', lc: 'INe-II-6', gen: () => Math.random() < .35 ? g() : bank('R2', [
+    { t: '光的可逆性', q: '光具有「可逆性」，意思是？', o: ['光沿原來的路徑反向前進，仍會走同一條路徑', '光會一直反射下去', '光的速率不會改變', '光不能走回頭路'], a: 0, e: '把光的入射與反射（或折射）路徑反過來，光仍然會沿同一條路徑走。' },
+    { t: '垂直入射', q: '光線「垂直」射向平面鏡（入射線剛好疊在法線上），反射後會？', o: ['沿著原來的路徑反向射回', '偏向鏡面', '穿過鏡子', '不會反射'], a: 0, r: ['入射角是 0°，反射角也是 0°', '入射角是 90°，反射角是 0°', '光被鏡子吸收', '光速變成 0'], ra: 0, e: '垂直入射時入射角 0°，反射角也 0°，反射線沿原路反向射出。' },
+    { t: '光的可逆性', tf: true, q: '如果觀察者在鏡中看得到某人的眼睛，那麼那個人也能在鏡中看到觀察者的眼睛。', e: '光路具有可逆性，兩人之間的光線可以雙向走同一條路徑。' },
+    { t: '垂直入射', tf: false, q: '光垂直射向平面鏡時，因為沒有入射角，所以不會發生反射。', e: '垂直入射時入射角為 0°，反射角也是 0°，光仍會沿原路射回。' },
+    { t: '垂直入射', q: '光線垂直射向平面鏡時，入射角是多少度？', o: ['0°', '90°', '45°', '180°'], a: 0, e: '入射角是入射線與法線的夾角；垂直射向鏡面時，入射線就在法線上，夾角是 0°（不是 90°）。' },
+    { t: '垂直入射', q: '用雷射筆照鏡子時，發現反射光剛好照回自己的手。最可能的情形是？', o: ['雷射光垂直射向鏡面', '雷射光與鏡面平行', '鏡面把光完全吸收', '入射角是 90°'], a: 0, e: '光線垂直入射時，反射線會沿原路反向射出，所以光會回到發射的位置。' },
+    { t: '光的可逆性', q: '光從 A 點射向平面鏡，反射後到達 B 點。若改從 B 點沿原來的反射光路徑射向鏡子，光會怎樣？', o: ['沿同一條路徑反向走，到達 A 點', '走另一條不同的路徑', '不會被反射', '在鏡面消失'], a: 0, e: '光具有可逆性，把光路反過來，光仍然沿同一條路徑走。' },
+    { t: '光的可逆性', q: '某光線以 25° 的入射角射到平面鏡，反射後沿反射線方向前進。若有另一束光沿著這條反射線的反方向射向鏡面，它的入射角與反射角分別是多少？', o: ['入射角 25°，反射角 25°', '入射角 50°，反射角 50°', '入射角 65°，反射角 65°', '入射角 0°，反射角 0°'], a: 0, e: '反方向射來的光，路徑與原反射線重合，它與法線的夾角仍是 25°，所以入射角 ＝ 反射角 ＝ 25°。' },
+    { t: '垂直入射', tf: false, q: '光垂直射向平面鏡時，反射線會偏向鏡面的方向。', e: '垂直入射時反射線沿原來的入射線反向射出，不會偏向鏡面。' },
+    { t: '光的可逆性', tf: false, q: '光沿著反射線的反方向射向鏡面時，反射後不會回到原來光源的位置。', e: '光路具有可逆性，反射後會沿原入射線回到光源所在的位置。' },
+    { t: '垂直入射', q: '光線垂直射向平面鏡時，入射線、法線與反射線三者的關係是？', o: ['三者重疊在同一條直線上', '入射線與反射線互相垂直', '反射線與鏡面平行', '法線在入射線與反射線中間夾 45°'], a: 0, e: '垂直入射時，入射線就在法線上，反射線也沿法線射回，三條線重疊。' },
+    { t: '光的可逆性', q: '用雷射筆讓光線經過平面鏡反射，照在牆上的 P 點。如果把雷射筆移到 P 點，沿著反射線的反方向射向鏡面，光會照到哪裡？', o: ['原來雷射筆所在的位置', '原位置的上方', '原位置的下方', '鏡子的後面'], a: 0, e: '光路可逆，從 P 點射回鏡子的光會沿原路徑回到原來雷射筆的位置。' },
+    { t: '垂直入射', tf: true, q: '光垂直射向平面鏡時，反射角是 0°。', e: '反射角等於入射角；垂直入射時入射角是 0°，所以反射角也是 0°。' },
+    { t: '光的可逆性', q: '在暗室中，小美站在鏡子前，手電筒的光經鏡子反射後剛好照到小華的眼睛。若小華改用另一支手電筒，沿同一條光路向鏡子照過去，光會照到哪裡？', o: ['小美的位置', '小美旁邊另一個位置', '鏡子的後面', '什麼地方都照不到'], a: 0, e: '光具有可逆性，反向照出的光沿原路徑走，會回到小美的位置。' },
+  ])() });
+})();
+
+/* R3 平面鏡成像 */
+(() => {
+  const g = () => {
+    const k = rnd(0, 2), d = pick([1, 2, 3, 4, 5]);
+    if (k === 0) return NUM(`小明站在平面鏡前 ${d} 公尺，他在鏡中的像離鏡面幾公尺？`, d, '公尺', `平面鏡成像，物距 ＝ 像距，所以像離鏡面也是 ${d} 公尺。`, { tag: '物距等於像距' });
+    if (k === 1) return NUM(`小明站在平面鏡前 ${d} 公尺，他和自己在鏡中的像相距幾公尺？`, 2 * d, '公尺', `像距 ＝ 物距 ＝ ${d} 公尺，人到像的距離 ＝ ${d} ＋ ${d} ＝ ${2 * d} 公尺。`, { tag: '物距像距的合計' });
+    const x = pick([1, 2]), d2 = d + x + 1;
+    return NUM(`小明站在平面鏡前 ${d2} 公尺，他朝鏡子走近 ${x} 公尺後，他與自己在鏡中的像相距幾公尺？`, 2 * (d2 - x), '公尺', `走近後離鏡面 ${d2} − ${x} ＝ ${d2 - x} 公尺，像也離鏡面 ${d2 - x} 公尺，兩者相距 ${2 * (d2 - x)} 公尺。`, { tag: '物距像距的合計' });
+  };
+  def('R3', { sec: '4-2', can: '說出平面鏡成像的性質（虛像、等大、對稱、物距＝像距）', lc: 'Ka-IV-8', gen: () => Math.random() < .35 ? g() : bank('R3', [
+    { t: '平面鏡成像的性質', q: '下列哪一項「不是」平面鏡成像的性質？', o: ['像比物體小', '像和物體大小相等', '物體與像以鏡面為中心對稱', '像到鏡面的距離等於物到鏡面的距離'], a: 0, e: '平面鏡所成的像與物體等大，而且和鏡面兩側對稱，物距和像距相等。' },
+    { t: '虛像', q: '把白紙放在平面鏡後方像的位置，紙上看不到像。這表示平面鏡所成的像是？', o: ['虛像', '實像', '放大的像', '倒立的像'], a: 0, r: ['像不是真實的光線在紙上聚成的，只是反射光向後延伸的交點', '像是真實光線會聚形成的', '像太暗了', '像在鏡面上'], ra: 0, e: '虛像無法呈現在屏幕上；像出現在反射光往鏡後延長線的相交處。' },
+    { t: '虛像', q: '平面鏡中的像，是由什麼構成的？', o: ['反射光往鏡後延長後相交的地方，看起來像在鏡後', '真實光線在鏡後聚集', '鏡子自己發出的光', '鏡後真的有一個物體'], a: 0, e: '來自物體的光經鏡面反射進入眼睛，看起來好像鏡後有物體，其實那裡沒有真實光線。' },
+    { t: '平面鏡成像的性質', tf: true, q: '不管你站在鏡前的哪個位置觀察，鏡中像的位置與大小都不會改變。', e: '改變眼睛位置，像的位置和大小不變，只是能不能看到的角度不同。' },
+    { t: '平面鏡成像的性質', tf: false, q: '當你遠離平面鏡時，你在鏡中的像會變小。', e: '平面鏡的像永遠和物體等大，距離改變時像只是離鏡面更遠，大小不變。' },
+    { t: '平面鏡成像的應用', q: '白天從光線充足的路上看車窗，常看到自己的像，看不清車內。這是因為？', o: ['車外的光反射進眼睛，比穿透車窗的車內光線強得多', '車窗會吸收所有光', '車內的人看不到車外', '玻璃是黑色的'], a: 0, e: '車外光線強、車內光線弱，進入眼睛的反射光蓋過了車內的光，所以看到自己的像。' },
+    { t: '物距與像距', q: '平面鏡成像中的「物距」是指？', o: ['物體到鏡面的距離', '像到鏡面的距離', '物體到像的距離', '眼睛到鏡面的距離'], a: 0, e: '物距是物體到鏡面的距離；像到鏡面的距離是像距；物與像之間的距離是兩者相加。' },
+    { t: '平面鏡成像的性質', q: '小明站在平面鏡前，他在鏡中的像和他本人相比，大小怎樣？', o: ['一樣大', '比較小', '比較大', '隨他站的位置改變'], a: 0, e: '平面鏡的像與物體等大，不論距離遠近都不會改變。' },
+    { t: '虛像', tf: false, q: '平面鏡成的像，是真實光線在鏡子後面聚集形成的，所以可以用紙接到。', e: '平面鏡的像是虛像，鏡後並沒有真實光線聚集，用紙接不到。' },
+    { t: '平面鏡成像的性質', q: '小華走向平面鏡時，鏡中的像會怎樣？', o: ['也向鏡面靠近，大小不變', '變大', '變小', '離開鏡面'], a: 0, e: '像距等於物距，人靠近鏡面，像也靠近鏡面；像與物體等大，大小不會改變。' },
+    { t: '平面鏡成像的應用', q: '夜晚搭車時，車內開著燈、車外很暗，坐在車內往窗外看，常會看見什麼？', o: ['車內乘客在玻璃上的像', '車外景物比車內更清楚', '車窗自己發出的光', '完全看不到玻璃上有像'], a: 0, e: '車內的光線被玻璃反射，進入眼睛，看起來好像乘客在車外；車外太暗，穿透玻璃進來的光很少。' },
+    { t: '平面鏡成像的性質', q: '平面鏡成像時，物體與像的關係可以用哪一個詞來形容？', o: ['以鏡面為中心對稱', '像比物體縮小', '像和物體在同一個位置', '像在鏡面上'], a: 0, e: '物與像相對於鏡面成對稱，而且物距等於像距。' },
+    { t: '虛像', tf: true, q: '把站在平面鏡前的人移走，鏡中的像也會同時消失。', e: '像是來自物體的光（自己發出的或反射來的）再經鏡面反射才形成的；物體不在了，就沒有這些光，像也跟著消失。' },
+    { t: '虛像', q: '光線經平面鏡反射進入眼睛後，看起來像是從哪裡發出來的？', o: ['鏡面後方、與物體等距的位置', '鏡面上', '鏡面前方、眼睛所在位置', '物體所在位置'], a: 0, e: '眼睛把進入的光線當成直線，向後延長，感覺光來自鏡後與物等距的位置，這就是虛像的位置。' },
+  ])() });
+})();
+
+/* R4 凸面鏡與凹面鏡 */
+def('R4', { sec: '4-2', can: '說出凸面鏡與凹面鏡對光線的作用、成像與生活應用', lc: 'Ka-IV-8', gen: bank('R4', [
+  { t: '凸面鏡與凹面鏡', q: '平行光照射到「凸面鏡」後反射，光線會？', o: ['發散', '會聚於一點', '全部平行射回', '全部被吸收'], a: 0, e: '凸面鏡使平行光發散，所以能擴大視野。' },
+  { t: '凸面鏡與凹面鏡', q: '平行光照射到「凹面鏡」後反射，光線會？', o: ['會聚於一點（焦點）', '發散', '不反射', '沿原路回去'], a: 0, e: '凹面鏡使平行光會聚於焦點。' },
+  { t: '面鏡的應用', q: '公車的後照鏡、道路轉彎處的反射鏡，通常使用哪一種面鏡？', o: ['凸面鏡', '凹面鏡', '平面鏡', '三稜鏡'], a: 0, r: ['凸面鏡成正立縮小的虛像，可擴大視野', '凹面鏡成放大的像，視野更大', '平面鏡成像最大', '凸面鏡能產生實像'], ra: 0, e: '凸面鏡的像是正立、縮小的虛像，能看到比較廣的範圍，常用來擴大視野。' },
+  { t: '面鏡的應用', q: '化妝鏡能把臉放大，方便修飾儀容，它通常是？', o: ['凹面鏡', '凸面鏡', '平面鏡', '哈哈鏡'], a: 0, e: '物體靠近凹面鏡時（在焦點內）會成正立放大的虛像，化妝鏡就利用這一點。' },
+  { t: '面鏡的應用', q: '手電筒的反光杯，把燈泡放在焦點附近，光就能變成平行光束照得很遠。這個反光杯是？', o: ['凹面鏡', '凸面鏡', '平面鏡', '透明塑膠板'], a: 0, e: '光源放在凹面鏡的焦點，反射出去變成一束平行光（光路可逆的性）。' },
+  { t: '面鏡成像', q: '物體放在「凸面鏡」前，所成的像是？', o: ['正立縮小的虛像', '正立放大的虛像', '倒立縮小的實像', '倒立放大的實像'], a: 0, e: '凸面鏡所成的像永遠是正立縮小的虛像。' },
+  { t: '面鏡成像', q: '物體靠近「凹面鏡」（在焦點內），所成的像是？', o: ['正立放大的虛像', '正立縮小的虛像', '倒立縮小的實像', '和物體一樣大'], a: 0, e: '物體在凹面鏡前近處時，像是正立放大的虛像。' },
+  { t: '面鏡的應用', tf: true, q: '凹面鏡的「焦點」是平行光反射後會聚集的那一點。', e: '平行光射向凹面鏡，反射後都集中到同一點，這一點就是焦點。' },
+  { t: '面鏡的應用', q: '便利商店的天花板角落常裝一面凸面鏡，方便店員監看賣場。這樣做的好處是？', o: ['能看到比較廣的範圍', '能讓像放大', '能讓像上下顛倒', '能讓光線會聚'], a: 0, e: '凸面鏡成正立縮小的虛像，視野比較大，所以能用小小的鏡子看到大範圍。' },
+  { t: '面鏡的應用', q: '有一種「太陽灶」，把陽光集中在一點來加熱鍋子，它的反射面應該是？', o: ['凹面鏡', '凸面鏡', '平面鏡', '毛玻璃'], a: 0, e: '凹面鏡能使平行光（陽光）反射後會聚於焦點，把光和熱集中在鍋子上。' },
+  { t: '凸面鏡與凹面鏡', tf: false, q: '凸面鏡能使平行光反射後會聚於一點，所以常用來當聚光燈的反光罩。', e: '凸面鏡使平行光反射後發散；聚光與手電筒的反光罩用的是凹面鏡。' },
+  { t: '面鏡成像', tf: true, q: '凸面鏡所成的像比實際物體小，所以在鏡中可以看到比較大的範圍。', e: '凸面鏡成正立縮小的虛像，使視野擴大，常用在後照鏡與道路反射鏡。' },
+  { t: '面鏡的應用', q: '想用化妝鏡（凹面鏡）把臉看得更大、更清楚，臉應該怎樣擺放？', o: ['靠近鏡子，放在焦點以內', '離鏡子很遠', '背對鏡子', '用手遮住鏡面'], a: 0, e: '物體在凹面鏡的焦點內時，成正立放大的虛像，所以臉要靠近鏡子。' },
+  { t: '面鏡成像', q: '把物體放在凹面鏡的焦點以內，以及放在凸面鏡前，兩種情況成的像都是正立虛像。這兩個像的大小關係是？', o: ['凹面鏡的像放大，凸面鏡的像縮小', '兩者都縮小', '兩者都放大', '兩者都和物體等大'], a: 0, e: '凹面鏡在物體位於焦點內時成放大的虛像；凸面鏡的像永遠是縮小的虛像。' },
+  { t: '面鏡的應用', q: '下列哪一個物品「不是」使用凸面鏡？', o: ['化妝鏡', '機車的後照鏡', '道路轉彎處的反射鏡', '商店角落的監視鏡'], a: 0, e: '化妝鏡是凹面鏡，用來放大；後照鏡、轉彎處的反射鏡、監視鏡都是凸面鏡，用來擴大視野。' },
+]) });
+
+/* F1 折射現象 */
+(() => {
+  const M = { '空氣': { n: 1.0, c: '#f4f9ff', s: 0 }, '水': { n: 1.33, c: '#cfe7fb', s: 1 }, '玻璃': { n: 1.5, c: '#d7e8d3', s: 2 } };
+  const speedTxt = { '空氣': '快', '水': '慢', '玻璃': '更慢' };
+  const g = () => {
+    if (Math.random() < .12) {
+      const [a, b] = pick([['空氣', '水'], ['空氣', '玻璃'], ['水', '空氣']]);
+      return TT(`光線由${a}「垂直」射入${b}（入射角 0°）。它的前進方向和速率會怎樣？`, ['方向不偏折，速率改變', '方向偏折，速率不變', '方向偏折，速率也改變', '方向和速率都不變'], 0, ['垂直入射時不會偏折，但不同介質中光速不同', '垂直入射時光會反射回去', '光進入新介質就一定會偏折', '光在任何介質中速率都相同'], 0, '光垂直射進另一種介質時走直線不轉彎，不過速率照樣改變。', { tag: '垂直入射的折射' });
+    }
+    const pairs = [['空氣', '水'], ['空氣', '玻璃'], ['水', '空氣'], ['玻璃', '空氣'], ['水', '玻璃'], ['玻璃', '水']];
+    const [a, b] = pick(pairs), toward = M[b].s > M[a].s;
+    const bt = b === '空氣', top = bt ? b : a, bottom = bt ? a : b, dir = bt ? 'up' : 'down';
+    const { svg } = refractSvg({ n1: M[a].n, n2: M[b].n, theta: 35, top, bottom, dir, colors: [M[top].c, M[bottom].c] });
+    return TT(`光線斜向由「${a}」進入「${b}」（光速：空氣最快，水較慢，玻璃最慢）。折射時，光線會怎樣偏折？`, ['偏向法線（折射角 ＜ 入射角）', '偏離法線（折射角 ＞ 入射角）', '不偏折'], toward ? 0 : 1,
+      ['光速由快變慢', '光速由慢變快', '光速不變'], toward ? 0 : 1,
+      toward ? `光由${a}（${speedTxt[a]}）進入${b}（${speedTxt[b]}），光速變慢，折射線偏向法線，折射角比入射角小。` : `光由${a}（${speedTxt[a]}）進入${b}（${speedTxt[b]}），光速變快，折射線偏離法線，折射角比入射角大。`,
+      { svg, tag: '折射偏折方向' });
+  };
+  def('F1', { sec: '4-3', can: '說明折射現象，並由光速快慢判斷偏向或偏離法線', lc: 'Ka-IV-8', gen: () => Math.random() < .7 ? g() : bank('F1', [
+    { t: '折射的意思', q: '「折射」是指什麼現象？', o: ['光進入不同介質時，在交界處前進方向發生偏折', '光遇到鏡子彈回來', '光沿直線前進', '光變成各種顏色'], a: 0, e: '光從一種介質進到另一種介質，在交界處改變前進方向，這個現象叫折射。' },
+    { t: '折射的名詞', q: '光在交界處轉彎後，在新介質裡走的那條線叫什麼？', o: ['折射線', '反射線', '入射線', '法線'], a: 0, e: '轉彎後的光線叫折射線，它和法線所夾的角是折射角。' },
+    { t: '折射的名詞', q: '折射角是哪兩條線的夾角？', o: ['折射線與法線', '折射線與界面', '入射線與折射線', '入射線與界面'], a: 0, e: '折射角是折射線與法線的夾角。' },
+    { t: '折射偏折方向', tf: true, q: '光由空氣斜向射入水中，折射線會偏向法線。', e: '光速由快（空氣）變慢（水），偏向法線。' },
+    { t: '折射偏折方向', tf: false, q: '光由水斜向射入空氣，折射角會比入射角小。', e: '光速變快，偏離法線，折射角比入射角大。' },
+    { t: '折射偏折方向', q: '光線由空氣斜向射入玻璃，光速與偏折情形如何？', o: ['光速變慢，折射角小於入射角', '光速變快，折射角小於入射角', '光速變慢，折射角大於入射角', '光速變快，折射角大於入射角'], a: 0, e: '空氣中光速較快，玻璃中較慢；光速變慢，偏向法線，折射角比入射角小。' },
+    { t: '折射的意思', q: '把筷子斜插進裝水的透明杯子，從側面看，筷子在水面處好像折斷了。這是哪一種光學現象造成的？', o: ['折射', '反射', '針孔成像', '色散'], a: 0, e: '水中筷子反射出的光在水面進入空氣時改變方向，使我們看到的筷子位置錯開，是折射現象。' },
+    { t: '垂直入射的折射', q: '光線從空氣射入水中時，在什麼情況下前進方向不會改變？', o: ['垂直射入水面（入射角 0°）', '斜向射入水面', '入射角很大時', '光速變慢時一定不改變'], a: 0, e: '垂直入射時，光不會偏折，但光速仍然改變；斜向射入才會偏折。' },
+    { t: '折射偏折方向', tf: true, q: '光由玻璃斜向射入空氣時，折射角比入射角大。', e: '玻璃中光速慢，空氣中光速快，光速變快，偏離法線，折射角比入射角大。' },
+    { t: '折射偏折方向', q: '光由玻璃斜向射入水中，已知光在玻璃中比在水中更慢。光線在水中會怎樣偏折？', o: ['偏離法線（折射角大於入射角）', '偏向法線（折射角小於入射角）', '不會偏折', '全部反射回玻璃'], a: 0, e: '光由較慢的玻璃進入較快的水，光速變快，所以偏離法線，折射角比入射角大。' },
+    { t: '垂直入射的折射', tf: false, q: '光垂直射入水中時，不會偏折，所以光的速率也不會改變。', e: '垂直入射時不偏折，但是光在水中的速率比空氣慢，速率仍然會改變。' },
+    { t: '折射的原因', q: '光進入另一種介質時，下列哪一項「一定」會改變？（兩種介質的光速不同）', o: ['傳播速率', '前進方向', '入射角', '光源的亮度'], a: 0, e: '進入光速不同的介質，速率一定改變；但垂直入射時前進方向不變，所以方向不是「一定」改變。' },
+    { t: '折射的原因', q: '下列哪一項，說明了光為什麼會發生折射？', o: ['光在不同介質中傳播的速率不同', '光被介質吸收了一部分', '光碰到介質會彈回來', '不同介質的顏色不同'], a: 0, e: '光進入光速不同的介質，前進方向在交界處偏折，就是折射。' },
+    { t: '折射偏折方向', q: '光線由空氣斜向射入水中，折射線與原來入射線的延伸方向相比，會怎樣？', o: ['更靠近法線', '更遠離法線', '更靠近界面', '完全重合'], a: 0, e: '光由空氣（快）進入水（慢），偏向法線，所以折射線比入射線的延長線更靠近法線。' },
+  ])() });
+})();
+
+/* F2 折射作圖、角度比較與可逆性 */
+(() => {
+  const PAIRS = [[30, 22], [40, 29], [45, 32], [50, 35], [60, 41]];
+  const g = () => {
+    const [i, r] = pick(PAIRS);
+    return NUM(`光由空氣斜向射入水中，入射角是 ${i}°，折射角是 ${r}°。若光改由水中以 ${r}° 的入射角射向空氣，折射角會是幾度？`, i, '度', `折射也有可逆性：光走回頭路，路徑相同。原本空氣中的入射角 ${i}° 就變成這次的折射角。`, { tag: '折射的可逆性', hint: '光走回頭路，路徑相同。' });
+  };
+  def('F2', { sec: '4-3', can: '比較折射角與入射角，運用折射的可逆性與水、玻璃的差異', lc: 'Ka-IV-8', gen: () => Math.random() < .35 ? g() : bank('F2', [
+    { t: '水與玻璃的比較', q: '光以相同的入射角，分別由空氣射入水與玻璃。哪一個的折射角比較小？', o: ['玻璃', '水', '一樣大', '無法判斷'], a: 0, r: ['光在玻璃中的速率比水更慢，偏折更多', '光在玻璃中的速率比水快', '玻璃會反射更多光', '兩種介質的偏折一樣'], ra: 0, e: '光進入的介質讓光跑得愈慢，光線就愈靠近法線、折射角愈小；玻璃讓光跑得比水更慢。' },
+    { t: '由角度判斷光速', q: '光斜向由甲介質射入乙介質，入射角 40°、折射角 28°。可以推論？', o: ['乙介質中的光速比甲慢', '乙介質中的光速比甲快', '兩介質光速相同', '光在乙介質中不會前進'], a: 0, r: ['折射角小於入射角，偏向法線，光速變慢', '折射角小於入射角，光速變快', '折射角小於入射角，所以反射了', '兩角度不同光速一定相同'], ra: 0, e: '折射角比入射角小，表示光偏向法線，也就是光速由快變慢。' },
+    { t: '由角度判斷光速', q: '光斜向由丙介質射入丁介質，入射角 30°、折射角 40°。可以推論？', o: ['丁介質中的光速比丙快', '丁介質中的光速比丙慢', '兩者光速相同', '光發生了反射'], a: 0, e: '折射角比入射角大，光偏離法線，表示光速由慢變快。' },
+    { t: '折射作圖', q: '光由空氣斜射入水中的作圖中，入射線與折射線的位置關係是？', o: ['分別在法線的兩側', '在法線的同一側', '都和法線重疊', '都和界面重疊'], a: 0, e: '入射線與折射線位於法線的兩側。' },
+    { t: '折射的可逆性', tf: true, q: '光從空氣進水、和光從水進空氣，走的是同一條路只是方向反過來，所以折射也有可逆性。', e: '把光路反過來，光仍沿同一條路徑走。' },
+    { t: '垂直入射', tf: true, q: '光垂直射入不同介質時不會偏折，但光速會改變。', e: '垂直入射時入射角為 0°，不會偏折；不同介質中光速不同。' },
+    { t: '折射角與入射角', q: '光線由空氣斜向射入水中，入射角是 45°。折射角可能是下列哪一個？', o: ['32°', '45°', '60°', '90°'], a: 0, e: '光由空氣進入水，光速變慢，偏向法線，折射角比 45° 小，所以 32° 合理。' },
+    { t: '折射角與入射角', q: '光線由水斜向射入空氣，入射角是 30°。折射角會怎樣？', o: ['比 30° 大', '比 30° 小', '剛好是 30°', '剛好是 0°'], a: 0, e: '光由水（慢）進入空氣（快），偏離法線，折射角比入射角大。' },
+    { t: '由角度判斷光速', q: '光由甲介質斜向射入乙介質，折射角恰好等於入射角（入射角不是 0°）。可以推論？', o: ['兩種介質中的光速相同', '乙介質中的光速比較慢', '乙介質中的光速比較快', '光發生了反射'], a: 0, e: '光速沒有改變，前進方向就不會偏折，折射角才會等於入射角。' },
+    { t: '水與玻璃的比較', q: '光以同一個入射角由空氣斜向射入水或玻璃。折射角與入射角，由小到大的順序是？', o: ['玻璃中的折射角 ＜ 水中的折射角 ＜ 入射角', '水中的折射角 ＜ 玻璃中的折射角 ＜ 入射角', '入射角 ＜ 水中的折射角 ＜ 玻璃中的折射角', '入射角 ＜ 玻璃中的折射角 ＜ 水中的折射角'], a: 0, e: '空氣中光速最快，玻璃最慢；進入愈慢的介質，光線偏向法線的程度愈大，折射角就愈小。' },
+    { t: '水與玻璃的比較', tf: false, q: '光以相同的入射角由空氣斜向射入水與玻璃，兩者偏折的程度一樣大。', e: '光在玻璃中的速率比在水中更慢，偏折得更多，折射角比水中小。' },
+    { t: '由角度判斷光速', tf: true, q: '光斜向由光速較慢的介質進入光速較快的介質，折射角大於入射角。', e: '光速變快，偏離法線，折射角比入射角大。' },
+    { t: '折射的可逆性', q: '光由空氣以入射角 θ 射入玻璃，折射角是 φ。若光改由玻璃以入射角 φ 射入空氣，折射角會是多少？', o: ['θ', 'φ', '2θ', '90°'], a: 0, e: '折射具有可逆性，路徑反過來走，原本在空氣中的入射角 θ 就變成這次的折射角。' },
+    { t: '由角度判斷光速', q: '同樣的入射角，光射入甲介質後的折射角比射入乙介質後的折射角小。哪一個介質中光速比較慢？', o: ['甲', '乙', '兩者一樣', '無法判斷'], a: 0, e: '折射角愈小，表示光愈偏向法線，進入的介質中光速愈慢，所以甲中光速較慢。' },
+  ])() });
+})();
+
+/* F3 視深 */
+def('F3', { sec: '4-3', can: '解釋視深小於實深（杯底變淺、游泳池看起來比較淺）', lc: 'Ka-IV-8', gen: bank('F3', [
+  { t: '視深與實深', q: '站在游泳池邊往下看，池底看起來比實際深度？', o: ['淺', '深', '一樣深', '看不到'], a: 0, r: ['光從水中進入空氣時發生偏折，使我們看到的位置變淺', '水會把光吸收', '光線沿直線，沒有偏折', '池底會自己上升'], ra: 0, e: '看起來的深度叫視深，比實際深度（實深）淺，是光線在水面折射造成的。' },
+  { t: '視深與實深', tf: false, q: '游泳池的視深大於實深，所以池水看起來比實際更深。', e: '視深比實深淺，這就是為什麼不能只憑眼睛判斷水深。' },
+  { t: '杯底的燈具', q: '杯底放一個燈具，眼睛的位置剛好被杯緣擋住看不到。慢慢加水後，竟然看到了燈具。這是因為？', o: ['光線由水進入空氣時偏折，繞過杯緣進入眼睛', '水把燈具推高了', '水讓燈具變得更亮', '眼睛變得更敏銳'], a: 0, e: '燈具發出的光，在水面處折射後能越過杯緣到達眼睛。光仍然沿直線走，只是在水面轉了彎。' },
+  { t: '視深的成因', q: '看水中的物體時，眼睛看到的像位置，是怎麼決定的？', o: ['進入眼睛的光線，反向延長後的交會處', '物體真正的位置', '水面的位置', '眼睛的位置'], a: 0, e: '眼睛把進入的光線當成直線，沿反方向延長，在那裡看到物體，所以位置和真實位置不同。' },
+  { t: '視深與實深', q: '往空水桶裝水，隨著水位上升，桶底看起來會怎樣？', o: ['看起來愈來愈高（愈來愈近）', '看起來愈來愈深', '位置不變', '消失不見'], a: 0, e: '水位上升時，光線折射的位置愈來愈接近眼睛，看到的桶底也愈來愈近。' },
+  { t: '生活安全', q: '看起來很淺的池水，實際可能很深。下水前比較安全的做法是？', o: ['用物品或讓腳慢慢下水測量水深', '看到水很淺就直接跳進去', '請別人跳下去試試看', '閉上眼睛跳下去'], a: 0, e: '視深比實深淺，不能只憑目測判斷水深。' },
+  { t: '光線的方向', tf: true, q: '看見杯底燈具時，光是由燈具發出，經水面折射後進入眼睛，而不是從眼睛發出去的。', e: '光從光源（或反射物體）進入眼睛，我們才看見東西；眼睛本身不會發光。' },
+  { t: '視深與實深', q: '從岸上看池底，「看起來的深度」和「實際的深度」分別稱為什麼？', o: ['視深；實深', '實深；視深', '像深；物深', '淺度；深度'], a: 0, e: '看起來的深度叫視深，實際的深度叫實深。池水的視深小於實深。' },
+  { t: '視深的成因', tf: true, q: '池水的視深小於實深，是因為光由水進入空氣時發生了折射。', e: '光從水中射入空氣時偏折，進入眼睛的光線反向延長後交在較淺的位置，所以看起來比較淺。' },
+  { t: '視深與實深', q: '站在岸邊看水裡的魚，魚看起來的位置和真正的位置相比，會怎樣？', o: ['看起來比較淺（比較接近水面）', '看起來比較深', '位置完全一樣', '看起來在水面上方很高的地方'], a: 0, e: '光線由水進入空氣時折射，使我們看到的魚比實際位置淺一些。' },
+  { t: '生活安全', q: '小朋友看到池水似乎很淺，直接跳下去，結果水深到胸口。這件事主要說明？', o: ['視深小於實深，不能只靠眼睛判斷水深', '池水會自己變深', '光在水中不會折射', '小朋友的視力一定不好'], a: 0, e: '因為折射，池水看起來比實際淺，所以不能只憑目測判斷水深，要先測量再下水。' },
+  { t: '視深的成因', tf: false, q: '站在池邊往下看，光沿直線進入眼睛，所以看到的池底位置就是真實位置。', e: '光從池底到眼睛的途中，在水面處發生折射而偏折，我們看到的位置與真實位置不同。' },
+  { t: '視深的成因', q: '光線由水進入空氣時折射角比入射角大，使折射線偏離法線。這會讓我們看到水底的物體位置怎樣？', o: ['比實際位置淺', '比實際位置深', '在水面上方', '位置不變'], a: 0, r: ['光由慢變快，偏離法線，反向延長後交在較淺處', '光由快變慢，偏向法線', '光不會偏折', '光被水吸收'], ra: 0, e: '進入眼睛的光線反向延長，會交在比實際位置更淺的地方，所以看起來較淺。' },
+  { t: '視深與實深', q: '下列哪一個現象，和「視深小於實深」的成因最相近？', o: ['空水桶裝水時，桶底看起來愈來愈高', '影子隨著太陽的位置移動', '在山谷裡聽到回聲', '在鏡子裡看到自己的像'], a: 0, e: '裝水時桶底看起來變高，也是光線由水進入空氣的折射造成的；其餘三項分別是光的直進、聲音反射、光的反射。' },
+]) });
+
+/* ---- c_q_s.js ---- */
+/* ===== 3-2 ~ 3-4 聲音：S1–S11 題庫與出題器（題目皆為自擬） ===== */
+
+/* S1 聲音的產生 */
+def('S1', { sec: '3-2', can: '說明聲音由物體快速振動產生', lc: 'INe-II-5', gen: bank('S1', [
+  { t: '聲音的來源', q: '敲擊音叉後，立刻把音叉的金屬部分碰到水面，水面濺起水花。這個現象說明？', o: ['發聲的音叉正在振動', '音叉會產生水', '聲音是液體', '水面本來就會濺起水花'], a: 0, e: '音叉發聲時在快速振動，碰到水面才會把水濺起來。' },
+  { t: '聲音的來源', q: '敲響音叉後用手握住它的金屬部分，嗡嗡聲很快消失。最合理的解釋是？', o: ['握住讓音叉停止振動，所以聲音也停了', '手把聲音吸收掉了', '音叉的聲音只能維持一秒', '手發出的聲音蓋過音叉'], a: 0, r: ['聲音來自物體的快速振動', '聲音來自物體的溫度', '聲音是從手傳出的', '聲音是光變成的'], ra: 0, e: '聲音是物體快速振動才有的；振動一停，聲音就跟著停止。' },
+  { t: '聲源', q: '「發出聲音的物體」稱為什麼？', o: ['聲源', '介質', '波峰', '聲速'], a: 0, e: '發聲的物體叫聲源；傳遞聲音的物質叫介質。' },
+  { t: '樂器發聲', q: '下列樂器與「振動的部分」配對，何者正確？', o: ['吉他：弦', '鼓：簧片', '薩克斯風：鼓面', '鑼：弦'], a: 0, e: '鋼琴、吉他靠弦振動；薩克斯風靠簧片；鑼、鼓靠鑼面、鼓面。' },
+  { t: '樂器發聲', q: '敲打鼓面時，鼓面上的小水珠會跳起來。這是因為？', o: ['鼓面在振動', '鼓面變熱', '鼓面上有風', '聲音是水做的'], a: 0, e: '鼓聲來自鼓面的快速振動，振動把水珠彈起來。' },
+  { t: '聲音的來源', tf: true, q: '用手輕按正在發聲的鑼面，鑼聲會變小或消失，是因為鑼面的振動被壓住了。', e: '振動被壓住，聲音就變小甚至停止，可見聲音是由振動產生的。' },
+  { t: '聲音的來源', tf: false, q: '只有固體振動才會發出聲音，空氣振動不會。', e: '任何物體的快速振動都可能發聲；例如吹笛子，就是空氣柱在振動。' },
+  { t: '聲音的來源', q: '打雷或放鞭炮時，旁邊車子的防盜器有時會響。比較合理的原因是？', o: ['巨大的聲響經空氣傳來，使車子振動', '雷聲和鞭炮把電傳給車子', '防盜器聽到有人說話', '車子被光照到'], a: 0, e: '巨大的聲響使空氣劇烈振動，傳到車子上，觸動了防盜器。' },
+  { t: '聲音的來源', tf: true, q: '把手輕輕貼在喉嚨上說話，會感覺到喉嚨在顫動，這表示聲音和物體的振動有關。', e: '說話時聲帶在快速振動，手摸得到顫動，所以聲音是由物體振動產生的。' },
+  { t: '樂器發聲', q: '按下鋼琴的琴鍵後，琴中發出聲音的部分是下列哪一項在振動？', o: ['琴弦', '簧片', '鼓面', '鑼面'], a: 0, e: '鋼琴是利用弦的振動發聲；簧片、鼓面、鑼面分別是薩克斯風、鼓和鑼的發聲部分。' },
+  { t: '聲音的來源', q: '把鐵尺的一端壓在桌邊，撥動伸出桌外的部分，看到尺快速上下晃動並發出嗡嗡聲。如果用手把尺壓住不動，會怎樣？', o: ['聲音停止或消失', '聲音變得更大', '聲音變成高音', '聲音完全不受影響'], a: 0, e: '尺不再振動，聲音就跟著停止，可見聲音是由物體快速振動產生的。' },
+  { t: '聲音的來源', q: '下列哪一個現象「不能」當作聲音由物體振動產生的證據？', o: ['按下手電筒的開關，燈泡就亮了', '敲響的音叉碰到水面，水花濺起', '彈撥橡皮筋，看到橡皮筋快速晃動並聽到聲音', '用手握住發聲的音叉，聲音立刻消失'], a: 0, e: '燈泡亮與振動、聲音無關；其餘三項都顯示：物體在快速振動時發出聲音，振動被止住，聲音也消失。' },
+  { t: '聲源', q: '下列哪一個是「聲源」？', o: ['正在發聲的音叉', '傳遞聲音的空氣', '接收聲音的耳朵', '聲波本身'], a: 0, e: '發出聲音的物體稱為聲源；空氣是傳遞聲音的介質，耳朵是接收者。' },
+  { t: '聲音的來源', q: '用細線吊一顆小球，輕輕靠近正在發聲的音叉，小球被彈開。最合理的解釋是？', o: ['發聲的音叉正在快速振動，把小球撞開', '音叉變熱，把小球烤開', '音叉發出光，把小球推開', '音叉有磁性，把小球吸過去'], a: 0, e: '音叉發聲時快速振動，振動碰到小球就把它彈開，這也是看得到「聲源在振動」的好方法。' },
+  { t: '聲音的來源', tf: false, q: '鞦韆來回緩慢擺動時也在振動，所以一定會發出和音叉一樣的聲音。', e: '聲音是物體「快速」振動所產生的；鞦韆擺得太慢，不會發出我們聽得到的聲音。' },
+]) });
+
+/* S2 聲音需要介質 */
+def('S2', { sec: '3-2', can: '說明聲音需要介質才能傳播（固、液、氣皆可，真空不行）', lc: 'INe-II-5', gen: bank('S2', [
+  { t: '聲音傳播的介質', q: '波以耳把鈴鐺放進玻璃罩中敲響，再把罩內的空氣慢慢抽走。聽到的聲音會怎樣？', o: ['愈來愈小，接近真空時幾乎聽不到', '愈來愈大', '完全不變', '一開始就聽不到'], a: 0, r: ['聲音需要介質才能傳播', '聲音不需要介質', '鈴鐺在真空中不會振動', '空氣會把聲音吸收'], ra: 0, e: '空氣（介質）變少，傳到耳朵的聲音就變小；真空中沒有介質，聲音傳不出來。' },
+  { t: '聲音傳播的介質', q: '太空是真空。兩位太空人各自在太空中（不靠無線電）面對面說話，會怎樣？', o: ['聽不到彼此的聲音', '聲音變得更大', '聽得和地面一樣清楚', '只有高音聽得到'], a: 0, e: '真空中沒有傳聲的介質，聲音無法傳播。' },
+  { t: '聲音傳播的介質', q: '水上芭蕾的舞者在水面下仍能聽到水中喇叭的音樂。這說明？', o: ['聲音可以經液體傳播', '聲音只能經空氣傳播', '聲音不需要介質', '水會讓聲音變成光'], a: 0, e: '水是液體，這個例子說明聲音可以經液體傳播。' },
+  { t: '聲音傳播的介質', q: '隔壁的人用鐵槌輕敲牆壁，你在這一邊也聽得到。這說明？', o: ['聲音可以經固體傳播', '聲音只能經氣體傳播', '牆壁不會傳聲', '聲音是光的一種'], a: 0, e: '牆壁是固體，聽得到敲擊聲，表示固體也能傳聲。' },
+  { t: '聲音傳播的介質', tf: false, q: '聲音只能在空氣中傳播，不能在液體或固體中傳播。', e: '聲音可以經氣體、液體、固體傳播，只是在真空中不行。' },
+  { t: '聲音傳播的介質', tf: true, q: '聲音是一種需要介質才能傳播的力學波。', e: '聲波屬於力學波，需要介質。' },
+  { t: '聲音與光的比較', q: '在抽成真空的玻璃罩內，鈴鐺被小槌敲擊。人在罩外會有什麼觀察？', o: ['看得到鈴鐺在動，但聽不到聲音', '看得到也聽得到', '看不到也聽不到', '聽得到但看不到'], a: 0, e: '光不需要介質，可以穿過真空；聲音需要介質，真空中傳不出來。' },
+  { t: '聲音傳播的介質', q: '下列哪一個情況，聲音「無法」傳到耳朵？', o: ['兩人之間是真空', '兩人隔著一面牆', '一人在水裡、一人在水面上', '兩人相隔一條很長的走廊'], a: 0, e: '只有「沒有任何介質」（真空）時聲音才傳不過去；牆（固體）、水（液體）、空氣（氣體）都能傳聲。' },
+  { t: '聲音傳播的介質', q: '太空人在太空船外面維修時，兩個人必須靠無線電對講才能溝通。最主要的原因是？', o: ['太空是真空，聲音沒有介質可以傳播', '太空太冷，聲音會結冰', '太空人在太空中聽力會變差', '太空中光也無法傳播'], a: 0, e: '太空幾乎是真空，沒有傳聲的介質，聲音傳不出去；無線電波不需要介質，所以可以用來對講。' },
+  { t: '聲音傳播的介質', q: '下列哪一個例子，顯示聲音可以經由「液體」傳播？', o: ['潛水員在水底聽到船的馬達聲', '在房間裡聽到客廳傳來的電視聲', '在操場上聽到遠處的哨音', '在山谷裡聽到自己的回聲'], a: 0, e: '水是液體，潛水員在水中聽到馬達聲，說明聲音能經由液體傳播；其餘三項都是經由空氣（氣體）傳聲。' },
+  { t: '聲音傳播的介質', q: '下列哪一個例子，顯示聲音可以經由「固體」傳播？', o: ['把耳朵貼在長木桌的一端，聽到另一端有人用指節輕敲桌面', '在操場上聽到遠處的哨音', '游泳時在水中聽到水中喇叭的音樂', '在山谷裡聽到自己的回聲'], a: 0, e: '木桌是固體，耳朵貼著桌面聽到敲擊聲，表示固體可以傳聲；其他選項是經由氣體或液體。' },
+  { t: '波以耳實驗', q: '波以耳的實驗中，鈴鐺被抽成真空的玻璃罩裡，已經聽不到鈴聲。若把空氣慢慢放回罩內，會怎樣？', o: ['又聽得到鈴聲，而且愈來愈大聲', '仍然聽不到鈴聲', '鈴鐺停止振動', '鈴聲變成超聲波'], a: 0, e: '空氣（介質）回來了，聲音就能傳到耳朵，所以聲音愈來愈大。' },
+  { t: '聲音傳播的介質', tf: true, q: '聲音可以在水中傳播，所以海豚能在水裡用聲音和同伴聯絡。', e: '水是液體，聲音可以經由液體傳播，這也是水中動物能用聲音溝通的原因。' },
+  { t: '聲音傳播的介質', tf: false, q: '把空氣從玻璃罩中抽光後聽不到鈴聲，是因為鈴鐺在真空中不再振動。', e: '鈴鐺仍然被小槌敲得振動（看得到），聽不到的原因是沒有介質把聲音傳出來。' },
+  { t: '聲音傳播的介質', q: '關於聲音的傳播，下列敘述何者正確？', o: ['可以經由氣體、液體、固體傳播，但不能在真空中傳播', '只能經由空氣傳播，但能在真空中傳播', '能在真空中傳播，但不能經由固體傳播', '只能經由固體傳播'], a: 0, e: '聲音是力學波，需要介質：固體、液體、氣體都可以，只有真空不行。' },
+]) });
+
+/* S3 聲速 */
+def('S3', { sec: '3-2', can: '說明哪些因素會影響聲速（介質種類、溫度），哪些不會', lc: 'Ka-IV-3', gen: bank('S3', [
+  { t: '聲速與介質', q: '同一個聲音，分別在鐵軌（固體）、水（液體）、空氣（氣體）中傳播，聲速由大到小的順序是？', o: ['鐵軌 ＞ 水 ＞ 空氣', '空氣 ＞ 水 ＞ 鐵軌', '水 ＞ 鐵軌 ＞ 空氣', '三者一樣快'], a: 0, e: '一般而言，聲速在固體中最快，液體次之，氣體最慢。' },
+  { t: '聲速與介質', q: '下列哪一種介質中，聲音傳得最快？', o: ['木頭', '水', '空氣', '三者一樣'], a: 0, e: '固體（木頭）＞ 液體（水）＞ 氣體（空氣）。' },
+  { t: '聲速與溫度', q: '在空氣中，夏天（35℃）和冬天（5℃）相比，同一個聲音的速率？', o: ['夏天比較快', '冬天比較快', '一樣快', '無法比較'], a: 0, r: ['空氣溫度愈高，聲速愈快', '空氣溫度愈高，聲速愈慢', '聲速和溫度無關', '聲音大小不同'], ra: 0, e: '空氣中的聲速，最主要看溫度：溫度愈高，聲速愈快。' },
+  { t: '不影響聲速的因素', q: '下列哪一項「不會」影響聲音在空氣中的傳播速率？', o: ['發聲的音叉振動得多快', '空氣的溫度', '傳播聲音的介質種類', '介質的狀態（固、液、氣）'], a: 0, e: '聲速和發音體本身振動快慢（頻率）無關，和介質的種類、狀態與溫度有關。' },
+  { t: '不影響聲速的因素', tf: false, q: '聲音愈大聲，傳播的速率就愈快。', e: '聲音大小（響度）和聲速無關；聲速由介質的種類、狀態與溫度決定。' },
+  { t: '不影響聲速的因素', tf: false, q: '高音（頻率高）比低音在空氣中傳得更快。', e: '聲速和頻率無關。同一種介質、同樣溫度下，高音與低音傳得一樣快。' },
+  { t: '聲速的數值', q: '在乾燥無風、0℃的空氣中，聲速約為多少？', o: ['331 公尺／秒', '33 公尺／秒', '3×10⁸ 公尺／秒', '3352 公尺／秒'], a: 0, e: '0℃ 時空氣中的聲速約 331 公尺／秒，氣溫每高 1℃，聲速大約多 0.6 公尺／秒。' },
+  { t: '聲速與介質', q: '已知聲音在空氣、水、木頭中的速率分別約 331、1463、3352 公尺／秒。若要讓聲音在相同距離花「最少」的時間，應選擇哪一種介質傳播？', o: ['木頭', '水', '空氣', '三者時間相同'], a: 0, e: '距離相同，速率愈大，時間愈短；木頭中聲速最大。' },
+  { t: '聲速的意思', q: '「聲速」指的是什麼？', o: ['聲波在介質中傳播的快慢', '發聲體每秒振動的次數', '聲音聽起來的大小', '聲音聽起來的高低'], a: 0, e: '聲速是聲波行進的快慢（速率）；每秒振動次數是頻率，大小是響度，高低是音調。' },
+  { t: '不影響聲速的因素', tf: false, q: '講話的速度愈快，聲音在空氣中就傳得愈快。', e: '「講話快慢」只是說話的節奏，與聲波行進得多快無關；聲速由介質的種類、狀態和溫度決定。' },
+  { t: '聲速與溫度', q: '在 0℃ 的空氣中，聲音每秒大約前進 331 公尺。如果氣溫升高到 10℃，聲音在空氣中的速率會怎樣？', o: ['比 331 公尺／秒大一些', '比 331 公尺／秒小一些', '剛好還是 331 公尺／秒', '變成 0'], a: 0, e: '空氣溫度愈高，聲速愈快（每升高 1℃ 約增加 0.6 公尺／秒），所以 10℃ 時聲速比 331 公尺／秒略大。' },
+  { t: '聲速與介質', q: '把耳朵貼在鐵軌上，能比只用耳朵聽空氣更早聽到遠方火車駛來的聲音。這是因為？', o: ['聲音在固體鐵軌中傳得比在空氣中快', '火車先在鐵軌上發出聲音，再在空氣中發出聲音', '鐵軌比空氣的溫度低', '鐵軌把聲音放大了'], a: 0, r: ['一般而言聲速：固體＞氣體', '一般而言聲速：氣體＞固體', '聲速與介質種類無關', '聲音只能在鐵軌中傳播'], ra: 0, e: '同一個聲音在固體中傳播得比在氣體中快，所以經由鐵軌傳來的聲音先到。' },
+  { t: '聲速與溫度', q: '下列哪一個因素，會影響聲音在空氣中的傳播速率？', o: ['空氣的溫度', '歌手唱歌的音量', '敲擊音叉的力道', '聲音的音調高低'], a: 0, e: '空氣中的聲速主要受溫度影響；音量、敲擊力道（振幅）與音調（頻率）都不會改變聲速。' },
+  { t: '聲速與介質', q: '在相同溫度下，聲音在下列哪一種介質中傳得最「慢」？', o: ['空氣（氣體）', '水（液體）', '木頭（固體）', '鐵（固體）'], a: 0, e: '聲速的大小一般是固體＞液體＞氣體，所以在氣體（空氣）中最慢。' },
+  { t: '聲速與溫度', tf: false, q: '氣溫從 30℃ 降到 0℃ 時，聲音在空氣中的傳播速率會變快。', e: '空氣溫度愈低，聲速愈慢，所以降溫時聲速變慢。' },
+]) });
+
+/* S4 響度與振幅、分貝 */
+(() => {
+  const g = () => {
+    const hi = rnd(0, 1), amps = hi ? [.85, .3] : [.3, .85];
+    const svg = cmpWaves([{ label: '甲', amp: amps[0], cyc: 4 }, { label: '乙', amp: amps[1], cyc: 4 }]);
+    const a = hi ? 0 : 1;
+    return TT('甲、乙是同一個示波器上看到的兩個聲音（時間軸相同）。哪一個聽起來比較「大聲」？', ['甲比較大聲', '乙比較大聲', '兩個一樣大聲'], a, ['振幅比較大', '頻率比較高', '波長比較長', '波形比較規律'], 0,
+      `響度（音量）由振幅決定：振幅大，聲音就大聲。圖中${a ? '乙' : '甲'}的振幅比較大。`, { svg, tag: '響度與振幅（看圖）' });
+  };
+  def('S4', { sec: '3-3', can: '說明響度（音量）與振幅的關係，知道分貝是音量的單位', lc: 'INe-III-6', gen: mixGen('S4', [
+    { t: '響度與振幅', q: '用湯匙「用力」敲試管，比「輕輕」敲時聲音更大聲。波形上的差別是？', o: ['振幅變大', '頻率變大', '波長變長', '波速變快'], a: 0, e: '敲擊力量大，波形振幅大，音量就大。' },
+    { t: '響度的單位', q: '生活中比較聲音大小聲，通常使用的單位是？', o: ['分貝（dB）', '赫茲（Hz）', '公尺／秒', '公分'], a: 0, e: '音量（響度）用分貝（dB）比較；赫茲（Hz）是頻率的單位。' },
+    { t: '響度與振幅', tf: true, q: '同一個聲音，振幅愈大，聽起來愈大聲。', e: '響度（音量）取決於聲波的振幅。' },
+    { t: '響度與振幅', tf: false, q: '把音叉敲得更用力，音叉的音調會變得更高。', e: '用力敲，改變的是振幅（音量變大）；音調由頻率決定，不會因此改變。' },
+    { t: '響度與振幅', q: '「聲音大小」又稱為什麼？它和聲波的哪一項有關？', o: ['響度（音量）；振幅', '音調；頻率', '音色；波形', '響度（音量）；頻率'], a: 0, e: '聲音三要素：響度（音量）—振幅、音調—頻率、音色—波形。' },
+    { t: '響度與振幅', q: '同一支音叉，用力敲和輕輕敲相比，用力敲時聲波的哪一項會變大？', o: ['振幅', '頻率', '波速', '波長'], a: 0, e: '敲得愈用力，音叉振動的幅度愈大，聲波振幅變大，聲音就比較大聲。頻率、波速都沒有改變。' },
+    { t: '響度與振幅', q: '示波器上，甲聲音的波形比乙聲音高（振幅較大），兩者其他條件都相同。甲、乙相比，哪一項敘述正確？', o: ['甲比乙大聲', '乙比甲大聲', '甲、乙一樣大聲', '甲的音調比乙高'], a: 0, e: '振幅大，響度就大，所以甲比較大聲；音調由頻率決定，與波形的高度無關。' },
+    { t: '響度與振幅', q: '小明把音響的音量旋鈕轉大，這時音響發出的聲波，哪一項變大？', o: ['振幅', '頻率', '在空氣中的聲速', '音色'], a: 0, e: '音量變大，代表聲波的振幅變大；聲速由介質決定，頻率與音色也不會因為轉音量鈕而改變。' },
+    { t: '響度的單位', tf: false, q: '赫茲（Hz）可以用來表示聲音的大小。', e: '比較聲音大小用分貝（dB）；赫茲（Hz）是頻率的單位，與音調有關。' },
+    { t: '響度的單位', q: '一個聲音的分貝數愈大，聽起來會怎樣？', o: ['愈大聲', '音調愈高', '傳得愈快', '音色愈好聽'], a: 0, e: '分貝數是響度（音量）的大小，分貝數愈大，聲音聽起來愈大聲。' },
+    { t: '響度與振幅', tf: true, q: '兩個頻率相同的聲音，振幅較大的那一個聽起來比較大聲。', e: '頻率相同表示音調相同，這時比較大聲與否，只需要看振幅。' },
+    { t: '響度與振幅', q: '下列哪一個做法，可以讓同一支音叉的聲音變得更大聲，但音調不變？', o: ['用更大的力量敲音叉', '換成較短的音叉', '用手握住音叉', '把音叉泡在水裡再敲'], a: 0, e: '用力敲使振幅變大、音量變大，頻率不變所以音調不變；換成較短的音叉會改變頻率與音調。' },
+    { t: '響度與振幅', tf: false, q: '離聲源愈遠，聽到的聲音愈小，是因為聲音的音調變低了。', e: '距離變遠時，傳到耳朵的聲波振幅變小，所以聽起來比較小聲；頻率沒有改變，音調也不變。' },
+    { t: '響度與振幅', q: '示波器上，兩個聲音每一格內的波數相同、波形形狀也相同，但甲的波形高度是乙的兩倍。兩者不同的是聲音三要素的哪一項？', o: ['響度（音量）', '音調', '音色', '聲速'], a: 0, e: '波數相同表示頻率（音調）相同，形狀相同表示音色相同，只有高度（振幅）不同，所以是響度不同。' },
+  ], [g]) });
+})();
+
+/* S5 音調與頻率 */
+(() => {
+  const g = () => {
+    const hi = rnd(0, 1), cs = hi ? [7, 3] : [3, 7], svg = cmpWaves([{ label: '甲', amp: .6, cyc: cs[0] }, { label: '乙', amp: .6, cyc: cs[1] }]);
+    const a = hi ? 0 : 1;
+    return TT('甲、乙兩個聲音的振幅相同，波形如圖（時間軸相同）。哪一個聽起來「音調」比較高？', ['甲的音調比較高', '乙的音調比較高', '兩個音調一樣高'], a, ['頻率比較高（同樣時間內的波比較多）', '振幅比較大', '波速比較快', '音色比較好聽'], 0,
+      `音調由頻率決定：頻率高，音調就高。圖中${a ? '乙' : '甲'}在同樣時間內有較多個波，頻率比較高。`, { svg, tag: '音調與頻率（看圖）' });
+  };
+  def('S5', { sec: '3-3', can: '說明音調與頻率的關係，以及什麼會改變音調', lc: 'INe-III-6', gen: mixGen('S5', [
+    { t: '音調與頻率', q: '對著試管口吹氣，水量愈多（空氣柱愈短）的試管，發出的聲音？', o: ['音調愈高', '音調愈低', '音量愈小', '音色改變'], a: 0, r: ['空氣柱愈短，振動頻率愈高', '空氣柱愈短，振幅愈小', '空氣柱愈短，波速愈慢', '水量愈多聲音愈大聲'], ra: 0, e: '空氣柱短，頻率高，音調高；空氣柱長，頻率低，音調低沉。' },
+    { t: '音調與頻率', q: '敲擊兩支音叉，音調較低的那支，它的振動頻率？', o: ['比較低', '比較高', '一樣', '無法判斷'], a: 0, e: '頻率低，音調低；頻率高，音調高。' },
+    { t: '音調與發音體', q: '一般而言，發音體愈「短、細、緊、薄」，發出的音調會？', o: ['愈高', '愈低', '不變', '愈大聲'], a: 0, e: '鐵琴的琴鍵愈短音調愈高；吉他的弦愈緊、愈細，音調也愈高。' },
+    { t: '音調與頻率', tf: true, q: '一般來說，女生說話的音調比男生高，表示女生聲音的頻率通常比較高。', e: '音調高＝頻率高。人聲頻率大約在 90～560 赫之間，聲帶不同使得音調有差異。' },
+    { t: '音調與頻率', tf: false, q: '把音量調大聲，聲音的音調就會跟著變高。', e: '音量（響度）看振幅，音調看頻率，兩者是不同的要素。' },
+    { t: '音調與頻率', q: '「聲音的高低」稱為什麼？它由聲波的哪一項決定？', o: ['音調；頻率', '音量；振幅', '音色；波形', '音調；振幅'], a: 0, e: '聲音的高低是音調，由頻率決定，單位是赫（Hz）。' },
+    { t: '音調與頻率', q: '吉他手把某一條弦調得更緊，再撥動這條弦，發出的聲音會怎樣？', o: ['音調變高', '音調變低', '音量變大', '音色變成噪音'], a: 0, e: '弦愈緊，振動的頻率愈高，音調就愈高。' },
+    { t: '音調與頻率', q: '甲的聲音頻率是 90 赫，乙的聲音頻率是 400 赫。下列敘述何者正確？', o: ['乙的音調比甲高', '甲的音調比乙高', '兩者音調一樣', '無法判斷音調高低'], a: 0, e: '頻率愈高，音調愈高。400 赫比 90 赫高，所以乙的音調比較高。' },
+    { t: '音調與頻率', q: '頻率的單位是什麼？它和聲音三要素的哪一項有關？', o: ['赫（Hz）；音調', '分貝（dB）；音量', '赫（Hz）；音量', '公尺／秒；音調'], a: 0, e: '頻率的單位是赫（Hz），與音調有關；分貝是音量的單位，公尺／秒是速率的單位。' },
+    { t: '音調與頻率', tf: false, q: '頻率 20 赫的聲音，音調比頻率 200 赫的聲音高。', e: '頻率愈低，音調愈低，所以 20 赫的音調比 200 赫低。' },
+    { t: '音調與發音體', q: '對三支水量不同的試管口吹氣，聲音最低沉的是哪一支？', o: ['水最少、空氣柱最長的那一支', '水最多、空氣柱最短的那一支', '三支的聲音一樣', '水量剛好一半的那一支'], a: 0, e: '空氣柱愈長，振動頻率愈低，音調愈低沉；所以空氣柱最長（水最少）的那一支最低沉。' },
+    { t: '音調與頻率', q: '合唱團裡的女高音唱出來的音調，比男低音唱的音調高。這表示女高音聲音的哪一項比較大？', o: ['頻率', '振幅', '在空氣中的聲速', '週期'], a: 0, e: '音調高代表頻率高；頻率高時週期反而比較小；振幅決定響度，聲速由介質決定。' },
+    { t: '音調與頻率', q: '同一個人說同一句話，分別用「尖細的聲音」和「低沉的聲音」說，主要改變的是聲音的哪一項？', o: ['音調（頻率）', '在空氣中的聲速', '傳遞聲音的介質', '聲源的數目'], a: 0, e: '聲音尖細或低沉描述的是音調的高低，也就是頻率的不同。' },
+    { t: '音調與頻率', tf: false, q: '發出高音的物體，一定振動得比發出低音的物體更用力。', e: '音調看頻率（振動多快），用力與否看振幅（響度），兩者不相同。' },
+  ], [g]) });
+})();
+
+/* S6 音色與波形 */
+def('S6', { sec: '3-3', can: '說明音色與波形的關係，並用音色分辨聲音', lc: 'INe-III-6', gen: bank('S6', [
+  { t: '音色與波形', q: '小提琴和長笛演奏同一個音符，我們仍然能分辨出是哪一種樂器。能分辨的原因是？', o: ['兩者的音色不同', '兩者的聲速不同', '兩者的振幅一定不同', '兩者的介質不同'], a: 0, r: ['音色由波形決定，不同樂器波形不同', '音色由振幅決定', '音色由頻率決定', '音色由聲速決定'], ra: 0, e: '每種發聲體都有自己的聲音特色，這就是音色，由聲音的波形。' },
+  { t: '音色與波形', q: '電話裡雖然只聽到聲音，你還是知道是媽媽在說話，主要是靠聲音的哪個特性？', o: ['音色', '音量', '聲速', '波長'], a: 0, e: '每個人的聲音波形不同（音色不同），所以能分辨是誰。' },
+  { t: '音色與波形', q: '聲音三要素中，「音色」是由聲波的什麼決定？', o: ['波形', '振幅', '頻率', '波速'], a: 0, e: '音色決定於波形；振幅決定響度，頻率決定音調。' },
+  { t: '音色與波形', tf: false, q: '兩種樂器的音調和音量都相同，聲音就一定聽起來完全一樣。', e: '音色不同（波形不同）時，即使音調、音量相同，聽起來仍然不一樣。' },
+  { t: '音色與波形', tf: true, q: '示波器上看起來形狀不同的波，代表它們的音色不同。', e: '音色決定於波形，波形形狀不同，音色就不同。' },
+  { t: '三要素的對應', q: '聲音三要素「響度、音調、音色」依序分別由聲波的哪些特性決定？', o: ['振幅、頻率、波形', '頻率、振幅、波形', '波形、頻率、振幅', '振幅、波形、頻率'], a: 0, e: '響度—振幅，音調—頻率，音色—波形。' },
+  { t: '音色與波形', q: '示波器上，音叉聲的波形是平滑單純的曲線，小號聲的波形卻比較複雜。這代表兩者的哪一項不同？', o: ['音色', '響度', '聲速', '傳播的介質'], a: 0, e: '波形不同，音色就不同；音叉和小號是不同的發音體，各有獨特的音色。' },
+  { t: '音色與波形', tf: false, q: '只要兩個聲音的頻率相同，它們的波形就一定相同，音色也一定相同。', e: '頻率相同（音調相同）時，波形仍可能不同，例如不同樂器演奏同一個音，音色就不同。' },
+  { t: '音色與波形', q: '兩位歌手唱同一首歌，音調與音量都相同，我們仍然聽得出是誰在唱。主要是因為他們聲音的什麼不同？', o: ['音色', '聲速', '頻率', '振幅'], a: 0, e: '音調（頻率）與音量（振幅）都相同時，仍能分辨出聲音的差別，靠的就是音色（波形）。' },
+  { t: '音色與波形', q: '下列哪一組聲音的差別，主要是「音色」不同？', o: ['小號與長笛吹出同一個音', '同一支長笛吹出高音與低音', '同一面鼓輕敲與重敲', '同一支音叉在冬天與夏天敲響'], a: 0, e: '吹同一個音（音調相同），卻能分出小號與長笛，是音色不同；高低音是音調不同，輕重敲是響度不同。' },
+  { t: '音色與波形', tf: true, q: '小提琴與小號演奏同一個音符時，示波器上顯示的波形並不相同。', e: '不同樂器的音色不同，波形也不同；這正是我們能分辨樂器的原因。' },
+  { t: '音色與波形', q: '改變聲音的哪一項特性，會讓示波器上波形的「形狀」變得不一樣（不只是高度或疏密不同）？', o: ['音色', '響度', '音調', '聲速'], a: 0, e: '響度改變的是波的高度，音調改變的是波的疏密，只有音色改變的是波形的形狀。' },
+  { t: '音色與波形', q: '有位同學說：「只要把兩種樂器的音量調成一樣大，聽起來就會一樣。」這個想法的問題在哪裡？', o: ['沒有考慮音色，音量一樣時音色不同仍然聽得出差別', '沒有考慮聲速不同', '沒有考慮介質不同', '這個想法沒有問題'], a: 0, e: '聲音的差別不只有大小，音色也不同；音量相同時，不同樂器仍然聽起來不一樣。' },
+  { t: '三要素的對應', q: '鋼琴、長笛、小提琴演奏同一個音（音調相同）時，下列哪一項最可能不同？', o: ['波形', '頻率', '在空氣中的聲速', '音調'], a: 0, e: '音調相同表示頻率相同，同在空氣中聲速也相同；不同樂器的波形不同，所以音色不同。' },
+]) });
+
+/* S7 三要素綜合判斷（看圖） */
+(() => {
+  const g = () => {
+    const kind = pick([0, 1, 2]), A = .6, C = 4, shape = pick(['tri', 'sq', 'saw']);
+    const b = [{ amp: .25, cyc: C, type: 'sine' }, { amp: A, cyc: 8, type: 'sine' }, { amp: A, cyc: C, type: shape }][kind];
+    const svg = cmpWaves([{ label: '甲', amp: A, cyc: C, type: 'sine' }, { label: '乙', ...b }]);
+    return TT('甲、乙兩個聲音在示波器上的波形如圖（時間軸相同），兩者只有「一項」不同。不同的是聲音三要素的哪一項？', ['響度（音量）', '音調', '音色'], kind === 0 ? 0 : kind === 1 ? 1 : 2,
+      ['兩個波的振幅（高度）不一樣', '兩個波在同樣時間內的波數（頻率）不一樣', '兩個波的形狀不一樣'], kind,
+      ['振幅不同→響度不同。', '頻率不同→音調不同。', '波形不同→音色不同。'][kind], { svg, tag: '三要素綜合（看圖）' });
+  };
+  def('S7', { sec: '3-3', can: '看波形圖，判斷兩個聲音在響度、音調、音色上的差別', lc: 'Ka-IV-5', gen: mixGen('S7', [
+    { t: '三要素綜合', q: '甲、乙兩支音叉被敲響，甲的波形振幅比乙大、頻率比乙低。下列敘述何者正確？', o: ['甲比乙大聲，音調比乙低', '甲比乙小聲，音調比乙高', '甲比乙大聲，音調比乙高', '兩者大小聲與音調都相同'], a: 0, e: '振幅大→響度大；頻率低→音調低。' },
+    { t: '三要素綜合', q: '下列哪一項是聲音三要素之一？', o: ['音色', '密度', '聲速', '波長'], a: 0, e: '三要素是響度（音量）、音調、音色。' },
+    { t: '三要素綜合', q: '樂器發出的聲音愈大聲，則下列何者一定成立？', o: ['聲波的振幅愈大', '聲波的頻率愈高', '聲波傳得愈快', '聲波的波形愈規則'], a: 0, e: '愈大聲代表響度愈大，也就是振幅愈大；聲速則與音量無關。' },
+    { t: '三要素綜合', q: '關於聲音三要素，下列配對何者錯誤？', o: ['音調—振幅', '響度—振幅', '音調—頻率', '音色—波形'], a: 0, e: '音調對應的是頻率，不是振幅。' },
+    { t: '三要素綜合', q: '示波器上，甲、乙兩個聲音的振幅相同，但乙在同樣時間內出現的波是甲的兩倍。乙與甲相比，聲音的哪一項不同？', o: ['乙的音調比較高', '乙比較大聲', '乙的音色不同', '乙的聲速比較快'], a: 0, e: '同樣時間內的波數多，表示頻率高、音調高；振幅相同所以音量一樣。' },
+    { t: '三要素綜合', q: '甲、乙兩個聲音的波形形狀相似、每一格的波數相同，但乙的高度只有甲的一半。下列敘述何者正確？', o: ['乙比甲小聲，音調相同', '乙比甲大聲，音調相同', '乙的音調比甲低', '乙的音色一定不同'], a: 0, e: '高度（振幅）較小，所以較小聲；波數相同，音調相同；形狀相似，音色也相似。' },
+    { t: '三要素綜合', q: '甲、乙兩個聲音的振幅與頻率都相同，但甲的波形圓滑，乙的波形有尖角。兩者不同的是？', o: ['音色', '音調', '響度', '聲速'], a: 0, e: '振幅相同→響度相同；頻率相同→音調相同；波形形狀不同→音色不同。' },
+    { t: '三要素綜合', q: '某個聲音在示波器上的波形：高度很高，而且波排得很稀疏。這個聲音聽起來最像？', o: ['大聲而低沉', '小聲而尖銳', '大聲而尖銳', '小聲而低沉'], a: 0, e: '高度高→振幅大→大聲；波稀疏→頻率低→音調低（低沉）。' },
+    { t: '三要素綜合', q: '看示波器上的聲音波形圖，下列哪一個判斷是「錯誤」的？', o: ['波排得愈密，聲音愈大聲', '波愈高，聲音愈大聲', '波排得愈密，音調愈高', '波的形狀不同，音色就不同'], a: 0, e: '波排得愈密表示頻率愈高、音調愈高，與音量無關；音量要看波的高度（振幅）。' },
+    { t: '三要素綜合', tf: true, q: '比較兩個聲音的波形圖時，要使用相同的時間軸，才能用波的疏密來比較頻率高低。', e: '時間軸比例不同，「一格內有幾個波」就不能直接比較；比較頻率時，時間軸必須一致。' },
+    { t: '三要素綜合', tf: false, q: '示波器上，波峰到波谷看起來愈高，代表這個聲音的音調愈高。', e: '波愈高表示振幅愈大，也就是響度愈大；音調要看波排得多密（頻率）。' },
+    { t: '三要素綜合', q: '一個人先輕聲說「啊」，再用同樣音高大聲說「啊」。示波器上的波形會有什麼變化？', o: ['波變高，波的疏密不變', '波變密，高度不變', '波形的形狀完全改變', '波變成一直線'], a: 0, e: '大聲代表振幅變大（波變高）；音高相同表示頻率不變（疏密不變）。' },
+    { t: '三要素綜合', q: '小提琴與小號演奏同樣大聲、同樣音高的音。示波器上兩者最可能不同的是？', o: ['波形的形狀', '波的高度（振幅）', '一格內的波數（頻率）', '每秒的聲速'], a: 0, e: '同樣大聲→振幅相同；同樣音高→頻率相同；不同樂器的音色不同，也就是波形的形狀不同。' },
+    { t: '三要素綜合', q: '下列哪一種波形，最像是「小聲而低沉」的聲音？', o: ['波很矮、排得很稀疏', '波很高、排得很密', '波很高、排得很稀疏', '波很矮、排得很密'], a: 0, e: '小聲→振幅小（矮）；低沉→頻率低（稀疏）。' },
+  ], [g]) });
+})();
+
+/* S8 樂音與噪音 */
+(() => {
+  const g = () => {
+    const s = rnd(0, 1), svg = cmpWaves(s ? [{ label: '甲', amp: .7, cyc: 4, type: 'sine' }, { label: '乙', amp: .8, cyc: 3, type: 'noise' }] : [{ label: '甲', amp: .8, cyc: 3, type: 'noise' }, { label: '乙', amp: .7, cyc: 4, type: 'sine' }]);
+    return TT('甲、乙兩個聲音的波形如圖，哪一個比較可能是「樂音」？', ['甲', '乙'], s ? 0 : 1, ['波形整齊、有規律', '波形雜亂、沒有規律', '波形振幅比較大', '波形頻率比較低'], 0, '樂音的波形整齊有規律；噪音的波形雜亂沒規律。', { svg, tag: '樂音噪音（看波形）' });
+  };
+  def('S8', { sec: '3-3', can: '分辨樂音與噪音，說出噪音的影響與防治', lc: 'INe-III-6', gen: mixGen('S8', [
+    { t: '樂音與噪音', q: '樂音和噪音在波形上最大的差別是？', o: ['樂音的波形有規律，噪音的波形沒有規律', '樂音是縱波，噪音是橫波', '樂音需要介質，噪音不需要', '樂音的波長比較長'], a: 0, e: '樂音波形有一定的規律性；噪音波形沒有規律性。' },
+    { t: '樂音與噪音', tf: true, q: '就算是好聽的聲音，音量大到耳朵受不了，也當作噪音。', e: '除了波形沒有規律，音量過大超過人耳承受範圍，也算噪音。' },
+    { t: '樂音與噪音', q: '下列哪一個聲音，最可能有「規律」的波形？', o: ['鋼琴彈奏的音符', '工地施工聲', '汽車喇叭亂按', '鞭炮聲'], a: 0, e: '鋼琴的聲音和諧悅耳，波形有規律，是樂音；其餘大多是噪音。' },
+    { t: '噪音的防治', q: '下列哪一項做法「不是」在防治噪音？', o: ['把音響的音量開到最大', '在馬路旁設置隔音牆', '睡覺時戴耳塞', '在教室牆面裝吸音板'], a: 0, e: '隔音牆、耳塞、吸音板都能降低噪音；把音量開到最大反而會製造噪音。' },
+    { t: '噪音的防治', tf: true, q: '政府制定噪音管制法，我們自己也應該不做噪音的製造者。', e: '要保障環境品質，法規與每個人的自律都重要。' },
+    { t: '樂音與噪音', q: '長期待在非常大聲的環境中，對聽力可能有什麼影響？', o: ['可能造成聽力受損', '聽力會變得更好', '完全不會有影響', '只會影響視力'], a: 0, e: '長期暴露在高分貝噪音中，可能使聽力受損而重聽。' },
+    { t: '樂音與噪音', q: '下列哪一個聲音的波形最可能「沒有規律」？', o: ['施工中的電鑽聲', '長笛吹出的一個長音', '音叉發出的聲音', '小提琴拉出的一個音'], a: 0, e: '電鑽聲雜亂刺耳，波形沒有規律，是噪音；長笛、音叉、小提琴的音波形有規律，屬於樂音。' },
+    { t: '噪音的防治', q: '住在機場附近的居民，把窗戶換成雙層隔音玻璃，主要目的是？', o: ['減少噪音傳進室內', '增加室內的回聲', '讓光線變暗', '把聲音變成超聲波'], a: 0, e: '隔音玻璃能降低傳進室內的聲音，是防治噪音的做法之一。' },
+    { t: '噪音的影響', q: '下列哪一種做法，對保護聽力「最不好」？', o: ['長時間用耳機把音量開到最大聽音樂', '在吵雜的場所戴上耳塞', '把耳機音量調小一點', '在大聲的場所縮短停留的時間'], a: 0, e: '長期處在很大的音量下，可能使聽力受損；調小音量、戴耳塞、縮短暴露時間都有保護聽力的效果。' },
+    { t: '樂音與噪音', tf: true, q: '一個聲音聽起來悅耳或刺耳，除了要看波形有沒有規律，音量太大也可能讓它變成噪音。', e: '波形沒有規律是噪音；就算是悅耳的聲音，音量大到超過人耳承受範圍，也會成為噪音。' },
+    { t: '噪音的防治', q: '在圖書館裡，下列哪一個做法最能避免自己成為噪音的製造者？', o: ['小聲說話、把手機調成靜音', '拉大嗓門和朋友聊天', '用最大的音量播放影片', '在走道上奔跑'], a: 0, e: '降低自己製造的聲音，是防治噪音最直接的方法，也就是「不做噪音的製造者」。' },
+    { t: '樂音與噪音', q: '比較「悅耳的聲音」與「刺耳的聲音」，兩者的分貝數（音量）通常有什麼差別？', o: ['悅耳的聲音分貝數通常較小，刺耳的聲音分貝數通常較大', '悅耳的聲音分貝數通常較大，刺耳的聲音分貝數通常較小', '兩者的分貝數完全沒有差別', '悅耳的聲音一定是 0 分貝'], a: 0, e: '悅耳的聲音多半音量較小、波形有規律；刺耳的聲音多半音量較大、波形沒有規律。' },
+    { t: '噪音的防治', q: '下列哪一項，是社會用來減少噪音的做法？', o: ['訂定噪音管制的規定，並在馬路旁設置隔音設施', '鼓勵工廠在夜間提高機器的音量', '拆除道路旁的隔音牆', '要求大家在夜間大聲播放音樂'], a: 0, e: '制定法規和設置隔音設施都是防制噪音的辦法，我們自己也要做到不製造噪音。' },
+    { t: '噪音的影響', tf: false, q: '噪音只會讓人心情煩躁，不會傷害聽力。', e: '噪音除了讓人煩躁、無法專心，長期處在高分貝的噪音中，還可能使聽力受損而重聽。' },
+    { t: '樂音與噪音', q: '練習拉小提琴時，不小心拉出一串刺耳又雜亂、波形沒有規律的聲音。這個聲音屬於？', o: ['噪音', '樂音', '超聲波', '次聲波'], a: 0, e: '波形沒有規律又令人不舒服的聲音是噪音；即使是樂器發出的聲音，只要雜亂刺耳也算噪音。' },
+  ], [g]) });
+})();
+
+/* S9 聲波反射與回聲 */
+def('S9', { sec: '3-4', can: '說明聲波反射與回聲，及其在生活中的影響與應用', lc: 'Ka-IV-4', gen: bank('S9', [
+  { t: '回聲的意思', q: '在山谷中大喊，隔一會兒會聽到「回聲」。回聲是怎麼來的？', o: ['聲波遇到山壁反射回來', '聲波被山壁吸收後放大', '空氣自己發出聲音', '聲音繞過山壁'], a: 0, e: '波碰到障礙物彈回原來的介質，叫做反射，彈回來的聲波就是回聲。' },
+  { t: '反射與吸收', q: '下列哪一種表面，聲音比較容易被「反射」？', o: ['光滑堅硬的磚牆', '柔軟的吸音海綿', '厚窗簾', '粗糙的毛毯'], a: 0, e: '光滑、堅硬的表面容易反射聲音；粗糙、柔軟的表面容易吸收聲音。' },
+  { t: '反射與吸收', q: '音樂廳的牆面常做成凹凸不平，或掛上布幔、吸音板，主要目的是？', o: ['減少回聲的干擾', '增加回聲', '讓聲音傳得更快', '讓聲音變成光'], a: 0, e: '凹凸牆面可打散回聲，布幔、吸音板吸收聲波，能降低回聲干擾。' },
+  { t: '回聲的應用', q: '傳聲筒能讓遠處的人聽得更清楚，主要是利用聲音的什麼性質？', o: ['聲波反射後集中朝同一方向', '聲音變成光', '聲波速度變快', '聲音不需要介質'], a: 0, e: '傳聲筒讓聲波一再反射，集中往同一個方向跑。' },
+  { t: '回聲的應用', q: '聽診器的導管內，聲音不易散開，使醫生能聽見微弱的身體聲。主要是因為？', o: ['聲音在管壁間不斷反射，不易散失', '導管把聲音放大成超聲波', '導管讓聲速變快', '導管把縱波變成橫波'], a: 0, e: '聽診器的細管讓聲音在管壁間一直反射、不容易跑掉，也隔掉外面的雜音。' },
+  { t: '反射前後的聲音', q: '聲波在同一種介質中發生反射後，原聲與回聲相比，下列何者「不會」改變？', o: ['頻率', '前進方向', '振幅', '三者都會改變'], a: 0, e: '反射時，傳播速率、頻率、波長、週期都不變；前進方向與振幅（因部分被吸收）會改變。' },
+  { t: '反射的生活現象', q: '在空曠的大禮堂聽演講，聲音常常混雜不清楚。比較合理的原因是？', o: ['原聲與延遲的回聲混在一起', '聲音的頻率變低了', '禮堂的空氣太熱', '麥克風速度太快'], a: 0, e: '遠處牆壁反射的聲波比原聲晚到，與原聲混合在一起，聽起來就不清楚。' },
+  { t: '回聲的意思', q: '平常在房間裡說話，我們不容易察覺回聲，原因之一是？', o: ['牆壁離我們太近，原聲和回聲間隔太短，人耳分辨不出來', '房間裡沒有任何聲音反射', '人耳聽不到反射的聲音', '回聲速度比原聲快'], a: 0, e: '障礙物太近時，原聲與回聲相隔時間太短，人耳無法分辨；另外生活周遭的物體也會吸收聲音。' },
+  { t: '反射與吸收', q: '在空蕩蕩、牆面又光滑的浴室裡唱歌，聲音聽起來特別響亮、有回音。主要是因為？', o: ['光滑堅硬的牆面容易反射聲音', '牆壁會把聲音的頻率變高', '浴室的空氣溫度比較高', '聲音在浴室裡變成超聲波'], a: 0, e: '光滑堅硬的表面容易反射聲音，聲音在牆面間反覆反射，所以聽起來響亮而有回音。' },
+  { t: '反射的生活現象', q: '遠處的雷聲往往是連續的「轟隆隆」聲，而不是只有一下爆響。比較合理的原因是？', o: ['雷聲被周圍的建築、山坡等多次反射，陸續傳到耳朵', '雷聲的聲速一下快一下慢', '雷是由很多個人同時發出的', '雷聲在空氣中變成了光'], a: 0, e: '雷聲會被許多堅硬的建築和山坡反射，反射的聲音比原聲晚一點點才到，連在一起就變成連續的轟隆聲。' },
+  { t: '反射前後的聲音', tf: false, q: '聲音被牆壁反射後，頻率會變低，所以回聲聽起來比原聲低沉。', e: '在同一介質中，反射前後聲音的頻率、波長、週期與聲速都不變，所以音調不變；變的是前進方向和振幅（部分被吸收，振幅變小）。' },
+  { t: '回聲的意思', q: '想在山谷中聽到明顯的回聲，山壁最好是下列哪一種？', o: ['光滑堅硬、距離夠遠的岩壁', '長滿柔軟灌木的坡地', '覆蓋著厚厚雪堆的柔軟斜坡', '離我們只有一兩公尺的牆'], a: 0, e: '光滑堅硬的表面容易反射聲音；距離夠遠，回聲才不會和原聲混在一起；柔軟的表面會吸收聲音。' },
+  { t: '反射的生活現象', q: '新建的音樂廳，既要減少回聲的干擾，又要讓遠處座位的觀眾也聽得到樂音。下列哪一種設計最合適？', o: ['用平滑曲面的牆面把樂音集中傳向遠方，並用凹凸牆面或布幔減少回聲', '全部牆面都貼光滑磁磚', '全部牆面都鋪厚厚的吸音海綿', '把觀眾席設在抽成真空的房間裡'], a: 0, e: '平滑曲面能把聲音集中反射到遠方；凹凸的牆面和吸音布幔則減少回聲干擾。全部光滑會回聲太多，全部吸音則聲音傳不遠。' },
+  { t: '反射與吸收', tf: true, q: '聲波碰到障礙物時，有一部分會被反射，也有一部分會被吸收。', e: '光滑堅硬的表面反射較多，柔軟粗糙的表面吸收較多，兩種情形通常同時存在。' },
+  { t: '反射與吸收', q: '表面愈柔軟、愈粗糙的物體，對聲音的作用比較偏向？', o: ['吸收聲音', '反射聲音', '放大聲音', '使聲音變快'], a: 0, e: '柔軟粗糙的表面容易吸收聲音，所以吸音海綿、窗簾能減少回聲。' },
+]) });
+
+/* S10 超聲波、聽覺範圍 */
+(() => {
+  const ANI = [['蝙蝠', '1000～120000'], ['海豚', '2000～100000'], ['貓', '60～65000'], ['狗', '15～50000'], ['人', '20～20000']];
+  const tbl = `<div class="tbl-scroll"><table class="t"><tr><th>動物</th>${ANI.map(a => `<th>${a[0]}</th>`).join('')}</tr><tr><th>可聽頻率（赫）</th>${ANI.map(a => `<td>${a[1]}</td>`).join('')}</tr></table></div>`;
+  const specs = [
+    { f: 18, hear: true, opts: ['狗', '人', '貓', '海豚'], ans: '狗' }, { f: 30000, hear: false, opts: ['人', '狗', '貓', '海豚'], ans: '人' },
+    { f: 70000, hear: true, opts: ['海豚', '人', '狗', '貓'], ans: '海豚' }, { f: 110000, hear: true, opts: ['蝙蝠', '海豚', '貓', '狗'], ans: '蝙蝠' },
+    { f: 1500, hear: false, opts: ['海豚', '人', '狗', '貓'], ans: '海豚' },
+  ];
+  const gA = () => { const sp = pick(specs), o = shuffle(sp.opts);
+    return MC(`下表是幾種動物能聽到的聲音頻率範圍。頻率 ${sp.f} 赫的聲音，下列哪一種動物${sp.hear ? '「聽得到」' : '「聽不到」'}？${tbl}`, o, o.indexOf(sp.ans), `${sp.f} 赫${sp.hear ? '落在' + sp.ans + '的可聽範圍內' : '不在' + sp.ans + '的可聽範圍內'}，其他選項則相反。`, { tag: '動物的聽覺範圍' }); };
+  const gB = () => { const f = pick([10, 50, 440, 3000, 15000, 25000, 40000, 100000]);
+    const a = f < 20 ? 2 : f <= 20000 ? 0 : 1;
+    return MC(`頻率是 ${f} 赫的聲波，對人耳來說是？`, ['人耳可以聽見的聲音', '頻率高於 20000 赫（超聲波），人耳聽不見', '頻率低於 20 赫，人耳聽不見'], a, '人耳可聽的頻率大約是 20～20000 赫；高於 20000 赫稱為超聲波，人耳聽不到；低於 20 赫的聲波，人耳同樣聽不到（次聲波）。', { tag: '人耳聽覺範圍與超聲波' }); };
+  def('S10', { sec: '3-4', can: '說出超聲波的定義與人耳聽覺範圍，比較各種動物的聽覺', lc: 'Ka-IV-5', gen: () => { const r = Math.random(); return r < .3 ? gA() : r < .6 ? gB() : bank('S10', [
+    { t: '超聲波', q: '「超聲波」是指頻率超過多少赫的聲波？', o: ['20000 赫', '2000 赫', '20 赫', '200 赫'], a: 0, e: '人耳可聽範圍約 20～20000 赫，高於 20000 赫的就叫超聲波。' },
+    { t: '超聲波', tf: true, q: '超聲波在同一種介質中的傳播速率，和一般聲波一樣。', e: '一般聲波和超聲波在同一種介質裡跑得一樣快。' },
+    { t: '超聲波', tf: false, q: '超聲波是一種光波，所以不需要介質。', e: '超聲波仍是聲波，是力學波，需要介質。' },
+    { t: '超聲波', q: '蝙蝠發出的超聲波，人耳聽不到。這和聲音的哪一項特性最有關？', o: ['頻率', '振幅', '波速', '波形'], a: 0, e: '超聲波的頻率高過人耳上限 20000 赫，聽不見是因為頻率超出可聽範圍。' },
+    { t: '動物的聽覺', tf: true, q: '人耳可聽到的頻率範圍，比大多數動物都小。', e: '由各種動物的可聽範圍比較可知，人的範圍相對較窄。' },
+  ])(); } });
+})();
+
+/* S11 超聲波與回聲的應用 */
+def('S11', { sec: '3-4', can: '說明回聲與超聲波在生活中的應用（聲納、倒車雷達…）', lc: 'Ka-IV-4', gen: bank('S11', [
+  { t: '超聲波的應用', q: '船艦上的聲納可以測量海底地形或魚群的距離。它用的是什麼原理？', o: ['發出超聲波，再接收反射回來的回聲', '發出光，再接收反射光', '直接聽魚的叫聲', '利用水的溫度'], a: 0, e: '聲納＝超聲波＋回聲：發出超聲波，接收遇到物體反射回來的聲音。' },
+  { t: '超聲波的應用', q: '倒車雷達在車子靠近障礙物時發出嗶嗶聲，它應用了聲波的哪一種性質？', o: ['超聲波遇到障礙物會反射', '超聲波可以穿過所有障礙物', '聲音在真空中傳播', '聲波變成光波'], a: 0, e: '雷達發出超聲波，遇到障礙物反射回來，接收到反射訊號後就發出警示聲。' },
+  { t: '超聲波的應用', q: '下列哪一項「不是」超聲波的應用？', o: ['潛水時聽到水中傳來的音樂', '孕婦用超音波檢查胎兒', '超音波清洗機清洗物品', '船艦用聲納探測海底'], a: 0, e: '水中聽到音樂是「聲音能經液體傳播」，不屬於超聲波的應用。' },
+  { t: '超聲波的應用', q: '倒車雷達有偵測不到的死角。下列哪一種做法，可以改善這個問題？', o: ['增加雷達數量或加裝倒車攝影機', '把雷達的音量調大', '關掉雷達', '把車子漆成黑色'], a: 0, e: '增加雷達的數量可以減少死角，倒車攝影機則能讓駕駛直接看見車後的畫面。' },
+  { t: '超聲波的應用', q: '海豚和蝙蝠能靠超聲波和回聲辨別方向、尋找食物。這個生物行為和下列哪一項最類似？', o: ['船艦的聲納', '照相機', '收音機', '溫度計'], a: 0, e: '它們都是發出超聲波，再用接收到的回聲來判斷物體的位置。' },
+  { t: '回聲的應用', q: '下列哪一項是「利用聲音反射」的例子？', o: ['蝙蝠用回聲判斷障礙物位置', '在水中聽到水中喇叭', '用手握住音叉使聲音停止', '用吸管吹氣'], a: 0, e: '蝙蝠發出聲音並接收反射回來的回聲來判斷距離；其餘選項與反射無關。' },
+  { t: '超聲波的應用', tf: true, q: '醫院用超音波檢查胎兒，是利用超聲波的應用。', e: '超聲波可用來檢查胎兒、測量海底、清洗物品等。' },
+  { t: '聲納的原理', q: '船艦用聲納測量海底有多深時，主要是依據什麼資訊來判斷距離？', o: ['超聲波從發出到接收到回聲所經過的時間', '海水的顏色', '船的重量', '回聲的音色'], a: 0, e: '回聲回來得愈晚，表示海底愈遠，所以聲納利用「發出超聲波到接收回聲的時間」來判斷距離。' },
+  { t: '超聲波的應用', q: '漁船使用魚群探測器尋找魚群，探測器發出的是下列哪一種波？', o: ['超聲波', '可見光', '無線電波', '雷射光'], a: 0, e: '魚群探測器的原理和聲納一樣，發出超聲波並接收魚群反射回來的回聲。' },
+  { t: '超聲波的應用', q: '超聲波清洗機能把眼鏡、飾品上的髒汙洗乾淨，主要是利用超聲波使水怎樣？', o: ['快速振動', '變成固體', '產生強烈的光', '完全靜止不動'], a: 0, e: '超聲波清洗機利用超聲波使水快速振動，把物品上的汙垢震落。' },
+  { t: '超聲波的應用', q: '孕婦做產前檢查時，醫生用儀器觀察胎兒的狀況，儀器使用的是哪一種波？', o: ['超聲波', '可見光', '無線電波', '聲音頻率低於 20 赫的聲波'], a: 0, e: '產檢用的是超聲波（超音波），遇到身體組織的交界面會反射，形成影像。' },
+  { t: '超聲波的應用', tf: true, q: '倒車雷達發出人耳聽不到的超聲波，接收到障礙物反射回來的聲音後，才發出嗶嗶聲警示駕駛。', e: '倒車雷達利用超聲波遇到障礙物會反射的性質，嗶嗶聲是接收到回聲後發出的警示聲。' },
+  { t: '超聲波的應用', tf: false, q: '超聲波只能在空氣中使用，無法在水中傳播。', e: '超聲波仍是聲波，可以經氣體、液體、固體傳播；聲納就是在水中使用超聲波。' },
+  { t: '超聲波的應用', q: '工廠用超聲波檢查金屬零件的內部有沒有裂縫。這是利用超聲波遇到裂縫或不同物質的交界面時會？', o: ['反射而產生回聲', '被完全吸收而消失', '變成可見光', '變成次聲波'], a: 0, e: '超聲波在不同物質的交界面容易反射，檢測到反射回來的回聲，就能發現內部的裂縫。' },
+]) });
+
+/* ---- c_q_t.js ---- */
+/* ===== 4-4 ~ 4-5 透鏡成像、色散與顏色：T1–T5, C1–C4（題目皆為自擬） ===== */
+
+/* T1 凸透鏡與凹透鏡對光的作用 */
+(() => {
+  const g = () => {
+    const cv = rnd(0, 1), kind = cv ? 'convex' : 'concave';
+    return TT('平行主軸的光射向如圖的透鏡（只畫出透鏡的外形與焦點），折射後光線會？', ['會聚', '發散'], cv ? 0 : 1, ['透鏡中央厚、邊緣薄', '透鏡中央薄、邊緣厚', '透鏡是用塑膠做的', '透鏡的焦點在中間'], cv ? 0 : 1,
+      cv ? '中央厚、邊緣薄的是凸透鏡，會使光線會聚。' : '中央薄、邊緣厚的是凹透鏡，會使光線發散。', { svg: lensRaySvg({ kind, ray: 'parallel', showOut: false }), tag: '凸凹透鏡的作用' });
+  };
+  def('T1', { sec: '4-4', can: '分辨凸透鏡與凹透鏡，說出焦點、焦距與對光的作用', lc: 'Ka-IV-8', gen: mixGen('T1', [
+    { t: '凸凹透鏡的作用', q: '下列何者敘述正確？', o: ['凸透鏡使光線會聚，凹透鏡使光線發散', '凸透鏡使光線發散，凹透鏡使光線會聚', '兩種透鏡都使光線會聚', '兩種透鏡都不會使光線偏折'], a: 0, e: '凸透鏡＝會聚透鏡；凹透鏡＝發散透鏡。' },
+    { t: '焦點與焦距', q: '太陽光是平行光，經凸透鏡後集中成一個又小又亮的光點，這個點叫什麼？', o: ['焦點', '鏡心', '法線', '主軸'], a: 0, e: '平行光經凸透鏡會聚的那一點是焦點；焦點到鏡心的距離是焦距。' },
+    { t: '焦點與焦距', q: '怎樣可以用太陽光和白紙找出凸透鏡的焦距？', o: ['調整紙與透鏡的距離，到光點最小最亮時，量透鏡到紙的距離', '量透鏡的直徑', '量透鏡的厚度', '量紙的長度'], a: 0, e: '太陽距離很遠，射來的光近似平行光，會聚得最小最亮的位置就是焦點，量到鏡心的距離就是焦距。' },
+    { t: '凹透鏡的焦點', q: '平行光射向凹透鏡，折射後光線往外發散。凹透鏡的焦點，是由什麼決定的？', o: ['發散光線「反向延長線」的交點（在入射側）', '光線真正會聚的點', '鏡心', '透鏡邊緣'], a: 0, e: '凹透鏡的光線並沒有真的會聚，只是折射線的反向延長線在鏡前相交於一點，這點是它的焦點。' },
+    { t: '三稜鏡的組合', q: '把兩個三稜鏡的「厚端」對在一起，平行雷射光通過後會？', o: ['會聚', '發散', '不偏折', '變成彩色'], a: 0, e: '厚端組合的三稜鏡類似凸透鏡，使光線會聚；尖端組合則使光線發散。' },
+    { t: '凸凹透鏡的作用', tf: true, q: '透鏡中央較厚、邊緣較薄的是凸透鏡。', e: '凸透鏡中央厚邊緣薄，凹透鏡中央薄邊緣厚。' },
+    { t: '焦點與焦距', q: '某凸透鏡把太陽光會聚在離透鏡 10 公分的地方。這個凸透鏡的焦距是多少？', o: ['10 公分', '5 公分', '20 公分', '無法知道'], a: 0, e: '太陽光近似平行光，會聚成最亮最小一點的位置是焦點，焦點到透鏡的距離就是焦距，所以是 10 公分。' },
+    { t: '凹透鏡的認識', q: '下列哪一個物品使用的是會使光線發散的凹透鏡？', o: ['近視眼鏡', '放大鏡', '老花眼鏡', '投影機的鏡頭'], a: 0, e: '近視眼鏡是凹透鏡；放大鏡、老花眼鏡、投影機鏡頭都是凸透鏡。' },
+    { t: '凸凹透鏡的作用', q: '拿到一片透明的透鏡，發現中央比邊緣薄。這片透鏡是哪一種？對光線有什麼作用？', o: ['凹透鏡，使光線發散', '凹透鏡，使光線會聚', '凸透鏡，使光線會聚', '凸透鏡，使光線發散'], a: 0, e: '中央薄、邊緣厚的是凹透鏡，它使光線發散。' },
+    { t: '焦點與焦距', q: '關於「焦距」，下列敘述何者正確？', o: ['焦點到鏡心的距離', '透鏡的直徑', '物體到透鏡的距離', '像到焦點的距離'], a: 0, e: '焦距是焦點到鏡心的距離；物體到透鏡的距離叫物距。' },
+    { t: '焦點與焦距', tf: false, q: '凸透鏡只有一個焦點，而且在透鏡的其中一側。', e: '平行光可以從透鏡的任一側射入，所以凸透鏡兩側各有一個焦點。' },
+    { t: '凸凹透鏡的作用', tf: false, q: '平行光通過凹透鏡後，會在鏡後集中到同一點。', e: '凹透鏡使光線發散，不會在鏡後會聚。' },
+    { t: '三稜鏡的組合', q: '把兩個三稜鏡的「尖端」對在一起，平行光通過後會怎樣？', o: ['發散', '會聚', '不偏折', '消失不見'], a: 0, e: '尖端組合的三稜鏡類似凹透鏡，使光線發散；厚端組合則類似凸透鏡，使光線會聚。' },
+    { t: '焦點與焦距', q: '為什麼可以用太陽光來找出凸透鏡的焦點？', o: ['太陽離地球很遠，射來的光近似平行光', '太陽光是單一顏色的光', '太陽光很熱', '太陽光會自己會聚'], a: 0, e: '太陽距離很遠，射到地面的光線幾乎彼此平行，平行光經凸透鏡會聚的那一點就是焦點。' },
+  ], [g]) });
+})();
+
+/* T2 凸透鏡成像規律 */
+(() => {
+  const OPT = ['倒立縮小的實像', '倒立等大的實像', '倒立放大的實像', '不成像（屏幕上看不到像，眼睛也看不到）', '正立放大的虛像'];
+  const g = () => {
+    const f = pick([5, 6, 8, 10, 12]), reg = rnd(0, 4);
+    let u, ans, pos;
+    if (reg === 0) { u = f * pick([2.5, 3, 4]); ans = 0; pos = '焦距到 2 倍焦距之間'; }
+    else if (reg === 1) { u = 2 * f; ans = 1; pos = '剛好在 2 倍焦距處'; }
+    else if (reg === 2) { u = round(f * pick([1.25, 1.5, 1.75]), 1); ans = 2; pos = '2 倍焦距以外'; }
+    else if (reg === 3) { u = f; ans = 3; pos = ''; }
+    else { u = round(f * pick([0.4, 0.5, 0.7]), 1); ans = 4; pos = ''; }
+    const where = ['物在 2 倍焦距外', '物在 2 倍焦距上', '物在 1 倍到 2 倍焦距之間', '物在焦點上', '物在焦點內（比焦距近）'][ans];
+    if (Math.random() < .3 && ans <= 2) {
+      const PO = ['焦距到 2 倍焦距之間', '剛好在 2 倍焦距處', '2 倍焦距以外'];
+      return MC(`凸透鏡的焦距是 ${f} 公分，把發光的燈具放在離透鏡 ${u} 公分處，移動屏幕找到最清楚的像。像在透鏡的另一側，離透鏡多遠最合理？`, PO, ans, `${where}，成${OPT[ans]}，像的位置在${pos}（${[`${f}～${2 * f}`, `${2 * f}`, `大於 ${2 * f}`][ans]} 公分）。`, { tag: '凸透鏡的像距' });
+    }
+    return MC(`凸透鏡的焦距是 ${f} 公分，把發光的燈具放在離透鏡 ${u} 公分處。透過透鏡（或在屏幕上）看到的情形是？`, OPT, ans, `焦距 ${f} 公分，2 倍焦距是 ${2 * f} 公分；燈具在 ${u} 公分處，屬於「${where}」，所以成${OPT[ans]}。`, { tag: '凸透鏡成像規律' });
+  };
+  def('T2', { sec: '4-4', can: '依物距判斷凸透鏡成什麼像（實或虛、正或倒、放大或縮小）', lc: 'Ka-IV-8', gen: mixGen('T2', [
+    { t: '成像的變化', q: '凸透鏡成像的實驗中，燈具從很遠處慢慢移近到焦點外（仍是實像）。屏幕上的像會？', o: ['像變大，位置離透鏡愈來愈遠', '像變小，位置愈來愈近', '像大小不變', '像變成正立'], a: 0, e: '物愈靠近焦點，像離鏡愈遠、愈大（恆為倒立實像）。' },
+    { t: '實像與虛像', q: '下列哪一種像，可以用屏幕（白紙）接到？', o: ['實像', '虛像', '正立的像', '縮小的像'], a: 0, e: '實像由真實光線會聚而成，可呈現在屏幕上；虛像看得到卻接不到。' },
+    { t: '放大鏡的用法', q: '用凸透鏡當放大鏡，要看到「正立放大」的像，物體應該放在？', o: ['焦點以內（離透鏡比焦距近）', '2 倍焦距以外', '剛好 2 倍焦距', '剛好焦點上'], a: 0, e: '物在焦點內時，透過透鏡可看到正立放大的虛像。' },
+    { t: '成像的變化', tf: true, q: '物體剛好在凸透鏡的焦點上，屏幕接不到像，眼睛看過去也看不到像。', e: '物在焦點上時，折射後形成平行光，不成像。' },
+    { t: '像的方向', q: '物體在焦點「外」，透過凸透鏡（在屏幕上）看到的像，方向是？', o: ['上下顛倒、左右相反（倒立）', '正立', '只有左右相反', '只有上下顛倒'], a: 0, e: '焦點外的實像都是倒立的（上下顛倒、左右相反）。' },
+  ], [g, g]) });
+})();
+
+/* T3 三條特殊光線作圖 */
+(() => {
+  const OUT = ['折射後通過另一側的焦點', '折射後前進方向不變', '折射後平行主軸', '折射後散開，往回延長會通過和入射光同一側的焦點'];
+  const specs = [
+    { kind: 'convex', ray: 'parallel', a: 0, e: '平行主軸的光，經凸透鏡折射後通過另一側的焦點。' },
+    { kind: 'convex', ray: 'center', a: 1, e: '對準鏡心射來的光，直直穿過不轉彎。' },
+    { kind: 'convex', ray: 'focus', a: 2, e: '通過（射向）同側焦點的光，經凸透鏡折射後平行主軸。' },
+    { kind: 'concave', ray: 'parallel', a: 3, e: '平行主軸的光，經凹透鏡折射後散開，往回延長會通過和入射光同一側的焦點。' },
+    { kind: 'concave', ray: 'center', a: 1, e: '對準鏡心射來的光，直直穿過不轉彎。' },
+    { kind: 'concave', ray: 'focus', a: 2, e: '射向另一側焦點的光，經凹透鏡折射後平行主軸。' },
+  ];
+  const g = () => {
+    const sp = pick(specs);
+    const o = shuffle([0, 1, 2, 3]);
+    const opts = o.map(i => OUT[i]);
+    return MC(`下圖是一條光線射向${sp.kind === 'convex' ? '凸' : '凹'}透鏡的情形（只畫出入射線）。這條光線折射後會怎麼走？`, opts, o.indexOf(sp.a), sp.e, { svg: lensRaySvg({ kind: sp.kind, ray: sp.ray }), tag: '特殊光線' });
+  };
+  def('T3', { sec: '4-4', can: '用三條特殊光線畫出凸透鏡、凹透鏡的折射光路', lc: 'Ka-IV-8', gen: mixGen('T3', [
+    { t: '特殊光線', q: '凸透鏡成像作圖時，「射向鏡心的光線」折射後會怎樣？', o: ['前進方向不變', '平行主軸', '通過焦點', '反射回去'], a: 0, e: '對準鏡心射來的光，直直穿過不轉彎。' },
+    { t: '特殊光線', q: '凸透鏡成像作圖時，「平行主軸的光線」折射後會怎樣？', o: ['通過另一側的焦點', '平行主軸', '前進方向不變', '通過鏡心'], a: 0, e: '平行主軸的光，折射後會經過對面那一側的焦點。' },
+    { t: '特殊光線', q: '凸透鏡成像作圖時，「通過同側焦點的光線」折射後會怎樣？', o: ['平行主軸', '通過另一側焦點', '前進方向不變', '往回走'], a: 0, e: '射向同側焦點的光，折射後平行主軸（和平行光通過焦點互為可逆）。' },
+    { t: '特殊光線', tf: true, q: '用三條特殊光線作圖時，只要找到其中兩條折射線的交點，就能決定像的位置。', e: '從物體上同一點發出的光，折射後會相交在像的位置，兩條就足夠找到它。' },
+    { t: '特殊光線', q: '凹透鏡作圖時，「平行主軸的光線」折射後會怎樣？', o: ['發散，往後延伸會通過入射光那一側的焦點', '會聚，通過另一側的焦點', '平行主軸繼續前進', '前進方向不變'], a: 0, e: '凹透鏡使光線發散，平行主軸的光折射後向外散開，把折射線反向延長，會通過與入射光同側的焦點。' },
+    { t: '特殊光線', q: '凹透鏡作圖時，「射向鏡心的光線」折射後會怎樣？', o: ['前進方向不變', '向外發散', '平行主軸', '通過焦點'], a: 0, e: '對準鏡心射去的光線，不論凸透鏡或凹透鏡，都沿原來的方向直線通過。' },
+    { t: '特殊光線', q: '凹透鏡作圖時，「射向另一側焦點的光線」折射後會怎樣？', o: ['平行主軸', '通過焦點', '前進方向不變', '被反射回去'], a: 0, e: '朝著另一側焦點射去的光，通過凹透鏡折射後會平行於主軸。' },
+    { t: '特殊光線', q: '凸透鏡作圖時，下列哪一條光線折射後，前進方向「不變」？', o: ['射向鏡心的光線', '平行主軸的光線', '通過同側焦點的光線', '三條都不變'], a: 0, e: '只有射向鏡心的光線不偏折；平行主軸的光線折射後通過另一側焦點，通過同側焦點的光線折射後平行主軸。' },
+    { t: '特殊光線', q: '下列哪一種光線「不是」凸透鏡成像作圖用的三條特殊光線之一？', o: ['射向透鏡邊緣的光線', '平行主軸的光線', '射向鏡心的光線', '通過同側焦點的光線'], a: 0, e: '三條特殊光線是：平行主軸、射向鏡心、通過（射向）同側焦點的光線。' },
+    { t: '特殊光線', tf: false, q: '平行主軸的光線通過凸透鏡後，會通過鏡心。', e: '平行主軸的光線穿過凸透鏡後，會經過對面那一側的焦點，不是經過鏡心。' },
+    { t: '特殊光線', tf: true, q: '射向凹透鏡鏡心的光線，折射後前進方向不變。', e: '凹透鏡的三條特殊光線之一：對準鏡心的光線沿原方向直線通過。' },
+    { t: '特殊光線', q: '平行主軸的光線分別射向凸透鏡與凹透鏡，下列敘述何者正確？', o: ['凸透鏡折射後通過另一側的焦點；凹透鏡折射後往後延伸通過入射光同側的焦點', '兩者折射後都通過另一側的焦點', '兩者折射後都平行主軸', '凸透鏡使光發散，凹透鏡使光會聚'], a: 0, e: '凸透鏡使光會聚，光真的通過另一側的焦點；凹透鏡使光發散，只是折射線的反向延長線通過同側焦點。' },
+    { t: '特殊光線', q: '凹透鏡的折射光線不會真的相交，所以作圖時要用什麼來找出像的位置？', o: ['折射線的反向延長線', '入射線的延長線', '法線', '主軸的延長線'], a: 0, e: '凹透鏡形成虛像，不是由真實光線會聚而成，要把折射線反向延長，它們的交點就是像的位置。' },
+    { t: '特殊光線', tf: false, q: '凹透鏡作圖時，三條特殊光線折射後會在鏡後相交於同一點。', e: '凹透鏡使光線發散，折射後的光線彼此分開，不會在鏡後相交；只有反向延長線才相交。' },
+  ], [g, g, g]) });
+})();
+
+/* T4 凹透鏡成像 */
+def('T4', { sec: '4-4', can: '說明凹透鏡的成像：正立縮小的虛像', lc: 'Ka-IV-8', gen: bank('T4', [
+  { t: '凹透鏡成像', q: '物體放在凹透鏡前任何位置，透過透鏡看到的像，總是？', o: ['正立縮小的虛像', '倒立縮小的實像', '正立放大的虛像', '倒立放大的實像'], a: 0, r: ['凹透鏡使光線發散，沒有真實光線會聚', '凹透鏡使光線會聚成實像', '凹透鏡不讓光通過', '凹透鏡會把物體放大'], ra: 0, e: '凹透鏡使光線發散，折射線不會真的會聚，所以只能形成正立縮小的虛像。' },
+  { t: '凹透鏡成像', tf: false, q: '用凹透鏡可以在屏幕上得到清晰的實像。', e: '凹透鏡不能形成實像，屏幕上接不到像。' },
+  { t: '凹透鏡成像', q: '物體離凹透鏡愈遠，透過凹透鏡看到的像會？', o: ['愈小', '愈大', '大小不變', '變成倒立'], a: 0, e: '物體愈遠離凹透鏡，成的像愈小。' },
+  { t: '凹透鏡成像', q: '近視眼鏡是凹透鏡。透過近視眼鏡看物體，看到的像是？', o: ['縮小正立的像', '放大正立的像', '倒立縮小的像', '倒立放大的像'], a: 0, e: '近視眼鏡是凹透鏡，成正立縮小的虛像。' },
+  { t: '虛像', q: '「虛像」的意思最接近下列哪一個？', o: ['眼睛看得到，但無法呈現在屏幕上的像', '屏幕上看得到的像', '很模糊的像', '倒立的像'], a: 0, e: '虛像：眼睛看得到，但屏幕接不到。' },
+  { t: '凹透鏡成像', q: '比較凸透鏡與凹透鏡，下列何者敘述正確？', o: ['凸透鏡可形成實像，凹透鏡不能', '兩者都可形成實像', '凹透鏡可形成實像，凸透鏡不能', '兩者都不能形成實像'], a: 0, e: '凸透鏡能把光會聚成實像；凹透鏡使光發散，只能形成虛像。' },
+  { t: '凹透鏡成像', q: '下列哪一種透鏡，不論物體放在哪裡，看到的像「一定」是正立縮小的虛像？', o: ['凹透鏡', '凸透鏡', '放大鏡', '投影機的鏡頭'], a: 0, e: '凹透鏡使光發散，只能成正立縮小的虛像；凸透鏡的像會隨物距改變，放大鏡、投影機鏡頭都是凸透鏡。' },
+  { t: '凹透鏡成像', tf: false, q: '把物體放在凹透鏡前某些位置，可以看到放大的像。', e: '凹透鏡的像永遠是正立縮小的虛像，不會放大。' },
+  { t: '凹透鏡成像', q: '用屏幕（白紙）去接凹透鏡後方的光，會看到什麼？', o: ['接不到像', '倒立縮小的實像', '正立縮小的實像', '放大的實像'], a: 0, e: '凹透鏡不能形成實像，屏幕上接不到像；只能用眼睛透過透鏡看到虛像。' },
+  { t: '虛像', q: '凹透鏡所成的像是虛像，原因是？', o: ['折射後的光線不會真的會聚，只有反向延長線相交', '光線被透鏡吸收了', '透鏡太薄', '像出現在屏幕上'], a: 0, e: '凹透鏡使光線發散，折射線不相交，只有反向延長線相交，所以不能呈現在屏幕上，是虛像。' },
+  { t: '凹透鏡成像', q: '和凸透鏡相比，凹透鏡「不能」做到下列哪一件事？', o: ['在屏幕上呈現清楚的像', '使光線發散', '形成虛像', '讓物體看起來比較小'], a: 0, e: '凹透鏡只能形成正立縮小的虛像，不能形成實像，所以屏幕上接不到像。' },
+  { t: '凹透鏡成像', q: '把物體放在凹透鏡前很遠的地方與很近的地方，所成的像有什麼共同點？', o: ['都是正立縮小的虛像', '都是倒立縮小的實像', '遠時是實像、近時是虛像', '都是放大的虛像'], a: 0, e: '凹透鏡不論物距遠近，成的都是正立縮小的虛像；只是物體愈遠，像愈小。' },
+  { t: '虛像', q: '下列哪一個情形，看到的像「不是」正立縮小的像？', o: ['用放大鏡看近處的小字', '透過近視眼鏡看遠處的招牌', '透過凹透鏡看物體', '在路口的凸面鏡裡看到來車'], a: 0, e: '放大鏡是凸透鏡，物體在焦點內時成正立「放大」的虛像；近視眼鏡（凹透鏡）、凸面鏡看到的都是正立縮小的像。' },
+  { t: '凹透鏡成像', tf: true, q: '凹透鏡所成的像，總是和物體在透鏡的同一側。', e: '凹透鏡成的是虛像，虛像出現在物體所在的那一側（鏡前）。' },
+]) });
+
+/* T5 生活中的透鏡 */
+(() => {
+  const g = () => {
+    const ob = pick([4, 10, 40, 100]), ey = pick([5, 10, 15]);
+    return NUM(`顯微鏡的物鏡倍率是 ${ob} 倍，目鏡倍率是 ${ey} 倍，總放大倍率是幾倍？`, ob * ey, '倍', `顯微鏡的放大倍率 ＝ 物鏡倍率 × 目鏡倍率 ＝ ${ob} × ${ey} ＝ ${ob * ey} 倍。`, { tag: '顯微鏡倍率' });
+  };
+  def('T5', { sec: '4-4', can: '說出生活中透鏡的應用（眼睛與眼鏡、放大鏡、顯微鏡、照相機）', lc: 'Ka-IV-9', gen: () => Math.random() < .15 ? g() : bank('T5', [
+    { t: '近視眼鏡', q: '近視的人看遠處物體時，光線會成像在視網膜的前面。需要配戴哪一種透鏡矯正？', o: ['凹透鏡', '凸透鏡', '平面鏡', '三稜鏡'], a: 0, r: ['凹透鏡使光線發散，讓像往後移到視網膜上', '凸透鏡使光線發散', '平面鏡會放大物體', '三稜鏡能讓光變白'], ra: 0, e: '近視成像在視網膜前，需用凹透鏡矯正。' },
+    { t: '遠視眼鏡', q: '遠視或老花的人看近物時，光線會成像在視網膜的後面。需要配戴哪一種透鏡矯正？', o: ['凸透鏡', '凹透鏡', '平面鏡', '凸面鏡'], a: 0, e: '遠視（老花）成像在視網膜後，需用凸透鏡矯正。' },
+    { t: '放大鏡', q: '放大鏡其實是哪一種透鏡？看到的像是？', o: ['凸透鏡；正立放大的虛像（物在焦點內）', '凹透鏡；正立放大的虛像', '凸透鏡；倒立縮小的實像', '凹透鏡；倒立放大的實像'], a: 0, e: '放大鏡是凸透鏡，物體在焦點內時，可看到正立放大的虛像。' },
+    { t: '顯微鏡', q: '複式顯微鏡的物鏡和目鏡，分別是哪一種透鏡？', o: ['都是凸透鏡', '都是凹透鏡', '物鏡凹透鏡、目鏡凸透鏡', '物鏡凸透鏡、目鏡凹透鏡'], a: 0, e: '顯微鏡鏡筒兩端的物鏡、目鏡都是凸透鏡。' },
+    { t: '照相機', q: '相機的鏡頭相當於凸透鏡。底片（感光元件）上得到的像是？', o: ['倒立縮小的實像', '正立放大的虛像', '倒立放大的虛像', '正立縮小的實像'], a: 0, e: '相機成像在感光元件上，是倒立縮小的實像。' },
+    { t: '投影機', q: '投影機把圖像投影到布幕上，布幕上看到的是實像還是虛像？鏡頭應該是哪一種透鏡？', o: ['實像；凸透鏡', '虛像；凸透鏡', '實像；凹透鏡', '虛像；凹透鏡'], a: 0, e: '能呈現在屏幕（布幕）上的是實像，而能形成實像的是凸透鏡。' },
+    { t: '水滴透鏡', q: '在透明玻璃片上點一滴水，透過水滴看課本的字，字被放大了（正立放大）。這個小水滴的作用像？', o: ['凸透鏡，所成的是虛像', '凹透鏡，所成的是虛像', '凸透鏡，所成的是實像', '平面鏡'], a: 0, e: '正立放大的像是虛像，能放大的透鏡是凸透鏡，所以水滴相當於凸透鏡。' },
+    { t: '近視眼鏡', tf: true, q: '近視眼鏡是凹透鏡，遠視（老花）眼鏡是凸透鏡。', e: '近視用凹透鏡，遠視用凸透鏡。' },
+    { t: '眼睛的構造', q: '正常眼睛中，哪一個部分的作用相當於凸透鏡？', o: ['水晶體', '視網膜', '眼皮', '視神經'], a: 0, e: '水晶體相當於凸透鏡，能讓光線會聚；視網膜是接收影像的地方。' },
+    { t: '眼睛的構造', q: '視力正常的人看東西時，光線經過水晶體後，清楚的像成在哪裡？', o: ['視網膜上', '視網膜前面', '視網膜後面', '水晶體上'], a: 0, e: '正常眼睛的水晶體能調節，使遠近物體的像都清楚地成在視網膜上。' },
+    { t: '眼睛的構造', q: '正常的眼睛不論看遠處或近處的物體，都能看得清楚，主要是因為水晶體能？', o: ['調節，使像清楚成在視網膜上', '固定不動', '讓像成在視網膜後面', '讓像成在視網膜前面'], a: 0, e: '正常眼睛的水晶體有很好的調節能力，遠近物體都能清楚成像在視網膜上。' },
+    { t: '顯微鏡', q: '複式顯微鏡中，靠近標本的透鏡和靠近眼睛的透鏡，分別叫什麼？', o: ['物鏡；目鏡', '目鏡；物鏡', '焦點；鏡心', '物距；像距'], a: 0, e: '靠近標本的是物鏡，靠近眼睛的是目鏡，兩者都是凸透鏡。' },
+    { t: '近視眼鏡', tf: false, q: '近視的人看遠方物體時，像成在視網膜的後面。', e: '近視者看遠物，像成在視網膜的「前面」；遠視者看近物，像才成在視網膜的後面。' },
+    { t: '放大鏡', tf: false, q: '放大鏡能把字放大，是因為它形成倒立的實像。', e: '放大鏡是凸透鏡，字放在焦點內，看到的是正立放大的虛像，不是倒立的實像。' },
+    { t: '透鏡的種類', q: '下列哪一個物品使用的透鏡「不是」凸透鏡？', o: ['近視眼鏡', '放大鏡', '照相機的鏡頭', '複式顯微鏡的物鏡'], a: 0, e: '近視眼鏡是凹透鏡；放大鏡、照相機鏡頭、顯微鏡的物鏡都是凸透鏡（或相當於凸透鏡）。' },
+    { t: '遠視眼鏡', q: '阿公戴老花眼鏡看報紙，透過老花眼鏡看到的字，與不戴眼鏡時相比，通常會怎樣？', o: ['被放大', '被縮小', '上下顛倒', '變成彩色'], a: 0, e: '老花眼鏡是凸透鏡，報紙在焦點內時，透過它會看到正立放大的虛像。' },
+  ])() });
+})();
+
+/* C1 色散 */
+def('C1', { sec: '4-5', can: '說明陽光經三稜鏡的色散，知道陽光由各種色光組成', lc: 'Ka-IV-10', gen: bank('C1', [
+  { t: '色散', q: '陽光通過三稜鏡後，在牆上看到一條彩色光帶。這種現象稱為？', o: ['色散', '反射', '直進', '針孔成像'], a: 0, e: '光被折射後各種顏色散開來，這個現象就是色散。' },
+  { t: '色散', q: '牛頓讓陽光通過第一個三稜鏡分散成七彩色光，再用第二個三稜鏡把色光混合，看到什麼？', o: ['白光', '黑色', '單一紅光', '什麼都看不到'], a: 0, e: '七彩色光混合起來又變成白光，可知陽光不是單一的白色光，而是由各種色光混合而成。' },
+  { t: '色散', tf: true, q: '陽光是由各種不同顏色的光混合而成的。', e: '陽光通過三稜鏡會分散出七彩色光，說明了這一點。' },
+  { t: '色散', q: '同樣射進三稜鏡，紅色雷射光和陽光的結果有什麼不同？', o: ['雷射光只偏折、不會分成各種顏色；陽光會分成彩色光帶', '兩者結果完全一樣', '雷射光會分成彩色光帶', '陽光完全不偏折'], a: 0, e: '雷射光只有單一色光，只偏折；陽光含有各種色光，不同色光偏折不同，因而分散。' },
+  { t: '色散', q: '雨後常在天空看到彩虹，它的形成主要和哪種現象有關？', o: ['色散', '針孔成像', '平面鏡成像', '光的直進'], a: 0, e: '太陽光經水珠折射，不同色光被分開，形成彩虹。' },
+  { t: '色光在三稜鏡中的速率', q: '陽光穿過三稜鏡後被分成彩色光帶，代表各色光在三稜鏡裡的速率？', o: ['不相同', '完全相同', '都是 0', '都等於真空中的光速'], a: 0, r: ['不同色光在介質中速率不同，折射程度因此不同', '所有色光速率一樣，所以才分散', '光不會在三稜鏡中前進', '三稜鏡會改變光的顏色'], ra: 0, e: '穿過三稜鏡時紅光最快、紫光最慢；速率不一樣，偏折也不同，色光就被分開。' },
+  { t: '色散', q: '在三稜鏡中，哪一種顏色的光速率最快？', o: ['紅光', '綠光', '藍光', '紫光'], a: 0, e: '穿過三稜鏡時，紅光跑得最快，紫光跑得最慢。' },
+  { t: '色散', q: '下列哪一種光通過三稜鏡後，會被分散成彩色光帶？', o: ['陽光', '紅色雷射光', '綠色雷射光', '藍色雷射光'], a: 0, e: '陽光含有各種色光，通過三稜鏡會被分開；單一色光只會偏折，不會再分出其他顏色。' },
+  { t: '色散', q: '雨後出現彩虹時，空中的小水珠所扮演的角色，最像下列哪一項？', o: ['三稜鏡', '平面鏡', '光源', '黑色屏幕'], a: 0, e: '陽光射入水珠時發生折射，各種色光偏折程度不同而分開，水珠的作用就像三稜鏡。' },
+  { t: '色散', tf: false, q: '三稜鏡把白光「染成」了各種顏色，所以才會出現彩色光帶。', e: '陽光本來就含有各種色光，三稜鏡只是讓它們偏折的程度不同而分開，並沒有替光「上色」。' },
+  { t: '色光在三稜鏡中的速率', q: '陽光通過三稜鏡後，各種色光在牆上排成一條光帶，原因是各色光？', o: ['在三稜鏡中偏折的程度不同', '在三稜鏡中的速率完全相同', '互相吸收', '被三稜鏡反射回去'], a: 0, e: '不同色光在三稜鏡中的速率不同，偏折程度也不同，離開三稜鏡後就分開成光帶。' },
+  { t: '色散', q: '下列哪一項敘述，最能描述「色散」？', o: ['白色的陽光被折射，分開成各種顏色的光', '各種色光混合成白光', '光碰到鏡子被彈回來', '光沿直線前進'], a: 0, e: '色散是陽光經折射被分開成各種色光；各色光再混合成白光，則是色散的相反過程。' },
+  { t: '色光在三稜鏡中的速率', q: '在三稜鏡中，哪一種色光的速率最慢？', o: ['紫光', '紅光', '綠光', '各色光速率一樣'], a: 0, e: '各色光進入三稜鏡後速率不同：紅光最快、紫光最慢。' },
+  { t: '三稜鏡的折射', q: '一束光通過三稜鏡的過程中，總共發生幾次折射？', o: ['兩次（進入與離開三稜鏡各一次）', '一次', '三次', '零次'], a: 0, e: '光由空氣進入三稜鏡折射一次，由三稜鏡射出到空氣中又折射一次，共兩次。' },
+  { t: '色散', q: '讓一束紅色雷射光射進三稜鏡，從另一邊射出後在牆上會看到什麼？', o: ['一個偏折過的紅色光點', '一條彩色光帶', '白光', '什麼都看不到'], a: 0, e: '雷射光只含單一色光，通過三稜鏡只會偏折，不會分散成彩色光帶。' },
+]) });
+
+/* C2 光的三原色與色光混合 */
+(() => {
+  const COMBO = [['紅', '綠', '黃'], ['綠', '藍', '青'], ['紅', '藍', '洋紅']];
+  const g = () => {
+    if (Math.random() < .25) return MC('把亮度相同的紅光、綠光、藍光，同時照在白色螢幕的同一個位置，會看到什麼顏色？', ['白色', '黑色', '黃色', '紫黑色'], 0, '紅、綠、藍三種色光等量相加，得到白色光。', { tag: '色光混合' });
+    const [a, b, r] = pick(COMBO), flip = rnd(0, 1);
+    const opts = shuffle(['黃色', '青色', '洋紅色', '白色']);
+    const ans = r + '色';
+    return MC(`把${flip ? b : a}色光和${flip ? a : b}色光同時照在白色螢幕上，會混合成什麼顏色的光？`, opts, opts.indexOf(ans), `${a}光 ＋ ${b}光 ＝ ${r}光。（紅＋綠＝黃、綠＋藍＝青、紅＋藍＝洋紅、紅＋綠＋藍＝白）`, { tag: '色光混合' });
+  };
+  def('C2', { sec: '4-5', can: '說出光的三原色，並判斷色光混合的結果', lc: 'Ka-IV-11', gen: () => Math.random() < .6 ? g() : bank('C2', [
+    { t: '光的三原色', q: '光的三原色是哪三種色光？', o: ['紅、綠、藍', '紅、黃、藍', '黃、青、洋紅', '紅、白、黑'], a: 0, e: '把紅、綠、藍三種色光調成不同的亮度再疊在一起，可以得到各種顏色的光，所以稱為光的三原色。' },
+    { t: '三原色的應用', q: '電視、手機螢幕混合出彩色畫面，利用的是什麼原理？', o: ['紅、綠、藍三原色的色光混合', '三稜鏡的色散', '鏡子的反射', '針孔成像'], a: 0, e: '螢幕的發光裝置產生紅、綠、藍三種色光，混合出各種顏色。' },
+    { t: '色光混合', tf: true, q: '只要調整紅、綠、藍三種色光的亮度比例，就能組合出各種顏色的光。', e: '這就是它們被稱為「三原色」的原因。' },
+    { t: '光的三原色', q: '下列哪一種顏色「不是」光的三原色之一？', o: ['黃色', '紅色', '綠色', '藍色'], a: 0, e: '光的三原色是紅、綠、藍；黃色可以由紅光和綠光混合得到。' },
+    { t: '色光混合', q: '電視螢幕上顯示黃色的部分，是螢幕混合哪兩種色光所呈現的？', o: ['紅光與綠光', '紅光與藍光', '綠光與藍光', '藍光與白光'], a: 0, e: '紅光與綠光混合成黃光。' },
+    { t: '色光混合', q: '電腦螢幕呈現洋紅色的部分，主要是混合哪兩種色光？', o: ['紅光與藍光', '紅光與綠光', '綠光與藍光', '黃光與藍光'], a: 0, e: '紅光與藍光混合成洋紅色光。' },
+    { t: '色光混合', q: '把綠光和藍光同時照在白色螢幕的同一處，會看到什麼顏色？', o: ['青色', '黃色', '洋紅色', '白色'], a: 0, e: '綠光與藍光混合成青色光。' },
+    { t: '色光混合', q: '紅、綠、藍三種色光等量混合會得到白光。若把其中的綠光拿掉，只剩紅光與藍光，會看到什麼顏色？', o: ['洋紅色', '黃色', '青色', '白色'], a: 0, e: '紅光＋藍光＝洋紅色光；綠光被拿掉，就不再是白光。' },
+    { t: '色光混合', q: '白色螢幕上原本只有紅光照射。再加上綠光同時照射，螢幕的顏色會變成？', o: ['黃色', '黑色', '仍是紅色', '藍色'], a: 0, e: '紅光＋綠光＝黃光，色光混合是愈加愈亮。' },
+    { t: '色光混合', tf: false, q: '色光混合時，顏色愈混愈暗，紅、綠、藍三種色光混合會變成黑色。', e: '色光是愈加愈亮，紅、綠、藍等量混合會得到白光，而不是黑色。' },
+    { t: '色光混合', q: '舞台上有紅、綠、藍三盞燈，亮度適當並同時照在白色的衣服上，衣服看起來是什麼顏色？', o: ['白色', '黑色', '黃色', '紅色'], a: 0, e: '三種色光混合成白光，白色衣服反射各種色光，所以看起來是白色。' },
+    { t: '光的三原色', q: '下列哪一組色光混合後，可以得到白光？', o: ['紅、綠、藍', '紅、綠', '綠、藍', '紅、藍'], a: 0, e: '只有三原色光等量混合才得到白光；兩種色光混合只會得到黃、青、洋紅等顏色。' },
+    { t: '三原色的應用', q: '電視要顯示白色的畫面時，螢幕上紅、綠、藍三種發光裝置會怎樣？', o: ['都以適當的亮度發光', '都不發光', '只有綠色發光', '只有紅色與藍色發光'], a: 0, e: '紅、綠、藍三種色光適當混合就成為白光，所以三種發光裝置都要發光。' },
+    { t: '色光混合', q: '下列哪一個色光混合結果是「錯誤」的？', o: ['藍光＋綠光＝黃光', '紅光＋綠光＝黃光', '綠光＋藍光＝青光', '紅光＋藍光＝洋紅光'], a: 0, e: '藍光＋綠光應該是青光；黃光是由紅光和綠光混合而成。' },
+  ])() });
+})();
+
+/* C3 透明物體的顏色 */
+(() => {
+  const LIGHT = ['紅', '綠', '藍', '白'], PAPER = ['紅', '綠', '藍', '無色'];
+  const RS = ['玻璃紙只放行和自己同色的光，其餘的光被吸收', '無色透明的玻璃紙讓所有色光都穿透', '玻璃紙把光反射回去', '玻璃紙把光染成它自己的顏色'];
+  const g = () => {
+    const L = pick(LIGHT), P = pick(PAPER);
+    let ans, ra;
+    if (P === '無色') { ans = L + '光'; ra = 1; }
+    else if (L === '白' || L === P) { ans = P + '光'; ra = 0; }
+    else { ans = '沒有光通過（看起來是黑的）'; ra = 0; }
+    const pool = ['紅光', '綠光', '藍光', '白光', '沒有光通過（看起來是黑的）'];
+    const opts = shuffle([ans, ...shuffle(pool.filter(x => x !== ans)).slice(0, 3)]);
+    return TT(`把${L}色的光射向${P === '無色' ? '無色透明' : P + '色'}玻璃紙，從玻璃紙的另一面看到什麼？`, opts, opts.indexOf(ans), RS, ra,
+      P === '無色' ? '無色透明的玻璃紙讓所有色光穿透，所以光的顏色不變。' : L === '白' ? `白光含有各種色光，${P}色玻璃紙只讓${P}光通過，所以透出${P}光。` : L === P ? `${L}光與玻璃紙同色，可以穿透。` : `${P}色玻璃紙只讓${P}光穿透，${L}光被吸收，所以沒有光通過。`, { tag: '透明物體的顏色' });
+  };
+  def('C3', { sec: '4-5', can: '說明透明物體的顏色看穿透過去的色光，並判斷穿透的色光', lc: 'Ka-IV-11', gen: () => Math.random() < .65 ? g() : bank('C3', [
+    { t: '透明物體的顏色', q: '透明物體（例如彩色玻璃紙）呈現的顏色，是由什麼決定的？', o: ['穿透過去的色光', '反射回來的色光', '物體的重量', '物體的形狀'], a: 0, e: '透明物體呈現什麼顏色，要看穿透過去的是哪種色光。' },
+    { t: '透明物體的顏色', q: '白光通過紅色玻璃紙，看到紅光。這是因為？', o: ['玻璃紙只放行紅光，其餘色光被它吸收', '玻璃紙把所有光反射', '玻璃紙發出紅光', '白光其實是紅色的'], a: 0, e: '玻璃紙只放行和自己同色的光，其餘的光被吸收。' },
+    { t: '透明物體的顏色', tf: true, q: '無色透明的玻璃紙，會讓所有色光穿透。', e: '無色透明的玻璃紙讓各種色光都穿透，所以光的顏色不變。' },
+    { t: '透明物體的顏色', q: '用手電筒的白光，依序穿過一張紅色玻璃紙和一張綠色玻璃紙，最後透出來的光是什麼？', o: ['沒有光通過（一片黑）', '黃光', '白光', '紅光'], a: 0, e: '紅色玻璃紙只讓紅光通過，其他色光被吸收；接著綠色玻璃紙只讓綠光通過，但已經沒有綠光了，所以沒有光透出來。' },
+    { t: '透明物體的顏色', q: '白光依序穿過兩張紅色玻璃紙，最後透出來的光是什麼？', o: ['紅光', '黑色（沒有光）', '白光', '綠光'], a: 0, e: '第一張只讓紅光通過，第二張也讓紅光通過，所以最後仍是紅光。' },
+    { t: '透明物體的顏色', q: '白光通過無色透明的玻璃杯，透出來的光是什麼顏色？', o: ['白光', '紅光', '黑色（沒有光）', '彩色光'], a: 0, e: '無色透明的物體讓各種色光都通過，光的顏色不變，仍是白光。' },
+    { t: '透明物體的顏色', q: '有些背單字的書附有紅色的透明塑膠片，蓋在用紅字印的答案上，答案就看不見了。書頁是白紙，最合理的解釋是？', o: ['透過紅色片後，白紙與紅字都呈現紅色，兩者分不出差別', '紅色片把紅字擦掉了', '紅色片吸收了所有的光', '紅色片讓紅字變成白色'], a: 0, e: '白紙反射各種色光，透過紅片只剩紅光；紅字反射紅光，透過紅片也是紅光，所以白紙與紅字看起來一樣紅，字就看不見了。' },
+    { t: '透明物體的顏色', q: '看到一片藍色的透明玻璃紙，是因為？', o: ['藍光穿透了玻璃紙進入眼睛', '玻璃紙反射了藍光', '玻璃紙吸收了藍光', '玻璃紙發出了藍光'], a: 0, e: '透明物體的顏色由穿透的色光決定，藍色玻璃紙讓藍光穿透。' },
+    { t: '透明物體的顏色', q: '白光通過藍色玻璃紙後，透出來的光含有哪一種色光？', o: ['藍光', '紅光', '綠光', '黃光'], a: 0, e: '藍色玻璃紙只放行藍光，其他色光都被它吸收了。' },
+    { t: '透明物體的顏色', q: '用紅光照射綠色玻璃紙，從另一側看不到光通過。最主要的原因是？', o: ['綠色玻璃紙吸收了紅光', '綠色玻璃紙只讓紅光通過', '紅光被變成了綠光', '紅光沒有照到玻璃紙'], a: 0, e: '綠色玻璃紙只讓綠光穿透，紅光被它吸收，所以沒有光穿透過去。' },
+    { t: '透明物體的顏色', tf: false, q: '白光穿過綠色玻璃紙後，透出來的仍是白光。', e: '綠色玻璃紙只放行綠光，其他色光都被吸收，所以透出的是綠光。' },
+    { t: '透明物體的顏色', tf: false, q: '透明物體的顏色，是由它反射的色光決定的。', e: '透明物體的顏色由穿透過去的色光（透射光）決定；不透明物體的顏色才由反射光決定。' },
+    { t: '透明物體的顏色', q: '想讓白色的手電筒光變成綠色的光，最簡單的做法是在燈前加上哪一種紙？', o: ['綠色玻璃紙', '紅色玻璃紙', '黑色圖畫紙', '白色圖畫紙'], a: 0, e: '綠色玻璃紙只讓綠光穿透；黑色或白色圖畫紙是不透明的，光穿不過去。' },
+    { t: '透明物體的顏色', q: '下列哪一個物體，顏色主要是由「穿透的色光」決定的？', o: ['藍色的透明玻璃杯', '紅色的蘋果', '綠色的樹葉', '黑色的鉛筆'], a: 0, e: '藍色透明杯的顏色來自穿透過去的光；蘋果、樹葉、鉛筆不透光，它們的顏色要看反射的是哪種光。' },
+  ])() });
+})();
+
+/* C4 不透明物體的顏色 */
+(() => {
+  const LIGHT = ['紅', '綠', '藍', '白'], PAPER = ['紅', '綠', '藍', '白', '黑'];
+  const RS = ['色紙只反射與自己同色的色光，其他色光被吸收', '白紙反射各種色光', '黑紙吸收各種色光', '色紙讓光穿透過去'];
+  const g = () => {
+    const L = pick(LIGHT), P = pick(PAPER);
+    let ans, ra;
+    if (P === '白') { ans = L === '白' ? '白色' : L + '色'; ra = 1; }
+    else if (P === '黑') { ans = '黑色'; ra = 2; }
+    else if (L === '白') { ans = P + '色'; ra = 0; }
+    else if (L === P) { ans = P + '色'; ra = 0; }
+    else { ans = '黑色'; ra = 0; }
+    const pool = ['紅色', '綠色', '藍色', '白色', '黑色'];
+    const opts = shuffle([ans, ...shuffle(pool.filter(x => x !== ans)).slice(0, 3)]);
+    return TT(`在暗室裡，用${L}色光照射${P}色的不透明色紙，色紙看起來是什麼顏色？`, opts, opts.indexOf(ans), RS, ra,
+      P === '白' ? `白紙會反射各種色光，所以呈現照射光的顏色（${ans}）。` : P === '黑' ? '黑紙吸收各種色光，在任何色光下都是黑色。' : L === '白' || L === P ? `${P}紙只反射${P}光，${L === '白' ? '白光中含有' + P + '光' : '照射的正是' + P + '光'}，所以呈現${P}色。` : `${P}紙只反射${P}光，${L}光被吸收，沒有光進入眼睛，所以是黑色。`, { tag: '不透明物體的顏色' });
+  };
+  def('C4', { sec: '4-5', can: '說明不透明物體的顏色由反射的色光決定，判斷色光照色紙的顏色', lc: 'Ka-IV-11', gen: () => Math.random() < .7 ? g() : bank('C4', [
+    { t: '不透明物體的顏色', q: '不透明物體（例如色紙）呈現的顏色，是由什麼決定的？', o: ['物體表面反射的色光', '穿透過去的色光', '物體的重量', '物體的形狀'], a: 0, e: '不透光物體的顏色，取決於表面反射了哪些色光、吸收了哪些色光。' },
+    { t: '不透明物體的顏色', q: '紅紙在白光下是紅色，在藍光下是黑色。這說明紅紙？', o: ['只反射紅光，吸收其他色光', '只吸收紅光', '反射所有色光', '吸收所有色光'], a: 0, e: '紅紙只反射紅光；藍光照射時沒有紅光可反射，光被吸收，看起來是黑色。' },
+    { t: '不透明物體的顏色', q: '日本國旗是白底紅圓。在「紅光」照射下，看起來會怎樣？', o: ['整面都是紅色，看不出紅圓的形狀', '白底變成黑色，紅圓是紅色', '紅圓變成黑色，白底是紅色', '整面都是黑色'], a: 0, e: '白底反射各種色光，所以在紅光下呈現紅色；紅圓也反射紅光，也是紅色，所以圖案看不出來。' },
+    { t: '不透明物體的顏色', tf: true, q: '黑色的紙吸收各種色光，所以在任何色光下都呈現黑色。', e: '黑紙吸收各種色光，沒有光反射進入眼睛。' },
+    { t: '不透明物體的顏色', tf: true, q: '白色的紙反射各種色光，所以在藍光下看起來是藍色。', e: '白紙反射各種色光，呈現照射光的顏色。' },
+    { t: '不透明物體的顏色', q: '在白光下，紅花配綠葉。若只用紅光照射，會看到什麼？', o: ['花仍是紅色，葉子變成黑色', '花和葉都變成黑色', '花變成黑色，葉子變成紅色', '花和葉都變成綠色'], a: 0, e: '紅花反射紅光，所以在紅光下仍是紅色；綠葉只反射綠光，紅光被吸收，沒有光進入眼睛，看起來是黑色。' },
+    { t: '不透明物體的顏色', q: '白色的襯衫，在藍色的舞台燈光下看起來是什麼顏色？', o: ['藍色', '白色', '黑色', '紅色'], a: 0, e: '白色物體反射各種色光，所以會呈現照射光的顏色，也就是藍色。' },
+    { t: '不透明物體的顏色', q: '黑色的鉛筆盒，在白光下看起來是黑色。最合理的解釋是？', o: ['它吸收各種色光', '它反射各種色光', '它只反射黑光', '它讓光穿透過去'], a: 0, e: '黑色物體吸收各種色光，幾乎沒有光反射進眼睛，所以看起來是黑色。' },
+    { t: '不透明物體的顏色', q: '下列哪一種色紙，在紅光、綠光、藍光下，都呈現照射光的顏色？', o: ['白紙', '黑紙', '紅紙', '綠紙'], a: 0, e: '白紙反射各種色光，所以會顯示照射光的顏色；黑紙在任何色光下都是黑色。' },
+    { t: '不透明物體的顏色', q: '綠色的樹葉在紅光的照射下，看起來是什麼顏色？', o: ['黑色', '綠色', '紅色', '白色'], a: 0, e: '綠葉只反射綠光，紅光被吸收，沒有光反射進眼睛，看起來是黑色。' },
+    { t: '不透明物體的顏色', tf: false, q: '藍色的色紙在白光下是藍色，是因為它把藍光吸收了。', e: '藍色色紙反射藍光、吸收其他色光，我們看到的是反射進眼睛的藍光。' },
+    { t: '不透明物體的顏色', tf: false, q: '紅色的蘋果在綠光的照射下，看起來仍然是紅色。', e: '紅色蘋果只反射紅光；綠光照射時沒有紅光可以反射，綠光被吸收，蘋果看起來是黑色。' },
+    { t: '不透明物體的顏色', q: '一面白底紅圓的旗子，在綠光的照射下，看起來會怎樣？', o: ['白底變成綠色，紅圓變成黑色', '整面都是綠色', '白底變成黑色，紅圓變成綠色', '整面都是黑色'], a: 0, e: '白底反射各種色光，在綠光下呈現綠色；紅圓只反射紅光，綠光被吸收，所以是黑色。' },
+    { t: '不透明物體的顏色', q: '在藍光照射下，下列哪一張色紙的顏色，會和白紙一樣呈現藍色？', o: ['藍色色紙', '紅色色紙', '綠色色紙', '黑色色紙'], a: 0, e: '藍色色紙反射藍光，所以在藍光下呈現藍色；紅紙、綠紙只反射紅光、綠光，在藍光下是黑色；黑紙吸收所有光。' },
+    { t: '不透明物體的顏色', tf: true, q: '一張色紙在紅光下看起來是黑色，那麼它不可能是紅色的色紙。', e: '紅色色紙會反射紅光，在紅光下仍是紅色；在紅光下是黑色的，一定不是紅紙。' },
+  ])() });
+})();
+
+/* ---- c_q_w.js ---- */
+/* ===== 3-1 波的傳播與特徵：W1–W8 題庫與出題器（題目皆為自擬） ===== */
+const OPT_TRANS = ['橫波（高低波）', '縱波（疏密波）'];
+const RS_DIR = ['介質的振動方向和波前進的方向成直角', '介質的振動方向和波前進的方向在同一直線上'];
+
+/* W1 波、波動、波源、介質 */
+def('W1', { sec: '3-1', can: '說出波、波動、波源與介質的意思', lc: 'Ka-IV-1', gen: bank('W1', [
+  { t: '波源與介質', q: '手握著繩子的一端上下抖動，繩子上出現一個向前傳的波。這個情況中的「波源」和「介質」分別是？', o: ['波源：手；介質：繩子', '波源：繩子；介質：手', '波源：繩波；介質：空氣', '波源和介質都是繩子'], a: 0, e: '造成擾動的來源（手）是波源；負責把波傳出去的物質（繩子）是介質。' },
+  { t: '波源與介質', q: '把石頭丟進平靜的水池，水面出現一圈一圈向外擴散的水波。這個水波的介質是？', o: ['石頭', '水', '水花', '池邊的岸'], a: 1, e: '水波靠水來傳遞，所以介質是水；石頭是造成擾動的波源。' },
+  { t: '波與波動', q: '下列哪一個敘述，最接近「波動」的意思？', o: ['波一路往前傳的過程', '造成物質擾動的來源', '傳遞波的媒介物質', '介質隨著波移動到遠方'], a: 0, e: '「波動」指的是波向前傳遞的現象；造成擾動的來源叫波源，傳遞的物質叫介質。' },
+  { t: '波源與介質', q: '喇叭發出聲音時，旁邊的燭火跟著搖晃。這個聲波的介質最可能是？', o: ['喇叭', '燭火', '空氣', '聲音'], a: 2, e: '喇叭是波源，聲波靠空氣一路傳到燭火，所以介質是空氣。' },
+  { t: '波源與介質', tf: false, q: '「介質」指的是造成物質擾動的來源。', e: '造成擾動的來源叫「波源」（也叫振源）；介質是傳遞波的媒介物質。' },
+  { t: '波源與介質', tf: true, q: '傳遞彈簧波時，彈簧就是介質。', e: '波靠彈簧來傳遞，彈簧就是這個波的介質。' },
+  { t: '波與波動', q: '水、繩子或彈簧被干擾後，會出現隆起、凹陷，或一段疏一段密的形狀，這些形狀叫什麼？', o: ['波', '波源', '介質', '波長'], a: 0, e: '被干擾後出現的隆起、凹陷或疏密形狀叫「波」；波向前傳遞的現象才叫「波動」。' },
+  { t: '波源與介質', q: '要傳播水波一定要有水，要傳播繩波一定要有繩子。這裡的「水」和「繩子」扮演什麼角色？', o: ['波源', '介質', '波峰', '波長'], a: 1, e: '傳遞波的媒介物質稱為介質。' },
+  { t: '波源與介質', q: '敲擊鑼面使它發出聲音，聲音經空氣傳到你的耳朵。這個聲波的「波源」是什麼？', o: ['鑼', '空氣', '耳朵', '聲音'], a: 0, e: '振動並讓周圍受到擾動的是鑼，所以鑼是波源；空氣負責傳遞，是介質；耳朵只是接收聲音的地方。' },
+  { t: '波源與介質', q: '小明用手指在平靜的水面上點一下，水面向外擴散出一圈圈水波。下列配對何者正確？', o: ['手指是波源，水是介質', '水是波源，手指是介質', '手指是介質，空氣是波源', '水波是波源，水是介質'], a: 0, e: '造成擾動的是手指（波源），水波靠水傳遞，所以水是介質。水波是「波」本身，不是波源。' },
+  { t: '波源與介質', q: '下列敘述中，哪一個物體是「波源」而不是介質？', o: ['掉進池塘、激起水波的那顆石頭', '池塘裡的水', '彈簧波中傳遞擾動的彈簧', '傳遞聲音的空氣'], a: 0, e: '石頭是造成水面擾動的來源，是波源；水、彈簧、空氣都是負責傳遞波的介質。' },
+  { t: '波源與介質', q: '手上下甩動一條長繩，繩上出現一個一個向遠處傳去的起伏。若把手換成機器來甩動繩子，下列何者仍然不變？', o: ['繩波的介質仍然是繩子', '繩波的波源仍然是手', '繩波的介質變成機器', '繩波變成不需要介質'], a: 0, e: '換掉的是波源（從手變成機器），傳遞波的介質還是繩子。' },
+  { t: '波源與介質', tf: false, q: '水波產生以後，水波本身就是這個波的介質。', e: '水波是「波」；介質是傳遞它的水。要分清楚「波」與「傳遞波的物質」。' },
+  { t: '波源與介質', tf: true, q: '同樣是聲波，在空氣中傳播時介質是空氣，在水中傳播時介質是水。', e: '介質是當下負責傳遞波的物質，會隨聲音傳播的環境而不同。' },
+  { t: '波源與介質', q: '吉他的弦被撥動後，聲音經空氣傳到你的耳朵。下列配對何者正確？', o: ['波源：弦；介質：空氣', '波源：空氣；介質：弦', '波源：耳朵；介質：弦', '波源：聲音；介質：空氣'], a: 0, e: '振動的弦造成擾動，是波源；空氣傳遞聲波，是介質。' },
+]) });
+
+/* W2 力學波／非力學波 */
+(() => {
+  const L = [['繩波', 1], ['聲波', 1], ['水波', 1], ['彈簧上傳遞的波', 1], ['光波', 0], ['無線電波', 0], ['Wi-Fi 路由器發出的訊號', 0], ['手機接收到的電磁波', 0], ['廣播電台傳送的無線電波', 0], ['石頭丟入池塘激起的漣漪', 1], ['太陽發出的光', 0], ['鑼被敲響後傳到耳朵的聲音', 1]];
+  const items = L.map(([n, m]) => ({ t: '力學波／非力學波', q: `「${n}」屬於哪一種波？`, o: ['力學波', '非力學波'], a: m ? 0 : 1, r: ['要靠物質幫忙才傳得出去', '沒有物質也傳得過去'], ra: m ? 0 : 1, e: m ? `${n}要靠介質才能傳，所以是力學波。` : `${n}屬於電磁波，不需要介質也能傳，所以是非力學波。` }));
+  items.push({ t: '力學波／非力學波', q: '波以耳實驗中，抽成真空後仍能看見鈴鐺在動，卻聽不到鈴聲。這說明？', o: ['光不需要介質，聲音需要介質', '聲音不需要介質，光需要介質', '光和聲音都需要介質', '光和聲音都不需要介質'], a: 0, e: '看得到＝光能在真空傳；聽不到＝聲音需要介質。聲波是力學波，光波是非力學波。' });
+  items.push({ t: '力學波／非力學波', tf: false, q: '所有的波都需要介質才能傳播。', e: '力學波需要介質（如繩波、聲波），非力學波不需要（如光波、無線電波）。' });
+  items.push({ t: '力學波／非力學波', q: '下列哪一種波，在沒有任何物質的太空中也能傳播？', o: ['光波', '聲波', '繩波', '水波'], a: 0, e: '光波是非力學波，不需要介質；聲波、繩波、水波都是力學波，沒有介質就傳不出去。' });
+  items.push({ t: '力學波／非力學波', q: '下列哪一組的波，全部都是力學波？', o: ['聲波、水波、繩波', '聲波、光波、水波', '無線電波、光波、繩波', '光波、水波、無線電波'], a: 0, e: '聲波、水波、繩波都要靠介質；光波與無線電波屬於電磁波，是非力學波。' });
+  items.push({ t: '力學波／非力學波', tf: false, q: '無線電波需要空氣當介質，所以在真空中無法傳播。', e: '無線電波是電磁波，屬於非力學波，不需要介質，真空中也能傳播。' });
+  items.push({ t: '力學波／非力學波', tf: true, q: '太空人在太空中能看見彼此，卻要靠無線電才能交談，這顯示光波和聲波是不同類型的波。', e: '光是非力學波，真空也能傳；聲音是力學波，沒有介質就傳不出去，所以要改用無線電波通話。' });
+  items.push({ t: '力學波／非力學波', q: '關於「需要介質才能傳播的波」，下列敘述何者正確？', o: ['這類波稱為力學波，例如繩波、聲波', '這類波稱為非力學波，例如光波', '這類波稱為電磁波，例如聲波', '這類波稱為力學波，例如無線電波'], a: 0, e: '需要介質的是力學波（繩波、聲波、水波）；不需要介質的是非力學波（光波、無線電波等電磁波）。' });
+  def('W2', { sec: '3-1', can: '分辨力學波與非力學波', lc: 'Ka-IV-2', gen: bank('W2', items) });
+})();
+
+/* W3 橫波與縱波 */
+(() => {
+  const arrowGen = () => {
+    const trans = Math.random() < .5, vert = trans ? Math.random() < .8 : false;
+    let s = text(18, 30, '波前進方向', 'k', 14, 'start', 'font-weight="700"') + arrow(150, 26, 300, 26, 'o', 3.5);
+    s += text(18, 100, '介質振動方向', 'k', 14, 'start', 'font-weight="700"');
+    if (trans) { s += arrow(225, 100, 225, 70, 'r', 3.5) + arrow(225, 100, 225, 130, 'r', 3.5); }
+    else { s += arrow(225, 100, 300, 100, 'r', 3.5) + arrow(225, 100, 150, 100, 'r', 3.5); }
+    return TT('圖中的箭頭表示某個波的「波前進方向」與「介質振動方向」，這個波是哪一種波？', OPT_TRANS, trans ? 0 : 1, RS_DIR, trans ? 0 : 1,
+      trans ? '振動方向（上下）和前進方向（左右）互相垂直，是橫波。' : '振動方向和前進方向在同一條線上（互相平行），是縱波。', { svg: SVG(330, 150, s), tag: '橫波縱波的判斷' });
+  };
+  def('W3', { sec: '3-1', can: '分辨橫波與縱波，並各舉例子', lc: 'Ka-IV-2', gen: mixGen('W3', [
+    { t: '橫波縱波的判斷', q: '手握彈簧一端「上下」擺動一次，產生的波是哪一種？', o: OPT_TRANS, a: 0, r: RS_DIR, ra: 0, e: '手上下擺，彈簧上下動、波往前跑，兩個方向成直角，所以是高低起伏的橫波。' },
+    { t: '橫波縱波的判斷', q: '手握彈簧一端「左右」推動一次，產生的波是哪一種？', o: OPT_TRANS, a: 1, r: RS_DIR, ra: 1, e: '手左右推，彈簧前後動、波也往前跑，兩個方向在同一直線上，所以是疏密相間的縱波。' },
+    { t: '橫波縱波的判斷', q: '聲波在空氣中傳播時，空氣的振動方向和聲波前進方向互相平行。聲波是哪一種波？', o: OPT_TRANS, a: 1, r: RS_DIR, ra: 1, e: '聲波使空氣產生疏密變化向外傳，是縱波。' },
+    { t: '橫波縱波的別名', q: '「疏密波」是下列哪一種波的另一個名字？', o: ['縱波', '橫波', '週期波', '非力學波'], a: 0, e: '縱波的波形疏密相間，又叫疏密波；橫波的波形高低起伏，又叫高低波。' },
+    { t: '橫波縱波的別名', q: '「高低波」是下列哪一種波的另一個名字？', o: ['橫波', '縱波', '力學波', '非週期波'], a: 0, e: '橫波的波形高低起伏，又叫高低波。' },
+    { t: '橫波縱波的判斷', tf: true, q: '橫波的介質振動方向，和波前進方向互相垂直。', e: '這正是橫波的定義。' },
+    { t: '橫波縱波的判斷', tf: false, q: '縱波的波形是高低起伏的。', e: '高低起伏的是橫波；縱波的波形是疏密相間。' },
+    { t: '橫波縱波的判斷', q: '彈簧波可以是橫波，也可以是縱波。決定它是哪一種的關鍵是什麼？', o: ['手擺動彈簧的方向', '彈簧的顏色', '手擺動的快慢', '彈簧的長度'], a: 0, e: '上下擺動得到橫波，左右推動得到縱波；方向不同，介質振動方向與前進方向的關係就不同。' },
+    { t: '橫波縱波的判斷', q: '繩波向右傳遞，繩子上的每一個點都只在原處上下振動。這個繩波屬於哪一種波？', o: OPT_TRANS, a: 0, r: RS_DIR, ra: 0, e: '繩上各點上下振動，與向右的前進方向垂直，所以是橫波。' },
+    { t: '橫波縱波的判斷', q: '地震時，震源會傳出速度較快的 P 波和速度稍慢的 S 波。下列配對何者正確？', o: ['P 波是縱波，S 波是橫波', 'P 波是橫波，S 波是縱波', 'P 波與 S 波都是縱波', 'P 波與 S 波都是橫波'], a: 0, e: '速度較快的 P 波是縱波（又稱伸縮波）；速度稍慢的 S 波是橫波（又稱變形波）。' },
+    { t: '橫波縱波的別名', q: '關於橫波與縱波的波形，下列敘述何者正確？', o: ['橫波的波形高低起伏，縱波的波形疏密相間', '橫波的波形疏密相間，縱波的波形高低起伏', '兩者的波形都是疏密相間', '兩者的波形都是高低起伏'], a: 0, e: '橫波又叫高低波，縱波又叫疏密波。' },
+    { t: '橫波縱波的判斷', tf: false, q: '聲波是橫波，因為聲音傳播時，空氣會上下起伏。', e: '聲音傳播時空氣被推擠出疏部與密部，振動方向和前進方向平行，聲波是縱波。' },
+    { t: '橫波縱波的判斷', q: '手沿著彈簧的長度方向來回推拉，產生縱波。波通過時，彈簧上套著的髮圈會怎樣？', o: ['沿著彈簧的方向在原處來回移動', '上下擺動', '跟著波一路移動到彈簧的另一端', '完全不動'], a: 0, e: '縱波的介質振動方向與前進方向平行，髮圈沿彈簧方向在原處往返，不會跟著波前進。' },
+    { t: '橫波縱波的判斷', q: '要判斷彈簧波是橫波還是縱波，需要比較哪兩個方向？', o: ['介質振動的方向與波前進的方向', '手握彈簧的位置與彈簧的長度', '波峰的高度與波谷的深度', '彈簧的顏色與波的快慢'], a: 0, e: '垂直就是橫波，平行就是縱波，所以要比較「介質怎麼振動」和「波往哪裡傳」這兩個方向。' },
+    { t: '橫波縱波的判斷', tf: false, q: '聲波是縱波，所以聲波不需要介質也能傳播。', e: '聲波雖然是縱波，卻是力學波，必須靠空氣、水等介質才能傳播。「橫波／縱波」看振動方向，「力學波／非力學波」看有沒有介質，是兩種不同的分法。' },
+  ], [arrowGen]) });
+})();
+
+/* W4 介質不隨波前進 */
+def('W4', { sec: '3-1', can: '說明波只傳遞能量、介質不會隨波前進', lc: 'Ka-IV-1', gen: bank('W4', [
+  { t: '介質不隨波前進', q: '彈簧上套了一個髮圈，手上下擺動彈簧，波通過髮圈。髮圈會怎樣？', o: ['在原處上下擺動，不會隨波前進', '跟著波一起移動到彈簧另一端', '被波推到彈簧中間停住', '完全不會動'], a: 0, r: ['介質只在原處振動', '波會帶著物質一起走', '波不會讓介質動', '髮圈太輕不受影響'], ra: 0, e: '髮圈代表介質上的一點，只在原處往返振動，波通過後還留在原處。' },
+  { t: '介質不隨波前進', q: '在水面放一片保麗龍，水波經過時，保麗龍會怎樣？', o: ['在原處上下晃動', '被水波帶到岸邊', '沿著水波前進的方向一路移動', '沉到水底'], a: 0, e: '水（介質）只在原處振動，漂在上面的保麗龍也只在原處上下晃動，波傳出去的是能量。' },
+  { t: '波傳遞的是什麼', q: '波傳遞的時候，真正被傳出去的是什麼？', o: ['擺動或振動的能量', '介質本身', '波源', '一層一層的水或繩子'], a: 0, e: '波源一動就產生能量，這份能量靠介質一路傳遠，介質自己仍在原處往返振動。' },
+  { t: '介質不隨波前進', tf: false, q: '波傳遞時，介質會跟著波一起前進到遠處。', e: '介質只在原處往返振動，不會跟著波前進。' },
+  { t: '波傳遞的是什麼', tf: true, q: '波傳遞時，傳出去的是能量，不是物質。', e: '介質留在原處，波是把擺動或振動的能量傳出去。' },
+  { t: '介質不隨波前進', q: '球場的觀眾做「波浪舞」：每個人依序站起又坐下，看起來像波在場邊轉圈。這個比喻中，哪一部分對應「介質不隨波前進」？', o: ['每個人只在座位上站起、坐下，沒有跑到別處', '站起的人跑到下一個人的座位', '所有人同時站起來', '坐著的人把波丟出去'], a: 0, e: '人（介質）留在原位上下動，只有「站起來」這個動作（能量）一個傳一個地傳下去。' },
+  { t: '介質不隨波前進', q: '聲音從喇叭傳到你的耳朵，下列敘述何者合理？', o: ['空氣在原處來回振動，把振動傳過來', '喇叭裡的空氣一路被推到耳朵', '聲音是一團物質飄過來', '空氣完全沒有動'], a: 0, e: '空氣一層一層地振動（疏密變化）向外傳，每一部分空氣仍在原處附近往返。' },
+  { t: '介質不隨波前進', q: '湖面上有規律的水波向岸邊傳去，岸邊的落葉卻只是在原地附近上下晃動。這個觀察支持下列哪一個結論？', o: ['波傳遞時，水（介質）並沒有跟著波一路前進', '水波不帶有任何能量', '落葉比水重，所以不會動', '水波的波長比落葉小'], a: 0, e: '落葉隨著水面上下振動，卻沒有被送到岸邊，表示水只在原處往返，沒有跟著波前進。' },
+  { t: '波傳遞的是什麼', q: '在繩子的一端用力甩動，站在另一端的人會感覺繩子被拉動。這個現象說明波傳遞了什麼？', o: ['能量', '繩子本身的一小段', '甩動繩子的手', '繩子的質量'], a: 0, e: '波把波源的擺動能量傳到遠處，所以另一端能感受到拉動，但繩子並沒有被送過去。' },
+  { t: '介質不隨波前進', q: '站在遠處大喊，你聽得到聲音，卻感覺不到有一陣風從對方吹過來。下列哪一種說法最合理？', o: ['聲波傳來的是振動的能量，空氣沒有被一路送過來', '聲波不需要空氣就能傳播', '聲音比風跑得快，所以沒有風', '聲波是橫波，所以不會有風'], a: 0, e: '空氣只在原處附近來回振動，把疏密變化往前傳；傳到你耳朵的是振動的能量，不是整團空氣。' },
+  { t: '介質不隨波前進', tf: false, q: '水池中央放了一顆乒乓球，水波從池中央向池邊傳去，乒乓球會被水波一路推到池邊。', e: '水只在原處上下振動，漂在水面的乒乓球也只是在原處附近起伏，不會被水波送到池邊。' },
+  { t: '介質不隨波前進', q: '一個波從繩子的左端傳到右端後，繩子上原本的各個點最後會在哪裡？', o: ['都回到原來位置附近', '全部聚集在右端', '全部聚集在左端', '隨波一起消失'], a: 0, e: '波經過時，繩上各點只是在原處往返振動，波過去之後仍回到原來的位置。' },
+  { t: '波傳遞的是什麼', q: '手甩動繩子產生繩波，能量是靠什麼一段一段傳到遠方？', o: ['繩子（介質）的各部分依序振動，把能量傳下去', '手一路跟著波跑到遠方', '繩子整條被搬到遠方', '能量不需要任何東西就能傳過去'], a: 0, e: '繩波是力學波，靠繩子各部分依序振動來傳遞能量，繩子本身並沒有前進。' },
+  { t: '介質不隨波前進', q: '一長排骨牌依序倒下，倒下的動作一個接一個從頭傳到尾，每塊骨牌只倒在原處附近。若把這個情形比喻成波，下列何者對應「波傳遞出去的東西」？', o: ['倒下這個動作所帶的能量', '骨牌本身', '放骨牌的桌子', '骨牌的總數量'], a: 0, e: '骨牌（介質）留在原處，向前傳的是「倒下」的動作與能量，就像波只傳遞能量，不搬運介質。' },
+]) });
+
+/* W5 波的各部分：波峰、波谷、波長、振幅、全波 */
+(() => {
+  const g = () => {
+    const kind = pick(['lam', 'amp', 'cnt']), lam = pick([4, 5, 6, 8]), amp = pick([1, 2, 3]), n = pick([2, 2, 3]);
+    const svg = waveSvg({ lam, amp, n });
+    if (kind === 'lam') return NUM('圖是一個週期波，格線每一格是 1 公分。這個波的波長是幾公分？', lam, '公分', `波長是相鄰兩個波峰（或兩個波谷）之間的距離，一個全波的長度。這個波一個全波佔 ${lam} 格，所以波長 ${lam} 公分。`, { svg, tag: '波長的判讀', hint: '一個全波＝一個波峰加一個波谷。' });
+    if (kind === 'amp') return NUM('圖是一個週期波，格線每一格是 1 公分。這個波的振幅是幾公分？', amp, '公分', `振幅是從平衡位置（中間的橫線）到波峰（或波谷）的高度，這裡是 ${amp} 公分。（不是波峰到波谷的總高度。）`, { svg, tag: '振幅的判讀' });
+    return NUM('圖中畫出了幾個「全波」？（一個全波包含一個波峰與一個波谷）', n, '個', `圖中共有 ${n} 個波峰、${n} 個波谷，所以是 ${n} 個全波，全長 ${lam * n} 公分。`, { svg, tag: '全波的判讀' });
+  };
+  def('W5', { sec: '3-1', can: '看圖指出波峰、波谷、波長與振幅', lc: 'Ka-IV-1', gen: mixGen('W5', [
+    { t: '波的各部分', q: '一個波的「最高點」和「最低點」分別叫什麼？', o: ['波峰、波谷', '波谷、波峰', '波長、振幅', '振幅、波長'], a: 0, e: '最高點是波峰，最低點是波谷。' },
+    { t: '波長的意思', q: '下列哪一個距離不一定等於「波長」？', o: ['波峰到相鄰的波谷', '相鄰兩個波峰之間', '相鄰兩個波谷之間', '一個全波的長度'], a: 0, e: '波峰到相鄰波谷只有半個全波，不是波長。' },
+    { t: '振幅的意思', q: '振幅指的是哪一段距離？', o: ['平衡位置到波峰（或波谷）的高度', '波峰到波谷的總高度', '相鄰兩波峰的距離', '波走一秒的距離'], a: 0, e: '振幅是介質偏離平衡位置的最大距離（垂直距離），手擺動得愈用力，振幅愈大。' },
+    { t: '全波的意思', tf: true, q: '波源振動一次，會產生一個波峰和一個波谷，合稱一個全波。', e: '一個全波＝一個波峰加一個波谷，它的長度就是波長。' },
+    { t: '振幅的意思', tf: false, q: '手擺動繩子的速度愈快，波的振幅就愈大。', e: '振幅和手「擺動的力量（幅度）」有關；擺動得快，影響的是頻率。' },
+    { t: '波的各部分', q: '一個波中，介質沒有受到擾動時所在的位置稱為什麼？', o: ['平衡位置', '波峰', '波谷', '波長'], a: 0, e: '平衡位置是介質靜止時的位置；振幅就是從平衡位置量到波峰（或波谷）的距離。' },
+    { t: '波長的意思', q: '一個週期波上，相鄰兩個波峰相距 12 公分，這個波的波長是多少？', o: ['12 公分', '6 公分', '24 公分', '36 公分'], a: 0, e: '相鄰兩個波峰之間的距離就是一個全波的長度，也就是波長 12 公分。' },
+    { t: '全波的意思', q: '一個「全波」裡，包含幾個波峰和幾個波谷？', o: ['各一個', '一個波峰、兩個波谷', '兩個波峰、一個波谷', '只有波峰，沒有波谷'], a: 0, e: '一個波峰加上一個波谷合起來是一個全波。' },
+    { t: '振幅的意思', q: '甲、乙兩人用相同的快慢上下擺動繩子，甲擺得比乙高、幅度比乙大。甲產生的波，哪一項比乙大？', o: ['振幅', '頻率', '波長', '波速'], a: 0, e: '擺動的幅度（力量）決定振幅；快慢相同所以頻率相同，在同一條繩子上波長與波速也都相同。' },
+    { t: '振幅的意思', tf: true, q: '手擺動繩子的力量愈大，繩上各點離開平衡位置的最大距離就愈大。', e: '離開平衡位置的最大距離就是振幅，擺動力量愈大，振幅愈大。' },
+    { t: '波長的意思', q: '一個週期波中，相鄰的波峰與波谷之間的水平距離是 5 公分，這個波的波長是多少？', o: ['10 公分', '5 公分', '2.5 公分', '15 公分'], a: 0, e: '波峰到相鄰波谷只有半個全波，所以波長是 5 × 2 ＝ 10 公分。' },
+    { t: '全波的意思', q: '繩子上連續排著 4 個波峰和 4 個波谷，這段繩波包含幾個全波？', o: ['4 個', '8 個', '2 個', '1 個'], a: 0, e: '每一個波峰加一個波谷就是一個全波，所以是 4 個全波。（不要把波峰和波谷各算一次。）' },
+    { t: '振幅與波長', tf: false, q: '一個週期波的波長愈長，它的振幅也一定愈大。', e: '波長是水平方向一個全波的長度，振幅是垂直方向偏離平衡位置的距離，兩者互不相干。' },
+    { t: '波的各部分', q: '下列哪一個波的特徵，是用來描述「偏離平衡位置多遠」的？', o: ['振幅', '波長', '週期', '頻率'], a: 0, e: '振幅描述介質偏離平衡位置的最大距離；波長描述一個全波的長度；週期、頻率描述振動的快慢。' },
+  ], [g]) });
+})();
+
+/* W6 週期與頻率 */
+(() => {
+  const g = () => {
+    const k = rnd(0, 3);
+    if (k === 0) { const N = pick([2, 4, 5, 10]), f = pick([0.5, 1, 2, 2.5, 4, 5]); const m = f * N; if (!Number.isInteger(m)) return g();
+      return NUM(`一條繩子上的某一點，${N} 秒內完整振動了 ${m} 次（產生 ${m} 個全波），這個波的頻率是多少赫（Hz）？`, f, '赫', `頻率是一秒內產生的全波數：${m} ÷ ${N} ＝ ${f} 赫。`, { tag: '頻率的計算' }); }
+    if (k === 1) { const T = pick([0.1, 0.2, 0.25, 0.5, 2, 4]); const f = round(1 / T, 6);
+      return NUM(`某個週期波的週期是 ${T} 秒，它的頻率是多少赫（Hz）？`, f, '赫', `週期與頻率互為倒數：f ＝ 1 ÷ T ＝ 1 ÷ ${T} ＝ ${f} 赫。`, { tag: '週期頻率互為倒數' }); }
+    if (k === 2) { const f = pick([2, 4, 5, 10, 20, 0.5]); const T = round(1 / f, 6);
+      return NUM(`某個波的頻率是 ${f} 赫，它的週期是多少秒？`, T, '秒', `T ＝ 1 ÷ f ＝ 1 ÷ ${f} ＝ ${T} 秒。`, { tag: '週期頻率互為倒數' }); }
+    return pick([
+      MC('手擺動繩子的速度變快，產生波的「頻率」和「週期」會怎麼變？', ['頻率變大、週期變小', '頻率變小、週期變大', '頻率和週期都變大', '頻率和週期都不變'], 0, '擺動愈快，一秒產生的全波數愈多（頻率大），做完一個全波花的時間愈短（週期小）。', { tag: '週期頻率的關係' }),
+      MC('頻率的單位是什麼？', ['赫茲（Hz），也就是 次／秒', '秒', '公尺', '公尺／秒'], 0, '頻率＝一秒內的全波數，單位是赫茲（Hz）或 次／秒；週期的單位是秒。', { tag: '單位' }),
+      MC('「做完一次完整振動所花的時間」稱為什麼？', ['週期', '頻率', '波長', '波速'], 0, '做完一個全波要花的時間就是週期（T），單位是秒。', { tag: '週期頻率的意思' }),
+      MC('「每一秒鐘產生幾個全波」這個量稱為什麼？', ['頻率', '週期', '振幅', '波速'], 0, '每秒鐘有幾個全波，就是頻率（f），單位是赫茲（Hz）。', { tag: '週期頻率的意思' }),
+    ]);
+  };
+  def('W6', { sec: '3-1', can: '算出週期與頻率，並知道兩者互為倒數', lc: 'Ka-IV-1', gen: g });
+})();
+
+/* W7 波速 */
+(() => {
+  const g = () => {
+    const k = rnd(0, 4);
+    if (k === 0) { const f = pick([2, 5, 10, 20, 50]), lam = pick([3, 4, 5, 6, 8, 10, 12]); const v = f * lam;
+      return NUM(`一個週期波的頻率是 ${f} 赫，波長是 ${lam} 公分，波速是多少公分／秒？`, v, '公分／秒', `v ＝ f × λ ＝ ${f} × ${lam} ＝ ${v} 公分／秒。`, { tag: '波速公式 v＝f×λ' }); }
+    if (k === 1) { const f = pick([2, 4, 5, 10]), lam = pick([3, 5, 6, 12, 15]); const v = f * lam;
+      return NUM(`同一條繩子上，週期波的波速是 ${v} 公分／秒，頻率是 ${f} 赫，波長是多少公分？`, lam, '公分', `λ ＝ v ÷ f ＝ ${v} ÷ ${f} ＝ ${lam} 公分。`, { tag: '波速公式 v＝f×λ' }); }
+    if (k === 2) { const t = pick([2, 3, 4, 5]), v = pick([10, 20, 25, 30, 40]); const L = v * t;
+      return NUM(`繩子上有一個單獨的波，花了 ${t} 秒從一端傳到 ${L} 公分遠的另一端，這個波的波速是多少公分／秒？`, v, '公分／秒', `單一個波的波速 ＝ 傳遞距離 ÷ 傳遞時間 ＝ ${L} ÷ ${t} ＝ ${v} 公分／秒。（單一個波不是週期波，不用 f×λ。）`, { tag: '單一波的波速 v＝L/t' }); }
+    if (k === 3) { const f = pick([1, 2, 4]), cnt = pick([2, 4, 6]), lam = pick([10, 15, 20, 30]); const t = cnt / f, n = cnt + 1, v = f * lam;
+      return NUM(`湖面有規律的水波，量得連續 ${n} 個波峰通過浮標的時間是 ${t} 秒，相鄰兩波峰的距離是 ${lam} 公分，水波的波速是多少公分／秒？`, v, '公分／秒', `連續 ${n} 個波峰之間隔了 ${cnt} 個全波，花 ${t} 秒，頻率 ＝ ${cnt} ÷ ${t} ＝ ${f} 赫；波長 ${lam} 公分，所以 v ＝ f×λ ＝ ${f} × ${lam} ＝ ${v} 公分／秒。`, { tag: '波速與連續波峰', hint: '先想想：連續 n 個波峰之間有幾個全波？' }); }
+    const T = pick([0.5, 0.25, 2]), lam = pick([20, 40, 60]); const v = lam / T;
+    return NUM(`一個週期波的週期是 ${T} 秒，波長是 ${lam} 公分，波速是多少公分／秒？`, v, '公分／秒', `一個週期波前進一個波長，用了一個週期的時間：v ＝ λ ÷ T ＝ ${lam} ÷ ${T} ＝ ${v} 公分／秒。`, { tag: '波速與週期' });
+  };
+  def('W7', { sec: '3-1', can: '用 v＝f×λ（或 v＝距離÷時間）計算波速', lc: 'Ka-IV-1', gen: g });
+})();
+
+/* W8 同介質中波速固定 */
+(() => {
+  const RS = ['波速只由介質決定，在同一種均勻介質中是固定的', '波速一定會跟著頻率改變', '波長是固定不變的', '週期不會隨擺動快慢改變'];
+  const g = () => {
+    const r = Math.random();
+    if (r < .5) {
+      const lam1 = pick([12, 24, 30, 60]), f1 = pick([1, 2, 5]), k = pick([2, 3, 0.5]); const v = f1 * lam1, f2 = f1 * k, lam2 = lam1 / k;
+      return NUM(`同一條繩子上，原本頻率 ${f1} 赫、波長 ${lam1} 公分。把頻率改成 ${f2} 赫（繩子沒有變），新的波長是多少公分？`, lam2, '公分', `同一條繩子（同一種介質）波速不變：v ＝ ${f1} × ${lam1} ＝ ${v} 公分／秒。新波長 ＝ ${v} ÷ ${f2} ＝ ${lam2} 公分。`, { tag: '同介質波速固定', hint: '波速不會因為你擺動得比較快或比較慢而改變。' });
+    }
+    if (r < .85) {
+      const b = pick([
+        { q: '同一條繩子，把手擺動得「更快」，繩上的波會怎麼變？', o: ['頻率變大、波長變短、波速不變', '頻率變大、波長變長、波速變大', '頻率變小、波長變短、波速不變', '頻率、波長、波速都不變'], a: 0, e: '擺動變快，頻率變大；同一種介質波速固定，所以波長變短。' },
+        { q: '同一條繩子，把手擺動得「更慢」，繩上的波會怎麼變？', o: ['頻率變小、波長變長、波速不變', '頻率變小、波長變短、波速變小', '頻率變大、波長變長、波速不變', '頻率、波長、波速都不變'], a: 0, e: '擺動變慢，頻率變小；波速固定，所以波長變長。' },
+      ]);
+      return TT(b.q, b.o, b.a, RS, 0, b.e, { tag: '同介質波速固定' });
+    }
+    return MC('在同一種均勻介質中傳播的波，下列哪一個量「不會」因為頻率改變而改變？', ['波速', '波長', '週期', '頻率'], 0, '波速由介質決定，在同一種均勻介質中是固定的；頻率、週期、波長會跟著改變。', { tag: '同介質波速固定' });
+  };
+  def('W8', { sec: '3-1', can: '說明同一介質中波速固定，頻率與波長互相消長', lc: 'Ka-IV-1', gen: g });
+})();
+
+/* ---- d_r_l.js ---- */
+/* ===== 第 4 章 複習卡（上）L1–L3、R1–R4、F1–F3 ===== */
+card('L1', { body: () => {
+  let a = `<circle cx="40" cy="70" r="14" fill="#ffd54f" stroke="#e0a800"/>` + text(40, 108, '光源', 'k', 13) + `<rect x="150" y="45" width="16" height="50" fill="#455a64"/>` + text(158, 110, '不透明物體', 'k', 13);
+  a += `<rect x="330" y="20" width="14" height="100" fill="#eceff1" stroke="#90a4ae"/>` + `<rect x="330" y="48" width="14" height="44" fill="#37474f"/>` + text(337, 138, '牆（影子）', 'k', 13);
+  a += arrow(55, 63, 325, 40, 'o', 2) + arrow(55, 77, 325, 100, 'o', 2) + line(55, 70, 150, 70, 'o', 2) + line(158, 48, 325, 48, 'o', 1.5, 'stroke-dasharray="5 4"') + line(158, 92, 325, 92, 'o', 1.5, 'stroke-dasharray="5 4"');
+  let b = `<circle cx="40" cy="60" r="14" fill="#ffd54f" stroke="#e0a800"/>` + text(40, 98, '光源', 'k', 13) + `<rect x="170" y="35" width="40" height="50" rx="6" fill="#a5d6a7" stroke="#2e7d32"/>` + text(190, 100, '課本', 'k', 13) + `<circle cx="340" cy="75" r="14" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="342" cy="75" r="6" fill="#333"/>` + text(340, 110, '眼睛', 'k', 13);
+  b += arrow(55, 56, 165, 56, 'o', 2.4) + arrow(214, 62, 322, 72, 'r', 2.4);
+  return `
+  ${kp('光源與直進性', '<p>會自己發光的物體叫<b>光源</b>（太陽、通電的燈泡、燭火）。光在真空或均勻的介質中<b>沿直線前進</b>，這叫光的直進性。</p>', true)}
+  <h4>① 影子怎麼來</h4><div class="svgbox">${SVG(400, 150, a)}</div>
+  <p>光走直線，被不透明的物體擋住，後面就是沒有光的暗區——影子。物體離光源愈近，擋住的光愈多，影子愈大。日晷就是靠影子看時間。</p>
+  <h4>② 我們怎麼看見不發光的東西</h4><div class="svgbox">${SVG(400, 125, b)}</div>
+  <p>光源的光照到物體，<b>被物體反射</b>，反射後的光跑進眼睛，這個物體就被看到了。</p>`; },
+  traps: ['眼睛不會發出光去「照」物體；是物體（或光源）的光進入眼睛。', '光不會繞過不透明的物體，所以才會有影子。'],
+  quick: [['想讓手影變大，手要靠近光源還是靠近牆？', '靠近光源（離牆遠）。']] });
+
+card('L2', { body: () => `
+  <p>用紙杯做針孔：杯底戳小洞，杯口蓋描圖紙。光源的每一點發出的光，只有極少數能通過小孔，而且<b>沿直線前進、在孔處交錯</b>，所以像是倒過來的。</p>
+  {{sim:simPinhole}}
+  ${tbl(['改變', '像會怎樣'], [['針孔離光源更遠', '像變小'], ['針孔離描圖紙更遠（杯子變長）', '像變大'], ['多戳幾個小洞', '出現多個像'], ['把針孔弄大', '變亮，但變模糊']])}
+  ${kp('像的性質', '<p>是一個<b>整個倒過來（上下、左右都反）的實像</b>——真實的光線會聚而成，屏幕接得到。這可以證明光沿直線前進。</p>', true)}`,
+  traps: ['針孔成像的像是實像，不是虛像。', '孔變大不是「更清楚」，而是「更亮但更模糊」。'],
+  quick: [['針孔成像證明了光的什麼性質？', '直進性。']] });
+
+card('L3', { body: () => `
+  ${kp('光速要記的重點', '<ul><li>光在真空中約 <b>3×10⁸ 公尺／秒</b>（3×10⁵ 公里／秒），比聲音快得多。</li><li>光<b>不需要介質</b>也能傳播（聲音需要）。</li><li>光在不同介質中速率不同：<b>真空 ＞ 空氣 ＞ 水 ＞ 玻璃</b>。</li></ul>', true)}
+  ${tbl(['介質', '真空', '空氣', '水', '玻璃'], [['速率（公尺／秒）', '3×10⁸', '約 3×10⁸', '2.25×10⁸', '2×10⁸']])}
+  <p>為什麼先看到閃電、後聽到雷聲？因為光比聲音快很多。</p>
+  ${kp('時間的算法', '<p>時間 ＝ 距離 ÷ 速率。例：1.5×10⁸ 公里 ÷ 3×10⁵ 公里／秒 ＝ 500 秒（光從太陽到地球的時間）。</p>', true)}`,
+  traps: ['光在水中、玻璃中比在空氣中慢，但仍然非常快。', '算時間時，單位要一致（公里配公里／秒）。'],
+  quick: [['光從距離 6×10⁵ 公里處走來，要多久？', '6×10⁵ ÷ 3×10⁵ ＝ 2 秒。']] });
+
+card('R1', { body: () => `
+  <div class="svgbox">${mirrorSvg({ theta: 40, lab: { i: '入射角', r: '反射角' } })}</div>
+  ${kp('名詞', '<ul><li><b>界面</b>：兩種介質的交界（這裡是鏡面）。</li><li><b>法線</b>：在入射點作、<b>垂直</b>界面的直線。</li><li><b>入射角、反射角</b>：入射線、反射線<b>和法線</b>的夾角（不是和鏡面的夾角）。</li></ul>', true)}
+  ${kp('反射定律', '<ol style="margin:4px 0 4px 1.2em;padding:0"><li>入射線和反射線各站在法線的一邊。</li><li><b>入射角 ＝ 反射角</b>。</li><li>入射線、反射線、法線在<b>同一個平面</b>上。</li></ol>', true)}
+  {{sim:simReflect:law}}`,
+  traps: ['題目給的角度如果是「和鏡面的夾角」，要先用 90° 減掉，才是入射角。', '入射線和反射線夾的角＝入射角的 2 倍。'],
+  quick: [['入射線與鏡面夾角 30°，反射角是多少？', '入射角＝90°−30°＝60°，反射角也是 60°。']] });
+
+card('R2', { body: () => `
+  ${kp('光的可逆性', '<p>光走的路徑如果「倒著走」，會沿著同一條路走回去。所以從反射光的路徑射向鏡子，反射後會沿原本的入射光路徑出去。</p>', true)}
+  {{sim:simReflect:reverse}}
+  ${kp('垂直入射', '<p>光垂直射向鏡面時，入射線和法線重疊，入射角 0°、反射角 0°，反射光<b>沿原路退回</b>。</p>', true)}
+  <p>用處：你能在鏡中看到對方的眼睛，對方也一定能看到你的眼睛。</p>`,
+  traps: ['垂直入射不是「沒有反射」，而是反射線沿著原路回去。'],
+  quick: [['入射角 50° 的光反射到牆上 A 點。從 A 點沿原路射向鏡子，入射角是？', '50°（光路可逆，角度相同）。']] });
+
+card('R3', { body: () => `
+  ${kp('平面鏡成像的性質', '<ul><li>像和物體<b>一樣大</b>。</li><li>像和物體以鏡面為中心<b>對稱</b>。</li><li><b>像距＝物距</b>（像到鏡面的距離＝物到鏡面的距離）。</li><li>是<b>虛像</b>：不能呈現在鏡後的紙上。</li></ul>', true)}
+  {{sim:simReflect:image}}
+  <p>像的位置在「反射光向後延伸的交點」，眼睛的位置改變，像的位置與大小都不變。</p>
+  <p>若人離鏡 d，人與像相距 <b>2d</b>；你向鏡子走近，像也同步走近。</p>`,
+  traps: ['虛像不是「假的」，而是光線沒有真的聚在那裡，所以紙屏接不到。', '離鏡面愈遠，像不會變小。'],
+  quick: [['你站在鏡前 2 公尺，你和像相距多少？', '4 公尺。']] });
+
+card('R4', { body: () => `
+  {{sim:simCurved}}
+  ${tbl(['', '凸面鏡', '凹面鏡'], [['平行光反射後', '發散', '會聚於焦點'], ['成像', '正立縮小虛像', '近處（焦點內）：正立放大虛像'], ['用途', '看得更廣：公車後照鏡、路口轉彎鏡、商店角落鏡', '放大、會聚：化妝鏡、手電筒反光杯']])}
+  <p>手電筒把燈泡放在凹面鏡的焦點，反射出的光變成平行光束照得更遠（光路可逆）。</p>`,
+  traps: ['要擴大視野的是凸面鏡，要放大臉的是凹面鏡。'],
+  quick: [['公車後照鏡是凸面鏡還是凹面鏡？為什麼？', '凸面鏡，成正立縮小的像，視野大。']] });
+
+card('F1', { body: () => `
+  ${kp('折射', '<p>光進入<b>不同介質</b>時，在交界處前進方向發生偏折，叫折射。偏折後的光叫<b>折射線</b>，它和法線的夾角是<b>折射角</b>。</p>', true)}
+  {{sim:simRefract:angle}}
+  ${kp('偏向還是偏離法線？看光速', '<ul><li>光由<b>快 → 慢</b>：偏<b>向</b>法線，折射角 ＜ 入射角（例：空氣 → 水、空氣 → 玻璃）。</li><li>光由<b>慢 → 快</b>：偏<b>離</b>法線，折射角 ＞ 入射角（例：水 → 空氣）。</li><li>垂直入射：不偏折，但光速仍會改變。</li></ul>', true)}
+  <p>光速順序：空氣（快）＞ 水（慢）＞ 玻璃（更慢）。</p>`,
+  traps: ['不是每次折射都「偏向法線」，要先看光速是變快還是變慢。', '垂直入射時不偏折，但光速還是會變。'],
+  quick: [['光從水射向空氣，折射角比入射角大還小？', '大（變快，偏離法線）。']] });
+
+card('F2', { body: () => `
+  ${kp('折射作圖', '<ol style="margin:4px 0 4px 1.2em;padding:0"><li>在入射點畫法線（垂直界面）。</li><li>入射線與折射線分別在法線兩側。</li><li>快 → 慢：折射線靠近法線；慢 → 快：折射線遠離法線。</li></ol>', true)}
+  {{sim:simRefract:compare}}
+  ${kp('折射的可逆性', '<p>光由空氣入水的路徑，反過來（水入空氣）會走回同一條路徑。例：空氣 50° → 水 35°，反過來水 35° → 空氣 50°。</p>', true)}
+  ${tbl(['同樣入射角，空氣 → ', '水', '玻璃'], [['光速變慢的程度', '較少', '較多（更慢）'], ['折射角', '較大', '較小（偏折更多）']])}
+  <p>所以可以用「偏折得多不多」來判斷介質中的光速快慢：偏折愈多，介質中光速愈慢。</p>`,
+  traps: ['折射角是和「法線」的夾角，不是和界面的夾角。'],
+  quick: [['同樣入射角，水和玻璃哪個折射角小？', '玻璃。']] });
+
+card('F3', { body: () => `
+  ${kp('視深與實深', '<p>往水裡看，物體「看起來」的深度叫<b>視深</b>，實際的深度叫<b>實深</b>。結果是：<b>視深 ＜ 實深</b>（看起來比較淺）。</p>', true)}
+  {{sim:simRefract:depth}}
+  <p>為什麼？水中物體發出的光，從水進入空氣時<b>偏離法線</b>。眼睛把進入的光當成直線，沿著反方向看回去，就以為物體在「比較高」的位置。</p>
+  <p>杯底的燈具：原本被杯緣擋住看不到，加水後光在水面偏折，繞過杯緣進到眼睛，就看到了。</p>
+  ${kp('安全提醒', '<p>池水看起來淺，其實比看到的深。下水前不要只靠眼睛判斷，要用物品或腳慢慢測水深。</p>', true)}`,
+  traps: ['視深比實深淺，不是深。', '光是從物體（燈具）進入眼睛，不是眼睛發出去。'],
+  quick: [['岸上看水中的魚，魚實際位置比看到的位置更深還更淺？', '更深（魚看起來比實際的位置淺）。']] });
+
+/* ---- d_r_t.js ---- */
+/* ===== 第 4 章 複習卡（下）T1–T5、C1–C4 ===== */
+card('T1', { body: () => `
+  <div class="row" style="justify-content:center;gap:24px"><div class="svgbox">${lensRaySvg({ kind: 'convex', ray: 'parallel', showOut: true })}<p class="muted">凸透鏡：平行光會聚</p></div><div class="svgbox">${lensRaySvg({ kind: 'concave', ray: 'parallel', showOut: true })}<p class="muted">凹透鏡：平行光發散</p></div></div>
+  ${tbl(['', '凸透鏡', '凹透鏡'], [['外形', '中央厚、邊緣薄', '中央薄、邊緣厚'], ['對光', '會聚（會聚透鏡）', '發散（發散透鏡）'], ['焦點', '平行光真正會聚的點', '發散光線「反向延長線」的交點（在入射側）']])}
+  ${kp('名詞', '<ul><li><b>鏡心</b>：透鏡的中心。</li><li><b>焦距</b>：焦點到鏡心的距離。用太陽光＋白紙，找到光點最小最亮的位置，量到鏡心的距離，就是凸透鏡的焦距。</li><li>三稜鏡：厚端接厚端（像凸透鏡）→ 會聚；尖端接尖端（像凹透鏡）→ 發散。</li></ul>', true)}`,
+  traps: ['凹透鏡的光線並沒有真的會聚，焦點是「延長線」的交點。'],
+  quick: [['中央最厚的透鏡，對平行光有什麼作用？', '會聚，它是凸透鏡。']] });
+
+card('T2', { body: () => `
+  <p>用焦距 f 把世界分成幾個區：<b>焦點內、焦點上、f～2f、2f 上、2f 外</b>。</p>
+  {{sim:simLens:convex}}
+  ${tbl(['物體位置（物距）', '像的性質', '像的位置'], [['2f 外', '倒立、縮小、實像', 'f～2f 之間'], ['2f 上', '倒立、等大、實像', '剛好 2f'], ['f～2f 之間', '倒立、放大、實像', '2f 以外'], ['焦點上（f）', '不成像', '—'], ['焦點內（< f）', '正立、放大、虛像（放大鏡）', '物的同側']])}
+  ${kp('口訣', '<ul><li>焦點外 → <b>倒立實像</b>（屏幕接得到）；焦點內 → <b>正立虛像</b>（屏幕接不到）。</li><li>物愈靠近焦點，像離透鏡愈遠、愈大。</li></ul>', true)}`,
+  traps: ['物在焦點上時什麼像都沒有，不是「放大的像」。', '2f 處的像是「等大」，不是縮小或放大。'],
+  quick: [['物在 1.5 倍焦距處，成什麼像？', '倒立、放大的實像。']] });
+
+card('T3', { body: () => `
+  <p>用這三條「特殊光線」，就能畫出物體的像：</p>
+  ${tbl(['光線', '凸透鏡折射後', '凹透鏡折射後'], [['①平行主軸的光', '通過另一側焦點', '發散，延長線通過入射側焦點'], ['②射向鏡心的光', '方向不變', '方向不變'], ['③射向（通過）焦點的光', '平行主軸', '平行主軸（原本是射向另一側焦點）']])}
+  {{sim:simLens:rays}}
+  <p>作圖法：從物體頂端畫出其中兩條光線，折射後（或延長線）的交會處就是像的頂端；再往主軸作垂線，就是像。</p>`,
+  traps: ['凹透鏡的①是「發散」，要用虛線把延長線畫回入射側。', '射向鏡心的光線不會偏折。'],
+  quick: [['平行主軸的光射向凸透鏡，會通過哪裡？', '另一側的焦點。']] });
+
+card('T4', { body: () => `
+  {{sim:simLens:concave}}
+  ${kp('凹透鏡成像', '<ul><li>不論物體放在哪裡，都只能看到<b>正立縮小的虛像</b>。</li><li>物體愈遠離凹透鏡，像愈小。</li><li>屏幕上接不到像（沒有實像）。</li></ul>', true)}
+  <p>近視眼鏡是凹透鏡，透過它看東西會比實際小，就是這個原因。</p>`,
+  traps: ['凹透鏡不會成放大的像，也不會成實像。'],
+  quick: [['凸透鏡和凹透鏡，哪一個能成實像？', '凸透鏡。']] });
+
+card('T5', { body: () => `
+  ${tbl(['應用', '用到的透鏡', '要記住的重點'], [['近視眼鏡', '凹透鏡', '近視：遠處物體成像在視網膜「前」，凹透鏡讓光發散來矯正'], ['遠視／老花眼鏡', '凸透鏡', '遠視：近處物體成像在視網膜「後」，凸透鏡讓光會聚來矯正'], ['放大鏡', '凸透鏡', '物在焦點內 → 正立放大虛像'], ['複式顯微鏡', '物鏡、目鏡都是凸透鏡', '放大倍率＝物鏡倍率×目鏡倍率；看到整個倒過來的放大像'], ['照相機', '鏡頭（相當於凸透鏡）', '底片／感光元件上成倒立縮小實像'], ['投影機', '凸透鏡', '在布幕上成實像']])}
+  ${kp('眼睛', '<p>眼睛的水晶體相當於凸透鏡，把外界的光會聚在視網膜上成像。近視、遠視就是成像的位置沒有剛好落在視網膜上。</p>', true)}`,
+  traps: ['近視 ➜ 凹透鏡；遠視（老花）➜ 凸透鏡。可用「近視看遠處，要發散」幫助記憶。'],
+  quick: [['顯微鏡物鏡 10 倍、目鏡 15 倍，放大幾倍？', '150 倍。']] });
+
+card('C1', { body: () => {
+  const cols = ['#e53935', '#fb8c00', '#fdd835', '#43a047', '#1e88e5', '#3949ab', '#8e24aa'];
+  let s = `<polygon points="170,30 110,150 230,150" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>` + arrow(20, 112, 150, 106, 'k', 3.5) + text(60, 98, '陽光（白光）', 'k', 13);
+  cols.forEach((c, i) => { s += `<line x1="195" y1="${108 + i * 0}" x2="400" y2="${60 + i * 22}" stroke="${c}" stroke-width="4"/>`; });
+  s += text(330, 192, '七彩色光（色散）', 'k', 14) + text(412, 62, '紅', 'k', 12, 'start') + text(412, 196, '紫', 'k', 12, 'start');
+  return `
+  ${kp('色散', '<p>陽光通過<b>三稜鏡</b>，會分散成一條彩色光帶，這個現象叫<b>色散</b>。</p>', true)}
+  <div class="svgbox">${SVG(450, 210, s)}</div>
+  ${kp('重點', '<ul><li>牛頓用第二個三稜鏡把色光再混合，又得到白光 → 陽光是各種色光混合成的白光。</li><li>各色光在三稜鏡中速率不同：<b>紅光最快、紫光最慢</b>，所以偏折不同、被分開。</li><li>單色的雷射光只偏折，不會分散。</li><li>彩虹是陽光被水珠折射、色散形成的。</li></ul>', true)}`; },
+  traps: ['色散是因為各色光在介質中速率不同，不是三稜鏡「幫光上色」。'],
+  quick: [['陽光通過三稜鏡，哪一種色光速率最快？', '紅光。']] });
+
+card('C2', { body: () => `
+  ${kp('光的三原色', '<p>紅、綠、藍。只要調整這三種色光的亮度比例，就能組出各種顏色的光。電視、手機螢幕就用這個原理。</p>', true)}
+  {{sim:simColor:mix}}
+  ${tbl(['混合', '結果'], [['紅 ＋ 綠', '黃'], ['綠 ＋ 藍', '青'], ['紅 ＋ 藍', '洋紅'], ['紅 ＋ 綠 ＋ 藍（等量）', '白']])}`,
+  traps: ['光的三原色是紅、綠、藍，不是紅、黃、藍（那是顏料的常見講法）。', '色光是「愈加愈亮」，三色等量疊加是白光，不是黑色。'],
+  quick: [['紅光加綠光，是什麼顏色？', '黃色。']] });
+
+card('C3', { body: () => `
+  ${kp('透明物體的顏色', '<p>看「<b>穿透過去的光</b>」。彩色玻璃紙只放行和自己同顏色的光，別的顏色的光會被它吃掉（吸收）；無色透明的玻璃紙什麼光都放行。</p>', true)}
+  {{sim:simColor:filter}}
+  ${tbl(['光 ＼ 玻璃紙', '紅', '綠', '藍', '無色'], [['白光', '紅', '綠', '藍', '白'], ['紅光', '紅', '黑暗', '黑暗', '紅'], ['綠光', '黑暗', '綠', '黑暗', '綠'], ['藍光', '黑暗', '黑暗', '藍', '藍']])}`,
+  traps: ['紅光射向綠玻璃紙，後面「沒有光」，不是變成黃光。'],
+  quick: [['白光通過藍色玻璃紙，看到什麼？', '藍光。']] });
+
+card('C4', { body: () => `
+  ${kp('不透明物體的顏色', '<p>看「<b>反射的光</b>」：色紙只反射和自己同色的色光、吸收其他色光；白紙反射所有色光；黑紙吸收所有色光。</p>', true)}
+  {{sim:simColor:paper}}
+  ${tbl(['光 ＼ 色紙', '紅紙', '綠紙', '藍紙', '白紙', '黑紙'], [['白光', '紅', '綠', '藍', '白', '黑'], ['紅光', '紅', '黑', '黑', '紅', '黑'], ['綠光', '黑', '綠', '黑', '綠', '黑'], ['藍光', '黑', '黑', '藍', '藍', '黑']])}
+  <p>所以在紅光下，白底紅圓的旗子整面都是紅色，圖案就看不出來了。</p>`,
+  traps: ['白紙在藍光下是藍色，不是白色（它只是把看到的光都反射出來）。', '黑紙在任何色光下都是黑色。'],
+  quick: [['綠光照射紅紙，紅紙看起來是什麼顏色？', '黑色（紅紙不反射綠光）。']] });
+
+/* ---- d_r_w.js ---- */
+/* ===== 第 3 章 複習卡 W1–W8、S1–S11（全部用自己的話撰寫；圖為自繪 SVG） ===== */
+const waveAnnot = () => {
+  const x0 = 30, lam = 170, A = 52, y0 = 100; let d = '';
+  for (let i = 0; i <= 340; i++) { const x = i / 340 * 2 * lam; d += (i ? 'L' : 'M') + (x0 + x).toFixed(1) + ',' + (y0 - A * Math.sin(2 * Math.PI * x / lam)).toFixed(1); }
+  let s = line(x0, y0, x0 + 2 * lam + 10, y0, 'gr', 1.4, 'stroke-dasharray="5 4"') + text(x0 + 2 * lam + 14, y0 + 4, '平衡位置', 'gr', 12, 'start');
+  s += `<path d="${d}" fill="none" stroke="${COL.b}" stroke-width="3"/>`;
+  const p1 = x0 + lam / 4, p2 = x0 + 5 * lam / 4, t1 = x0 + 3 * lam / 4;
+  s += `<circle cx="${p1}" cy="${y0 - A}" r="4.5" fill="${COL.r}"/><circle cx="${p2}" cy="${y0 - A}" r="4.5" fill="${COL.r}"/><circle cx="${t1}" cy="${y0 + A}" r="4.5" fill="${COL.g}"/>`;
+  s += text(p1, y0 - A - 10, '波峰', 'r', 14) + text(p2, y0 - A - 10, '波峰', 'r', 14) + text(t1, y0 + A + 20, '波谷', 'g', 14);
+  s += arrow(p1 + 6, y0 - A - 28, p2 - 6, y0 - A - 28, 'p', 2.2) + arrow(p2 - 6, y0 - A - 28, p1 + 6, y0 - A - 28, 'p', 2.2) + text((p1 + p2) / 2, y0 - A - 34, '波長（一個全波的長度）', 'p', 13);
+  s += arrow(p1 + 26, y0 - 2, p1 + 26, y0 - A + 4, 'o', 2.4) + text(p1 + 70, y0 - A / 2 + 4, '振幅', 'o', 14, 'start');
+  return SVG(430, 200, s);
+};
+
+card('W1', { body: () => `
+  ${kp('先用一個畫面想', '<p>把石頭丟進水池，水面一圈一圈向外擴散。石頭是「搞出動靜的人」，水是「把動靜傳出去的東西」，那一圈圈起伏就是「波」。</p>')}
+  ${tbl(['名詞', '意思', '水池例子'], [['波', '受到擾動後出現的凸起、凹下（或疏、密）的部分', '水面的一圈起伏'], ['波動', '這個波一路向前傳出去的現象', '波紋向外擴散'], ['波源（振源）', '造成擾動的來源', '丟下去的石頭'], ['介質', '負責傳遞波的物質', '水']])}
+  ${tbl(['情境', '波源', '介質'], [['手抖動繩子', '手', '繩子'], ['喇叭發出聲音', '喇叭', '空氣'], ['手推動彈簧', '手', '彈簧']])}
+  ${kp('一句話記住', '<p><b>誰動手 → 波源；誰幫忙傳 → 介質。</b></p>')}`,
+  traps: ['波源和介質很容易講反：手是波源，繩子才是介質。', '「波」是形狀，「波動」是這個形狀傳出去的過程。'],
+  quick: [['繩波中，繩子是波源還是介質？', '繩子是介質（傳遞者），手才是波源。']] });
+
+card('W2', { body: () => `
+  ${kp('只問一個問題', '<p>這種波要不要靠「物質」才能傳？</p><ul><li><b>要</b> → 力學波：繩波、水波、彈簧波、<b>聲波</b>。</li><li><b>不要</b> → 非力學波（電磁波）：<b>光波</b>、無線電波、Wi-Fi 與手機訊號。</li></ul>')}
+  ${tbl(['', '力學波', '非力學波'], [['要靠物質幫忙傳嗎？', '要', '不用'], ['真空中能傳嗎？', '不能', '能'], ['例子', '繩波、水波、聲波', '光波、無線電波']])}
+  <p>太陽光能穿過太空到地球，聲音卻不行：因為光是非力學波，聲音是力學波。</p>`,
+  traps: ['聲波是力學波，不是電磁波。', '「Wi-Fi 看不到」不代表要介質；它是電磁波，不需要介質。'],
+  quick: [['無線電波是力學波嗎？', '不是，無線電波屬於非力學波，不需要介質。']] });
+
+card('W3', { body: () => `
+  ${kp('只看一件事', '<p>「介質怎麼動」和「波往哪裡跑」之間的關係：</p><ul><li><b>垂直</b> → 橫波（波形高低起伏，又叫高低波）</li><li><b>平行</b> → 縱波（波形疏密相間，又叫疏密波）</li></ul>')}
+  {{sim:simWaveType}}
+  ${tbl(['', '橫波', '縱波'], [['介質的動法', '上下（與前進方向垂直）', '前後（與前進方向平行）'], ['波形', '高低起伏', '疏密相間'], ['別名', '高低波', '疏密波'], ['例子', '手上下抖動的繩波、彈簧上下擺', '手前後推拉的彈簧、聲波']])}`,
+  traps: ['彈簧可以是橫波，也可以是縱波，看的是「手怎麼動」。', '判斷時不要看波長相不相同；只看「介質振動方向」對「波前進方向」。'],
+  quick: [['聲波是橫波還是縱波？', '縱波：空氣前後振動，方向和聲波前進方向平行。']] });
+
+card('W4', { body: () => `
+  <p>觀察彈簧上套一個髮圈：波經過時，髮圈只是原地上下動，波走遠後髮圈還在原本的位置。</p>
+  {{sim:simWaveType}}
+  ${kp('結論', '<ul><li>介質<b>不會跟著波跑到遠處</b>，只在原處來回振動。</li><li>被傳出去的是<b>能量</b>（振動的消息），不是物質。</li></ul>')}
+  <p>生活例子：觀眾席的「波浪舞」——人沒有跑走，只是站起、坐下，卻讓「波」繞著場地轉。</p>`,
+  traps: ['看到水波往外擴，不等於水跟著往外跑；漂在水面的樹葉只會原地起伏。'],
+  quick: [['波傳遞的是物質還是能量？', '能量。介質本身留在原處來回振動。']] });
+
+card('W5', { body: () => `
+  ${waveAnnot()}
+  ${tbl(['名詞', '怎麼找', '提醒'], [['波峰／波谷', '最高點／最低點', ''], ['全波', '一個波峰＋一個波谷', '波源振動一次產生一個全波'], ['波長 λ', '相鄰兩波峰（或兩波谷）的距離＝一個全波的長度', '峰到谷只有半個波長'], ['振幅', '從「平衡位置」到波峰（或波谷）的高度', '手擺得愈用力，振幅愈大']])}
+  {{sim:simPeriodic:shape}}`,
+  traps: ['振幅不是「波峰到波谷」的高度，只要量到平衡位置那一半。', '波長不是波峰到相鄰波谷，那只有半個波長。'],
+  quick: [['圖上相鄰兩個波峰相距 8 公分，波長是多少？', '8 公分。']] });
+
+card('W6', { body: () => `
+  ${kp('兩個數字描述波「快不快」', '<ul><li><b>週期 T</b>：產生一個全波要花多久（單位：秒）。</li><li><b>頻率 f</b>：每一秒產生幾個全波（單位：赫茲 Hz，也就是 次／秒）。</li></ul>')}
+  ${kp('互為倒數', '<p><b>f ＝ 1 ÷ T</b>　　<b>T ＝ 1 ÷ f</b></p><p>例：一秒擺動 4 次 → f＝4 赫，T＝1/4＝0.25 秒。</p>')}
+  {{sim:simPeriodic:freq}}
+  <p>擺得愈快：頻率愈大、週期愈小。</p>`,
+  traps: ['頻率的單位是赫（次／秒），週期的單位是秒，別寫反。', '「幾秒內擺幾次」要先換成「一秒擺幾次」才是頻率。'],
+  quick: [['週期 0.5 秒，頻率是多少？', '1 ÷ 0.5 ＝ 2 赫。']] });
+
+card('W7', { body: () => `
+  ${kp('兩個公式，看情況選', `<ul><li><b>單獨一個波</b>：v ＝ 傳遞的距離 ÷ 花的時間（沒有頻率、波長可言）。</li><li><b>連續有規律的週期波</b>：<b>v ＝ f × λ</b>（也可以寫成 v ＝ λ ÷ T）。</li></ul>`)}
+  {{sim:simPeriodic:speed}}
+  ${kp('解題三步', '<ol style="margin:4px 0 4px 1.2em;padding:0"><li>找頻率 f（或週期 T）</li><li>找波長 λ</li><li>相乘（注意單位）</li></ol><p>「連續 n 個波峰通過」＝中間只有 <b>n − 1</b> 個全波。</p>')}
+  <p>例：f＝5 赫、λ＝4 公分 → v＝5×4＝20 公分／秒。</p>`,
+  traps: ['連續 5 個波峰通過，只算 4 個全波，不是 5 個。', 'v ＝ f×λ 只適用週期波；單獨的波要用「距離÷時間」。'],
+  quick: [['f＝10 赫、λ＝3 公分，v＝？', '10×3＝30 公分／秒。']] });
+
+card('W8', { body: () => `
+  ${kp('同一條繩子，波速不變', '<p>波速是由「介質」決定的。你把手擺得比較快，頻率變大，但波速不變，所以<b>波長只好變短</b>；擺得慢，頻率變小，波長就變長。</p><p><b>f 變大 ⇒ λ 變小；f 變小 ⇒ λ 變大</b>（v 固定）。</p>')}
+  {{sim:simPeriodic:fixedv}}
+  ${tbl(['手擺動', '頻率', '波長', '波速'], [['變快', '變大', '變短', '不變'], ['變慢', '變小', '變長', '不變']])}`,
+  traps: ['波速不會因為手擺得更用力或更快而變大（只要介質不變）。', '頻率變兩倍，波長是原來的一半，不是兩倍。'],
+  quick: [['頻率 2 赫、波長 12 公分。頻率改成 4 赫，波長？', 'v＝2×12＝24；λ＝24÷4＝6 公分。']] });
+
+/* ---------- 聲音 ---------- */
+card('S1', { body: () => `
+  ${kp('核心一句話', '<p><b>聲音是物體「快速振動」產生的。</b>發出聲音的物體叫聲源。</p>')}
+  ${tbl(['證據', '怎麼看出來'], [['撥橡皮筋', '看得到橡皮筋來回抖動'], ['敲音叉再碰水面', '水花被濺起來，表示音叉在振動'], ['用手握住音叉', '振動被壓住，聲音也跟著消失']])}
+  ${tbl(['樂器', '振動的部分'], [['吉他、鋼琴', '弦'], ['薩克斯風', '簧片'], ['鼓、鑼', '鼓面、鑼面']])}`,
+  traps: ['聲音大小和有沒有發聲是兩回事：只要振動停了，聲音就沒了。'],
+  quick: [['握住音叉後聲音停了，說明什麼？', '振動停止，聲音就停止；聲音來自振動。']] });
+
+card('S2', { body: () => `
+  <p>聲音是力學波，需要介質：氣體、液體、固體都可以傳，只有「真空」不行。</p>
+  {{sim:simVacuum}}
+  ${tbl(['介質', '例子'], [['氣體', '平常說話，空氣傳聲'], ['液體', '水中聽到水中喇叭的音樂'], ['固體', '貼在牆上聽到隔壁敲牆']])}
+  ${kp('光和聲音的對照', '<p>抽成真空的罩子裡，鈴鐺<b>看得到（光能過）</b>、<b>聽不到（聲音不能過）</b>。</p>')}`,
+  traps: ['聲音不能在真空傳；太空中沒有空氣，聽不到聲音。', '不是「沒有空氣就沒有聲音」，而是「聲音傳不出來」。'],
+  quick: [['月球表面幾乎是真空，兩人面對面不靠無線電說話，聽得到嗎？', '聽不到，因為沒有傳聲的介質。']] });
+
+card('S3', { body: () => `
+  ${kp('聲速由什麼決定？', '<ul><li><b>介質的種類（狀態）</b>：固體 ＞ 液體 ＞ 氣體。</li><li><b>溫度</b>（空氣中）：愈熱聲音愈快。</li></ul><p>0℃ 時空氣中約 331 公尺／秒，每高 1℃ 約再快 0.6 公尺／秒。</p>')}
+  ${tbl(['介質', '木頭（固）', '水（液）', '空氣（氣）'], [['聲速（公尺／秒）', '約 3352', '約 1463', '約 331']])}
+  ${kp('聲速和這些無關', '<p>聲音的大小、頻率（音調高低）、說話快慢、發聲體振動快慢，都<b>不會</b>改變聲速。</p>', false)}`,
+  traps: ['大聲的聲音不會跑得比較快；高音、低音傳得一樣快。', '空氣溫度愈高，聲速愈大，不是愈小。'],
+  quick: [['冬天（5℃）和夏天（35℃）哪個季節聲速較大？', '夏天，溫度高，聲速大。']] });
+
+card('S4', { body: () => `
+  <p>響度就是「音量」，生活中用<b>分貝（dB）</b>比較。它取決於聲波的<b>振幅</b>：</p>
+  {{sim:simSound3:amp}}
+  ${kp('記法', '<p><b>振幅大 → 大聲；振幅小 → 小聲。</b>敲得愈用力，振幅愈大。</p>')}`,
+  traps: ['大聲≠高音。大聲看的是振幅，高音看的是頻率。'],
+  quick: [['音量和聲波的哪一項有關？', '振幅。']] });
+
+card('S5', { body: () => `
+  <p>音調就是聲音的「高低」，取決於聲波的<b>頻率</b>：</p>
+  {{sim:simSound3:freq}}
+  ${tbl(['', '頻率', '音調'], [['空氣柱短（吹水多的試管）', '高', '高'], ['空氣柱長（吹水少的試管）', '低', '低'], ['發音體短、細、緊、薄', '高', '高']])}
+  <p>男生、女生音調不同，是因為聲帶不同，女生一般比較高。</p>`,
+  traps: ['把音量調大，音調不會變高。', '空氣柱愈「短」，音調愈「高」，不要記反。'],
+  quick: [['試管裡水愈多，吹出來的聲音音調如何？', '愈高，因為空氣柱愈短，頻率愈高。']] });
+
+card('S6', { body: () => `
+  <p>音色是每種發聲體獨有的「聲音特色」，由聲波的<b>波形</b>決定。</p>
+  {{sim:simSound3:shape}}
+  <p>同樣彈出「中央 Do」，鋼琴和小提琴聽起來不一樣；打電話你也能聽出是誰在說話，都是因為音色不同。</p>
+  ${tbl(['三要素', '決定因素', '單位'], [['響度（音量）', '振幅', '分貝 dB'], ['音調', '頻率', '赫 Hz'], ['音色', '波形', '—']])}`,
+  traps: ['音色不同時，即使響度、音調相同，聲音還是聽得出來不一樣。'],
+  quick: [['三要素分別對應波的哪一項？', '響度—振幅、音調—頻率、音色—波形。']] });
+
+card('S7', { body: () => `
+  <p>看示波器的波形圖，用<b>三個問題</b>找出差別：</p>
+  ${tbl(['看什麼', '不同代表', '要素'], [['波的「高度」', '振幅不同', '響度（音量）'], ['同樣時間內「波的個數」（疏密）', '頻率不同', '音調'], ['波的「形狀」', '波形不同', '音色']])}
+  {{sim:simSound3:all}}
+  <p>練習：拖曳上面的滑桿，同時觀察「上方的波形」和「聽到的聲音」。</p>`,
+  traps: ['看圖時要確認兩張圖的時間軸一樣，再比較波的個數。'],
+  quick: [['兩個波一樣高、一樣疏密，只有形狀不同。差在哪一項？', '音色。']] });
+
+card('S8', { body: () => `
+  ${kp('樂音 vs 噪音', '<ul><li><b>樂音</b>：聽起來悅耳，波形<b>有規律</b>。</li><li><b>噪音</b>：吵雜刺耳，波形<b>沒有規律</b>；音量太大、超過耳朵能承受的範圍，也算噪音。</li></ul>')}
+  {{sim:simSound3:noise}}
+  ${kp('噪音的影響與防治', '<ul><li>長時間處在高分貝噪音中，會影響學習、情緒，甚至傷害聽力。</li><li>防治：在聲源減小音量、設隔音牆、戴耳塞、牆面用吸音材料；也要從自己做起，不當噪音製造者。</li></ul>')}`,
+  traps: ['再好聽的音樂，音量大到傷耳朵，也算噪音。'],
+  quick: [['樂音和噪音的波形差別是什麼？', '樂音有規律，噪音沒有規律。']] });
+
+card('S9', { body: () => `
+  <p>聲波遇到障礙物會彈回來，這叫<b>反射</b>，反射回來的聲音叫<b>回聲</b>。</p>
+  ${tbl(['表面', '聲音會怎樣', '例子'], [['光滑、堅硬', '容易反射（回聲明顯）', '磚牆、玻璃'], ['粗糙、柔軟', '容易被吸收（回聲小）', '吸音棉、布幔、地毯']])}
+  ${kp('反射前後什麼不變？', '<p>在同一種介質中，原聲與回聲的<b>速率、頻率、波長、週期都不變</b>；變的是前進方向（和振幅變小一點）。</p>')}
+  ${kp('生活中的應用', '<ul><li><b>把聲音集中</b>：傳聲筒、聽診器（聲音在管子裡不斷反射，不散開）。</li><li><b>降低回聲干擾</b>：音樂廳牆面做凹凸、掛布幔、吸音板。</li></ul>')}`,
+  traps: ['聲音反射時速率不會變，只有方向改變。', '房間裡常聽不到回聲，是因為牆太近，回聲和原聲間隔太短分不出來。'],
+  quick: [['為什麼雷聲常常是「轟隆隆」連續的聲音？', '雷聲被遠近不同的建築物、山坡多次反射，回聲一個接一個傳來。']] });
+
+card('S10', { body: () => `
+  <p>人耳大約聽得到 <b>20～20000 赫</b>；頻率<b>高於 20000 赫</b>的聲波，名字叫<b>超聲波</b>，人耳聽不見。</p>
+  {{sim:simHearing}}
+  ${kp('記住兩件事', '<ul><li>超聲波和一般聲波在同一種介質中，傳播速率一樣。</li><li>各種動物聽得到的範圍不一樣，人類的範圍比較窄；蝙蝠、海豚能發出和聽見超聲波。</li></ul>')}`,
+  traps: ['超聲波不是光，它還是聲波，仍需要介質。', '超聲波「聽不見」是因為頻率太高，不是因為音量太小。'],
+  quick: [['頻率 30000 赫的聲波，人類聽得到嗎？', '聽不到，它是超聲波（超過 20000 赫）。']] });
+
+card('S11', { body: () => {
+  const s = line(60, 70, 340, 70, 'gr', 1.4, 'stroke-dasharray="4 4"') + `<rect x="20" y="40" width="70" height="60" rx="8" fill="#cfe7fb" stroke="#1565c0"/>` + text(55, 76, '聲納', 'b', 15) +
+    `<path d="M380 30 Q420 70 380 110 Z" fill="#8a97a6"/>` + text(395, 130, '海底／魚群', 'k', 13) + arrow(95, 62, 372, 62, 'o', 3) + arrow(372, 80, 95, 80, 'r', 3) + text(230, 52, '① 發出超聲波', 'o', 14) + text(230, 100, '② 反射回來的回聲被接收', 'r', 14);
+  return `
+  ${kp('核心：超聲波加回聲', '<p>發出超聲波 → 遇到物體反射成回聲 → 接收回聲，就能知道前面有沒有東西、大概多遠。</p>')}
+  ${SVG(440, 150, s)}
+  ${tbl(['應用', '怎麼用'], [['聲納', '船艦測海底地形、探魚群'], ['倒車雷達', '偵測車後障礙物，靠近就嗶嗶響；有死角，所以還會加裝攝影機、增加雷達數量'], ['超音波檢查', '產檢看胎兒狀態'], ['超音波清洗機', '振動水，洗掉物品髒汙'], ['蝙蝠、海豚', '用超聲波與回聲辨別方向、找食物']])}`; },
+  traps: ['水中聽到喇叭聲屬於「聲音可以經液體傳播」，不是回聲或超聲波的應用。', '課本不要求用聲納算距離，會原理就好。'],
+  quick: [['倒車雷達用了聲波的哪一種性質？', '超聲波遇到障礙物會反射。']] });
+
+/* ---- e_sims1.js ---- */
+/* ===== 互動模擬（一）：共用工具＋波與聲音 ===== */
+const Q = (host, k) => host.querySelector(`[data-k="${k}"]`);
+const simBox = (host, title, obs, inner) => { host.innerHTML = `<div class="sh"><span class="chip">🧪 互動模擬</span>${title}</div><p class="obs">👀 <b>觀察：</b>${obs}</p>${inner}`; };
+const rng = (host, label, k, min, max, step, val, unit = '') => `<label>${label}<input type="range" data-k="${k}" min="${min}" max="${max}" step="${step}" value="${val}"><b data-k="${k}v">${val}${unit}</b></label>`;
+const loop = (host, fn) => { const t0 = performance.now(); const tick = t => { if (!host.isConnected) return; fn((t - t0) / 1000); requestAnimationFrame(tick); }; requestAnimationFrame(tick); };
+function dragOn(svg, onMove) {
+  const pt = e => { const r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal; return { x: (e.clientX - r.left) / r.width * vb.width, y: (e.clientY - r.top) / r.height * vb.height }; };
+  let on = false;
+  svg.addEventListener('pointerdown', e => { on = true; try { svg.setPointerCapture(e.pointerId); } catch (x) { } onMove(pt(e)); });
+  svg.addEventListener('pointermove', e => { if (on) onMove(pt(e)); });
+  svg.addEventListener('pointerup', () => { on = false; });
+  svg.addEventListener('pointercancel', () => { on = false; });
+}
+let AC = null;
+const audioCtx = () => { if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { } } if (AC && AC.state === 'suspended') AC.resume(); return AC; };
+const svgOpen = (w, h, k = 'svg') => `<svg viewBox="0 0 ${w} ${h}" data-k="${k}"><defs>${arrowDefs()}</defs><g data-k="g"></g></svg>`;
+const setG = (host, s) => { Q(host, 'g').innerHTML = s; };
+
+/* --- 橫波與縱波 --- */
+SIMS.simWaveType = host => {
+  let mode = 'trans', playing = true, t = 0, last = null;
+  simBox(host, '橫波與縱波', '紅色的點（介質）只在原處振動，波卻一直向右跑。比較「橫波」和「縱波」，紅點動的方向有什麼不同？',
+    `<div class="ctl"><span class="seg" data-k="seg"><button data-m="trans" class="on">橫波（上下抖）</button><button data-m="long">縱波（前後推）</button></span><button class="btn" data-k="pp">⏸ 暫停</button></div>${svgOpen(480, 210)}<div class="out" data-k="out"></div>`);
+  $$('[data-m]', host).forEach(b => b.onclick = () => { mode = b.dataset.m; $$('[data-m]', host).forEach(x => x.classList.toggle('on', x === b)); });
+  Q(host, 'pp').onclick = () => { playing = !playing; Q(host, 'pp').textContent = playing ? '⏸ 暫停' : '▶ 播放'; };
+  const N = 27, x0 = 28, dx = 16, cy = 118, A = 34, lam = 176, sp = 56, R = 7;
+  loop(host, now => {
+    if (last == null) last = now; if (playing) t += now - last; last = now;
+    let s = text(20, 26, '波前進方向', 'o', 14, 'start', 'font-weight="700"') + arrow(112, 22, 200, 22, 'o', 3);
+    const pts = [];
+    for (let i = 0; i < N; i++) {
+      const xi = x0 + i * dx, ph = 2 * Math.PI * (xi - sp * t) / lam, d = A * Math.sin(ph);
+      pts.push(mode === 'trans' ? [xi, cy - d] : [xi + d * .42, cy]);
+    }
+    const hi = 6, hx = x0 + hi * dx;
+    s += line(hx, 50, hx, 190, 'gr', 1.2, 'stroke-dasharray="4 4"') + text(hx, 204, '紅點原來的位置', 'gr', 12);
+    if (mode === 'trans') {
+      s += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="${COL.gr}" stroke-width="1.5"/>`;
+      pts.forEach((p, i) => s += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${i === hi ? R + 2 : R - 2}" fill="${i === hi ? COL.r : COL.b}"/>`);
+    } else {
+      pts.forEach((p, i) => s += `<line x1="${p[0].toFixed(1)}" y1="${cy - 38}" x2="${p[0].toFixed(1)}" y2="${cy + 38}" stroke="${i === hi ? COL.r : '#7aa6d8'}" stroke-width="${i === hi ? 4 : 2.4}"/>`);
+      s += text(240, 200, '線條擠在一起＝密部，分開＝疏部', 'gr', 12);
+    }
+    setG(host, s);
+  });
+  const o = Q(host, 'out'), upd = () => { o.innerHTML = mode === 'trans' ? '橫波：紅點<b>上下</b>動，波往<b>右</b>跑，兩個方向<b>互相垂直</b>。' : '縱波：紅點<b>左右（前後）</b>動，波也往<b>右</b>跑，兩個方向<b>互相平行</b>；波形是疏密相間。'; };
+  upd(); $$('[data-m]', host).forEach(b => b.addEventListener('click', upd));
+};
+
+/* --- 週期波：振幅、波長、頻率、週期、波速 --- */
+SIMS.simPeriodic = host => {
+  const mode = host.dataset.mode || 'speed', V0 = 12, SLOW = .25;
+  const obsT = { shape: '拖曳「振幅」和「波長」，看看波峰、波谷、波長（紅色括號）、振幅（橙色箭頭）怎麼變。', freq: '拖曳「頻率」：頻率變大，波變得更密、週期變小。紅點一秒上下幾次，頻率就是幾赫。', speed: '同時調「頻率」和「波長」，看波速 v ＝ f × λ 怎麼算出來。', fixedv: '這是同一條繩子：波速固定 12 公分／秒。你只能改頻率，波長會自動跟著變。' };
+  const sl = (mode === 'shape' ? rng(host, '振幅 A（公分）', 'A', .5, 3, .5, 1.5) + rng(host, '波長 λ（公分）', 'L', 2, 8, 1, 6) : '') +
+    (mode === 'freq' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 1) : '') +
+    (mode === 'speed' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 2) + rng(host, '波長 λ（公分）', 'L', 2, 10, 1, 4) : '') +
+    (mode === 'fixedv' ? rng(host, '頻率 f（赫）', 'F', .5, 6, .5, 2) : '');
+  simBox(host, '週期波模擬器（動畫放慢 4 倍）', obsT[mode], `<div class="ctl">${sl}</div>${svgOpen(500, 210)}<div class="out" data-k="out"></div>`);
+  const st = { A: 1.5, L: 6, F: mode === 'shape' ? 1 : 1 };
+  const read = () => { ['A', 'L', 'F'].forEach(k => { const e = Q(host, k); if (e) { st[k] = +e.value; Q(host, k + 'v').textContent = e.value; } }); if (mode === 'fixedv') st.L = V0 / st.F; if (mode === 'freq') { st.L = 6; } if (mode === 'speed') st.A = 1.5; if (mode === 'fixedv') st.A = 1.5; };
+  $$('input', host).forEach(i => i.oninput = read); read();
+  const px = 32, ypx = 28, X0 = 22, cy = 105;
+  loop(host, now => {
+    const v = st.F * st.L, tt = now * SLOW;
+    let s = '';
+    for (let i = 0; i <= 14; i++) { s += line(X0 + i * px, 14, X0 + i * px, 196, '#eef1f5', 1) + (i % 2 === 0 ? text(X0 + i * px, 207, i, 'gr', 11) : ''); }
+    s += line(X0, cy, X0 + 14.4 * px, cy, 'k', 1.5);
+    let d = ''; for (let i = 0; i <= 288; i++) { const x = i / 288 * 14; d += (i ? 'L' : 'M') + (X0 + x * px).toFixed(1) + ',' + (cy - st.A * ypx * Math.sin(2 * Math.PI * (x - v * tt) / st.L)).toFixed(1); }
+    s += `<path d="${d}" fill="none" stroke="${COL.b}" stroke-width="3"/>`;
+    let xc = (((v * tt + st.L / 4) % st.L) + st.L) % st.L; if (xc < .3) xc += st.L;
+    const a = xc + st.L <= 14 ? xc : xc - st.L, b = a + st.L, yt = cy - st.A * ypx - 18;
+    if (a >= 0 && b <= 14.2) s += arrow(X0 + a * px + 3, yt, X0 + b * px - 3, yt, 'p', 2.2) + arrow(X0 + b * px - 3, yt, X0 + a * px + 3, yt, 'p', 2.2) + text(X0 + (a + b) / 2 * px, yt - 5, 'λ ＝ ' + st.L + ' 公分', 'p', 13);
+    const xa = xc + st.L <= 14 ? xc + st.L : xc; s += arrow(X0 + xa * px + 8, cy - 3, X0 + xa * px + 8, cy - st.A * ypx + 3, 'o', 2.6) + text(X0 + xa * px + 12, cy - st.A * ypx / 2, 'A', 'o', 14, 'start', 'font-weight="700"');
+    const rx = 2, ry = cy - st.A * ypx * Math.sin(2 * Math.PI * (rx - v * tt) / st.L);
+    s += `<circle cx="${X0 + rx * px}" cy="${ry}" r="7" fill="${COL.r}"/>` + text(X0 + rx * px, cy + 44, '紅點', 'r', 12);
+    setG(host, s);
+  });
+  const o = Q(host, 'out'), upd = () => { read(); const T = round(1 / st.F, 3), v = round(st.F * st.L, 2);
+    o.innerHTML = (mode === 'shape' ? `振幅 A ＝ ${st.A} 公分，波長 λ ＝ ${st.L} 公分（一個全波的長度）。` :
+      `頻率 f ＝ <b>${st.F}</b> 赫（一秒 ${st.F} 個全波），週期 T ＝ 1 ÷ ${st.F} ＝ <b>${T}</b> 秒${mode === 'freq' ? '。' : `；波長 λ ＝ <b>${round(st.L, 2)}</b> 公分；<br>波速 v ＝ f × λ ＝ ${st.F} × ${round(st.L, 2)} ＝ <b>${v}</b> 公分／秒${mode === 'fixedv' ? '（固定不變）' : ''}。`}`); };
+  $$('input', host).forEach(i => i.addEventListener('input', upd)); upd();
+};
+
+/* --- 波以耳實驗：真空罩裡的鈴鐺 --- */
+SIMS.simVacuum = host => {
+  let snd = false, osc = null, gain = null;
+  simBox(host, '真空罩裡的鈴鐺', '把空氣抽走，罩內的小點（空氣）變少，罩外聽到的鈴聲會怎麼變？鈴鐺還看得到嗎？',
+    `<div class="ctl">${rng(host, '抽走空氣', 'P', 0, 100, 5, 0, ' %')}<button class="btn" data-k="snd">🔊 聽聽看</button></div>${svgOpen(480, 230)}<div class="out" data-k="out"></div>`);
+  const dots = Array.from({ length: 60 }, () => [Math.random(), Math.random(), Math.random()]);
+  const P = () => +Q(host, 'P').value;
+  Q(host, 'P').oninput = () => { Q(host, 'Pv').textContent = P() + ' %'; upd(); };
+  const upd = () => { const p = P(), vol = Math.pow(1 - p / 100, 1.6); Q(host, 'out').innerHTML = p >= 100 ? '罩內是<b>真空</b>：鈴鐺還在敲、看得到，但<b>聽不到聲音</b> → 聲音需要介質；光不需要。' : `罩內空氣剩 ${100 - p}%：聲音大小約剩 ${Math.round(vol * 100)}%。`; if (gain) gain.gain.value = snd ? vol * .18 : 0; };
+  Q(host, 'snd').onclick = () => {
+    snd = !snd; Q(host, 'snd').textContent = snd ? '🔇 關掉聲音' : '🔊 聽聽看';
+    if (snd && !osc) { const ac = audioCtx(); if (!ac) return; osc = ac.createOscillator(); gain = ac.createGain(); osc.type = 'sine'; osc.frequency.value = 880; osc.connect(gain); gain.connect(ac.destination); osc.start(); }
+    upd();
+  };
+  loop(host, t => {
+    if (!host.isConnected && osc) { try { osc.stop(); } catch (e) { } return; }
+    const p = P() / 100, ring = Math.sin(t * 22) * 5;
+    let s = `<rect x="150" y="50" width="180" height="140" rx="16" fill="#f4f9ff" stroke="#1565c0" stroke-width="3"/><rect x="130" y="190" width="220" height="14" rx="4" fill="#90a4ae"/>`;
+    dots.forEach(d => { if (d[2] > p) s += `<circle cx="${160 + d[0] * 160 + Math.sin(t * 3 + d[1] * 9) * 3}" cy="${60 + d[1] * 120}" r="2.6" fill="#90a4ae"/>`; });
+    s += `<rect x="226" y="62" width="28" height="4" fill="#555"/><path d="M${230 + ring * .4} 68 q10 -10 20 0 v28 h-20z" fill="#ffca28" stroke="#b28704" stroke-width="2"/><circle cx="${240 + ring * .4}" cy="100" r="3.5" fill="#b28704"/>`;
+    s += `<line x1="${180 + ring}" y1="86" x2="${222 + ring * .6}" y2="96" stroke="#444" stroke-width="3"/><circle cx="${176 + ring}" cy="85" r="6" fill="#444"/>`;
+    s += text(240, 44, '玻璃罩（接抽氣機）', 'gr', 13);
+    const vol = Math.pow(1 - p, 1.6);
+    for (let k = 0; k < 3; k++) s += `<path d="M${350 + k * 18} ${95 - 18 - k * 4} q${12 + k * 4} ${18 + k * 4} 0 ${36 + k * 8}" fill="none" stroke="${COL.o}" stroke-width="3" opacity="${vol * (1 - k * .22)}"/>`;
+    s += text(410, 96, '聲音', 'o', 13) + `<circle cx="440" cy="190" r="10" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="442" cy="190" r="4" fill="#333"/>` + text(440, 216, '眼睛：看得到', 'k', 12);
+    setG(host, s);
+  });
+  upd();
+};
+
+/* --- 聲音三要素 --- */
+SIMS.simSound3 = host => {
+  const mode = host.dataset.mode || 'all';
+  const S = { amp: .6, cyc: 4, shape: 'sine', noise: false }; let snd = false, osc = null, gain = null, nz = null;
+  const obs = { amp: '拖曳「振幅」：波愈高，聲音愈大聲（響度）。注意音調沒有變。', freq: '拖曳「頻率」：同樣時間內波愈多，音調愈高。注意音量沒有變。', shape: '切換「波形」：音調和音量一樣，但聽起來（音色）不同，波的形狀也不同。', all: '分別調整三個控制，找出「波的高度、疏密、形狀」各自改變了聲音的哪一項。', noise: '比較「樂音」與「噪音」的波形：哪一個有規律？' }[mode];
+  const ctl = (mode === 'amp' || mode === 'all' ? rng(host, '振幅（響度）', 'A', .1, 1, .1, .6) : '') + (mode === 'freq' || mode === 'all' ? rng(host, '頻率（音調）', 'F', 2, 10, 1, 4) : '') +
+    (mode === 'shape' || mode === 'all' ? `<label>波形（音色）<select data-k="W"><option value="sine">圓滑的波</option><option value="tri">三角波</option><option value="sq">方波</option><option value="saw">鋸齒波</option></select></label>` : '') +
+    (mode === 'noise' ? `<span class="seg" data-k="seg"><button data-n="0" class="on">樂音（有規律）</button><button data-n="1">噪音（沒有規律）</button></span>` : '');
+  simBox(host, '聲音三要素實驗室', obs, `<div class="ctl">${ctl}<button class="btn" data-k="snd">🔊 播放聲音</button></div>${svgOpen(480, 150)}<div class="out" data-k="out"></div>`);
+  const read = () => {
+    const a = Q(host, 'A'), f = Q(host, 'F'), w = Q(host, 'W');
+    if (a) { S.amp = +a.value; Q(host, 'Av').textContent = a.value; } if (f) { S.cyc = +f.value; Q(host, 'Fv').textContent = f.value; } if (w) S.shape = w.value;
+    if (mode === 'amp') { S.cyc = 4; S.shape = 'sine'; } if (mode === 'freq') { S.amp = .6; S.shape = 'sine'; } if (mode === 'shape') { S.amp = .6; S.cyc = 4; }
+    const out = Q(host, 'out'); const nm = { sine: '圓滑的波', tri: '三角波', sq: '方波', saw: '鋸齒波' }[S.shape];
+    out.innerHTML = mode === 'noise' ? (S.noise ? '噪音：波形<b>沒有規律</b>，聽起來吵雜刺耳。' : '樂音：波形<b>有規律</b>，聽起來和諧悅耳。') : `響度（音量）看<b>振幅</b>＝${S.amp}；音調看<b>頻率</b>＝${S.cyc}（同樣時間內的波數）；音色看<b>波形</b>＝${nm}。`;
+    if (gain) gain.gain.value = snd ? S.amp * .16 : 0; if (osc) { osc.frequency.value = 55 * S.cyc; osc.type = { sine: 'sine', tri: 'triangle', sq: 'square', saw: 'sawtooth' }[S.shape]; }
+  };
+  $$('input,select', host).forEach(i => i.oninput = read);
+  $$('[data-n]', host).forEach(b => b.onclick = () => { S.noise = b.dataset.n === '1'; $$('[data-n]', host).forEach(x => x.classList.toggle('on', x === b)); S.amp = .75; S.cyc = 3; S.shape = S.noise ? 'noise' : 'sine'; if (S.noise) S.cyc = 3; read(); });
+  Q(host, 'snd').onclick = () => {
+    snd = !snd; Q(host, 'snd').textContent = snd ? '🔇 停止' : '🔊 播放聲音';
+    const ac = audioCtx(); if (!ac) return;
+    if (snd && !osc && !S.noise) { osc = ac.createOscillator(); gain = ac.createGain(); osc.connect(gain); gain.connect(ac.destination); osc.start(); }
+    if (snd && S.noise && !nz) { const buf = ac.createBuffer(1, ac.sampleRate, ac.sampleRate), d = buf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; nz = ac.createBufferSource(); nz.buffer = buf; nz.loop = true; gain = gain || ac.createGain(); nz.connect(gain); gain.connect(ac.destination); nz.start(); }
+    if (!snd) { try { osc && osc.stop(); } catch (e) { } try { nz && nz.stop(); } catch (e) { } osc = null; nz = null; }
+    read();
+  };
+  const W = 470, X0 = 8, cy = 75;
+  loop(host, t => {
+    if (!host.isConnected) { try { osc && osc.stop(); nz && nz.stop(); } catch (e) { } return; }
+    const type = S.noise ? 'noise' : S.shape, A = S.amp * 62, off = (t * .5) % 1;
+    let d = ''; for (let i = 0; i <= 400; i++) { const x = i / 400; d += (i ? 'L' : 'M') + (X0 + x * W).toFixed(1) + ',' + (cy - A * wf(type, x * S.cyc - off * 1)).toFixed(1); }
+    setG(host, line(X0, cy, X0 + W, cy, '#cfd8e3', 1) + `<path d="${d}" fill="none" stroke="${COL.b}" stroke-width="2.6"/>` + text(X0 + W, 146, '時間 →', 'gr', 12, 'end'));
+  });
+  read();
+};
+
+/* --- 聽覺範圍 --- */
+SIMS.simHearing = host => {
+  const ANI = [['人', 20, 20000, '#1565c0'], ['狗', 15, 50000, '#6d4c41'], ['貓', 60, 65000, '#ef6c00'], ['海豚', 2000, 100000, '#00838f'], ['蝙蝠', 1000, 120000, '#6a1b9a']];
+  simBox(host, '誰聽得到？動物的聽覺範圍', '拖曳頻率，看哪些動物聽得到。越過紅線（20000 赫）就是超聲波，人聽不到。',
+    `<div class="ctl"><label>頻率<input type="range" data-k="f" min="1" max="5.1" step="0.01" value="3"><b data-k="fv"></b></label></div>${svgOpen(500, 220)}<div class="out" data-k="out"></div>`);
+  const L = f => 70 + (Math.log10(f) - 1) / 4.2 * 410, F = () => Math.pow(10, +Q(host, 'f').value);
+  const draw = () => {
+    const f = F(); let s = '';
+    [10, 100, 1000, 10000, 100000].forEach(v => { s += line(L(v), 20, L(v), 200, '#e3e8ee', 1) + text(L(v), 214, v >= 1000 ? (v / 1000) + 'k' : v, 'gr', 12); });
+    s += text(486, 214, '赫', 'gr', 12, 'end');
+    ANI.forEach((a, i) => { const y = 34 + i * 34, ok = f >= a[1] && f <= a[2]; s += text(40, y + 5, a[0], 'k', 14, 'end', 'font-weight="700"') + `<rect x="${L(a[1])}" y="${y - 10}" width="${L(a[2]) - L(a[1])}" height="20" rx="10" fill="${a[3]}" opacity="${ok ? 1 : .28}"/>` + (ok ? text(L(a[2]) + 6, y + 5, '聽得到', 'g', 12, 'start', 'font-weight="700"') : ''); });
+    s += line(L(20000), 14, L(20000), 200, 'r', 2.2, 'stroke-dasharray="6 4"') + text(L(20000) + 4, 14, '20000：超聲波 →', 'r', 12, 'start') + line(L(f), 8, L(f), 200, 'k', 3);
+    setG(host, s);
+    Q(host, 'fv').textContent = Math.round(f).toLocaleString() + ' 赫';
+    const who = ANI.filter(a => f >= a[1] && f <= a[2]).map(a => a[0]);
+    Q(host, 'out').innerHTML = `${Math.round(f).toLocaleString()} 赫：${f > 20000 ? '<b>超聲波</b>（頻率超過 20000 赫），人聽不到。' : f < 20 ? '低於人耳的下限（20 赫），人聽不到。' : '落在人耳可聽範圍（20～20000 赫）。'}<br>聽得到的動物：${who.length ? who.join('、') : '（這裡沒有列出的動物聽得到）'}`;
+  };
+  Q(host, 'f').oninput = draw; draw();
+};
+
+/* ---- e_sims2.js ---- */
+/* ===== 互動模擬（二）：光學 ===== */
+const sg = (c, min, max) => Math.max(min, Math.min(max, c));
+
+/* --- 針孔成像 --- */
+SIMS.simPinhole = host => {
+  const S = { u: 130, v: 90, multi: false, big: false };
+  simBox(host, '針孔成像', '像是倒立的嗎？把物移遠、把屏移遠，像各會怎麼變？再試試「多個針孔」和「大針孔」。',
+    `<div class="ctl">${rng(host, '物到針孔的距離', 'u', 60, 200, 10, 130)}${rng(host, '針孔到屏幕的距離', 'v', 40, 140, 10, 90)}<label><input type="checkbox" data-k="m"> 3 個針孔</label><label><input type="checkbox" data-k="b"> 針孔變大</label></div>${svgOpen(520, 300)}<div class="out" data-k="out"></div>`);
+  const draw = () => {
+    S.u = +Q(host, 'u').value; S.v = +Q(host, 'v').value; S.multi = Q(host, 'm').checked; S.big = Q(host, 'b').checked;
+    Q(host, 'uv').textContent = S.u; Q(host, 'vv').textContent = S.v;
+    const Xw = 270, cy = 150, h = 46, xo = Xw - S.u, xs = Xw + S.v;
+    const holes = S.multi ? [cy - 22, cy, cy + 22] : [cy], g = S.big && !S.multi ? 22 : 3;
+    let s = `<rect x="${Xw - 6}" y="20" width="12" height="260" fill="#546e7a"/>`;
+    s += `<rect x="${Xw - 7}" y="${cy - g - (S.multi ? 25 : 0)}" width="14" height="${2 * g + (S.multi ? 50 : 0)}" fill="#fff"/>`;
+    holes.forEach(y => { s += `<rect x="${Xw - 7}" y="${y - (S.multi ? 3 : g)}" width="14" height="${S.multi ? 6 : 2 * g}" fill="#fff"/>`; });
+    if (S.multi) s += `<rect x="${Xw - 7}" y="${cy - 25}" width="14" height="50" fill="#546e7a" opacity=".0"/>`;
+    s += line(xs, 30, xs, 280, 'gr', 4) + text(xs, 296, '屏幕', 'k', 13);
+    s += line(xo, cy, xo, cy - h, 'o', 5) + `<circle cx="${xo}" cy="${cy - h - 6}" r="9" fill="#ffca28" stroke="#e65100" stroke-width="2"/>` + text(xo, cy + 24, '物（發光的蠟燭）', 'k', 13);
+    const k = (S.u + S.v) / S.u;
+    holes.forEach(yh => {
+      const ty = (cy - h) + (yh - (cy - h)) * k, by = cy + (yh - cy) * k;
+      s += line(xo, cy - h, xs, ty, 'o', 1.4) + line(xo, cy, xs, by, 'b', 1.4);
+      if (S.big && !S.multi) { for (let j = -2; j <= 2; j++) s += line(xs + 1, by + j * 3, xs + 1, ty + j * 3, '#d32f2f', 6, 'opacity=".14"'); }
+      else s += line(xs + 1, by, xs + 1, ty, 'r', 5);
+      s += `<circle cx="${xs + 1}" cy="${ty}" r="${S.big && !S.multi ? 11 : 7}" fill="#ffca28" stroke="#e65100" stroke-width="1.5" opacity="${S.big && !S.multi ? .55 : 1}"/>`;
+    });
+    setG(host, s);
+    const r = round(S.v / S.u, 2);
+    Q(host, 'out').innerHTML = `像和物比較：<b>上下顛倒</b>（火焰在下、蠟燭在上）。像高 ＝ 物高 × ${S.v}÷${S.u} ＝ <b>${r}</b> 倍${r > 1 ? '（比物大）' : r < 1 ? '（比物小）' : '（等大）'}。${S.multi ? '<br>有 3 個針孔 → 屏幕上出現 <b>3 個像</b>。' : ''}${S.big && !S.multi ? '<br>針孔變大 → 變亮，但像<b>變模糊</b>。' : ''}`;
+  };
+  $$('input', host).forEach(i => i.addEventListener('input', draw)); draw();
+};
+
+/* --- 反射定律／可逆性／平面鏡成像 --- */
+SIMS.simReflect = host => {
+  const mode = host.dataset.mode || 'law';
+  if (mode === 'image') return reflectImage(host);
+  const S = { th: 40, rev: false };
+  simBox(host, '光的反射', mode === 'law' ? '拖曳光源（或用滑桿）改變入射角，看反射角怎麼變。' : '按「反向發射」，讓光從反射光的路徑射回去，看路徑和角度有沒有改變。',
+    `<div class="ctl">${rng(host, '入射角', 'th', 5, 80, 1, 40, '°')}${mode === 'reverse' ? '<button class="btn" data-k="rv">🔁 反向發射</button>' : ''}</div>${svgOpen(480, 270)}<div class="out" data-k="out"></div>`);
+  const O = { x: 240, y: 215 }, R = 165;
+  const draw = () => {
+    const th = S.th, sn = Math.sin(d2r(th)), cs = Math.cos(d2r(th));
+    const A = { x: O.x - R * sn, y: O.y - R * cs }, B = { x: O.x + R * sn, y: O.y - R * cs };
+    let s = `<rect x="60" y="${O.y}" width="360" height="14" fill="#cfd8e3"/>` + line(60, O.y, 420, O.y, 'k', 3) + text(440, O.y + 12, '鏡面', 'k', 13);
+    for (let x = 70; x < 420; x += 14) s += line(x, O.y + 14, x - 9, O.y + 5, '#8a97a6', 1.2);
+    s += line(O.x, O.y, O.x, 30, 'k', 1.5, 'stroke-dasharray="6 5"') + text(O.x, 22, '法線', 'k', 14);
+    const from = S.rev ? B : A, to = S.rev ? A : B, cin = S.rev ? 'r' : 'o', cout = S.rev ? 'o' : 'r';
+    s += arrow(from.x, from.y, O.x + (from.x - O.x) * .02, O.y + (from.y - O.y) * .02, cin, 3) + arrow(O.x, O.y, to.x, to.y, cout, 3);
+    s += `<circle cx="${from.x}" cy="${from.y}" r="11" fill="#ffd54f" stroke="#e0a800" stroke-width="2"/>`;
+    s += text(from.x + (S.rev ? 14 : -14), from.y - 14, '入射線', cin, 13, S.rev ? 'start' : 'end') + text(to.x + (S.rev ? -14 : 14), to.y - 14, '反射線', cout, 13, S.rev ? 'end' : 'start');
+    const r = 55; s += `<path d="M${O.x},${O.y - r} A${r},${r} 0 0 0 ${O.x - r * sn},${O.y - r * cs}" fill="none" stroke="${COL.o}" stroke-width="2.5"/><path d="M${O.x},${O.y - r - 9} A${r + 9},${r + 9} 0 0 1 ${O.x + (r + 9) * sn},${O.y - (r + 9) * cs}" fill="none" stroke="${COL.r}" stroke-width="2.5"/>`;
+    setG(host, s);
+    Q(host, 'out').innerHTML = `入射角 ＝ <b>${th}°</b>，反射角 ＝ <b>${th}°</b>（入射角 ＝ 反射角）。入射線與反射線的夾角 ＝ ${2 * th}°。${S.rev ? '<br>光走回頭路：路徑和角度都和原來一樣，只是方向相反（光的可逆性）。' : ''}`;
+  };
+  Q(host, 'th').oninput = () => { S.th = +Q(host, 'th').value; Q(host, 'thv').textContent = S.th + '°'; draw(); };
+  Q(host, 'rv') && (Q(host, 'rv').onclick = () => { S.rev = !S.rev; draw(); });
+  dragOn(Q(host, 'svg'), p => { S.th = sg(Math.round(Math.atan2(O.x - p.x, O.y - p.y) * 180 / Math.PI), 5, 80); Q(host, 'th').value = S.th; Q(host, 'thv').textContent = S.th + '°'; draw(); });
+  draw();
+};
+function reflectImage(host) {
+  simBox(host, '平面鏡成像', '改變物體離鏡面的距離，看像的位置、大小。像到鏡面的距離和物體到鏡面的距離有什麼關係？',
+    `<div class="ctl">${rng(host, '物距 d（公尺）', 'd', 1, 4, .5, 2)}</div>${svgOpen(560, 270)}<div class="out" data-k="out"></div>`);
+  const draw = () => {
+    const d = +Q(host, 'd').value; Q(host, 'dv').textContent = d;
+    const Mx = 320, sc = 46, xo = Mx - d * sc, xi = Mx + d * sc, Ty = 130, By = 205, E = { x: 40, y: 175 };
+    const yp = Ty + (E.y - Ty) * ((Mx - xi) / (E.x - xi));
+    let s = line(Mx, 20, Mx, 245, 'k', 4) + `<rect x="${Mx}" y="20" width="8" height="225" fill="#cfd8e3"/>` + text(Mx, 262, '平面鏡', 'k', 13);
+    s += line(xo, By, xo, Ty, 'o', 6) + `<circle cx="${xo}" cy="${Ty - 8}" r="9" fill="#ffca28" stroke="#e65100" stroke-width="2"/>` + text(xo, By + 16, '物', 'o', 13);
+    s += line(xi, By, xi, Ty, 'o', 6, 'stroke-dasharray="5 4" opacity=".55"') + `<circle cx="${xi}" cy="${Ty - 8}" r="9" fill="none" stroke="#e65100" stroke-width="2" stroke-dasharray="4 3"/>` + text(xi, By + 16, '像（虛像）', 'o', 13);
+    s += arrow(xo + 8, Ty, Mx - 2, yp, 'r', 2) + arrow(Mx - 2, yp, E.x + 16, E.y, 'r', 2) + line(Mx, yp, xi - 8, Ty, 'r', 1.6, 'stroke-dasharray="5 4"');
+    s += `<circle cx="${E.x}" cy="${E.y}" r="11" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="${E.x + 3}" cy="${E.y}" r="4.5" fill="#333"/>` + text(E.x, E.y + 28, '眼睛', 'k', 12);
+    s += arrow(xo, 232, Mx - 3, 232, 'g', 2) + arrow(Mx + 3, 232, xi, 232, 'g', 2) + text((xo + Mx) / 2, 226, `物距 ${d} 公尺`, 'g', 13) + text((xi + Mx) / 2, 226, `像距 ${d} 公尺`, 'g', 13);
+    setG(host, s);
+    Q(host, 'out').innerHTML = `物距 ＝ 像距 ＝ <b>${d}</b> 公尺；物與像相距 <b>${2 * d}</b> 公尺。像和物<b>等大</b>、以鏡面為中心<b>對稱</b>。<br>虛線表示光線「看起來」是從鏡後的像發出來的，那裡並沒有真實的光線，所以是<b>虛像</b>。`;
+  };
+  Q(host, 'd').oninput = draw; draw();
+}
+
+/* --- 凸面鏡與凹面鏡 --- */
+SIMS.simCurved = host => {
+  const S = { kind: 'concave', f: 80, src: false };
+  simBox(host, '凸面鏡與凹面鏡', '平行光照射後，反射光線是「會聚」還是「發散」？再試試把光源放在凹面鏡的焦點上。',
+    `<div class="ctl"><span class="seg"><button data-c="concave" class="on">凹面鏡</button><button data-c="convex">凸面鏡</button></span>${rng(host, '焦距', 'f', 60, 120, 10, 80)}<label><input type="checkbox" data-k="src"> 光源放在焦點（只有凹面鏡）</label></div>${svgOpen(540, 300)}<div class="out" data-k="out"></div>`);
+  const V = 380, cy = 150, ys = [-90, -60, -30, 30, 60, 90];
+  const draw = () => {
+    const f = S.f, cc = S.kind === 'concave', src = cc && S.src;
+    const sx = y => cc ? V - y * y / (4 * f) : V + y * y / (4 * f);
+    let s = line(20, cy, 520, cy, 'gr', 1, 'stroke-dasharray="5 4"');
+    let d = ''; for (let y = -105; y <= 105; y += 5) d += (d ? 'L' : 'M') + sx(y).toFixed(1) + ',' + (cy + y);
+    s += `<path d="${d}" fill="none" stroke="#1565c0" stroke-width="5"/>`;
+    const Fx = cc ? V - f : V + f; s += `<circle cx="${Fx}" cy="${cy}" r="5" fill="${COL.k}"/>` + text(Fx, cy + 20, cc ? '焦點 F' : '焦點 F（在鏡後）', 'k', 13);
+    ys.forEach(y => {
+      const hx = sx(y), hy = cy + y;
+      if (src) { s += arrow(Fx, cy, hx - 4, hy, 'o', 1.8) + arrow(hx, hy, 24, hy, 'r', 2); return; }
+      s += arrow(24, hy, hx - 3, hy, 'o', 2);
+      if (cc) { const dx = Fx - hx, dy = cy - hy, L = Math.hypot(dx, dy); s += arrow(hx, hy, Fx, cy, 'r', 2) + line(Fx, cy, Fx + dx / L * 70, cy + dy / L * 70, 'r', 1.6); }
+      else { const dx = hx - Fx, dy = hy - cy, L = Math.hypot(dx, dy); s += arrow(hx, hy, hx - dx / L * 190, hy - dy / L * 190, 'r', 2) + line(hx, hy, Fx, cy, 'r', 1.4, 'stroke-dasharray="5 4"'); }
+    });
+    s += text(100, 22, src ? '光源在焦點 → 反射後變成平行光' : '平行光射向' + (cc ? '凹' : '凸') + '面鏡', 'k', 14);
+    setG(host, s);
+    Q(host, 'out').innerHTML = src ? '光源放在凹面鏡焦點，反射光變成<b>平行光束</b>，所以手電筒能照得很遠（利用光的可逆性）。' : cc ? '凹面鏡：平行光反射後<b>會聚於焦點</b>。物體靠近時成正立放大的虛像（化妝鏡）。' : '凸面鏡：平行光反射後<b>發散</b>，往後延伸（虛線）交於鏡後焦點。成正立縮小的虛像，視野大（後照鏡）。';
+  };
+  $$('[data-c]', host).forEach(b => b.onclick = () => { S.kind = b.dataset.c; $$('[data-c]', host).forEach(x => x.classList.toggle('on', x === b)); Q(host, 'src').disabled = S.kind === 'convex'; draw(); });
+  Q(host, 'f').oninput = () => { S.f = +Q(host, 'f').value; Q(host, 'fv').textContent = S.f; draw(); };
+  Q(host, 'src').onchange = () => { S.src = Q(host, 'src').checked; draw(); };
+  draw();
+};
+
+/* --- 折射：角度、水與玻璃比較、視深 --- */
+const NMED = { water: { n: 1.33, name: '水', c: '#cfe7fb' }, glass: { n: 1.5, name: '玻璃', c: '#d7e8d3' } };
+SIMS.simRefract = host => {
+  const mode = host.dataset.mode || 'angle';
+  if (mode === 'compare') return refractCompare(host);
+  if (mode === 'depth') return refractDepth(host);
+  const S = { med: 'water', dir: 'in', th: 50 };
+  simBox(host, '光的折射', '改變入射角和介質，看折射角比入射角大還是小。灰色虛線是「如果不偏折」會走的路。',
+    `<div class="ctl"><span class="seg" data-k="sm"><button data-m="water" class="on">水</button><button data-m="glass">玻璃</button></span><span class="seg" data-k="sd"><button data-d="in" class="on">空氣 → 介質</button><button data-d="out">介質 → 空氣</button></span>${rng(host, '入射角', 'th', 0, 75, 1, 50, '°')}</div>${svgOpen(480, 300)}<div class="out" data-k="out"></div>`);
+  const O = { x: 240, y: 150 }, R = 125;
+  const draw = () => {
+    const M = NMED[S.med], inn = S.dir === 'in', maxT = inn ? 75 : 40; if (S.th > maxT) S.th = maxT; Q(host, 'th').max = maxT; Q(host, 'th').value = S.th; Q(host, 'thv').textContent = S.th + '°';
+    const n1 = inn ? 1 : M.n, n2 = inn ? M.n : 1, t1 = S.th, t2 = Math.asin(Math.min(1, n1 * Math.sin(d2r(t1)) / n2)) * 180 / Math.PI;
+    const a = Math.sin(d2r(t1)), b = Math.cos(d2r(t1)), a2 = Math.sin(d2r(t2)), b2 = Math.cos(d2r(t2));
+    let s = `<rect x="10" y="10" width="460" height="140" fill="#f4f9ff"/><rect x="10" y="150" width="460" height="140" fill="${M.c}"/>` + line(10, 150, 470, 150, 'k', 2) + line(O.x, 18, O.x, 284, 'k', 1.4, 'stroke-dasharray="6 5"') + text(O.x + 6, 30, '法線', 'k', 13, 'start');
+    s += text(24, 32, '空氣（光速快）', 'k', 14, 'start', 'font-weight="700"') + text(24, 282, M.name + (S.med === 'water' ? '（光速慢）' : '（光速更慢）'), 'k', 14, 'start', 'font-weight="700"');
+    let ix, iy, rx, ry;
+    if (inn) { ix = O.x - R * a; iy = O.y - R * b; rx = O.x + R * a2; ry = O.y + R * b2; s += line(O.x, O.y, O.x + R * a, O.y + R * b, '#8a97a6', 1.8, 'stroke-dasharray="6 5"'); }
+    else { ix = O.x - R * a; iy = O.y + R * b; rx = O.x + R * a2; ry = O.y - R * b2; s += line(O.x, O.y, O.x + R * a, O.y - R * b, '#8a97a6', 1.8, 'stroke-dasharray="6 5"'); }
+    s += arrow(ix, iy, O.x + (ix - O.x) * .02, O.y + (iy - O.y) * .02, 'o', 3) + arrow(O.x, O.y, rx, ry, 'r', 3);
+    s += `<circle cx="${ix}" cy="${iy}" r="10" fill="#ffd54f" stroke="#e0a800" stroke-width="2"/>`;
+    s += text(ix - 10, iy + (inn ? -12 : 20), '入射線', 'o', 13, 'end') + text(rx + 10, ry + (inn ? 20 : -12), '折射線', 'r', 13, 'start');
+    s += text(O.x - 60, O.y + (inn ? -34 : 52), '入射角 ' + t1 + '°', 'o', 14, 'middle', 'font-weight="700"') + text(O.x + 62, O.y + (inn ? 52 : -34), '折射角 ' + Math.round(t2) + '°', 'r', 14, 'middle', 'font-weight="700"');
+    setG(host, s);
+    Q(host, 'out').innerHTML = t1 === 0 ? '垂直入射：<b>不偏折</b>，但光速仍然改變。' : `入射角 <b>${t1}°</b>，折射角 <b>${Math.round(t2)}°</b>：折射角${t2 < t1 ? '<b>比入射角小</b>（光速由快變慢 → <b>偏向法線</b>）' : '<b>比入射角大</b>（光速由慢變快 → <b>偏離法線</b>）'}。`;
+  };
+  $$('[data-m]', host).forEach(x => x.onclick = () => { S.med = x.dataset.m; $$('[data-m]', host).forEach(y => y.classList.toggle('on', y === x)); draw(); });
+  $$('[data-d]', host).forEach(x => x.onclick = () => { S.dir = x.dataset.d; $$('[data-d]', host).forEach(y => y.classList.toggle('on', y === x)); draw(); });
+  Q(host, 'th').oninput = () => { S.th = +Q(host, 'th').value; draw(); };
+  draw();
+};
+function refractCompare(host) {
+  const S = { th: 50, rev: false };
+  simBox(host, '水與玻璃誰偏折得多？', '入射角一樣，光從空氣進入水和玻璃，哪一個折射角比較小？勾選「走回頭路」看光路是否可逆。',
+    `<div class="ctl">${rng(host, '入射角', 'th', 15, 75, 1, 50, '°')}<label><input type="checkbox" data-k="rv"> 走回頭路（反向）</label></div>${svgOpen(560, 280)}<div class="out" data-k="out"></div>`);
+  const draw = () => {
+    S.th = +Q(host, 'th').value; Q(host, 'thv').textContent = S.th + '°'; S.rev = Q(host, 'rv').checked;
+    const R = 105, cy = 135; let s = '', out = [];
+    [['water', 140], ['glass', 420]].forEach(([k, cx]) => {
+      const M = NMED[k], t2 = Math.asin(Math.sin(d2r(S.th)) / M.n) * 180 / Math.PI; out.push(Math.round(t2));
+      const a = Math.sin(d2r(S.th)), b = Math.cos(d2r(S.th)), a2 = Math.sin(d2r(t2)), b2 = Math.cos(d2r(t2));
+      s += `<rect x="${cx - 130}" y="10" width="260" height="${cy - 10}" fill="#f4f9ff"/><rect x="${cx - 130}" y="${cy}" width="260" height="${260 - cy}" fill="${M.c}"/>` + line(cx - 130, cy, cx + 130, cy, 'k', 2) + line(cx, 14, cx, 268, 'k', 1.3, 'stroke-dasharray="6 5"');
+      s += text(cx - 124, 30, '空氣', 'k', 13, 'start', 'font-weight="700"') + text(cx - 124, 256, M.name, 'k', 13, 'start', 'font-weight="700"');
+      const P1 = { x: cx - R * a, y: cy - R * b }, P2 = { x: cx + R * a2, y: cy + R * b2 };
+      const f = S.rev ? [P2, P1, 'r', 'o'] : [P1, P2, 'o', 'r'];
+      s += arrow(f[0].x, f[0].y, cx + (f[0].x - cx) * .02, cy + (f[0].y - cy) * .02, f[2], 3) + arrow(cx, cy, f[1].x, f[1].y, f[3], 3);
+      s += text(cx, 276 - 2, `折射角 ${Math.round(t2)}°`, 'r', 14, 'middle', 'font-weight="700"');
+    });
+    setG(host, s);
+    Q(host, 'out').innerHTML = `入射角都是 ${S.th}°：水中折射角 <b>${out[0]}°</b>，玻璃中折射角 <b>${out[1]}°</b>。玻璃的折射角<b>較小</b>，表示光在玻璃中速率比水更慢、偏折更多。${S.rev ? '<br>光反過來走：路徑完全相同（光的可逆性）。' : ''}`;
+  };
+  $$('input', host).forEach(i => i.addEventListener('input', draw)); draw();
+}
+function refractDepth(host) {
+  simBox(host, '視深：看起來比較淺', '調整魚的實際深度和你的觀察位置。灰色的魚是「眼睛以為魚在的位置」，它和真正的魚比，哪個比較深？',
+    `<div class="ctl">${rng(host, '魚的實際深度（公尺）', 'D', 1, 4, .5, 2)}${rng(host, '眼睛離魚的水平距離（公尺）', 'X', 2, 6, .5, 3.5)}</div>${svgOpen(540, 320)}<div class="out" data-k="out"></div>`);
+  const draw = () => {
+    const D = +Q(host, 'D').value, X = +Q(host, 'X').value; Q(host, 'Dv').textContent = D; Q(host, 'Xv').textContent = X;
+    const sc = 42, surf = 120, fx = 110, he = 1.6, nw = 1.33;
+    let lo = 0, hi = X;
+    const fn = x => nw * x / Math.hypot(x, D) - (X - x) / Math.hypot(X - x, he);
+    for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (fn(m) > 0) hi = m; else lo = m; }
+    const xp = (lo + hi) / 2, app = he * xp / (X - xp);
+    const Ex = fx + X * sc, Ey = surf - he * sc, Px = fx + xp * sc, Fy = surf + D * sc, Ay = surf + app * sc;
+    let s = `<rect x="10" y="${surf}" width="520" height="${310 - surf}" fill="#cfe7fb"/>` + line(10, surf, 530, surf, 'k', 2) + text(20, surf - 8, '空氣', 'k', 13, 'start') + text(20, surf + 20, '水', 'k', 13, 'start');
+    s += `<ellipse cx="${fx}" cy="${Fy}" rx="17" ry="9" fill="#ef6c00"/><polygon points="${fx + 14},${Fy} ${fx + 28},${Fy - 8} ${fx + 28},${Fy + 8}" fill="#ef6c00"/><circle cx="${fx - 8}" cy="${Fy - 2}" r="2" fill="#fff"/>`;
+    s += `<ellipse cx="${fx}" cy="${Ay}" rx="17" ry="9" fill="none" stroke="#546e7a" stroke-width="2" stroke-dasharray="4 3"/>` + text(fx + 40, Ay + 4, '看起來的位置（虛）', 'gr', 12, 'start');
+    s += arrow(fx + 12, Fy - 4, Px - 1, surf + 1, 'r', 2.2) + arrow(Px, surf, Ex - 12, Ey + 10, 'r', 2.2) + line(Px, surf, fx + 6, Ay - 4, 'r', 1.5, 'stroke-dasharray="5 4"');
+    s += `<circle cx="${Ex}" cy="${Ey}" r="11" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="${Ex - 3}" cy="${Ey + 1}" r="4.5" fill="#333"/>` + text(Ex, Ey - 18, '眼睛', 'k', 12);
+    s += arrow(44, surf + 4, 44, Fy - 6, 'g', 2) + text(40, (surf + Fy) / 2 + 4, '實深', 'g', 13, 'end') + arrow(72, surf + 4, 72, Ay - 6, 'p', 2) + text(76, surf + 22, '視深', 'p', 13, 'start');
+    setG(host, s);
+    Q(host, 'out').innerHTML = `實際深度（實深）＝ <b>${D}</b> 公尺，看起來的深度（視深）約 <b>${round(app, 2)}</b> 公尺 → <b>視深 ＜ 實深</b>。<br>光從水進入空氣時<b>偏離法線</b>，眼睛沿進來的光線往回看，就以為魚在比較淺的地方。`;
+  };
+  $$('input', host).forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* --- 透鏡成像（凸透鏡／凹透鏡） --- */
+SIMS.simLens = host => {
+  const mode = host.dataset.mode || 'convex', kind0 = mode === 'concave' ? 'concave' : 'convex';
+  const S = { kind: kind0, u: mode === 'concave' ? 1.5 : 2.5, r1: true, r2: true, r3: true };
+  simBox(host, mode === 'concave' ? '凹透鏡成像' : '透鏡成像與三條特殊光線', mode === 'rays' ? '拖曳蠟燭（或用滑桿），看三條特殊光線怎麼走、交在哪裡就是像的位置。' : '拖曳蠟燭改變物距。看像在哪一側、倒立還是正立、放大還是縮小。（F ＝ 焦點，2F ＝ 2 倍焦距）',
+    `<div class="ctl">${mode === 'concave' ? '' : '<span class="seg"><button data-l="convex" class="on">凸透鏡</button><button data-l="concave">凹透鏡</button></span>'}${rng(host, '物距 u（單位：f）', 'u', .3, 3.4, .05, S.u)}<label><input type="checkbox" data-k="r1" checked> ①平行光</label><label><input type="checkbox" data-k="r2" checked> ②過鏡心</label><label><input type="checkbox" data-k="r3" checked> ③過焦點</label></div>${svgOpen(580, 310)}<div class="out" data-k="out"></div>`);
+  const cy = 160, xl = 300, f = 80, h = 48;
+  const draw = () => {
+    const cv = S.kind === 'convex', u = S.u * f, xo = xl - u, T = { x: xo, y: cy - h };
+    S.r1 = Q(host, 'r1').checked; S.r2 = Q(host, 'r2').checked; S.r3 = Q(host, 'r3').checked;
+    Q(host, 'u').value = S.u; Q(host, 'uv').textContent = S.u;
+    let s = line(10, cy, 570, cy, 'gr', 1.2);
+    s += cv ? `<path d="M${xl},${cy - 105} Q${xl + 17},${cy} ${xl},${cy + 105} Q${xl - 17},${cy} ${xl},${cy - 105}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>` : `<path d="M${xl - 13},${cy - 105} Q${xl - 2},${cy} ${xl - 13},${cy + 105} L${xl + 13},${cy + 105} Q${xl + 2},${cy} ${xl + 13},${cy - 105}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>`;
+    [[xl - f, 'F'], [xl + f, 'F'], [xl - 2 * f, '2F'], [xl + 2 * f, '2F']].forEach(([x, t]) => s += `<circle cx="${x}" cy="${cy}" r="4" fill="${COL.k}"/>` + text(x, cy + 20, t, 'k', 12));
+    s += arrow(xo, cy, xo, cy - h + 3, 'o', 5);
+    let none = cv && Math.abs(S.u - 1) < .03, v = 0, m = 0, tip = null;
+    if (!none) { v = cv ? u * f / (u - f) : -u * f / (u + f); m = -v / u; tip = { x: xl + v, y: cy - m * h }; }
+    const real = cv && v > 0, ext = 190;
+    const outRay = (P, color) => {                       // 通過透鏡點 P 之後的光線（朝像或遠離像）
+      if (none) { return arrow(P.x, P.y, P.x + ext, P.y + (P.y > cy ? 0 : 0), 'r', 2); }
+      const dx = real ? tip.x - P.x : P.x - tip.x, dy = real ? tip.y - P.y : P.y - tip.y, L = Math.hypot(dx, dy) || 1;
+      const len = real ? L : ext;
+      let r = arrow(P.x, P.y, P.x + dx / L * len, P.y + dy / L * len, 'r', 2.2);
+      if (!real) r += line(P.x, P.y, tip.x, tip.y, 'r', 1.5, 'stroke-dasharray="5 4"');
+      return r;
+    };
+    if (S.r1) { const P = { x: xl, y: T.y }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + (none && cv ? arrow(P.x, P.y, xl + f, cy, 'r', 2.2) : outRay(P)); }
+    if (S.r2) { const P = { x: xl, y: cy }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2); const dx = xl - T.x, dy = cy - T.y, L = Math.hypot(dx, dy); if (real) s += arrow(P.x, P.y, tip.x, tip.y, 'r', 2.2); else { s += arrow(P.x, P.y, P.x + dx / L * ext, P.y + dy / L * ext, 'r', 2.2); if (tip) s += line(P.x, P.y, tip.x, tip.y, 'r', 1.5, 'stroke-dasharray="5 4"'); } }
+    if (S.r3 && !(cv && none)) {
+      const Fx = cv ? xl - f : xl + f, y3 = T.y + (cy - T.y) * (xl - T.x) / (Fx - T.x);
+      if (Math.abs(y3 - cy) < 104) { const P = { x: xl, y: y3 }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2); if (real) s += arrow(P.x, P.y, tip.x, P.y, 'r', 2.2); else { s += arrow(P.x, P.y, P.x + ext, P.y, 'r', 2.2); if (tip) s += line(P.x, P.y, tip.x, P.y, 'r', 1.5, 'stroke-dasharray="5 4"'); } }
+    }
+    if (tip) { s += `<line x1="${tip.x}" y1="${cy}" x2="${tip.x}" y2="${tip.y}" stroke="#d32f2f" stroke-width="5" ${real ? '' : 'stroke-dasharray="6 4" opacity=".7"'}/><circle cx="${tip.x}" cy="${tip.y + (tip.y < cy ? -6 : 6)}" r="8" fill="${real ? '#ffca28' : 'none'}" stroke="#d32f2f" stroke-width="2" ${real ? '' : 'stroke-dasharray="3 3"'}/>` + text(tip.x, tip.y < cy ? tip.y - 20 : tip.y + 26, real ? '實像' : '虛像', 'r', 13); }
+    setG(host, s);
+    let msg;
+    if (!cv) msg = '凹透鏡：不論物體在哪裡，像都是<b>正立、縮小的虛像</b>（在物體同側），屏幕上接不到。';
+    else if (none) msg = '物體剛好在<b>焦點</b>上：折射後變成平行光，<b>不成像</b>。';
+    else if (S.u > 2.02) msg = '物在 <b>2F 外</b>：<b>倒立、縮小的實像</b>，像在 F～2F 之間。';
+    else if (S.u > 1.98) msg = '物剛好在 <b>2F</b>：<b>倒立、等大的實像</b>，像也在 2F。';
+    else if (S.u > 1) msg = '物在 <b>F～2F 之間</b>：<b>倒立、放大的實像</b>，像在 2F 以外。';
+    else msg = '物在<b>焦點內</b>：<b>正立、放大的虛像</b>（放大鏡），像和物同側，屏幕上接不到。';
+    Q(host, 'out').innerHTML = `u ＝ ${S.u} f。${msg}` + (tip ? `<br>像的大小約是物的 <b>${round(Math.abs(m), 2)}</b> 倍。` : '');
+  };
+  $$('[data-l]', host).forEach(b => b.onclick = () => { S.kind = b.dataset.l; $$('[data-l]', host).forEach(x => x.classList.toggle('on', x === b)); draw(); });
+  Q(host, 'u').oninput = () => { S.u = +Q(host, 'u').value; draw(); };
+  $$('[data-k^=r]', host).forEach(c => c.onchange = draw);
+  dragOn(Q(host, 'svg'), p => { S.u = sg(Math.round((xl - p.x) / f / .05) * .05, .3, 3.4); draw(); });
+  draw();
+};
+
+/* --- 色光混合、透明物體與不透明物體的顏色 --- */
+SIMS.simColor = host => {
+  const mode = host.dataset.mode || 'mix';
+  if (mode === 'mix') return colorMix(host);
+  const filter = mode === 'filter', LIGHTS = ['白', '紅', '綠', '藍'], ITEMS = filter ? ['紅', '綠', '藍', '無色'] : ['紅', '綠', '藍', '白', '黑'];
+  const S = { l: '白', p: '紅' };
+  const SET = { '白': 'RGB', '紅': 'R', '綠': 'G', '藍': 'B', '無色': 'RGB', '黑': '' };
+  const HEX = s => `rgb(${s.includes('R') ? 255 : 0},${s.includes('G') ? 255 : 0},${s.includes('B') ? 255 : 0})`;
+  const NAME = { '': '黑色（沒有光）', R: '紅色', G: '綠色', B: '藍色', RG: '黃色', GB: '青色', RB: '洋紅色', RGB: '白色' };
+  simBox(host, filter ? '色光穿過玻璃紙' : '色光照在色紙上', filter ? '白光、紅光、綠光、藍光分別通過各色玻璃紙，通過後是什麼光？' : '同一張色紙，在不同顏色的光下看起來一樣嗎？注意下面三個小方塊：哪些色光被反射？',
+    `<div class="ctl"><b>光：</b><span class="seg" data-k="sl">${LIGHTS.map((x, i) => `<button data-l="${x}" class="${i ? '' : 'on'}">${x}光</button>`).join('')}</span><b>${filter ? '玻璃紙：' : '色紙：'}</b><span class="seg" data-k="sp">${ITEMS.map((x, i) => `<button data-p="${x}" class="${i ? '' : 'on'}">${x}${x === '無色' ? '（透明）' : filter ? '色' : '紙'}</button>`).join('')}</span></div>${svgOpen(520, 230)}<div class="out" data-k="out"></div>`);
+  const draw = () => {
+    const ls = SET[S.l], ps = SET[S.p], rs = [...ls].filter(c => ps.includes(c)).join('');
+    let s = `<rect x="10" y="10" width="500" height="210" fill="#222"/>`;
+    s += `<circle cx="60" cy="110" r="26" fill="${S.l === '白' ? '#fff' : HEX(ls)}"/>` + text(60, 160, S.l + '光', '#fff', 13);
+    s += `<polygon points="86,100 ${filter ? 190 : 250},${filter ? 70 : 90} ${filter ? 190 : 250},${filter ? 150 : 130} 86,120" fill="${S.l === '白' ? '#fff' : HEX(ls)}" opacity=".35"/>`;
+    const pc = S.p === '無色' ? 'rgba(255,255,255,.25)' : S.p === '白' ? '#fff' : S.p === '黑' ? '#000' : HEX(SET[S.p]);
+    if (filter) {
+      s += `<rect x="190" y="50" width="22" height="120" fill="${pc}" stroke="#fff" stroke-width="2" opacity="${S.p === '無色' ? 1 : .85}"/>` + text(201, 190, '玻璃紙', '#fff', 13);
+      s += `<polygon points="212,${rs ? 70 : 85} 360,${rs ? 60 : 85} 360,${rs ? 160 : 135} 212,${rs ? 150 : 135}" fill="${rs ? HEX(rs) : 'none'}" opacity=".45"/>`;
+      s += `<rect x="370" y="60" width="110" height="100" rx="8" fill="${rs ? HEX(rs) : '#050505'}" stroke="#777" stroke-width="2"/>` + text(425, 184, '穿過後看到', '#fff', 13);
+    } else {
+      s += `<rect x="250" y="55" width="26" height="110" fill="${pc}" stroke="#bbb" stroke-width="2"/>` + text(263, 184, S.p + '紙', '#fff', 13);
+      s += `<polygon points="276,${rs ? 80 : 95} 400,${rs ? 100 : 105} 400,${rs ? 130 : 125} 276,${rs ? 140 : 125}" fill="${rs ? HEX(rs) : 'none'}" opacity=".5"/>`;
+      s += `<circle cx="430" cy="115" r="18" fill="#fff"/><circle cx="436" cy="115" r="7" fill="#222"/>` + text(430, 160, '眼睛看到', '#fff', 13);
+      s += `<rect x="395" y="30" width="70" height="26" rx="6" fill="${rs ? HEX(rs) : '#050505'}" stroke="#777" stroke-width="2"/>`;
+    }
+    ['R', 'G', 'B'].forEach((c, i) => { const on = ls.includes(c), pass = rs.includes(c), x = 330 + i * 50; s += `<rect x="${x}" y="188" width="30" height="22" rx="4" fill="${on ? HEX(c) : '#333'}" opacity="${pass ? 1 : on ? .3 : .15}" stroke="#fff" stroke-width="${pass ? 3 : 1}"/>` + text(x + 15, 204, c === 'R' ? '紅' : c === 'G' ? '綠' : '藍', '#fff', 12); });
+    setG(host, s);
+    const why = filter ? (S.p === '無色' ? '無色透明玻璃紙讓所有色光穿透。' : `${S.p}色玻璃紙只讓${S.p}光穿透，其他色光被吸收。`) : (S.p === '白' ? '白紙反射所有色光。' : S.p === '黑' ? '黑紙吸收所有色光。' : `${S.p}紙只反射${S.p}光，其他色光被吸收。`);
+    Q(host, 'out').innerHTML = `${S.l}光 ${filter ? '穿過' : '照到'} ${S.p}${filter ? (S.p === '無色' ? '（透明）' : '色') + '玻璃紙' : '紙'}：${why}<br>${filter ? '穿過去的' : '反射出來的'}光是 → <b>${NAME[rs] || '黑色'}</b>${rs ? '' : '（沒有光，看起來是黑的）'}。`;
+  };
+  $$('[data-l]', host).forEach(b => b.onclick = () => { S.l = b.dataset.l; $$('[data-l]', host).forEach(x => x.classList.toggle('on', x === b)); draw(); });
+  $$('[data-p]', host).forEach(b => b.onclick = () => { S.p = b.dataset.p; $$('[data-p]', host).forEach(x => x.classList.toggle('on', x === b)); draw(); });
+  draw();
+};
+function colorMix(host) {
+  simBox(host, '色光混合', '紅、綠、藍三盞燈照在同一面白牆上。開關不同的燈，重疊的地方是什麼顏色？',
+    `<div class="ctl"><label><input type="checkbox" data-k="R" checked> 紅燈</label><label><input type="checkbox" data-k="G" checked> 綠燈</label><label><input type="checkbox" data-k="B" checked> 藍燈</label></div><canvas data-k="cv" width="480" height="240" style="width:100%;max-width:480px;background:#000;border:1px solid var(--line);border-radius:10px;display:block"></canvas><div class="out" data-k="out"></div>`);
+  const cv = Q(host, 'cv'), ctx = cv.getContext('2d'), NAME = { '': '沒有光（黑）', R: '紅', G: '綠', B: '藍', RG: '黃（紅＋綠）', GB: '青（綠＋藍）', RB: '洋紅（紅＋藍）', RGB: '白（紅＋綠＋藍）' };
+  const draw = () => {
+    ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 480, 240); ctx.globalCompositeOperation = 'lighter';
+    const on = ['R', 'G', 'B'].filter(c => Q(host, c).checked);
+    [['R', 190, 100, '#ff0000'], ['G', 290, 100, '#00ff00'], ['B', 240, 160, '#0000ff']].forEach(([c, x, y, col]) => { if (on.includes(c)) { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, 74, 0, 7); ctx.fill(); } });
+    ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = '#fff'; ctx.font = '14px sans-serif'; ctx.fillText('紅', 120, 70); ctx.fillText('綠', 350, 70); ctx.fillText('藍', 228, 232);
+    Q(host, 'out').innerHTML = `開著的燈：${on.length ? on.map(c => ({ R: '紅', G: '綠', B: '藍' })[c]).join('、') : '（全關）'}。三原色疊在一起，中間看到：<b>${NAME[on.join('')]}</b>。${on.length === 3 ? '<br>紅、綠、藍三種色光等量相加，得到白光。' : ''}`;
+  };
+  $$('input', host).forEach(i => i.onchange = draw); draw();
+}
+
+/* ---- z_app.js ---- */
+/* ===== 應用主程式：身分、紀錄回傳、首頁、檢核、複習、路由 ===== */
+const SELF = ['我覺得我會', '不太確定', '我覺得還不會'];
+const ident = () => store.get('ident', null);
+const who = () => { const m = ident(); return m ? m.cls + '-' + m.seat : 'anon'; };
+const TS = { get: id => store.get('t:' + who() + ':' + id, {}), set: (id, v) => store.set('t:' + who() + ':' + id, v) };
+const passedN = () => TASKS.filter(t => TS.get(t.id).passed).length;
+const secName = id => SECS.find(s => s.id === id).name;
+const go = h => { location.hash = h; };
+
+/* ---------- 紀錄回傳（Google 試算表，離線時先存起來） ---------- */
+let flushTimer = null, flushing = false;
+function sendRecord(rec, now = false) {
+  const me = ident(); if (!me) return;
+  rec = { exam: EXAM, time: new Date().toISOString(), rid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7), cls: me.cls, seat: me.seat, ...rec };
+  let q = store.get('outbox', []);
+  if (rec.kind === 'prog') q = q.filter(r => !(r.kind === 'prog' && r.task === rec.task && r.cls === rec.cls && r.seat === rec.seat));
+  q.push(rec); store.set('outbox', q);
+  if (now) flushOutbox(); else if (!flushTimer) flushTimer = setTimeout(flushOutbox, 20000);
+}
+async function flushOutbox(keepalive = false) {
+  clearTimeout(flushTimer); flushTimer = null;
+  if (!SHEET_URL || flushing || FILE_MODE) return;
+  const q = store.get('outbox', []); if (!q.length) return;
+  flushing = true;
+  try {
+    await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', keepalive, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(q) });
+    const sent = new Set(q.map(r => r.rid));
+    store.set('outbox', store.get('outbox', []).filter(r => !sent.has(r.rid)));
+  } catch (e) { /* 離線時下次再送 */ }
+  flushing = false;
+}
+window.addEventListener('online', () => flushOutbox());
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushOutbox(true); });
+
+/* ---------- 共用元件 ---------- */
+function statusOf(t) {
+  const s = TS.get(t.id);
+  if (s.passed) return { cls: 'ok', txt: '✅ 通過', done: true };
+  if ((s.miss || 0) >= 2) return { cls: 'hint', txt: '💡 建議先複習', hint: true };
+  if (s.n) return { cls: 'go', txt: `連對 ${s.streak || 0}/${PASS}` };
+  return { cls: 'no', txt: '⬜ 未開始' };
+}
+function identCard() {
+  const me = ident();
+  let old = null; try { old = JSON.parse(localStorage.getItem('nat2a:ident')); } catch (e) { }
+  if (me) return `<div class="card ident">👤 <b>${me.cls} 班 ${me.seat} 號</b>　<button class="btn" id="idEdit">修改</button></div>`;
+  return `<div class="card ident"><b>開始前，先輸入你的班級和座號（作答紀錄會依此記錄）：</b>
+    <div class="row"><input class="in" id="idCls" placeholder="班級，如 801" inputmode="numeric" maxlength="3" value="${old ? old.cls : ''}"><input class="in" id="idSeat" placeholder="座號" inputmode="numeric" maxlength="2" value="${old ? old.seat : ''}"><button class="btn primary" id="idSave">確定</button></div><div class="muted" id="idFb"></div></div>`;
+}
+function bindIdent(rerender) {
+  $('#idSave')?.addEventListener('click', () => {
+    const c = $('#idCls').value.trim(), s = $('#idSeat').value.trim();
+    if (!/^\d{3}$/.test(c) || !/^\d{1,2}$/.test(s) || Number(s) < 1) { $('#idFb').style.color = '#c62828'; $('#idFb').textContent = '班級請輸入 3 位數字（例如 801），座號輸入 1～2 位數字。'; return; }
+    store.set('ident', { cls: c, seat: String(Number(s)) }); rerender();
+  });
+  $('#idEdit')?.addEventListener('click', () => { if (confirm('要修改班級座號嗎？（每個班級座號的進度分開記錄，改回來原本的進度還在）')) { store.set('ident', null); rerender(); } });
+}
+function offlineNote() {
+  const n = store.get('outbox', []).length;
+  let h = '';
+  if (FILE_MODE && SHEET_URL) h += `<div class="warn-box">⚠ <b>你現在是直接打開檔案</b>，作答紀錄<b>不會</b>送給老師。請改用老師給的網址或 QR code 進入。</div>`;
+  if (n && SHEET_URL && !FILE_MODE) h += `<p class="muted">⏳ 有 ${n} 筆紀錄等待上傳（連上網路後會自動送出）</p>`;
+  return h;
+}
+function updateTop() {
+  const h = location.hash.replace(/^#\/?/, '');
+  const on = h.startsWith('review') || h.startsWith('r/') ? 'review' : h.startsWith('check') || h.startsWith('t/') ? 'check' : 'home';
+  $$('.nav a').forEach(a => a.classList.toggle('on', a.dataset.k === on));
+  const me = ident(); $('#me').textContent = me ? `${me.cls}-${me.seat}` : '尚未輸入身分';
+  const p = passedN(); $('#pbar').style.width = (p / TASKS.length * 100) + '%'; $('#ptxt').textContent = `${p}/${TASKS.length}`;
+}
+
+/* ---------- 首頁 ---------- */
+function viewHome() {
+  const p = passedN();
+  let h = `<h2>第 3、4 章 段考複習</h2><p class="muted">波動與聲音、光影像與顏色。先<b>檢核</b>看自己哪裡會、哪裡不會；不會的，回<b>複習</b>補起來，再繼續做題。</p>`;
+  h += offlineNote() + identCard();
+  h += `<div class="hero"><a class="h1" href="#/check"><b>🎯 檢核</b><span>${TASKS.length} 個概念，每個概念<b>連續答對 ${PASS} 題</b>才算通過。題目每次都不一樣。</span></a>
+    <a class="h2" href="#/review"><b>📖 複習</b><span>每個概念一張複習卡，附互動模擬。沒上到課也能自己讀懂。</span></a></div>`;
+  h += `<div class="card"><div class="prog-big"><div class="num">${p}<small> / ${TASKS.length}</small></div><div class="grow"><div class="pbar" style="height:12px;border-radius:99px;overflow:hidden"><i style="width:${p / TASKS.length * 100}%;height:100%;display:block;background:linear-gradient(90deg,var(--c3),var(--good))"></i></div>
+    <p class="muted" style="margin:6px 0 0">第 3 章 ${TASKS.filter(t => t.ch === 3 && TS.get(t.id).passed).length}/${TASKS.filter(t => t.ch === 3).length}　｜　第 4 章 ${TASKS.filter(t => t.ch === 4 && TS.get(t.id).passed).length}/${TASKS.filter(t => t.ch === 4).length}</p></div></div></div>`;
+  h += `<h3>怎麼使用？</h3><div class="steps"><div><b>① 檢核</b>挑一個概念開始做題。作答前先自評「我會不會」。</div><div><b>② 連對 3 題</b>連續答對 ${PASS} 題才通過；答錯就重新累計。</div><div><b>③ 卡住就複習</b>答錯時按「看複習卡」，讀完再回來。</div><div><b>④ 全部通過</b>${TASKS.length} 個概念都通過，段考前就穩了！</div></div>`;
+  $('#view').innerHTML = h; bindIdent(route);
+}
+
+/* ---------- 檢核總覽 ---------- */
+function viewBoard() {
+  const p = passedN();
+  let h = `<h2>🎯 檢核</h2>` + offlineNote() + identCard();
+  h += `<div class="card"><div class="prog-big"><div class="num">${p}<small> / ${TASKS.length}</small></div><div class="grow"><div class="pbar" style="height:12px;border-radius:99px;overflow:hidden"><i style="width:${p / TASKS.length * 100}%;height:100%;display:block;background:linear-gradient(90deg,var(--c3),var(--good))"></i></div>
+    <p class="muted" style="margin:6px 0 0">每個任務<b>連續答對 ${PASS} 題</b>就通過。答錯會重新累計；卡住了，每個任務旁邊都有「📖 複習」。</p></div></div></div>`;
+  [3, 4].forEach(ch => {
+    h += `<div class="ch-h c${ch}">第 ${ch} 章　${ch === 3 ? '波動與聲音' : '光、影像與顏色'}</div>`;
+    SECS.filter(s => s.ch === ch).forEach(sec => {
+      const ts = TASKS.filter(t => t.sec === sec.id), pn = ts.filter(t => TS.get(t.id).passed).length;
+      h += `<div class="sec-h"><h3>${sec.name}</h3><span class="sp">${pn}/${ts.length} 通過</span></div><div class="tl">`;
+      ts.forEach(t => {
+        const st = statusOf(t);
+        h += `<div class="tk ${ch === 4 ? 'c4' : ''} ${st.done ? 'done' : ''}"><div class="tt"><span class="chip ${ch === 4 ? 'c4' : ''}">${t.id}</span><span class="st ${st.cls}">${st.txt}</span></div>
+          <h4>我能${t.can}</h4><div class="codes">學習內容 ${t.lc}</div>
+          <div class="tl2"><a class="btn primary" style="padding:3px 14px;color:#fff;border:none" href="#/t/${t.id}">做題</a><a href="#/r/${t.id}">📖 複習</a></div></div>`;
+      });
+      h += `</div>`;
+    });
+  });
+  $('#view').innerHTML = h; bindIdent(route);
+}
+
+/* ---------- 作答 ---------- */
+function viewTask(id) {
+  const t = TASK[id], host = $('#view');
+  if (!t) return go('#/check');
+  if (!ident()) { go('#/check'); setTimeout(() => alert('請先輸入班級和座號，再開始做題。'), 50); return; }
+  const s = TS.get(id);
+  const head = `<div class="page-head"><span class="chip ${t.ch === 4 ? 'c4' : ''}">${t.id}｜${secName(t.sec)}｜學習內容 ${t.lc}</span><h2>我能${t.can}</h2></div>`;
+  if (s.self == null) {
+    host.innerHTML = head + `<div class="card"><h3>開始之前，先問問自己：</h3><p>對於「${t.can}」，你覺得自己——</p><div class="row">${SELF.map((x, i) => `<button class="btn ${i ? '' : 'primary'}" data-self="${i}">${x}</button>`).join('')}</div>
+      <p class="muted">這只是讓你之後比較：自己的感覺和實際表現一不一樣。想先讀一下？<a href="#/r/${id}?from=${id}">📖 看複習卡</a></p></div>`;
+    $$('[data-self]', host).forEach(b => b.onclick = () => { TS.set(id, { ...s, self: +b.dataset.self, streak: 0, n: 0, miss: 0 }); viewTask(id); });
+    return;
+  }
+  const q = t.gen(); window.__q = q;
+  let h = head + `<div class="streak">${Array.from({ length: PASS }, (_, i) => `<i class="${i < (s.streak || 0) ? 'on' : ''}"></i>`).join('')}<span>連續答對 ${s.streak || 0} / ${PASS}${s.passed ? '　（已通過，現在是加練）' : ''}</span></div>`;
+  if (!s.passed && (s.miss || 0) >= 2) h += `<div class="rv-box">💡 你連續答錯 ${s.miss} 題了。先去看一下複習卡（約 3～5 分鐘），再回來做題，連對的進度會保留。<div class="row"><a class="btn warn" href="#/r/${id}?from=${id}">📖 先去看複習卡</a></div></div>`;
+  h += `<div class="card"><p class="q-stem">${q.stem}</p>${q.svg ? `<div class="svgbox">${q.svg}</div>` : ''}`;
+  if (q.type === 'num') h += `<div class="row"><input class="in wide" id="tAns" autocomplete="off" inputmode="decimal" placeholder="輸入答案">${q.unit ? `<span>${q.unit}</span>` : ''}<button class="btn primary" id="tGo">送出</button></div>${q.hint ? `<p class="muted">${q.hint}</p>` : ''}`;
+  else {
+    const order = q.fixed ? q.opts.map((_, i) => i) : shuffle(q.opts.map((_, i) => i));
+    h += `<p class="step">${q.type === 'tt' ? '① 答案：' : ''}</p><div class="q-opts" id="tO">${order.map(i => `<button class="q-opt" data-i="${i}">${q.opts[i]}</button>`).join('')}</div>`;
+    if (q.type === 'tt') { const ro = shuffle(q.ropts.map((_, i) => i)); h += `<p class="step">② 理由：</p><div class="q-opts" id="tR">${ro.map(i => `<button class="q-opt" data-i="${i}">${q.ropts[i]}</button>`).join('')}</div>`; }
+    h += `<div class="row"><button class="btn primary" id="tGo" disabled>送出</button></div>`;
+  }
+  h += `<div class="fb" id="tFb" hidden></div></div><div class="row"><a class="btn" href="#/check">← 回檢核總覽</a><a class="btn" href="#/r/${id}?from=${id}">📖 卡住了？看複習卡</a></div>`;
+  host.innerHTML = h;
+
+  let pa = null, pr = null;
+  const ready = () => { $('#tGo').disabled = pa == null || (q.type === 'tt' && pr == null); };
+  $$('#tO .q-opt', host).forEach(b => b.onclick = () => { $$('#tO .q-opt').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); pa = +b.dataset.i; ready(); });
+  $$('#tR .q-opt', host).forEach(b => b.onclick = () => { $$('#tR .q-opt').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); pr = +b.dataset.i; ready(); });
+  const inp = $('#tAns'); if (inp) { inp.focus(); inp.onkeydown = e => { if (e.key === 'Enter') $('#tGo').click(); }; }
+  $('#tGo').onclick = () => {
+    let ok, why = '';
+    if (q.type === 'num') {
+      const v = inp.value; if (!v.trim()) return;
+      if (isNaN(parseNum(v))) { const fb = $('#tFb'); fb.hidden = false; fb.className = 'fb no'; fb.innerHTML = '<b>請輸入數字</b>　只能輸入數字（可以有小數點）。這次不算答錯，改好再送出。'; inp.focus(); return; }
+      ok = near(parseNum(v), q.ans, 1e-4, 1e-9);
+    } else {
+      ok = pa === q.a && (q.type !== 'tt' || pr === q.ra);
+      if (!ok && q.type === 'tt' && pa === q.a) why = '答案對了，但理由不對，這題不算過關。';
+      $$('#tO .q-opt').forEach(b => { b.disabled = true; b.classList.remove('sel'); if (+b.dataset.i === q.a) b.classList.add('is-right'); else if (+b.dataset.i === pa) b.classList.add('is-wrong'); });
+      $$('#tR .q-opt').forEach(b => { b.disabled = true; b.classList.remove('sel'); if (+b.dataset.i === q.ra) b.classList.add('is-right'); else if (+b.dataset.i === pr) b.classList.add('is-wrong'); });
+    }
+    if (inp) inp.disabled = true;
+    const cur = TS.get(id), streak = ok ? (cur.streak || 0) + 1 : 0, n = (cur.n || 0) + 1, miss = ok ? 0 : (cur.miss || 0) + 1;
+    const nowPass = !cur.passed && streak >= PASS;
+    TS.set(id, { ...cur, streak, n, miss, wrongN: (cur.wrongN || 0) + (ok ? 0 : 1), passed: cur.passed || nowPass, passAt: nowPass ? new Date().toISOString() : cur.passAt, passN: nowPass ? n : cur.passN });
+    if (!ok) {
+      let given, right, kind;
+      if (q.type === 'num') { given = inp.value.trim(); right = fmtPlain(q.ans) + (q.unit ? ' ' + q.unit : ''); kind = '數值錯'; }
+      else {
+        given = strip(q.opts[pa]) + (q.type === 'tt' ? '／理由：' + strip(q.ropts[pr]) : '');
+        right = strip(q.opts[q.a]) + (q.type === 'tt' ? '／理由：' + strip(q.ropts[q.ra]) : '');
+        kind = q.type !== 'tt' ? '答案錯' : pa === q.a ? '答案對、理由錯' : pr === q.ra ? '答案錯、理由對' : '答案和理由都錯';
+      }
+      sendRecord({ kind: 'wrong', task: id, tag: q.tag || id, err: kind, given: given.slice(0, 120), right: right.slice(0, 120), n });
+    }
+    if (!cur.passed || nowPass) sendRecord({ kind: 'prog', task: id, name: t.can, n, streak, passed: !!(cur.passed || nowPass), self: SELF[cur.self] });
+    if (nowPass) sendRecord({ kind: 'pass', task: id, name: t.can, tries: n, self: SELF[cur.self] }, true);
+    const fb = $('#tFb'); fb.hidden = false; fb.className = 'fb ' + (ok ? 'ok' : 'no');
+    fb.innerHTML = `<b>${ok ? '✓ 答對了！' : '✗ 還差一點'}</b>${why ? `<p>${why}</p>` : ''}${!ok && q.type === 'num' ? `<p>正確答案：${fmt(q.ans)}${q.unit ? ' ' + q.unit : ''}</p>` : ''}<p>${q.exp}</p>` +
+      (!ok ? `<div class="rv-box" style="margin-top:8px">📖 這個地方還不穩？<a class="btn warn" href="#/r/${id}?from=${id}">看「${t.id}」複習卡</a>${miss >= 2 ? ' <b>（連錯 ' + miss + ' 題了，建議先複習）</b>' : ''}</div>` : '');
+    const gb = $('#tGo'); gb.disabled = false;
+    if (nowPass) {
+      gb.remove();
+      const nxt = TASKS.find(x => !TS.get(x.id).passed && x.id !== id);
+      fb.insertAdjacentHTML('afterend', `<div class="pass-box">🎉 <b>${t.id} 通過！</b><p>作答前你覺得「${SELF[cur.self]}」，實際用了 <b>${n}</b> 題達成連續答對 ${PASS} 題。${n === PASS ? '一次到位，觀念很穩！' : ''}</p>
+        <div class="row"><a class="btn primary" href="#/check">回檢核總覽</a>${nxt ? `<a class="btn ok" href="#/t/${nxt.id}">下一個：${nxt.id} →</a>` : ''}<button class="btn" id="tMore">再加練一題</button></div></div>`);
+      $('#tMore').onclick = () => viewTask(id);
+    } else { gb.textContent = '下一題 →'; gb.onclick = () => viewTask(id); gb.focus(); }
+    $('.streak', host).outerHTML = `<div class="streak">${Array.from({ length: PASS }, (_, i) => `<i class="${i < streak ? 'on' : ''}"></i>`).join('')}<span>連續答對 ${streak} / ${PASS}</span></div>`;
+    updateTop();
+  };
+}
+const fmtPlain = x => String(round(x, 6));
+
+/* ---------- 複習：地圖與卡片 ---------- */
+function viewReviewMap() {
+  let h = `<h2>📖 複習</h2><p class="muted">每個概念一張複習卡：先看「我要會什麼」，再看重點、互動模擬、容易搞錯的地方。讀完按「去做題」檢查自己有沒有真的懂。<br>顏色：<span style="color:var(--good);font-weight:700">綠＝已通過</span>、<span style="color:var(--warn);font-weight:700">黃＝建議先複習</span>。</p>`;
+  [3, 4].forEach(ch => {
+    h += `<div class="ch-h c${ch}">第 ${ch} 章　${ch === 3 ? '波動與聲音' : '光、影像與顏色'}</div>`;
+    SECS.filter(s => s.ch === ch).forEach(sec => {
+      h += `<div class="map-sec"><div class="sec-h"><h3>${sec.name}</h3></div><div class="mp">`;
+      TASKS.filter(t => t.sec === sec.id).forEach(t => {
+        const st = statusOf(t);
+        h += `<a class="${ch === 4 ? 'c4' : ''} ${st.done ? 'done' : st.hint ? 'sugg' : ''}" href="#/r/${t.id}"><span class="id">${t.id}</span><span>${t.can}<br><span class="st ${st.cls}">${st.txt}</span></span></a>`;
+      });
+      h += `</div></div>`;
+    });
+  });
+  $('#view').innerHTML = h;
+}
+const seenRv = new Set();
+function viewCard(id, from) {
+  const t = TASK[id], c = CARDS[id], host = $('#view');
+  if (!t) return go('#/review');
+  const st = statusOf(t), i = TASKS.indexOf(t), prev = TASKS[i - 1], next = TASKS[i + 1];
+  let body = c ? (typeof c.body === 'function' ? c.body() : c.body) : '<p>（這張複習卡還在準備中）</p>';
+  body = body.replace(/\{\{sim:(\w+)(?::(\w+))?\}\}/g, (_, n, m) => `<div class="sim" data-sim="${n}" data-mode="${m || ''}"></div>`);
+  let h = `<div class="rcard"><div class="row" style="margin:0"><a class="btn" href="#/review">← 複習地圖</a><span class="chip ${t.ch === 4 ? 'c4' : ''}">${t.id}｜${secName(t.sec)}</span><span class="st ${st.cls}">${st.txt}</span></div>
+    <h2>我能${t.can}</h2><p class="muted">學習內容 ${t.lc}</p>`;
+  if (from && TASK[from]) h += `<div class="rv-box">你是從任務 <b>${from}</b> 過來的。看完下面的重點，按最底下的按鈕就能回去繼續做題（連對進度會保留）。</div>`;
+  h += body;
+  if (c && c.traps && c.traps.length) h += `<div class="trap"><b>⚠ 容易搞錯</b><ul>${c.traps.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
+  if (c && c.quick) h += c.quick.map(([q, a]) => `<details class="qc"><summary>自我檢查：${q}</summary><p>${a}</p></details>`).join('');
+  h += `<div class="card" style="text-align:center"><p style="margin:0 0 8px"><b>讀完了嗎？</b>去做題檢查自己有沒有真的懂。</p><div class="row" style="justify-content:center"><a class="btn ok" href="#/t/${id}">${from === id || st.cls === 'go' || st.hint ? '✅ 我看懂了，回去做題' : '🎯 去做這個概念的題目'}</a></div></div>`;
+  h += `<div class="nav2">${prev ? `<a class="btn" href="#/r/${prev.id}${from ? '?from=' + from : ''}">← ${prev.id} ${prev.can.slice(0, 12)}…</a>` : '<span></span>'}${next ? `<a class="btn" href="#/r/${next.id}${from ? '?from=' + from : ''}">${next.id} ${next.can.slice(0, 12)}… →</a>` : ''}</div></div>`;
+  host.innerHTML = h;
+  $$('.sim[data-sim]', host).forEach(el => { const f = SIMS[el.dataset.sim]; if (f) f(el); else el.innerHTML = '<p class="muted">（模擬準備中）</p>'; });
+  const key = id + '|' + (from || '');
+  if (ident() && !seenRv.has(key)) { seenRv.add(key); sendRecord({ kind: 'rv', task: id, from: from || '' }); }
+}
+
+/* ---------- 路由 ---------- */
+function route() {
+  const raw = location.hash.replace(/^#\/?/, ''), [path, qs] = raw.split('?'), parts = path.split('/');
+  const from = qs && (qs.match(/from=([A-Z]\d+)/) || [])[1];
+  window.scrollTo(0, 0);
+  if (parts[0] === 'check') viewBoard();
+  else if (parts[0] === 't') viewTask(parts[1]);
+  else if (parts[0] === 'review') viewReviewMap();
+  else if (parts[0] === 'r') viewCard(parts[1], from);
+  else viewHome();
+  updateTop();
+}
+window.addEventListener('hashchange', route);
+route();
+flushOutbox();
+
+</script></body></html>
