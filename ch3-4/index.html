@@ -227,6 +227,10 @@ const arrowDefs = () => ['k', 'r', 'b', 'o', 'g', 'p'].map(c => `<marker id="ah-
 const SVG = (w, h, inner, style = '') => `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="14" style="max-width:${w}px;${style}"><defs>${arrowDefs()}</defs>${inner}</svg>`;
 const line = (x1, y1, x2, y2, c = 'k', w = 2, extra = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${COL[c] || c}" stroke-width="${w}" ${extra}/>`;
 const arrow = (x1, y1, x2, y2, c = 'k', w = 2.5, extra = '') => line(x1, y1, x2, y2, c, w, `marker-end="url(#ah-${c})" ${extra}`);
+const midArrow = (x1, y1, x2, y2, c = 'k', w = 2, frac = .5, extra = '') => {
+  const a = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI, mx = x1 + (x2 - x1) * frac, my = y1 + (y2 - y1) * frac;
+  return line(x1, y1, x2, y2, c, w, extra) + `<polygon points="-7,-4.5 5,0 -7,4.5" transform="translate(${mx.toFixed(1)},${my.toFixed(1)}) rotate(${a.toFixed(1)})" fill="${COL[c] || c}"/>`;
+};
 const text = (x, y, s, c = 'k', size = 14, anchor = 'middle', extra = '') => `<text x="${x}" y="${y}" fill="${COL[c] || c}" font-size="${size}" text-anchor="${anchor}" ${extra}>${s}</text>`;
 const d2r = d => d * Math.PI / 180;
 
@@ -1383,13 +1387,30 @@ card('T5', { body: () => `
   quick: [['顯微鏡物鏡 10 倍、目鏡 15 倍，放大幾倍？', '150 倍。']] });
 
 card('C1', { body: () => {
-  const cols = ['#e53935', '#fb8c00', '#fdd835', '#43a047', '#1e88e5', '#3949ab', '#8e24aa'];
-  let s = `<polygon points="170,30 110,150 230,150" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>` + arrow(20, 112, 150, 106, 'k', 3.5) + text(60, 98, '陽光（白光）', 'k', 13);
-  cols.forEach((c, i) => { s += `<line x1="195" y1="${108 + i * 0}" x2="400" y2="${60 + i * 22}" stroke="${c}" stroke-width="4"/>`; });
-  s += text(330, 192, '七彩色光（色散）', 'k', 14) + text(412, 62, '紅', 'k', 12, 'start') + text(412, 196, '紫', 'k', 12, 'start');
+  // 三稜鏡頂點 A（上）、B（左下）、C（右下）；白光射到左側面，折射兩次。各色光偏折不同（紅最少、紫最多；為了看清楚，差異已放大）
+  const A = [180, 28], B = [100, 166], C = [260, 166], P = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
+  const unit = (x, y) => { const L = Math.hypot(x, y); return [x / L, y / L]; };
+  const refr = (d, n, n1, n2) => { const c = -(d[0] * n[0] + d[1] * n[1]), r = n1 / n2, k = r * c - Math.sqrt(1 - r * r * (1 - c * c)); return [r * d[0] + k * n[0], r * d[1] + k * n[1]]; };
+  const nL = unit(-(B[1] - A[1]), -(A[0] - B[0]));                                                       // 左側面朝外的法線（指向左上）
+  const nR = unit(C[1] - A[1], -(C[0] - A[0]));                                                          // 右側面朝外的法線（指向右上）
+  const d0 = [Math.cos(d2r(-12)), Math.sin(d2r(-12))];
+  const cols = [['#e53935', 1.46], ['#fb8c00', 1.485], ['#fdd835', 1.51], ['#43a047', 1.535], ['#1e88e5', 1.56], ['#3949ab', 1.585], ['#8e24aa', 1.61]];
+  let s = `<polygon points="${A} ${B} ${C}" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>` + text(180, 184, '三稜鏡', 'b', 13);
+  s += midArrow(P[0] - d0[0] * 118, P[1] - d0[1] * 118, P[0], P[1], 'k', 4, .5) + text(20, P[1] - d0[1] * 118 + 24, '陽光（白光）', 'k', 13, 'start');
+  let ends = [];
+  cols.forEach(([c, n]) => {
+    const d1 = refr(d0, nL, 1, n);                                       // 第一次折射：空氣 → 玻璃（偏向法線）
+    const t = ((A[0] - P[0]) * nR[0] + (A[1] - P[1]) * nR[1]) / (d1[0] * nR[0] + d1[1] * nR[1]), Qp = [P[0] + d1[0] * t, P[1] + d1[1] * t];
+    const d2 = refr(d1, [-nR[0], -nR[1]], n, 1), E = [Qp[0] + d2[0] * 190, Qp[1] + d2[1] * 190];      // 第二次折射：玻璃 → 空氣（偏離法線）
+    s += `<line x1="${P[0]}" y1="${P[1]}" x2="${Qp[0].toFixed(1)}" y2="${Qp[1].toFixed(1)}" stroke="${c}" stroke-width="2"/><line x1="${Qp[0].toFixed(1)}" y1="${Qp[1].toFixed(1)}" x2="${E[0].toFixed(1)}" y2="${E[1].toFixed(1)}" stroke="${c}" stroke-width="4"/>`;
+    ends.push(E);
+  });
+  s += text(ends[0][0] + 6, ends[0][1] + 2, '紅（偏折最少）', 'k', 12, 'start') + text(ends[6][0] + 6, ends[6][1] + 8, '紫（偏折最多）', 'k', 12, 'start');
+  s = SVG(520, 272, s);
+  s = s.replace('</svg>', text(260, 266, '示意圖：光在兩個面各折射一次；各色光的差異已放大', 'gr', 11) + '</svg>');
   return `
   ${kp('色散', '<p>陽光通過<b>三稜鏡</b>，會分散成一條彩色光帶，這個現象叫<b>色散</b>。</p>', true)}
-  <div class="svgbox">${SVG(450, 210, s)}</div>
+  <div class="svgbox">${s}</div>
   ${kp('重點', '<ul><li>牛頓用第二個三稜鏡把色光再混合，又得到白光 → 陽光是各種色光混合成的白光。</li><li>各色光在三稜鏡中速率不同：<b>紅光最快、紫光最慢</b>，所以偏折不同、被分開。</li><li>單色的雷射光只偏折，不會分散。</li><li>彩虹是陽光被水珠折射、色散形成的。</li></ul>', true)}`; },
   traps: ['色散是因為各色光在介質中速率不同，不是三稜鏡「幫光上色」。'],
   quick: [['陽光通過三稜鏡，哪一種色光速率最快？', '紅光。']] });
@@ -1427,7 +1448,7 @@ const waveAnnot = () => {
   s += `<circle cx="${p1}" cy="${y0 - A}" r="4.5" fill="${COL.r}"/><circle cx="${p2}" cy="${y0 - A}" r="4.5" fill="${COL.r}"/><circle cx="${t1}" cy="${y0 + A}" r="4.5" fill="${COL.g}"/>`;
   s += text(p1, y0 - A - 10, '波峰', 'r', 14) + text(p2, y0 - A - 10, '波峰', 'r', 14) + text(t1, y0 + A + 20, '波谷', 'g', 14);
   s += arrow(p1 + 6, y0 - A - 28, p2 - 6, y0 - A - 28, 'p', 2.2) + arrow(p2 - 6, y0 - A - 28, p1 + 6, y0 - A - 28, 'p', 2.2) + text((p1 + p2) / 2, y0 - A - 34, '波長（一個全波的長度）', 'p', 13);
-  s += arrow(p1 + 26, y0 - 2, p1 + 26, y0 - A + 4, 'o', 2.4) + text(p1 + 70, y0 - A / 2 + 4, '振幅', 'o', 14, 'start');
+  s += arrow(p2, y0 - 1, p2, y0 - A + 7, 'o', 2.6) + line(p2 - 7, y0, p2 + 7, y0, 'o', 2.6) + text(p2 + 10, y0 - A / 2 + 5, '振幅', 'o', 14, 'start', 'font-weight="700"');
   return SVG(430, 200, s);
 };
 
@@ -1631,19 +1652,20 @@ SIMS.simWaveType = host => {
 
 /* --- 週期波：振幅、波長、頻率、週期、波速 --- */
 SIMS.simPeriodic = host => {
-  const mode = host.dataset.mode || 'speed', V0 = 12, SLOW = .25;
-  const obsT = { shape: '拖曳「振幅」和「波長」，看看波峰、波谷、波長（紅色括號）、振幅（橙色箭頭）怎麼變。', freq: '拖曳「頻率」：頻率變大，波變得更密、週期變小。看右邊的小球：它一秒上下幾次，頻率就是幾赫。', speed: '同時調「頻率」和「波長」，看波速 v ＝ f × λ 怎麼算出來。', fixedv: '這是同一條繩子：波速固定 12 公分／秒。你只能改頻率，波長會自動跟著變。' };
+  const mode = host.dataset.mode || 'speed', V0 = 12; let slow = true, tt = 0, last = null;
+  const obsT = { shape: '拖曳「振幅」和「波長」，看看波峰、波谷、波長（紅色括號）、振幅（橙色箭頭）怎麼變。', freq: '拖曳「頻率」：頻率變大，波變得更密、週期變小。紅點一秒上下幾次，頻率就是幾赫（按「真實速度」數數看）。', speed: '同時調「頻率」和「波長」，看波速 v ＝ f × λ 怎麼算出來。', fixedv: '這是同一條繩子：波速固定 12 公分／秒。你只能改頻率，波長會自動跟著變。' };
   const sl = (mode === 'shape' ? rng(host, '振幅 A（公分）', 'A', .5, 3, .5, 1.5) + rng(host, '波長 λ（公分）', 'L', 2, 8, 1, 6) : '') +
     (mode === 'freq' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 1) : '') +
     (mode === 'speed' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 2) + rng(host, '波長 λ（公分）', 'L', 2, 10, 1, 4) : '') +
     (mode === 'fixedv' ? rng(host, '頻率 f（赫）', 'F', .5, 6, .5, 2) : '');
-  simBox(host, '週期波（波形放慢 4 倍；右邊小球是真實速度）', obsT[mode], `<div class="ctl">${sl}</div>${svgOpen(548, 212)}<div class="out" data-k="out"></div>`);
+  simBox(host, '週期波模擬器', obsT[mode], `<div class="ctl">${sl}<span class="seg"><button data-s="1" class="on">🐢 慢動作（放慢 4 倍）</button><button data-s="0">真實速度</button></span></div>${svgOpen(500, 212)}<div class="out" data-k="out"></div>`);
   const st = { A: 1.5, L: 6, F: mode === 'shape' ? 1 : 1 };
   const read = () => { ['A', 'L', 'F'].forEach(k => { const e = Q(host, k); if (e) { st[k] = +e.value; Q(host, k + 'v').textContent = e.value; } }); if (mode === 'fixedv') st.L = V0 / st.F; if (mode === 'freq') { st.L = 6; } if (mode === 'speed') st.A = 1.5; if (mode === 'fixedv') st.A = 1.5; };
   $$('input', host).forEach(i => i.oninput = read); read();
   const px = 32, ypx = 28, X0 = 22, cy = 105;
   loop(host, now => {
-    const v = st.F * st.L, tt = now * SLOW;
+    if (last == null) last = now; tt += (now - last) * (slow ? .25 : 1); last = now;
+    const v = st.F * st.L;
     let s = '';
     for (let i = 0; i <= 14; i++) { s += line(X0 + i * px, 14, X0 + i * px, 196, '#eef1f5', 1) + (i % 2 === 0 ? text(X0 + i * px, 207, i, 'gr', 11) : ''); }
     s += line(X0, cy, X0 + 14.4 * px, cy, 'k', 1.5);
@@ -1652,17 +1674,16 @@ SIMS.simPeriodic = host => {
     let xc = (((v * tt + st.L / 4) % st.L) + st.L) % st.L; if (xc < .3) xc += st.L;
     const a = xc + st.L <= 14 ? xc : xc - st.L, b = a + st.L, yt = cy - st.A * ypx - 18;
     if (a >= 0 && b <= 14.2) s += arrow(X0 + a * px + 3, yt, X0 + b * px - 3, yt, 'p', 2.2) + arrow(X0 + b * px - 3, yt, X0 + a * px + 3, yt, 'p', 2.2) + text(X0 + (a + b) / 2 * px, yt - 5, 'λ ＝ ' + st.L + ' 公分', 'p', 13);
-    const xa = xc + st.L <= 14 ? xc + st.L : xc; s += arrow(X0 + xa * px + 8, cy - 3, X0 + xa * px + 8, cy - st.A * ypx + 3, 'o', 2.6) + text(X0 + xa * px + 16, cy - st.A * ypx / 2 + 4, '振幅', 'o', 11, 'start', 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="4"');
+    const xa = xc + st.L <= 14 ? xc + st.L : xc; s += arrow(X0 + xa * px, cy - 1, X0 + xa * px, cy - st.A * ypx + 7, 'o', 2.6) + line(X0 + xa * px - 7, cy, X0 + xa * px + 7, cy, 'o', 2.6) + text(X0 + xa * px + 10, cy - st.A * ypx / 2 + 4, '振幅', 'o', 11, 'start', 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="4"');
     const rx = 2, ry = cy - st.A * ypx * Math.sin(2 * Math.PI * (rx - v * tt) / st.L);
     s += `<circle cx="${X0 + rx * px}" cy="${ry}" r="7" fill="${COL.r}"/>` + text(X0 + rx * px, cy + 44, '紅點', 'r', 12);
-    { const bx = 514, by = cy - 34 * Math.sin(2 * Math.PI * st.F * now);            // 真實速度：一秒上下 f 次（不放慢）
-      s += `<rect x="${bx - 20}" y="24" width="40" height="${2 * (cy - 24)}" rx="8" fill="#fff8e1" stroke="#f0c36d"/>` + line(bx - 14, cy, bx + 14, cy, '#f0c36d', 1) + `<circle cx="${bx}" cy="${by.toFixed(1)}" r="8" fill="${COL.r}"/>` + text(bx, 16, '真實', 'r', 12, 'middle', 'font-weight="700"') + text(bx, 2 * cy - 8, `1秒${st.F}次`, 'r', 11.5); }
     setG(host, s);
   });
   const o = Q(host, 'out'), upd = () => { read(); const T = round(1 / st.F, 3), v = round(st.F * st.L, 2);
     o.innerHTML = (mode === 'shape' ? `振幅 A ＝ ${st.A} 公分，波長 λ ＝ ${st.L} 公分（一個全波的長度）。` :
       `頻率 f ＝ <b>${st.F}</b> 赫（一秒 ${st.F} 個全波），週期 T ＝ 1 ÷ ${st.F} ＝ <b>${T}</b> 秒${mode === 'freq' ? '。' : `；波長 λ ＝ <b>${round(st.L, 2)}</b> 公分；<br>波速 v ＝ f × λ ＝ ${st.F} × ${round(st.L, 2)} ＝ <b>${v}</b> 公分／秒${mode === 'fixedv' ? '（固定不變）' : ''}。`}`); };
   $$('input', host).forEach(i => i.addEventListener('input', upd)); upd();
+  $$('[data-s]', host).forEach(b => b.onclick = () => { slow = b.dataset.s === '1'; $$('[data-s]', host).forEach(x => x.classList.toggle('on', x === b)); });
 };
 
 /* --- 波以耳實驗：真空罩裡的鈴鐺 --- */
@@ -1855,25 +1876,27 @@ SIMS.simCurved = host => {
   const S = { kind: 'concave', f: 80, src: false };
   simBox(host, '凸面鏡與凹面鏡', '平行光照射後，反射光線是「會聚」還是「發散」？再試試把光源放在凹面鏡的焦點上。',
     `<div class="ctl"><span class="seg"><button data-c="concave" class="on">凹面鏡</button><button data-c="convex">凸面鏡</button></span>${rng(host, '焦距', 'f', 60, 120, 10, 80)}<label><input type="checkbox" data-k="src"> 光源放在焦點（只有凹面鏡）</label></div>${svgOpen(540, 300)}<div class="out" data-k="out"></div>`);
-  const V = 380, cy = 150, ys = [-90, -60, -30, 30, 60, 90];
+  const cy = 150, ys = [-90, -60, -30, 30, 60, 90];
   const draw = () => {
-    const f = S.f, cc = S.kind === 'concave', src = cc && S.src;
+    const f = S.f, cc = S.kind === 'concave', src = cc && S.src, V = cc ? 380 : 330;
     const sx = y => cc ? V - y * y / (4 * f) : V + y * y / (4 * f);
     let s = line(20, cy, 520, cy, 'gr', 1, 'stroke-dasharray="5 4"');
     let d = ''; for (let y = -105; y <= 105; y += 5) d += (d ? 'L' : 'M') + sx(y).toFixed(1) + ',' + (cy + y);
     s += `<path d="${d}" fill="none" stroke="#1565c0" stroke-width="5"/>`;
     const Fx = cc ? V - f : V + f; s += `<circle cx="${Fx}" cy="${cy}" r="5" fill="${COL.k}"/>` + '';
+    const cut = (x0, y0, dx, dy) => { let t = 400; if (dx < 0) t = Math.min(t, (24 - x0) / dx); if (dy < 0) t = Math.min(t, (34 - y0) / dy); if (dy > 0) t = Math.min(t, (258 - y0) / dy); return [x0 + dx * t, y0 + dy * t]; };
     ys.forEach(y => {
-      const hx = sx(y), hy = cy + y;
-      if (src) { s += arrow(Fx, cy, hx - 4, hy, 'o', 1.8) + arrow(hx, hy, 24, hy, 'r', 2); return; }
-      s += arrow(24, hy, hx - 3, hy, 'o', 2);
-      if (cc) { const dx = Fx - hx, dy = cy - hy, L = Math.hypot(dx, dy); s += arrow(hx, hy, Fx, cy, 'r', 2) + line(Fx, cy, Fx + dx / L * 26, cy + dy / L * 26, 'r', 1.6); }
-      else { const dx = hx - Fx, dy = hy - cy, L = Math.hypot(dx, dy); s += arrow(hx, hy, hx - dx / L * 190, hy - dy / L * 190, 'r', 2) + line(hx, hy, Fx, cy, 'r', 1.4, 'stroke-dasharray="5 4"'); }
+      const hx = sx(y), hy = cy + y, dx = (hx - Fx), dy = (hy - cy), L = Math.hypot(dx, dy);
+      if (src) { s += midArrow(Fx, cy, hx, hy, 'o', 1.8, .6) + midArrow(hx, hy, 24, hy, 'r', 2, .5); return; }
+      s += midArrow(24, hy, hx, hy, 'o', 2, .35);
+      if (cc) { const [ex, ey] = cut(hx, hy, -dx / L, -dy / L), e2 = Math.min(L + 45, Math.hypot(ex - hx, ey - hy)); s += midArrow(hx, hy, hx - dx / L * e2, hy - dy / L * e2, 'r', 2, L * .5 / e2); }      // 反射後通過焦點，再繼續前進
+      else { const [ex, ey] = cut(hx, hy, dx / L, dy / L); s += midArrow(hx, hy, ex, ey, 'r', 2, .45) + line(hx, hy, Fx, cy, 'r', 1.5, 'stroke-dasharray="5 4"'); }   // 在鏡前反射發散；虛線往鏡後延伸到虛焦點
     });
-    s += line(Fx, cy + 8, Fx, 264, 'k', 1.2, 'stroke-dasharray="3 3"') + text(Fx, 282, cc ? '焦點 F' : '焦點 F（在鏡後）', 'k', 13, 'middle', 'font-weight="700"');
+    s += text(cc ? V - 150 : V - 70, 282, '← 鏡前', 'gr', 12) + (cc ? '' : text(V + 36, 30, '鏡後 →', 'gr', 12));
+    s += line(Fx, cy + 8, Fx, 264, 'k', 1.2, 'stroke-dasharray="3 3"') + text(Fx, 282, cc ? '焦點 F' : '虛焦點 F（在鏡後）', 'k', 13, 'middle', 'font-weight="700"');
     s += text(100, 22, src ? '光源在焦點 → 反射後變成平行光' : '平行光射向' + (cc ? '凹' : '凸') + '面鏡', 'k', 14);
     setG(host, s);
-    Q(host, 'out').innerHTML = src ? '光源放在凹面鏡焦點，反射光變成<b>平行光束</b>，所以手電筒能照得很遠（利用光的可逆性）。' : cc ? '凹面鏡：平行光反射後<b>會聚於焦點</b>。物體靠近時成正立放大的虛像（化妝鏡）。' : '凸面鏡：平行光反射後<b>發散</b>，往後延伸（虛線）交於鏡後焦點。成正立縮小的虛像，視野大（後照鏡）。';
+    Q(host, 'out').innerHTML = src ? '光源放在凹面鏡焦點，反射光變成<b>平行光束</b>，所以手電筒能照得很遠（利用光的可逆性）。' : cc ? '凹面鏡：平行光反射後<b>會聚於焦點</b>。物體靠近時成正立放大的虛像（化妝鏡）。' : '凸面鏡：平行光在鏡前反射後<b>發散</b>，往後延伸（虛線）交於鏡後焦點。成正立縮小的虛像，視野大（後照鏡）。';
   };
   $$('[data-c]', host).forEach(b => b.onclick = () => { S.kind = b.dataset.c; $$('[data-c]', host).forEach(x => x.classList.toggle('on', x === b)); Q(host, 'src').disabled = S.kind === 'convex'; draw(); });
   Q(host, 'f').oninput = () => { S.f = +Q(host, 'f').value; Q(host, 'fv').textContent = S.f; draw(); };
@@ -2034,31 +2057,35 @@ SIMS.simLens = host => {
     s += line(4, cy, W - 4, cy, 'gr', 1.2);
     s += cv ? `<path d="M${xl},${cy - LH} Q${xl + 16},${cy} ${xl},${cy + LH} Q${xl - 16},${cy} ${xl},${cy - LH}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>` : `<path d="M${xl - 12},${cy - LH} Q${xl - 2},${cy} ${xl - 12},${cy + LH} L${xl + 12},${cy + LH} Q${xl + 2},${cy} ${xl + 12},${cy - LH}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>`;
     [[xl - f, 'F'], [xl + f, 'F'], [xl - 2 * f, '2F'], [xl + 2 * f, '2F']].forEach(([x, t]) => s += `<circle cx="${x}" cy="${cy}" r="3.5" fill="${COL.k}"/>` + text(x, cy + 16, t, 'k', 11, 'middle', halo));
-    s += arrow(xo, cy, xo, cy - h + 3, 'o', 5);
+    s += candleSvg(xo, cy, cy - h, 12);                    // 物：蠟燭（底在主軸、火焰在上）
     const none = cv && Math.abs(S.u - 1) < .03; let v = 0, m = 0, tip = null;
     if (!none) { v = cv ? u * f / (u - f) : -u * f / (u + f); m = -v / u; tip = { x: xl + v, y: cy - m * h }; }
     const real = cv && v > 0;
-    const outRay = P => {                                  // 從透鏡上的 P 點出去的光：實像→射向像點；虛像→背離像點（虛線接回像點）
-      const dx = real ? tip.x - P.x : P.x - tip.x, dy = real ? tip.y - P.y : P.y - tip.y, L = Math.hypot(dx, dy) || 1, len = real ? Math.max(L, 40) : ext;
-      return arrow(P.x, P.y, P.x + dx / L * len, P.y + dy / L * len, 'r', 2.2) + (real ? '' : line(P.x, P.y, tip.x, tip.y, 'r', 1.5, 'stroke-dasharray="5 4"'));
+    const outRay = P => {                                  // 從透鏡上的 P 點出去的光：實像→通過像點再往前；虛像→背離像點（虛線接回像點）
+      const dx = real ? tip.x - P.x : P.x - tip.x, dy = real ? tip.y - P.y : P.y - tip.y, L = Math.hypot(dx, dy) || 1, len = real ? L + 26 : ext;
+      return midArrow(P.x, P.y, P.x + dx / L * len, P.y + dy / L * len, 'r', 2.2, real ? .42 : .22) + (real ? '' : line(P.x, P.y, tip.x, tip.y, 'r', 1.5, 'stroke-dasharray="5 4"'));
     };
-    const par = P => arrow(P.x, P.y, P.x + 2.6 * f, P.y + 2.6 * h, 'r', 2.2);       // 物在焦點上：出射光互相平行
+    const par = P => midArrow(P.x, P.y, P.x + 2.6 * f, P.y + 2.6 * h, 'r', 2.2, .4);       // 物在焦點上：出射光互相平行
     const tag = (P, t) => text(T.x + (P.x - T.x) * .8, T.y + (P.y - T.y) * .8 - 5, t, 'o', 11, 'middle', halo);
-    if (shown(0)) { const P = { x: xl, y: T.y }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + tag(P, '①') + (none ? par(P) : outRay(P)); }
-    if (shown(1)) { const P = { x: xl, y: cy }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + tag(P, '②') + (none ? par(P) : outRay(P)); }
+    const inRay = P => midArrow(T.x, T.y, P.x, P.y, 'o', 2, .45);
+    if (shown(0)) { const P = { x: xl, y: T.y }; s += inRay(P) + tag(P, '①') + (none ? par(P) : outRay(P)); }
+    if (shown(1)) { const P = { x: xl, y: cy }; s += inRay(P) + tag(P, '②') + (none ? par(P) : outRay(P)); }
     if (shown(2) && !none) {
       const Fx = cv ? xl - f : xl + f, y3 = T.y + (cy - T.y) * (xl - T.x) / (Fx - T.x);
       if (Math.abs(y3 - cy) < LH - 2) {
-        const P = { x: xl, y: y3 }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + tag(P, '③');
-        if (real) s += arrow(P.x, P.y, Math.max(tip.x, P.x + 40), P.y, 'r', 2.2); else s += arrow(P.x, P.y, P.x + ext, P.y, 'r', 2.2) + line(P.x, P.y, tip.x, P.y, 'r', 1.5, 'stroke-dasharray="5 4"');
+        const P = { x: xl, y: y3 }; s += inRay(P) + tag(P, '③');
+        if (real) s += midArrow(P.x, P.y, tip.x + 26, P.y, 'r', 2.2, .42); else s += midArrow(P.x, P.y, P.x + ext, P.y, 'r', 2.2, .22) + line(P.x, P.y, tip.x, P.y, 'r', 1.5, 'stroke-dasharray="5 4"');
       }
     }
     const showImg = tip && (!steps || S.n >= 2);
-    if (showImg) {
-      s += `<line x1="${tip.x}" y1="${cy}" x2="${tip.x}" y2="${tip.y}" stroke="#d32f2f" stroke-width="5" ${real ? '' : 'stroke-dasharray="6 4" opacity=".75"'}/><circle cx="${tip.x}" cy="${tip.y}" r="5" fill="${real ? '#d32f2f' : '#fff'}" stroke="#d32f2f" stroke-width="2"/>`;
-      s += text(sg(tip.x, 24, W - 24), sg(tip.y < cy ? tip.y - 9 : tip.y + 17, 12, H - 22), real ? '實像' : '虛像', 'r', 12, 'middle', halo);
+    if (showImg) {                                         // 像：畫成箭頭（實像＝實線，虛像＝虛線），名稱放在旁邊不壓光線
+      const my = sg((cy + tip.y) / 2 + 4, 14, H - 24);
+      s += candleSvg(tip.x, cy, tip.y, sg(12 * Math.abs(m), 5, 34), real ? 1 : .7);      // 像：依放大率等比例縮放的蠟燭（虛像畫成半透明）
+      if (real) s += tip.x > W - 52 ? text(tip.x - 10, my, '實像', 'r', 12, 'end', halo) : text(tip.x + 10, my, '實像', 'r', 12, 'start', halo);
+      else if (cv) s += tip.x < 52 ? text(tip.x + 10, my, '虛像', 'r', 12, 'start', halo) : text(tip.x - 10, my, '虛像', 'r', 12, 'end', halo);
+      else s += line(tip.x, cy + 3, tip.x, cy + 34, 'r', 1.2, 'stroke-dasharray="2 3"') + text(tip.x, cy + 47, '虛像', 'r', 12, 'middle', halo);
     }
-    s += text(sg(xo, 14, W), cy + 30, '物', 'o', 12, 'middle', halo);
+    s += text(sg(xo, 14, W), cy - h - 8, '物', 'o', 12, 'middle', halo);
     setG(host, s);
     let msg;
     if (!cv) msg = '凹透鏡：不論物體在哪裡，像都是<b>正立、縮小的虛像</b>（和物體同一側），屏幕接不到。';
