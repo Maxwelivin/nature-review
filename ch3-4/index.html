@@ -2035,6 +2035,8 @@ function colorMix(host) {
 
 /* ---- z_app.js ---- */
 /* ===== 應用主程式：身分、紀錄回傳、首頁、檢核、複習、路由 ===== */
+/* 任務依課本小節順序排列（W→S→L→R→F→T→C）；sort 為穩定排序，同小節維持定義順序 */
+TASKS.sort((x, y) => SECS.findIndex(c => c.id === x.sec) - SECS.findIndex(c => c.id === y.sec));
 const SELF = ['我覺得我會', '不太確定', '我覺得還不會'];
 const ident = () => store.get('ident', null);
 const who = () => { const m = ident(); return m ? m.cls + '-' + m.seat : 'anon'; };
@@ -2208,7 +2210,7 @@ function viewTask(id) {
     const gb = $('#tGo'); gb.disabled = false;
     if (nowPass) {
       gb.remove();
-      const nxt = TASKS.find(x => !TS.get(x.id).passed && x.id !== id);
+      const i0 = TASKS.indexOf(t), nxt = [...TASKS.slice(i0 + 1), ...TASKS.slice(0, i0)].find(x => !TS.get(x.id).passed);   // 這題的「下一題」（往後找，找不到再從頭找）
       fb.insertAdjacentHTML('afterend', `<div class="pass-box">🎉 <b>${t.id} 通過！</b><p>作答前你覺得「${SELF[cur.self]}」，實際用了 <b>${n}</b> 題達成連續答對 ${PASS} 題。${n === PASS ? '一次到位，觀念很穩！' : ''}</p>
         <div class="row"><a class="btn primary" href="#/check">回檢核總覽</a>${nxt ? `<a class="btn ok" href="#/t/${nxt.id}">下一個：${nxt.id} →</a>` : ''}<button class="btn" id="tMore">再加練一題</button></div></div>`);
       $('#tMore').onclick = () => viewTask(id);
