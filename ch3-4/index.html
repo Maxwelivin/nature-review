@@ -118,7 +118,8 @@ details.qc summary{cursor:pointer;font-weight:700}
 .sim .sh{display:flex;gap:8px;align-items:center;font-weight:800;margin-bottom:6px}
 .sim .sh .chip{background:#fff3d6;color:#8a5a00}
 .sim .obs{margin:0 0 8px;font-size:15px;color:var(--text2)}
-.sim svg{width:100%;max-width:760px;margin:0 auto;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px;touch-action:none}
+.sim svg{width:100%;max-width:760px;margin:0 auto;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px;touch-action:pan-y}
+.sim svg[data-drag]{touch-action:none}
 .sim .ctl{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:8px 0}
 .sim .ctl label{display:flex;gap:6px;align-items:center;font-size:14.5px;font-weight:600}
 .sim .ctl input[type=range]{width:150px}
@@ -1255,14 +1256,14 @@ def('W4', { sec: '3-1', can: '說明波只傳遞能量、介質不會隨波前�
 /* ---- d_r_l.js ---- */
 /* ===== 第 4 章 複習卡（上）L1–L3、R1–R4、F1–F3 ===== */
 card('L1', { body: () => {
-  let a = `<circle cx="40" cy="70" r="14" fill="#ffd54f" stroke="#e0a800"/>` + text(40, 108, '光源', 'k', 13) + `<rect x="150" y="45" width="16" height="50" fill="#455a64"/>` + text(158, 110, '不透明物體', 'k', 13);
-  a += `<rect x="330" y="20" width="14" height="100" fill="#eceff1" stroke="#90a4ae"/>` + `<rect x="330" y="48" width="14" height="44" fill="#37474f"/>` + text(337, 138, '牆（影子）', 'k', 13);
-  a += arrow(55, 63, 325, 40, 'o', 2) + arrow(55, 77, 325, 100, 'o', 2) + line(55, 70, 150, 70, 'o', 2) + line(158, 48, 325, 48, 'o', 1.5, 'stroke-dasharray="5 4"') + line(158, 92, 325, 92, 'o', 1.5, 'stroke-dasharray="5 4"');
+  let a = `<polygon points="150,70 330,29 330,161 150,120" fill="#cfd8dc" opacity=".55"/><rect x="330" y="8" width="14" height="176" fill="#fffde7" stroke="#90a4ae"/><rect x="330" y="29" width="14" height="132" fill="#37474f"/>`;
+  a += arrow(55, 92, 327, 29, 'o', 2) + arrow(55, 98, 327, 161, 'o', 2) + arrow(55, 90, 327, 14, 'o', 2) + arrow(55, 100, 327, 176, 'o', 2) + line(55, 94, 150, 86, 'o', 2) + line(55, 96, 150, 104, 'o', 2);
+  a += `<rect x="150" y="70" width="16" height="50" fill="#455a64"/><circle cx="40" cy="95" r="15" fill="#ffd54f" stroke="#e0a800" stroke-width="2"/>` + text(40, 130, '光源', 'k', 13) + text(158, 142, '不透明物體', 'k', 13) + text(250, 100, '光到不了', 'k', 12) + text(352, 100, '影子', 'k', 13, 'start', 'font-weight="700"') + text(352, 22, '亮', 'o', 12, 'start') + text(352, 178, '亮', 'o', 12, 'start') + text(337, 200, '牆', 'k', 13);
   let b = `<circle cx="40" cy="60" r="14" fill="#ffd54f" stroke="#e0a800"/>` + text(40, 98, '光源', 'k', 13) + `<rect x="170" y="35" width="40" height="50" rx="6" fill="#a5d6a7" stroke="#2e7d32"/>` + text(190, 100, '課本', 'k', 13) + `<circle cx="340" cy="75" r="14" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="342" cy="75" r="6" fill="#333"/>` + text(340, 110, '眼睛', 'k', 13);
   b += arrow(55, 56, 165, 56, 'o', 2.4) + arrow(214, 62, 322, 72, 'r', 2.4);
   return `
   ${kp('光源與直進性', '<p>會自己發光的物體叫<b>光源</b>（太陽、通電的燈泡、燭火）。光在真空或均勻的介質中<b>沿直線前進</b>，這叫光的直進性。</p>', true)}
-  <h4>① 影子怎麼來</h4><div class="svgbox">${SVG(400, 150, a)}</div>
+  <h4>① 影子怎麼來</h4><div class="svgbox">${SVG(420, 206, a)}</div>
   <p>光走直線，被不透明的物體擋住，後面就是沒有光的暗區——影子。物體離光源愈近，擋住的光愈多，影子愈大。日晷就是靠影子看時間。</p>
   <h4>② 我們怎麼看見不發光的東西</h4><div class="svgbox">${SVG(400, 125, b)}</div>
   <p>光源的光照到物體，<b>被物體反射</b>，反射後的光跑進眼睛，這個物體就被看到了。</p>`; },
@@ -1345,7 +1346,8 @@ card('F3', { body: () => `
 /* ---- d_r_t.js ---- */
 /* ===== 第 4 章 複習卡（下）T1–T5、C1–C4 ===== */
 card('T1', { body: () => `
-  <div class="row" style="justify-content:center;gap:24px"><div class="svgbox">${lensRaySvg({ kind: 'convex', ray: 'parallel', showOut: true })}<p class="muted">凸透鏡：平行光會聚</p></div><div class="svgbox">${lensRaySvg({ kind: 'concave', ray: 'parallel', showOut: true })}<p class="muted">凹透鏡：平行光發散</p></div></div>
+  <div class="svgbox">${lensRaySvg({ kind: 'convex', ray: 'parallel', showOut: true })}<p class="muted">凸透鏡：平行光會聚到焦點</p></div>
+  <div class="svgbox">${lensRaySvg({ kind: 'concave', ray: 'parallel', showOut: true })}<p class="muted">凹透鏡：平行光發散（虛線往回延長會通過焦點）</p></div>
   ${tbl(['', '凸透鏡', '凹透鏡'], [['外形', '中央厚、邊緣薄', '中央薄、邊緣厚'], ['對光', '會聚（會聚透鏡）', '發散（發散透鏡）'], ['焦點', '平行光真正會聚的點', '發散光線「反向延長線」的交點（在入射側）']])}
   ${kp('名詞', '<ul><li><b>鏡心</b>：透鏡的中心。</li><li><b>焦距</b>：焦點到鏡心的距離。用太陽光＋白紙，找到光點最小最亮的位置，量到鏡心的距離，就是凸透鏡的焦距。</li><li>三稜鏡：厚端接厚端（像凸透鏡）→ 會聚；尖端接尖端（像凹透鏡）→ 發散。</li></ul>', true)}`,
   traps: ['凹透鏡的光線並沒有真的會聚，焦點是「延長線」的交點。'],
@@ -1582,6 +1584,7 @@ const simBox = (host, title, obs, inner) => { host.innerHTML = `<div class="sh">
 const rng = (host, label, k, min, max, step, val, unit = '') => `<label>${label}<input type="range" data-k="${k}" min="${min}" max="${max}" step="${step}" value="${val}"><b data-k="${k}v">${val}${unit}</b></label>`;
 const loop = (host, fn) => { const t0 = performance.now(); const tick = t => { if (!host.isConnected) return; fn((t - t0) / 1000); requestAnimationFrame(tick); }; requestAnimationFrame(tick); };
 function dragOn(svg, onMove) {
+  svg.setAttribute('data-drag', '1');   // 只有可拖曳的圖才鎖住觸控捲動
   const pt = e => { const r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal; return { x: (e.clientX - r.left) / r.width * vb.width, y: (e.clientY - r.top) / r.height * vb.height }; };
   let on = false;
   svg.addEventListener('pointerdown', e => { on = true; try { svg.setPointerCapture(e.pointerId); } catch (x) { } onMove(pt(e)); });
@@ -1592,7 +1595,8 @@ function dragOn(svg, onMove) {
 let AC = null;
 const audioCtx = () => { if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { } } if (AC && AC.state === 'suspended') AC.resume(); return AC; };
 const svgOpen = (w, h, k = 'svg') => `<svg viewBox="0 0 ${w} ${h}" data-k="${k}"><defs>${arrowDefs()}</defs><g data-k="g"></g></svg>`;
-const setG = (host, s) => { Q(host, 'g').innerHTML = s; };
+const SIM_TXT_K = 1.35;   // 手機上圖會縮小，圖內文字統一放大，確保可讀
+const setG = (host, s) => { Q(host, 'g').innerHTML = s.replace(/font-size="([\d.]+)"/g, (m, n) => `font-size="${Math.round(n * SIM_TXT_K * 10) / 10}"`); };
 
 /* --- 橫波與縱波 --- */
 SIMS.simWaveType = host => {
@@ -1628,12 +1632,12 @@ SIMS.simWaveType = host => {
 /* --- 週期波：振幅、波長、頻率、週期、波速 --- */
 SIMS.simPeriodic = host => {
   const mode = host.dataset.mode || 'speed', V0 = 12, SLOW = .25;
-  const obsT = { shape: '拖曳「振幅」和「波長」，看看波峰、波谷、波長（紅色括號）、振幅（橙色箭頭）怎麼變。', freq: '拖曳「頻率」：頻率變大，波變得更密、週期變小。紅點一秒上下幾次，頻率就是幾赫。', speed: '同時調「頻率」和「波長」，看波速 v ＝ f × λ 怎麼算出來。', fixedv: '這是同一條繩子：波速固定 12 公分／秒。你只能改頻率，波長會自動跟著變。' };
+  const obsT = { shape: '拖曳「振幅」和「波長」，看看波峰、波谷、波長（紅色括號）、振幅（橙色箭頭）怎麼變。', freq: '拖曳「頻率」：頻率變大，波變得更密、週期變小。看右邊的小球：它一秒上下幾次，頻率就是幾赫。', speed: '同時調「頻率」和「波長」，看波速 v ＝ f × λ 怎麼算出來。', fixedv: '這是同一條繩子：波速固定 12 公分／秒。你只能改頻率，波長會自動跟著變。' };
   const sl = (mode === 'shape' ? rng(host, '振幅 A（公分）', 'A', .5, 3, .5, 1.5) + rng(host, '波長 λ（公分）', 'L', 2, 8, 1, 6) : '') +
     (mode === 'freq' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 1) : '') +
     (mode === 'speed' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 2) + rng(host, '波長 λ（公分）', 'L', 2, 10, 1, 4) : '') +
     (mode === 'fixedv' ? rng(host, '頻率 f（赫）', 'F', .5, 6, .5, 2) : '');
-  simBox(host, '週期波模擬器（動畫放慢 4 倍）', obsT[mode], `<div class="ctl">${sl}</div>${svgOpen(500, 210)}<div class="out" data-k="out"></div>`);
+  simBox(host, '週期波（波形放慢 4 倍；右邊小球是真實速度）', obsT[mode], `<div class="ctl">${sl}</div>${svgOpen(548, 212)}<div class="out" data-k="out"></div>`);
   const st = { A: 1.5, L: 6, F: mode === 'shape' ? 1 : 1 };
   const read = () => { ['A', 'L', 'F'].forEach(k => { const e = Q(host, k); if (e) { st[k] = +e.value; Q(host, k + 'v').textContent = e.value; } }); if (mode === 'fixedv') st.L = V0 / st.F; if (mode === 'freq') { st.L = 6; } if (mode === 'speed') st.A = 1.5; if (mode === 'fixedv') st.A = 1.5; };
   $$('input', host).forEach(i => i.oninput = read); read();
@@ -1648,9 +1652,11 @@ SIMS.simPeriodic = host => {
     let xc = (((v * tt + st.L / 4) % st.L) + st.L) % st.L; if (xc < .3) xc += st.L;
     const a = xc + st.L <= 14 ? xc : xc - st.L, b = a + st.L, yt = cy - st.A * ypx - 18;
     if (a >= 0 && b <= 14.2) s += arrow(X0 + a * px + 3, yt, X0 + b * px - 3, yt, 'p', 2.2) + arrow(X0 + b * px - 3, yt, X0 + a * px + 3, yt, 'p', 2.2) + text(X0 + (a + b) / 2 * px, yt - 5, 'λ ＝ ' + st.L + ' 公分', 'p', 13);
-    const xa = xc + st.L <= 14 ? xc + st.L : xc; s += arrow(X0 + xa * px + 8, cy - 3, X0 + xa * px + 8, cy - st.A * ypx + 3, 'o', 2.6) + text(X0 + xa * px + 12, cy - st.A * ypx / 2, 'A', 'o', 14, 'start', 'font-weight="700"');
+    const xa = xc + st.L <= 14 ? xc + st.L : xc; s += arrow(X0 + xa * px + 8, cy - 3, X0 + xa * px + 8, cy - st.A * ypx + 3, 'o', 2.6) + text(X0 + xa * px + 16, cy - st.A * ypx / 2 + 4, '振幅', 'o', 11, 'start', 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="4"');
     const rx = 2, ry = cy - st.A * ypx * Math.sin(2 * Math.PI * (rx - v * tt) / st.L);
     s += `<circle cx="${X0 + rx * px}" cy="${ry}" r="7" fill="${COL.r}"/>` + text(X0 + rx * px, cy + 44, '紅點', 'r', 12);
+    { const bx = 514, by = cy - 34 * Math.sin(2 * Math.PI * st.F * now);            // 真實速度：一秒上下 f 次（不放慢）
+      s += `<rect x="${bx - 20}" y="24" width="40" height="${2 * (cy - 24)}" rx="8" fill="#fff8e1" stroke="#f0c36d"/>` + line(bx - 14, cy, bx + 14, cy, '#f0c36d', 1) + `<circle cx="${bx}" cy="${by.toFixed(1)}" r="8" fill="${COL.r}"/>` + text(bx, 16, '真實', 'r', 12, 'middle', 'font-weight="700"') + text(bx, 2 * cy - 8, `1秒${st.F}次`, 'r', 11.5); }
     setG(host, s);
   });
   const o = Q(host, 'out'), upd = () => { read(); const T = round(1 / st.F, 3), v = round(st.F * st.L, 2);
@@ -1660,30 +1666,40 @@ SIMS.simPeriodic = host => {
 };
 
 /* --- 波以耳實驗：真空罩裡的鈴鐺 --- */
+const MUTE_TIP = '<span class="muted">（iPhone 沒聲音？請關掉側邊的靜音鍵）</span>';
 SIMS.simVacuum = host => {
   let snd = false, osc = null, gain = null;
-  simBox(host, '真空罩裡的鈴鐺', '把空氣抽走，罩內的小點（空氣）變少，罩外聽到的鈴聲會怎麼變？鈴鐺還看得到嗎？',
-    `<div class="ctl">${rng(host, '抽走空氣', 'P', 0, 100, 5, 0, ' %')}<button class="btn" data-k="snd">🔊 聽聽看</button></div>${svgOpen(480, 230)}<div class="out" data-k="out"></div>`);
-  const dots = Array.from({ length: 60 }, () => [Math.random(), Math.random(), Math.random()]);
-  const P = () => +Q(host, 'P').value;
-  Q(host, 'P').oninput = () => { Q(host, 'Pv').textContent = P() + ' %'; upd(); };
-  const upd = () => { const p = P(), vol = Math.pow(1 - p / 100, 1.6); Q(host, 'out').innerHTML = p >= 100 ? '罩內是<b>真空</b>：鈴鐺還在敲、看得到，但<b>聽不到聲音</b> → 聲音需要介質；光不需要。' : `罩內空氣剩 ${100 - p}%：聲音大小約剩 ${Math.round(vol * 100)}%。`; if (gain) gain.gain.value = snd ? vol * .18 : 0; };
+  simBox(host, '真空罩裡的鈴鐺', '把空氣抽走，罩內的小點（空氣）變少。耳朵聽到的鈴聲怎麼變？眼睛還看得到鈴鐺在搖嗎？',
+    `<div class="ctl">${rng(host, '抽走空氣', 'P', 0, 100, 5, 0, ' %')}<button class="btn" data-k="snd">🔊 聽聽看</button>${MUTE_TIP}</div>${svgOpen(440, 262)}<div class="out" data-k="out"></div>`);
+  const dots = Array.from({ length: 70 }, () => [Math.random(), Math.random(), Math.random()]);
+  const P = () => +Q(host, 'P').value, VOL = p => Math.pow(1 - p / 100, 1.6);
+  const upd = () => {
+    const p = P(), vol = VOL(p); Q(host, 'Pv').textContent = p + ' %';
+    Q(host, 'out').innerHTML = p >= 100 ? '罩內是<b>真空</b>：鈴鐺還在搖、<b>看得到</b>，但<b>聽不到聲音</b> → 聲音需要介質才能傳；光不需要。' : `罩內空氣剩 ${100 - p}%，聽到的聲音約剩 ${Math.round(vol * 100)}%。空氣愈少，聲音愈小。`;
+    if (gain) gain.gain.value = snd ? vol * .18 : 0;
+  };
+  Q(host, 'P').oninput = upd;
   Q(host, 'snd').onclick = () => {
     snd = !snd; Q(host, 'snd').textContent = snd ? '🔇 關掉聲音' : '🔊 聽聽看';
     if (snd && !osc) { const ac = audioCtx(); if (!ac) return; osc = ac.createOscillator(); gain = ac.createGain(); osc.type = 'sine'; osc.frequency.value = 880; osc.connect(gain); gain.connect(ac.destination); osc.start(); }
     upd();
   };
   loop(host, t => {
-    if (!host.isConnected && osc) { try { osc.stop(); } catch (e) { } return; }
-    const p = P() / 100, ring = Math.sin(t * 22) * 5;
-    let s = `<rect x="150" y="50" width="180" height="140" rx="16" fill="#f4f9ff" stroke="#1565c0" stroke-width="3"/><rect x="130" y="190" width="220" height="14" rx="4" fill="#90a4ae"/>`;
-    dots.forEach(d => { if (d[2] > p) s += `<circle cx="${160 + d[0] * 160 + Math.sin(t * 3 + d[1] * 9) * 3}" cy="${60 + d[1] * 120}" r="2.6" fill="#90a4ae"/>`; });
-    s += `<rect x="226" y="62" width="28" height="4" fill="#555"/><path d="M${230 + ring * .4} 68 q10 -10 20 0 v28 h-20z" fill="#ffca28" stroke="#b28704" stroke-width="2"/><circle cx="${240 + ring * .4}" cy="100" r="3.5" fill="#b28704"/>`;
-    s += `<line x1="${180 + ring}" y1="86" x2="${222 + ring * .6}" y2="96" stroke="#444" stroke-width="3"/><circle cx="${176 + ring}" cy="85" r="6" fill="#444"/>`;
-    s += text(240, 44, '玻璃罩（接抽氣機）', 'gr', 13);
-    const vol = Math.pow(1 - p, 1.6);
-    for (let k = 0; k < 3; k++) s += `<path d="M${350 + k * 18} ${95 - 18 - k * 4} q${12 + k * 4} ${18 + k * 4} 0 ${36 + k * 8}" fill="none" stroke="${COL.o}" stroke-width="3" opacity="${vol * (1 - k * .22)}"/>`;
-    s += text(410, 96, '聲音', 'o', 13) + `<circle cx="440" cy="190" r="10" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="442" cy="190" r="4" fill="#333"/>` + text(440, 216, '眼睛：看得到', 'k', 12);
+    const p = P() / 100, vol = VOL(P()), sw = Math.sin(t * 16) * 9;
+    // 底座、抽氣機與管子
+    let s = `<rect x="96" y="214" width="228" height="14" rx="4" fill="#78909c"/><rect x="60" y="218" width="40" height="6" fill="#90a4ae"/><rect x="10" y="200" width="52" height="40" rx="6" fill="#b0bec5" stroke="#546e7a" stroke-width="2"/>` + text(36, 256, '抽氣機', 'k', 11);
+    if (p > 0 && p < 1) s += arrow(98, 208, 66, 208, 'b', 2) + text(82, 200, '空氣', 'b', 10);
+    // 玻璃罩與罩內空氣
+    s += `<path d="M120,214 V92 Q120,26 210,26 Q300,26 300,92 V214 Z" fill="#eef7ff" stroke="#1565c0" stroke-width="3"/>` + text(210, 16, '玻璃罩', 'b', 11);
+    dots.forEach(d => { if (d[2] > p) { const x = 130 + d[0] * 160 + Math.sin(t * 3 + d[1] * 9) * 3, y = 44 + d[1] * 160; if (y > 92 || Math.hypot((x - 210) / 80, (y - 92) / 58) < 1) s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.6" fill="#90a4ae"/>`; } });
+    // 鈴鐺（一直在搖）
+    s += line(210, 27, 210, 74, '#555', 2.5) + `<path d="M210,72 q-30,8 -34,52 h68 q-4,-44 -34,-52 z" fill="#ffca28" stroke="#b28704" stroke-width="2.5"/><rect x="170" y="122" width="80" height="7" rx="3.5" fill="#b28704"/>`;
+    s += line(210, 100, 210 + sw, 140, '#5d4037', 3) + `<circle cx="${(210 + sw).toFixed(1)}" cy="142" r="7" fill="#5d4037"/>`;
+    s += `<path d="M158,88 q-9,12 0,24 M148,82 q-13,18 0,36 M262,88 q9,12 0,24 M272,82 q13,18 0,36" fill="none" stroke="#b28704" stroke-width="2"/>` + text(210, 176, '鈴鐺在振動', 'k', 11);
+    // 傳到罩外的聲音、耳朵、眼睛
+    for (let k = 0; k < 3; k++) s += `<path d="M${318 + k * 17},${116 - k * 5} q${10 + k * 3},${18 + k * 5} 0,${36 + k * 10}" fill="none" stroke="${COL.o}" stroke-width="3.5" opacity="${(vol * (1 - k * .2)).toFixed(2)}"/>`;
+    s += text(400, 146, '👂', 'k', 22) + text(400, 172, vol > .03 ? '聽得到' : '聽不到！', vol > .03 ? 'g' : 'r', 12, 'middle', 'font-weight="700"');
+    s += text(400, 60, '👁', 'k', 20) + text(400, 82, '看得到', 'g', 12, 'middle', 'font-weight="700"') + line(380, 52, 306, 78, '#2e7d32', 1.5, 'stroke-dasharray="4 4"');
     setG(host, s);
   });
   upd();
@@ -1697,7 +1713,7 @@ SIMS.simSound3 = host => {
   const ctl = (mode === 'amp' || mode === 'all' ? rng(host, '振幅（響度）', 'A', .1, 1, .1, .6) : '') + (mode === 'freq' || mode === 'all' ? rng(host, '頻率（音調）', 'F', 2, 10, 1, 4) : '') +
     (mode === 'shape' || mode === 'all' ? `<label>波形（音色）<select data-k="W"><option value="sine">圓滑的波</option><option value="tri">三角波</option><option value="sq">方波</option><option value="saw">鋸齒波</option></select></label>` : '') +
     (mode === 'noise' ? `<span class="seg" data-k="seg"><button data-n="0" class="on">樂音（有規律）</button><button data-n="1">噪音（沒有規律）</button></span>` : '');
-  simBox(host, '聲音三要素實驗室', obs, `<div class="ctl">${ctl}<button class="btn" data-k="snd">🔊 播放聲音</button></div>${svgOpen(480, 150)}<div class="out" data-k="out"></div>`);
+  simBox(host, '聲音三要素實驗室', obs, `<div class="ctl">${ctl}<button class="btn" data-k="snd">🔊 播放聲音</button>${MUTE_TIP}</div>${svgOpen(480, 150)}<div class="out" data-k="out"></div>`);
   const read = () => {
     const a = Q(host, 'A'), f = Q(host, 'F'), w = Q(host, 'W');
     if (a) { S.amp = +a.value; Q(host, 'Av').textContent = a.value; } if (f) { S.cyc = +f.value; Q(host, 'Fv').textContent = f.value; } if (w) S.shape = w.value;
@@ -1729,19 +1745,22 @@ SIMS.simSound3 = host => {
 /* --- 聽覺範圍 --- */
 SIMS.simHearing = host => {
   const ANI = [['人', 20, 20000, '#1565c0'], ['狗', 15, 50000, '#6d4c41'], ['貓', 60, 65000, '#ef6c00'], ['海豚', 2000, 100000, '#00838f'], ['蝙蝠', 1000, 120000, '#6a1b9a']];
-  simBox(host, '誰聽得到？動物的聽覺範圍', '拖曳頻率，看哪些動物聽得到。越過紅線（20000 赫）就是超聲波，人聽不到。',
-    `<div class="ctl"><label>頻率<input type="range" data-k="f" min="1" max="5.1" step="0.01" value="3"><b data-k="fv"></b></label></div>${svgOpen(500, 220)}<div class="out" data-k="out"></div>`);
+  simBox(host, '誰聽得到？動物的聽覺範圍', '拖曳頻率，看哪些動物聽得到（色條變深）。越過紅色虛線（20000 赫）就是超聲波，人聽不到。',
+    `<div class="ctl"><label>頻率<input type="range" data-k="f" min="1" max="5.1" step="0.01" value="3" style="width:190px"><b data-k="fv"></b></label></div>${svgOpen(500, 236)}<div class="out" data-k="out"></div>`);
   const L = f => 70 + (Math.log10(f) - 1) / 4.2 * 410, F = () => Math.pow(10, +Q(host, 'f').value);
   const draw = () => {
     const f = F(); let s = '';
-    [10, 100, 1000, 10000, 100000].forEach(v => { s += line(L(v), 20, L(v), 200, '#e3e8ee', 1) + text(L(v), 214, v >= 1000 ? (v / 1000) + 'k' : v, 'gr', 12); });
-    s += text(486, 214, '赫', 'gr', 12, 'end');
-    ANI.forEach((a, i) => { const y = 34 + i * 34, ok = f >= a[1] && f <= a[2]; s += text(40, y + 5, a[0], 'k', 14, 'end', 'font-weight="700"') + `<rect x="${L(a[1])}" y="${y - 10}" width="${L(a[2]) - L(a[1])}" height="20" rx="10" fill="${a[3]}" opacity="${ok ? 1 : .28}"/>` + (ok ? text(L(a[2]) + 6, y + 5, '聽得到', 'g', 12, 'start', 'font-weight="700"') : ''); });
-    s += line(L(20000), 14, L(20000), 200, 'r', 2.2, 'stroke-dasharray="6 4"') + text(L(20000) + 4, 14, '20000：超聲波 →', 'r', 12, 'start') + line(L(f), 8, L(f), 200, 'k', 3);
+    [[10, '10'], [100, '100'], [1000, '1千'], [10000, '1萬'], [100000, '10萬']].forEach(([v, t]) => { s += line(L(v), 26, L(v), 206, '#e3e8ee', 1) + text(L(v), 222, t, 'gr', 11); });
+    s += text(34, 222, '(赫)', 'gr', 10);
+    ANI.forEach((a, i) => {
+      const y = 46 + i * 35, ok = f >= a[1] && f <= a[2], x1 = L(a[1]), x2 = L(a[2]);
+      s += text(52, y + 5, a[0], 'k', 13, 'end', 'font-weight="700"') + `<rect x="${x1}" y="${y - 12}" width="${x2 - x1}" height="24" rx="12" fill="${a[3]}" opacity="${ok ? 1 : .25}"/>` + (ok ? text((x1 + x2) / 2, y + 4, '聽得到', '#fff', 11, 'middle', 'font-weight="700"') : '');
+    });
+    s += line(L(20000), 20, L(20000), 206, 'r', 2.2, 'stroke-dasharray="6 4"') + text(L(20000) + 5, 14, '超聲波 →', 'r', 10.5, 'start', 'font-weight="700"') + text(L(20000) - 5, 14, '20000', 'r', 10.5, 'end') + line(L(f), 22, L(f), 208, 'k', 3.5);
     setG(host, s);
     Q(host, 'fv').textContent = Math.round(f).toLocaleString() + ' 赫';
     const who = ANI.filter(a => f >= a[1] && f <= a[2]).map(a => a[0]);
-    Q(host, 'out').innerHTML = `${Math.round(f).toLocaleString()} 赫：${f > 20000 ? '<b>超聲波</b>（頻率超過 20000 赫），人聽不到。' : f < 20 ? '低於人耳的下限（20 赫），人聽不到。' : '落在人耳可聽範圍（20～20000 赫）。'}<br>聽得到的動物：${who.length ? who.join('、') : '（這裡沒有列出的動物聽得到）'}`;
+    Q(host, 'out').innerHTML = `${Math.round(f).toLocaleString()} 赫：${f > 20000 ? '<b>超聲波</b>（高於 20000 赫），人聽不到。' : f < 20 ? '低於人耳的下限（20 赫），人聽不到。' : '在人耳聽得到的範圍內（20～20000 赫）。'}<br>聽得到的動物：${who.length ? who.join('、') : '（這五種都聽不到）'}`;
   };
   Q(host, 'f').oninput = draw; draw();
 };
@@ -1751,32 +1770,35 @@ SIMS.simHearing = host => {
 const sg = (c, min, max) => Math.max(min, Math.min(max, c));
 
 /* --- 針孔成像 --- */
+const candleSvg = (x, y0, y1, w = 16, op = 1) => {          // 蠟燭：底在 y0、火焰在 y1（y1<y0 為正立，y1>y0 為倒立）
+  const dir = y1 >= y0 ? 1 : -1, L = Math.abs(y1 - y0), fl = Math.min(15, L * .3), be = y1 - dir * fl;
+  return `<g opacity="${op}"><rect x="${x - w / 2}" y="${Math.min(y0, be)}" width="${w}" height="${Math.abs(be - y0)}" fill="#fff3cd" stroke="#c9a227" stroke-width="1.5"/>` +
+    `<ellipse cx="${x}" cy="${(be + y1) / 2}" rx="${w * .42}" ry="${fl / 2 + 1}" fill="#ff9800" stroke="#e65100" stroke-width="1"/></g>`;
+};
 SIMS.simPinhole = host => {
   const S = { u: 130, v: 90, multi: false, big: false };
-  simBox(host, '針孔成像', '像是倒立的嗎？把物移遠、把屏移遠，像各會怎麼變？再試試「多個針孔」和「大針孔」。',
-    `<div class="ctl">${rng(host, '物到針孔的距離', 'u', 60, 200, 10, 130)}${rng(host, '針孔到屏幕的距離', 'v', 40, 140, 10, 90)}<label><input type="checkbox" data-k="m"> 3 個針孔</label><label><input type="checkbox" data-k="b"> 針孔變大</label></div>${svgOpen(520, 300)}<div class="out" data-k="out"></div>`);
+  simBox(host, '針孔成像', '屏幕上的像是倒的嗎？把蠟燭移遠、把屏幕移遠，像各會怎麼變？再試試「3 個針孔」和「針孔變大」。',
+    `<div class="ctl">${rng(host, '蠟燭到針孔的距離', 'u', 60, 200, 10, 130)}${rng(host, '針孔到屏幕的距離', 'v', 40, 140, 10, 90)}<label><input type="checkbox" data-k="m"> 3 個針孔</label><label><input type="checkbox" data-k="b"> 針孔變大</label></div>${svgOpen(440, 270)}<div class="out" data-k="out"></div>`);
   const draw = () => {
     S.u = +Q(host, 'u').value; S.v = +Q(host, 'v').value; S.multi = Q(host, 'm').checked; S.big = Q(host, 'b').checked;
     Q(host, 'uv').textContent = S.u; Q(host, 'vv').textContent = S.v;
-    const Xw = 270, cy = 150, h = 46, xo = Xw - S.u, xs = Xw + S.v;
-    const holes = S.multi ? [cy - 22, cy, cy + 22] : [cy], g = S.big && !S.multi ? 22 : 3;
-    let s = `<rect x="${Xw - 6}" y="20" width="12" height="260" fill="#546e7a"/>`;
-    s += `<rect x="${Xw - 7}" y="${cy - g - (S.multi ? 25 : 0)}" width="14" height="${2 * g + (S.multi ? 50 : 0)}" fill="#fff"/>`;
-    holes.forEach(y => { s += `<rect x="${Xw - 7}" y="${y - (S.multi ? 3 : g)}" width="14" height="${S.multi ? 6 : 2 * g}" fill="#fff"/>`; });
-    if (S.multi) s += `<rect x="${Xw - 7}" y="${cy - 25}" width="14" height="50" fill="#546e7a" opacity=".0"/>`;
-    s += line(xs, 30, xs, 280, 'gr', 4) + text(xs, 296, '屏幕', 'k', 13);
-    s += line(xo, cy, xo, cy - h, 'o', 5) + `<circle cx="${xo}" cy="${cy - h - 6}" r="9" fill="#ffca28" stroke="#e65100" stroke-width="2"/>` + text(xo, cy + 24, '物（發光的蠟燭）', 'k', 13);
-    const k = (S.u + S.v) / S.u;
+    const Xw = 222, cy = 96, h = 60, xo = Xw - S.u, xs = Xw + S.v, k = (S.u + S.v) / S.u, blur = S.big && !S.multi;
+    const holes = S.multi ? [cy - 26, cy, cy + 26] : [cy], g = blur ? 16 : 3;
+    let wall = '', prev = 24;                                  // 擋板（缺口＝針孔）
+    holes.forEach(y => { wall += `<rect x="${Xw - 6}" y="${prev}" width="12" height="${y - g - prev}" fill="#455a64"/>`; prev = y + g; });
+    wall += `<rect x="${Xw - 6}" y="${prev}" width="12" height="${250 - prev}" fill="#455a64"/>`;
+    let s = `<rect x="${xs}" y="22" width="30" height="230" fill="#f5f5f5" stroke="#90a4ae" stroke-width="2"/>` + text(xs + 15, 266, '屏幕', 'k', 12);
+    s += wall + text(Xw, 14, S.multi ? '3 個針孔' : blur ? '大針孔' : '針孔', 'r', 12, 'middle', 'font-weight="700"') + text(Xw, 266, '擋板', 'k', 12);
+    s += candleSvg(xo, cy, cy - h, 20) + text(xo, cy + 18, '蠟燭', 'k', 12);
     holes.forEach(yh => {
-      const ty = (cy - h) + (yh - (cy - h)) * k, by = cy + (yh - cy) * k;
-      s += line(xo, cy - h, xs, ty, 'o', 1.4) + line(xo, cy, xs, by, 'b', 1.4);
-      if (S.big && !S.multi) { for (let j = -2; j <= 2; j++) s += line(xs + 1, by + j * 3, xs + 1, ty + j * 3, '#d32f2f', 6, 'opacity=".14"'); }
-      else s += line(xs + 1, by, xs + 1, ty, 'r', 5);
-      s += `<circle cx="${xs + 1}" cy="${ty}" r="${S.big && !S.multi ? 11 : 7}" fill="#ffca28" stroke="#e65100" stroke-width="1.5" opacity="${S.big && !S.multi ? .55 : 1}"/>`;
+      const ty = (cy - h) + (yh - (cy - h)) * k, by = cy + (yh - cy) * k, k2 = (S.u + S.v + 15) / S.u;      // 火焰、燭底的光各自直線穿過針孔
+      s += line(xo, cy - h, xs + 15, (cy - h) + (yh - (cy - h)) * k2, 'o', 1.6) + line(xo, cy, xs + 15, cy + (yh - cy) * k2, 'b', 1.6);
+      if (blur) for (let j = -3; j <= 3; j++) s += candleSvg(xs + 15, by + j * 4, ty + j * 4, 22, .12);
+      else s += candleSvg(xs + 15, by, ty, 20, 1);
     });
     setG(host, s);
     const r = round(S.v / S.u, 2);
-    Q(host, 'out').innerHTML = `像和物比較：<b>上下顛倒</b>（火焰在下、蠟燭在上）。像高 ＝ 物高 × ${S.v}÷${S.u} ＝ <b>${r}</b> 倍${r > 1 ? '（比物大）' : r < 1 ? '（比物小）' : '（等大）'}。${S.multi ? '<br>有 3 個針孔 → 屏幕上出現 <b>3 個像</b>。' : ''}${S.big && !S.multi ? '<br>針孔變大 → 變亮，但像<b>變模糊</b>。' : ''}`;
+    Q(host, 'out').innerHTML = `屏幕上的像<b>上下顛倒</b>（火焰跑到下面）。橘線＝火焰的光，藍線＝燭底的光，兩條線在針孔交叉。<br>像的大小約是蠟燭的 <b>${r}</b> 倍${r > 1 ? '（比蠟燭大）' : r < 1 ? '（比蠟燭小）' : '（一樣大）'}。${S.multi ? '<br>3 個針孔 → 屏幕上有 <b>3 個像</b>。' : ''}${blur ? '<br>針孔變大 → 進來的光變多，像<b>變亮但變模糊</b>。' : ''}`;
   };
   $$('input', host).forEach(i => i.addEventListener('input', draw)); draw();
 };
@@ -1800,6 +1822,7 @@ SIMS.simReflect = host => {
     s += `<circle cx="${from.x}" cy="${from.y}" r="11" fill="#ffd54f" stroke="#e0a800" stroke-width="2"/>`;
     s += text(from.x + (S.rev ? 14 : -14), from.y - 14, '入射線', cin, 13, S.rev ? 'start' : 'end') + text(to.x + (S.rev ? -14 : 14), to.y - 14, '反射線', cout, 13, S.rev ? 'end' : 'start');
     const r = 55; s += `<path d="M${O.x},${O.y - r} A${r},${r} 0 0 0 ${O.x - r * sn},${O.y - r * cs}" fill="none" stroke="${COL.o}" stroke-width="2.5"/><path d="M${O.x},${O.y - r - 9} A${r + 9},${r + 9} 0 0 1 ${O.x + (r + 9) * sn},${O.y - (r + 9) * cs}" fill="none" stroke="${COL.r}" stroke-width="2.5"/>`;
+    s += text(O.x - (r + 26) * Math.sin(d2r(th / 2)), O.y - (r + 26) * Math.cos(d2r(th / 2)) + 4, th + '°', 'o', 13, 'middle', 'font-weight="700"') + text(O.x + (r + 28) * Math.sin(d2r(th / 2)), O.y - (r + 28) * Math.cos(d2r(th / 2)) + 4, th + '°', 'r', 13, 'middle', 'font-weight="700"');
     setG(host, s);
     Q(host, 'out').innerHTML = `入射角 ＝ <b>${th}°</b>，反射角 ＝ <b>${th}°</b>（入射角 ＝ 反射角）。入射線與反射線的夾角 ＝ ${2 * th}°。${S.rev ? '<br>光走回頭路：路徑和角度都和原來一樣，只是方向相反（光的可逆性）。' : ''}`;
   };
@@ -1810,17 +1833,17 @@ SIMS.simReflect = host => {
 };
 function reflectImage(host) {
   simBox(host, '平面鏡成像', '改變物體離鏡面的距離，看像的位置、大小。像到鏡面的距離和物體到鏡面的距離有什麼關係？',
-    `<div class="ctl">${rng(host, '物距 d（公尺）', 'd', 1, 4, .5, 2)}</div>${svgOpen(560, 270)}<div class="out" data-k="out"></div>`);
+    `<div class="ctl">${rng(host, '物距 d（公尺）', 'd', 1, 4, .5, 2)}</div>${svgOpen(560, 300)}<div class="out" data-k="out"></div>`);
   const draw = () => {
     const d = +Q(host, 'd').value; Q(host, 'dv').textContent = d;
     const Mx = 320, sc = 46, xo = Mx - d * sc, xi = Mx + d * sc, Ty = 130, By = 205, E = { x: 40, y: 175 };
     const yp = Ty + (E.y - Ty) * ((Mx - xi) / (E.x - xi));
-    let s = line(Mx, 20, Mx, 245, 'k', 4) + `<rect x="${Mx}" y="20" width="8" height="225" fill="#cfd8e3"/>` + text(Mx, 262, '平面鏡', 'k', 13);
-    s += line(xo, By, xo, Ty, 'o', 6) + `<circle cx="${xo}" cy="${Ty - 8}" r="9" fill="#ffca28" stroke="#e65100" stroke-width="2"/>` + text(xo, By + 16, '物', 'o', 13);
-    s += line(xi, By, xi, Ty, 'o', 6, 'stroke-dasharray="5 4" opacity=".55"') + `<circle cx="${xi}" cy="${Ty - 8}" r="9" fill="none" stroke="#e65100" stroke-width="2" stroke-dasharray="4 3"/>` + text(xi, By + 16, '像（虛像）', 'o', 13);
+    let s = line(Mx, 20, Mx, 250, 'k', 4) + `<rect x="${Mx}" y="20" width="8" height="230" fill="#cfd8e3"/>` + text(Mx, 292, '平面鏡', 'k', 13);
+    s += line(xo, By, xo, Ty, 'o', 6) + `<circle cx="${xo}" cy="${Ty - 8}" r="9" fill="#ffca28" stroke="#e65100" stroke-width="2"/>` + text(xo, By + 22, '物', 'o', 13);
+    s += line(xi, By, xi, Ty, 'o', 6, 'stroke-dasharray="5 4" opacity=".55"') + `<circle cx="${xi}" cy="${Ty - 8}" r="9" fill="none" stroke="#e65100" stroke-width="2" stroke-dasharray="4 3"/>` + text(xi, By + 22, '像（虛）', 'o', 13);
     s += arrow(xo + 8, Ty, Mx - 2, yp, 'r', 2) + arrow(Mx - 2, yp, E.x + 16, E.y, 'r', 2) + line(Mx, yp, xi - 8, Ty, 'r', 1.6, 'stroke-dasharray="5 4"');
     s += `<circle cx="${E.x}" cy="${E.y}" r="11" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="${E.x + 3}" cy="${E.y}" r="4.5" fill="#333"/>` + text(E.x, E.y + 28, '眼睛', 'k', 12);
-    s += arrow(xo, 232, Mx - 3, 232, 'g', 2) + arrow(Mx + 3, 232, xi, 232, 'g', 2) + text((xo + Mx) / 2, 226, `物距 ${d} 公尺`, 'g', 13) + text((xi + Mx) / 2, 226, `像距 ${d} 公尺`, 'g', 13);
+    s += arrow(xo, 268, Mx - 3, 268, 'g', 2) + arrow(Mx + 3, 268, xi, 268, 'g', 2) + text((xo + Mx) / 2, 258, `物距 ${d}`, 'g', 13) + text((xi + Mx) / 2, 258, `像距 ${d}`, 'g', 13);
     setG(host, s);
     Q(host, 'out').innerHTML = `物距 ＝ 像距 ＝ <b>${d}</b> 公尺；物與像相距 <b>${2 * d}</b> 公尺。像和物<b>等大</b>、以鏡面為中心<b>對稱</b>。<br>虛線表示光線「看起來」是從鏡後的像發出來的，那裡並沒有真實的光線，所以是<b>虛像</b>。`;
   };
@@ -1839,14 +1862,15 @@ SIMS.simCurved = host => {
     let s = line(20, cy, 520, cy, 'gr', 1, 'stroke-dasharray="5 4"');
     let d = ''; for (let y = -105; y <= 105; y += 5) d += (d ? 'L' : 'M') + sx(y).toFixed(1) + ',' + (cy + y);
     s += `<path d="${d}" fill="none" stroke="#1565c0" stroke-width="5"/>`;
-    const Fx = cc ? V - f : V + f; s += `<circle cx="${Fx}" cy="${cy}" r="5" fill="${COL.k}"/>` + text(Fx, cy + 20, cc ? '焦點 F' : '焦點 F（在鏡後）', 'k', 13);
+    const Fx = cc ? V - f : V + f; s += `<circle cx="${Fx}" cy="${cy}" r="5" fill="${COL.k}"/>` + '';
     ys.forEach(y => {
       const hx = sx(y), hy = cy + y;
       if (src) { s += arrow(Fx, cy, hx - 4, hy, 'o', 1.8) + arrow(hx, hy, 24, hy, 'r', 2); return; }
       s += arrow(24, hy, hx - 3, hy, 'o', 2);
-      if (cc) { const dx = Fx - hx, dy = cy - hy, L = Math.hypot(dx, dy); s += arrow(hx, hy, Fx, cy, 'r', 2) + line(Fx, cy, Fx + dx / L * 70, cy + dy / L * 70, 'r', 1.6); }
+      if (cc) { const dx = Fx - hx, dy = cy - hy, L = Math.hypot(dx, dy); s += arrow(hx, hy, Fx, cy, 'r', 2) + line(Fx, cy, Fx + dx / L * 26, cy + dy / L * 26, 'r', 1.6); }
       else { const dx = hx - Fx, dy = hy - cy, L = Math.hypot(dx, dy); s += arrow(hx, hy, hx - dx / L * 190, hy - dy / L * 190, 'r', 2) + line(hx, hy, Fx, cy, 'r', 1.4, 'stroke-dasharray="5 4"'); }
     });
+    s += line(Fx, cy + 8, Fx, 264, 'k', 1.2, 'stroke-dasharray="3 3"') + text(Fx, 282, cc ? '焦點 F' : '焦點 F（在鏡後）', 'k', 13, 'middle', 'font-weight="700"');
     s += text(100, 22, src ? '光源在焦點 → 反射後變成平行光' : '平行光射向' + (cc ? '凹' : '凸') + '面鏡', 'k', 14);
     setG(host, s);
     Q(host, 'out').innerHTML = src ? '光源放在凹面鏡焦點，反射光變成<b>平行光束</b>，所以手電筒能照得很遠（利用光的可逆性）。' : cc ? '凹面鏡：平行光反射後<b>會聚於焦點</b>。物體靠近時成正立放大的虛像（化妝鏡）。' : '凸面鏡：平行光反射後<b>發散</b>，往後延伸（虛線）交於鏡後焦點。成正立縮小的虛像，視野大（後照鏡）。';
@@ -1872,14 +1896,17 @@ SIMS.simRefract = host => {
     const n1 = inn ? 1 : M.n, n2 = inn ? M.n : 1, t1 = S.th, t2 = Math.asin(Math.min(1, n1 * Math.sin(d2r(t1)) / n2)) * 180 / Math.PI;
     const a = Math.sin(d2r(t1)), b = Math.cos(d2r(t1)), a2 = Math.sin(d2r(t2)), b2 = Math.cos(d2r(t2));
     let s = `<rect x="10" y="10" width="460" height="140" fill="#f4f9ff"/><rect x="10" y="150" width="460" height="140" fill="${M.c}"/>` + line(10, 150, 470, 150, 'k', 2) + line(O.x, 18, O.x, 284, 'k', 1.4, 'stroke-dasharray="6 5"') + text(O.x + 6, 30, '法線', 'k', 13, 'start');
-    s += text(24, 32, '空氣（光速快）', 'k', 14, 'start', 'font-weight="700"') + text(24, 282, M.name + (S.med === 'water' ? '（光速慢）' : '（光速更慢）'), 'k', 14, 'start', 'font-weight="700"');
+    s += text(24, 32, '空氣（光速快）', 'k', 14, 'start', 'font-weight="700"') + text(inn ? 24 : 456, inn ? 282 : 174, M.name + (S.med === 'water' ? '（光速慢）' : '（光速更慢）'), 'k', 14, inn ? 'start' : 'end', 'font-weight="700"');
     let ix, iy, rx, ry;
     if (inn) { ix = O.x - R * a; iy = O.y - R * b; rx = O.x + R * a2; ry = O.y + R * b2; s += line(O.x, O.y, O.x + R * a, O.y + R * b, '#8a97a6', 1.8, 'stroke-dasharray="6 5"'); }
     else { ix = O.x - R * a; iy = O.y + R * b; rx = O.x + R * a2; ry = O.y - R * b2; s += line(O.x, O.y, O.x + R * a, O.y - R * b, '#8a97a6', 1.8, 'stroke-dasharray="6 5"'); }
     s += arrow(ix, iy, O.x + (ix - O.x) * .02, O.y + (iy - O.y) * .02, 'o', 3) + arrow(O.x, O.y, rx, ry, 'r', 3);
     s += `<circle cx="${ix}" cy="${iy}" r="10" fill="#ffd54f" stroke="#e0a800" stroke-width="2"/>`;
     s += text(ix - 10, iy + (inn ? -12 : 20), '入射線', 'o', 13, 'end') + text(rx + 10, ry + (inn ? 20 : -12), '折射線', 'r', 13, 'start');
-    s += text(O.x - 60, O.y + (inn ? -34 : 52), '入射角 ' + t1 + '°', 'o', 14, 'middle', 'font-weight="700"') + text(O.x + 62, O.y + (inn ? 52 : -34), '折射角 ' + Math.round(t2) + '°', 'r', 14, 'middle', 'font-weight="700"');
+    { const a1 = d2r(t1), a2r = d2r(t2), r1 = 46, r2 = 62, up = inn ? -1 : 1;           // 入射側／折射側：弧線標出與法線的夾角
+      s += `<path d="M${O.x},${O.y + up * r1} A${r1},${r1} 0 0 ${inn ? 0 : 1} ${O.x - r1 * Math.sin(a1)},${O.y + up * r1 * Math.cos(a1)}" fill="none" stroke="${COL.o}" stroke-width="3"/>`;
+      s += `<path d="M${O.x},${O.y - up * r2} A${r2},${r2} 0 0 ${inn ? 0 : 1} ${O.x + r2 * Math.sin(a2r)},${O.y - up * r2 * Math.cos(a2r)}" fill="none" stroke="${COL.r}" stroke-width="3"/>`;
+      s += `<rect x="296" y="${inn ? 40 : 196}" width="168" height="62" rx="8" fill="#fff" stroke="#cfd8e3"/>` + text(310, inn ? 64 : 220, '入射角　' + t1 + '°', 'o', 15, 'start', 'font-weight="700"') + text(310, inn ? 90 : 246, '折射角　' + Math.round(t2) + '°', 'r', 15, 'start', 'font-weight="700"'); }
     setG(host, s);
     Q(host, 'out').innerHTML = t1 === 0 ? '垂直入射：<b>不偏折</b>，但光速仍然改變。' : `入射角 <b>${t1}°</b>，折射角 <b>${Math.round(t2)}°</b>：折射角${t2 < t1 ? '<b>比入射角小</b>（光速由快變慢 → <b>偏向法線</b>）' : '<b>比入射角大</b>（光速由慢變快 → <b>偏離法線</b>）'}。`;
   };
@@ -1926,62 +1953,13 @@ function refractDepth(host) {
     s += `<ellipse cx="${fx}" cy="${Ay}" rx="17" ry="9" fill="none" stroke="#546e7a" stroke-width="2" stroke-dasharray="4 3"/>` + text(fx + 40, Ay + 4, '看起來的位置（虛）', 'gr', 12, 'start');
     s += arrow(fx + 12, Fy - 4, Px - 1, surf + 1, 'r', 2.2) + arrow(Px, surf, Ex - 12, Ey + 10, 'r', 2.2) + line(Px, surf, fx + 6, Ay - 4, 'r', 1.5, 'stroke-dasharray="5 4"');
     s += `<circle cx="${Ex}" cy="${Ey}" r="11" fill="#fff" stroke="#333" stroke-width="2"/><circle cx="${Ex - 3}" cy="${Ey + 1}" r="4.5" fill="#333"/>` + text(Ex, Ey - 18, '眼睛', 'k', 12);
-    s += arrow(44, surf + 4, 44, Fy - 6, 'g', 2) + text(40, (surf + Fy) / 2 + 4, '實深', 'g', 13, 'end') + arrow(72, surf + 4, 72, Ay - 6, 'p', 2) + text(76, surf + 22, '視深', 'p', 13, 'start');
+    s += arrow(44, surf + 4, 44, Fy - 6, 'g', 2.4) + arrow(72, surf + 4, 72, Ay - 6, 'p', 2.4);
+    s += `<rect x="150" y="${surf + 138}" width="360" height="52" rx="8" fill="#fff" opacity=".9"/>` + text(160, surf + 160, '▍綠色箭頭：實深 ' + D + ' 公尺', 'g', 14, 'start', 'font-weight="700"') + text(160, surf + 182, '▍紫色箭頭：視深 約 ' + round(app, 2) + ' 公尺', 'p', 14, 'start', 'font-weight="700"');
     setG(host, s);
     Q(host, 'out').innerHTML = `實際深度（實深）＝ <b>${D}</b> 公尺，看起來的深度（視深）約 <b>${round(app, 2)}</b> 公尺 → <b>視深 ＜ 實深</b>。<br>光從水進入空氣時<b>偏離法線</b>，眼睛沿進來的光線往回看，就以為魚在比較淺的地方。`;
   };
   $$('input', host).forEach(i => i.addEventListener('input', draw)); draw();
 }
-
-/* --- 透鏡成像（凸透鏡／凹透鏡） --- */
-SIMS.simLens = host => {
-  const mode = host.dataset.mode || 'convex', kind0 = mode === 'concave' ? 'concave' : 'convex';
-  const S = { kind: kind0, u: mode === 'concave' ? 1.5 : 2.5, r1: true, r2: true, r3: true };
-  simBox(host, mode === 'concave' ? '凹透鏡成像' : '透鏡成像與三條特殊光線', mode === 'rays' ? '拖曳蠟燭（或用滑桿），看三條特殊光線怎麼走、交在哪裡就是像的位置。' : '拖曳蠟燭改變物距。看像在哪一側、倒立還是正立、放大還是縮小。（F ＝ 焦點，2F ＝ 2 倍焦距）',
-    `<div class="ctl">${mode === 'concave' ? '' : '<span class="seg"><button data-l="convex" class="on">凸透鏡</button><button data-l="concave">凹透鏡</button></span>'}${rng(host, '物距 u（單位：f）', 'u', .3, 3.4, .05, S.u)}<label><input type="checkbox" data-k="r1" checked> ①平行光</label><label><input type="checkbox" data-k="r2" checked> ②過鏡心</label><label><input type="checkbox" data-k="r3" checked> ③過焦點</label></div>${svgOpen(580, 310)}<div class="out" data-k="out"></div>`);
-  const cy = 160, xl = 300, f = 80, h = 48;
-  const draw = () => {
-    const cv = S.kind === 'convex', u = S.u * f, xo = xl - u, T = { x: xo, y: cy - h };
-    S.r1 = Q(host, 'r1').checked; S.r2 = Q(host, 'r2').checked; S.r3 = Q(host, 'r3').checked;
-    Q(host, 'u').value = S.u; Q(host, 'uv').textContent = S.u;
-    let s = line(10, cy, 570, cy, 'gr', 1.2);
-    s += cv ? `<path d="M${xl},${cy - 105} Q${xl + 17},${cy} ${xl},${cy + 105} Q${xl - 17},${cy} ${xl},${cy - 105}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>` : `<path d="M${xl - 13},${cy - 105} Q${xl - 2},${cy} ${xl - 13},${cy + 105} L${xl + 13},${cy + 105} Q${xl + 2},${cy} ${xl + 13},${cy - 105}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>`;
-    [[xl - f, 'F'], [xl + f, 'F'], [xl - 2 * f, '2F'], [xl + 2 * f, '2F']].forEach(([x, t]) => s += `<circle cx="${x}" cy="${cy}" r="4" fill="${COL.k}"/>` + text(x, cy + 20, t, 'k', 12));
-    s += arrow(xo, cy, xo, cy - h + 3, 'o', 5);
-    let none = cv && Math.abs(S.u - 1) < .03, v = 0, m = 0, tip = null;
-    if (!none) { v = cv ? u * f / (u - f) : -u * f / (u + f); m = -v / u; tip = { x: xl + v, y: cy - m * h }; }
-    const real = cv && v > 0, ext = 190;
-    const outRay = (P, color) => {                       // 通過透鏡點 P 之後的光線（朝像或遠離像）
-      if (none) { return arrow(P.x, P.y, P.x + ext, P.y + (P.y > cy ? 0 : 0), 'r', 2); }
-      const dx = real ? tip.x - P.x : P.x - tip.x, dy = real ? tip.y - P.y : P.y - tip.y, L = Math.hypot(dx, dy) || 1;
-      const len = real ? L : ext;
-      let r = arrow(P.x, P.y, P.x + dx / L * len, P.y + dy / L * len, 'r', 2.2);
-      if (!real) r += line(P.x, P.y, tip.x, tip.y, 'r', 1.5, 'stroke-dasharray="5 4"');
-      return r;
-    };
-    if (S.r1) { const P = { x: xl, y: T.y }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + (none && cv ? arrow(P.x, P.y, xl + f, cy, 'r', 2.2) : outRay(P)); }
-    if (S.r2) { const P = { x: xl, y: cy }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2); const dx = xl - T.x, dy = cy - T.y, L = Math.hypot(dx, dy); if (real) s += arrow(P.x, P.y, tip.x, tip.y, 'r', 2.2); else { s += arrow(P.x, P.y, P.x + dx / L * ext, P.y + dy / L * ext, 'r', 2.2); if (tip) s += line(P.x, P.y, tip.x, tip.y, 'r', 1.5, 'stroke-dasharray="5 4"'); } }
-    if (S.r3 && !(cv && none)) {
-      const Fx = cv ? xl - f : xl + f, y3 = T.y + (cy - T.y) * (xl - T.x) / (Fx - T.x);
-      if (Math.abs(y3 - cy) < 104) { const P = { x: xl, y: y3 }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2); if (real) s += arrow(P.x, P.y, tip.x, P.y, 'r', 2.2); else { s += arrow(P.x, P.y, P.x + ext, P.y, 'r', 2.2); if (tip) s += line(P.x, P.y, tip.x, P.y, 'r', 1.5, 'stroke-dasharray="5 4"'); } }
-    }
-    if (tip) { s += `<line x1="${tip.x}" y1="${cy}" x2="${tip.x}" y2="${tip.y}" stroke="#d32f2f" stroke-width="5" ${real ? '' : 'stroke-dasharray="6 4" opacity=".7"'}/><circle cx="${tip.x}" cy="${tip.y + (tip.y < cy ? -6 : 6)}" r="8" fill="${real ? '#ffca28' : 'none'}" stroke="#d32f2f" stroke-width="2" ${real ? '' : 'stroke-dasharray="3 3"'}/>` + text(tip.x, tip.y < cy ? tip.y - 20 : tip.y + 26, real ? '實像' : '虛像', 'r', 13); }
-    setG(host, s);
-    let msg;
-    if (!cv) msg = '凹透鏡：不論物體在哪裡，像都是<b>正立、縮小的虛像</b>（在物體同側），屏幕上接不到。';
-    else if (none) msg = '物體剛好在<b>焦點</b>上：折射後變成平行光，<b>不成像</b>。';
-    else if (S.u > 2.02) msg = '物在 <b>2F 外</b>：<b>倒立、縮小的實像</b>，像在 F～2F 之間。';
-    else if (S.u > 1.98) msg = '物剛好在 <b>2F</b>：<b>倒立、等大的實像</b>，像也在 2F。';
-    else if (S.u > 1) msg = '物在 <b>F～2F 之間</b>：<b>倒立、放大的實像</b>，像在 2F 以外。';
-    else msg = '物在<b>焦點內</b>：<b>正立、放大的虛像</b>（放大鏡），像和物同側，屏幕上接不到。';
-    Q(host, 'out').innerHTML = `u ＝ ${S.u} f。${msg}` + (tip ? `<br>像的大小約是物的 <b>${round(Math.abs(m), 2)}</b> 倍。` : '');
-  };
-  $$('[data-l]', host).forEach(b => b.onclick = () => { S.kind = b.dataset.l; $$('[data-l]', host).forEach(x => x.classList.toggle('on', x === b)); draw(); });
-  Q(host, 'u').oninput = () => { S.u = +Q(host, 'u').value; draw(); };
-  $$('[data-k^=r]', host).forEach(c => c.onchange = draw);
-  dragOn(Q(host, 'svg'), p => { S.u = sg(Math.round((xl - p.x) / f / .05) * .05, .3, 3.4); draw(); });
-  draw();
-};
 
 /* --- 色光混合、透明物體與不透明物體的顏色 --- */
 SIMS.simColor = host => {
@@ -2032,6 +2010,75 @@ function colorMix(host) {
   };
   $$('input', host).forEach(i => i.onchange = draw); draw();
 }
+
+/* ---- e_sims3.js ---- */
+/* ===== 互動模擬（三）：透鏡成像（模式 convex：拖曳看成像；rays：一條一條畫特殊光線；concave：凹透鏡） ===== */
+SIMS.simLens = host => {
+  const mode = host.dataset.mode || 'convex', steps = mode === 'rays';
+  const S = { kind: mode === 'concave' ? 'concave' : 'convex', u: mode === 'concave' ? 1.5 : 2.5, n: steps ? 1 : 3, on: [true, true, true] };
+  const W = 440, H = 226, cy = 108, xl = 215, f = 60, h = 42, LH = 100, ext = 240;
+  const RAYTXT = {
+    convex: ['①平行主軸的光 → 折射後通過<b>對面的焦點</b>。', '②對準鏡心的光 → <b>方向不變</b>，直直穿過。', '③經過焦點射來的光 → 折射後<b>平行主軸</b>。'],
+    concave: ['①平行主軸的光 → 折射後<b>散開</b>；往回延長（虛線）會通過入射側的焦點。', '②對準鏡心的光 → <b>方向不變</b>，直直穿過。', '③朝對面焦點射去的光 → 折射後<b>平行主軸</b>。'],
+  };
+  const halo = 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="5"';
+  simBox(host, mode === 'concave' ? '凹透鏡成像' : steps ? '一條一條畫：三條特殊光線' : '凸透鏡成像',
+    steps ? '按「畫下一條」，看每條特殊光線折射後怎麼走。兩條光線相交（或延長線相交）的地方就是像。' : '拖曳蠟燭（或用滑桿）改變物距。看像在哪一側、倒立還是正立、放大還是縮小。（F＝焦點，2F＝2 倍焦距）',
+    `<div class="ctl">${mode === 'concave' ? '' : '<span class="seg"><button data-l="convex" class="on">凸透鏡</button><button data-l="concave">凹透鏡</button></span>'}${rng(host, '物距（幾倍焦距）', 'u', .3, 3.4, .05, S.u)}</div>
+     <div class="ctl">${steps ? '<button class="btn primary" data-k="nx">畫下一條 ▶</button><button class="btn" data-k="all">全部顯示</button><button class="btn" data-k="rs">重畫</button>' : '<label><input type="checkbox" data-r="0" checked> ①平行光</label><label><input type="checkbox" data-r="1" checked> ②過鏡心</label><label><input type="checkbox" data-r="2" checked> ③過焦點</label>'}</div>${svgOpen(W, H)}<div class="out" data-k="out"></div>`);
+  const draw = () => {
+    const cv = S.kind === 'convex', u = S.u * f, xo = xl - u, T = { x: xo, y: cy - h }, shown = i => steps ? i < S.n : S.on[i];
+    Q(host, 'u').value = S.u; Q(host, 'uv').textContent = S.u;
+    let s = '';
+    if (cv) [[4, xl - 2 * f, '#e3f2fd', '2F 外'], [xl - 2 * f, xl - f, '#fff3e0', 'F～2F'], [xl - f, xl, '#fce4ec', '焦點內']].forEach(([a, b, c, t]) => s += `<rect x="${a}" y="${H - 17}" width="${b - a}" height="15" fill="${c}"/>` + text((a + b) / 2, H - 6, t, 'k', 9.5));
+    s += line(4, cy, W - 4, cy, 'gr', 1.2);
+    s += cv ? `<path d="M${xl},${cy - LH} Q${xl + 16},${cy} ${xl},${cy + LH} Q${xl - 16},${cy} ${xl},${cy - LH}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>` : `<path d="M${xl - 12},${cy - LH} Q${xl - 2},${cy} ${xl - 12},${cy + LH} L${xl + 12},${cy + LH} Q${xl + 2},${cy} ${xl + 12},${cy - LH}Z" fill="#cfe7fb" stroke="#1565c0" stroke-width="2.4"/>`;
+    [[xl - f, 'F'], [xl + f, 'F'], [xl - 2 * f, '2F'], [xl + 2 * f, '2F']].forEach(([x, t]) => s += `<circle cx="${x}" cy="${cy}" r="3.5" fill="${COL.k}"/>` + text(x, cy + 16, t, 'k', 11, 'middle', halo));
+    s += arrow(xo, cy, xo, cy - h + 3, 'o', 5);
+    const none = cv && Math.abs(S.u - 1) < .03; let v = 0, m = 0, tip = null;
+    if (!none) { v = cv ? u * f / (u - f) : -u * f / (u + f); m = -v / u; tip = { x: xl + v, y: cy - m * h }; }
+    const real = cv && v > 0;
+    const outRay = P => {                                  // 從透鏡上的 P 點出去的光：實像→射向像點；虛像→背離像點（虛線接回像點）
+      const dx = real ? tip.x - P.x : P.x - tip.x, dy = real ? tip.y - P.y : P.y - tip.y, L = Math.hypot(dx, dy) || 1, len = real ? Math.max(L, 40) : ext;
+      return arrow(P.x, P.y, P.x + dx / L * len, P.y + dy / L * len, 'r', 2.2) + (real ? '' : line(P.x, P.y, tip.x, tip.y, 'r', 1.5, 'stroke-dasharray="5 4"'));
+    };
+    const par = P => arrow(P.x, P.y, P.x + 2.6 * f, P.y + 2.6 * h, 'r', 2.2);       // 物在焦點上：出射光互相平行
+    const tag = (P, t) => text(T.x + (P.x - T.x) * .8, T.y + (P.y - T.y) * .8 - 5, t, 'o', 11, 'middle', halo);
+    if (shown(0)) { const P = { x: xl, y: T.y }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + tag(P, '①') + (none ? par(P) : outRay(P)); }
+    if (shown(1)) { const P = { x: xl, y: cy }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + tag(P, '②') + (none ? par(P) : outRay(P)); }
+    if (shown(2) && !none) {
+      const Fx = cv ? xl - f : xl + f, y3 = T.y + (cy - T.y) * (xl - T.x) / (Fx - T.x);
+      if (Math.abs(y3 - cy) < LH - 2) {
+        const P = { x: xl, y: y3 }; s += arrow(T.x, T.y, P.x, P.y, 'o', 2) + tag(P, '③');
+        if (real) s += arrow(P.x, P.y, Math.max(tip.x, P.x + 40), P.y, 'r', 2.2); else s += arrow(P.x, P.y, P.x + ext, P.y, 'r', 2.2) + line(P.x, P.y, tip.x, P.y, 'r', 1.5, 'stroke-dasharray="5 4"');
+      }
+    }
+    const showImg = tip && (!steps || S.n >= 2);
+    if (showImg) {
+      s += `<line x1="${tip.x}" y1="${cy}" x2="${tip.x}" y2="${tip.y}" stroke="#d32f2f" stroke-width="5" ${real ? '' : 'stroke-dasharray="6 4" opacity=".75"'}/><circle cx="${tip.x}" cy="${tip.y}" r="5" fill="${real ? '#d32f2f' : '#fff'}" stroke="#d32f2f" stroke-width="2"/>`;
+      s += text(sg(tip.x, 24, W - 24), sg(tip.y < cy ? tip.y - 9 : tip.y + 17, 12, H - 22), real ? '實像' : '虛像', 'r', 12, 'middle', halo);
+    }
+    s += text(sg(xo, 14, W), cy + 30, '物', 'o', 12, 'middle', halo);
+    setG(host, s);
+    let msg;
+    if (!cv) msg = '凹透鏡：不論物體在哪裡，像都是<b>正立、縮小的虛像</b>（和物體同一側），屏幕接不到。';
+    else if (none) msg = '物體剛好在<b>焦點</b>上：折射後的光互相平行，不會相交，<b>不成像</b>。';
+    else if (S.u > 2.02) msg = '物在 <b>2F 外</b>：<b>倒立、縮小的實像</b>，像在對面的 F～2F 之間。';
+    else if (S.u > 1.98) msg = '物剛好在 <b>2F</b>：<b>倒立、等大的實像</b>，像也在對面的 2F。';
+    else if (S.u > 1) msg = '物在 <b>F～2F 之間</b>：<b>倒立、放大的實像</b>，像在對面的 2F 以外' + (tip.x > W ? '（太遠，超出畫面）' : '') + '。';
+    else msg = '物在<b>焦點內</b>：<b>正立、放大的虛像</b>（放大鏡），像和物同一側，屏幕接不到' + (tip.y < 0 ? '（像很大，超出畫面）' : '') + '。';
+    const size = tip && showImg ? `像的大小約是物的 <b>${round(Math.abs(m), 2)}</b> 倍。` : '';
+    Q(host, 'out').innerHTML = steps ? RAYTXT[S.kind].slice(0, S.n).join('<br>') + (S.n >= 2 ? `<br>➜ ${msg} ${size}` : '<br><span class="muted">再畫一條：兩條光線的交點（或延長線的交點）就是像的位置。</span>')
+      : `物距 ＝ ${S.u} 倍焦距。${msg}<br>${size}`;
+    if (steps) Q(host, 'nx').disabled = S.n >= 3;
+  };
+  $$('[data-l]', host).forEach(b => b.onclick = () => { S.kind = b.dataset.l; $$('[data-l]', host).forEach(x => x.classList.toggle('on', x === b)); if (steps) S.n = 1; draw(); });
+  Q(host, 'u').oninput = () => { S.u = +Q(host, 'u').value; draw(); };
+  $$('[data-r]', host).forEach(c => c.onchange = () => { S.on[+c.dataset.r] = c.checked; draw(); });
+  if (steps) { Q(host, 'nx').onclick = () => { S.n = Math.min(3, S.n + 1); draw(); }; Q(host, 'all').onclick = () => { S.n = 3; draw(); }; Q(host, 'rs').onclick = () => { S.n = 1; draw(); }; }
+  dragOn(Q(host, 'svg'), p => { S.u = Math.round(sg((xl - p.x) / f, .3, 3.4) * 20) / 20; draw(); });
+  draw();
+};
 
 /* ---- z_app.js ---- */
 /* ===== 應用主程式：身分、紀錄回傳、首頁、檢核、複習、路由 ===== */
