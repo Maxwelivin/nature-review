@@ -9,7 +9,6 @@
   --sh:0 1px 3px rgba(20,40,70,.08),0 4px 14px rgba(20,40,70,.05);--r:14px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;-webkit-text-size-adjust:100%}
 a{color:var(--c3)}
 h1,h2,h3,h4{line-height:1.4;margin:.2em 0 .5em}
@@ -1653,14 +1652,21 @@ SIMS.simWaveType = host => {
 /* --- 週期波：振幅、波長、頻率、週期、波速 --- */
 SIMS.simPeriodic = host => {
   const mode = host.dataset.mode || 'speed', V0 = 12; let slow = true, tt = 0, last = null;
-  const obsT = { shape: '繩子畫成一顆一顆串在一起的小球。波源先動，再一顆帶一顆把擾動往右傳。拖曳「振幅」和「波長」，看波長（紫色）和振幅（橙色）怎麼變。', freq: '波源帶動旁邊的小球，一顆傳一顆。拖曳「頻率」：頻率變大，波變得更密。大紅球一秒上下幾次，頻率就是幾赫（按「真實速度」數數看）。', speed: '看綠色虛線：擾動一顆傳一顆往右跑，它跑的快慢就是波速。調「頻率」和「波長」，看 v ＝ f × λ。小球只在原處上下動。', fixedv: '這是同一條繩子：波速固定 12 公分／秒（綠色虛線每次跑得一樣快）。你只能改頻率，波長會自動跟著變。' };
+  const obsT = {
+    shape: '繩子畫成一顆一顆串在一起的小球。波源先動，再一顆帶一顆把擾動往右傳。拖曳「振幅」和「波長」，看波長（紫色）和振幅（橙色）怎麼變。',
+    freq: '拖曳「頻率」：頻率變大，波排得更密（波長變短），但綠色虛線跑得一樣快——同一條繩子，波速不變。大紅球一秒上下幾次，頻率就是幾赫（按「真實速度」數數看）。',
+    speed: '先改「頻率」：波長跟著變，但綠色虛線跑得一樣快（波速不變）。再換一條繩子：波速才會改變。不管怎麼改，v ＝ f × λ 都成立。',
+    fixedv: '這是同一條繩子：波速固定 12 公分／秒（綠色虛線每次跑得一樣快）。你只能改頻率，波長會自動跟著變。' };
   const sl = (mode === 'shape' ? rng(host, '振幅 A（公分）', 'A', .5, 3, .5, 1.5) + rng(host, '波長 λ（公分）', 'L', 2, 8, 1, 6) : '') +
-    (mode === 'freq' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 1) : '') +
-    (mode === 'speed' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 2) + rng(host, '波長 λ（公分）', 'L', 2, 10, 1, 4) : '') +
+    (mode === 'freq' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 2) : '') +
+    (mode === 'speed' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 2) + '<span class="seg"><button data-v="6">甲繩（波速 6）</button><button data-v="12" class="on">乙繩（波速 12）</button><button data-v="18">丙繩（波速 18）</button></span>' : '') +
     (mode === 'fixedv' ? rng(host, '頻率 f（赫）', 'F', .5, 6, .5, 2) : '');
   simBox(host, '週期波模擬器', obsT[mode], `<div class="ctl">${sl}<span class="seg"><button data-s="1" class="on">🐢 慢動作（放慢 4 倍）</button><button data-s="0">真實速度</button></span><button class="btn" data-k="re">↺ 從頭開始</button></div>${svgOpen(512, 212)}<div class="out" data-k="out"></div>`);
-  const st = { A: 1.5, L: 6, F: mode === 'shape' ? 1 : 1 };
-  const read = () => { ['A', 'L', 'F'].forEach(k => { const e = Q(host, k); if (e) { st[k] = +e.value; Q(host, k + 'v').textContent = e.value; } }); if (mode === 'fixedv') st.L = V0 / st.F; if (mode === 'freq') { st.L = 6; } if (mode === 'speed') st.A = 1.5; if (mode === 'fixedv') st.A = 1.5; };
+  const st = { A: 1.5, L: 6, F: 2, V: V0 };
+  const read = () => {                                       // 波速只由繩子（介質）決定：改頻率時，波長跟著變（λ ＝ v ÷ f）
+    ['A', 'L', 'F'].forEach(k => { const e = Q(host, k); if (e) { st[k] = +e.value; Q(host, k + 'v').textContent = e.value; } });
+    if (mode === 'shape') st.F = st.V / st.L; else st.L = st.V / st.F;
+  };
   $$('input', host).forEach(i => i.oninput = read); read();
   const px = 32, ypx = 28, X0 = 40, cy = 105, STEP = .25, NB = 57;       // 繩子＝57 顆串在一起的小球（每 0.25 公分一顆）
   loop(host, now => {
@@ -1689,12 +1695,15 @@ SIMS.simPeriodic = host => {
     if (front < 14) s += line(X0 + front * px, cy - 60, X0 + front * px, cy + 60, 'g', 1.5, 'stroke-dasharray="3 4"') + text(X0 + front * px + 6, cy - 70, '← 擾動傳到這裡', 'g', 10.5, 'start', 'font-weight="700"');
     setG(host, s);
   });
-  const o = Q(host, 'out'), upd = () => { read(); const T = round(1 / st.F, 3), v = round(st.F * st.L, 2);
-    o.innerHTML = (mode === 'shape' ? `振幅 A ＝ ${st.A} 公分，波長 λ ＝ ${st.L} 公分（一個全波的長度）。` :
-      `頻率 f ＝ <b>${st.F}</b> 赫（一秒 ${st.F} 個全波），週期 T ＝ 1 ÷ ${st.F} ＝ <b>${T}</b> 秒${mode === 'freq' ? '。' : `；波長 λ ＝ <b>${round(st.L, 2)}</b> 公分；<br>波速 v ＝ f × λ ＝ ${st.F} × ${round(st.L, 2)} ＝ <b>${v}</b> 公分／秒${mode === 'fixedv' ? '（固定不變）' : ''}。`}`); };
+  const o = Q(host, 'out'), upd = () => {
+    read(); const T = round(1 / st.F, 3), L = round(st.L, 2), v = round(st.F * st.L, 2);
+    o.innerHTML = mode === 'shape' ? `振幅 A ＝ ${st.A} 公分，波長 λ ＝ ${L} 公分（一個全波的長度）。` :
+      `頻率 f ＝ <b>${st.F}</b> 赫（一秒 ${st.F} 個全波），週期 T ＝ 1 ÷ ${st.F} ＝ <b>${T}</b> 秒；波長 λ ＝ <b>${L}</b> 公分。<br>波速 v ＝ f × λ ＝ ${st.F} × ${L} ＝ <b>${v}</b> 公分／秒${mode === 'speed' ? '（由繩子決定；同一條繩子改頻率，波速不變）' : '（同一條繩子，波速不變）'}。`;
+  };
   $$('input', host).forEach(i => i.addEventListener('input', upd)); upd();
   $$('input', host).forEach(i => i.addEventListener('input', () => { tt = 0; }));      // 改了設定就從靜止重新開始，看擾動怎麼傳出去
   Q(host, 're').onclick = () => { tt = 0; };
+  $$('[data-v]', host).forEach(b => b.onclick = () => { st.V = +b.dataset.v; $$('[data-v]', host).forEach(x => x.classList.toggle('on', x === b)); tt = 0; upd(); });
   $$('[data-s]', host).forEach(b => b.onclick = () => { slow = b.dataset.s === '1'; $$('[data-s]', host).forEach(x => x.classList.toggle('on', x === b)); });
 };
 
@@ -2345,6 +2354,7 @@ function viewCard(id, from) {
 }
 
 /* ---------- 路由 ---------- */
+const toTop = () => { window.scrollTo(0, 0); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; };
 function route() {
   const raw = location.hash.replace(/^#\/?/, ''), [path, qs] = raw.split('?'), parts = path.split('/');
   const from = qs && (qs.match(/from=([A-Z]\d+)/) || [])[1];
@@ -2355,7 +2365,9 @@ function route() {
   else if (parts[0] === 'r') viewCard(parts[1], from);
   else viewHome();
   updateTop();
+  toTop(); requestAnimationFrame(toTop); setTimeout(toTop, 60);      // 內容換好之後再捲一次（iOS 有時會停在舊的捲動位置）
 }
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.addEventListener('hashchange', route);
 route();
 flushOutbox();
