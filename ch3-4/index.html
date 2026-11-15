@@ -1829,14 +1829,15 @@ SIMS.simPinhole = host => {
     let wall = '', prev = 24;                                  // 擋板（缺口＝針孔）
     holes.forEach(y => { wall += `<rect x="${Xw - 6}" y="${prev}" width="12" height="${y - g - prev}" fill="#455a64"/>`; prev = y + g; });
     wall += `<rect x="${Xw - 6}" y="${prev}" width="12" height="${250 - prev}" fill="#455a64"/>`;
-    let s = `<rect x="${xs}" y="22" width="30" height="230" fill="#f5f5f5" stroke="#90a4ae" stroke-width="2"/>` + text(xs + 15, 266, '屏幕', 'k', 12);
+    let s = `<rect x="${xs - 15}" y="22" width="30" height="230" fill="#f5f5f5" stroke="#90a4ae" stroke-width="2"/>` + text(xs, 266, '屏幕', 'k', 12);
     s += wall + text(Xw, 14, S.multi ? '3 個針孔' : blur ? '大針孔' : '針孔', 'r', 12, 'middle', 'font-weight="700"') + text(Xw, 266, '擋板', 'k', 12);
     s += candleSvg(xo, cy, cy - h, 20) + text(xo, cy + 18, '蠟燭', 'k', 12);
     holes.forEach(yh => {
-      const ty = (cy - h) + (yh - (cy - h)) * k, by = cy + (yh - cy) * k, k2 = (S.u + S.v + 15) / S.u;      // 火焰、燭底的光各自直線穿過針孔
-      s += line(xo, cy - h, xs + 15, (cy - h) + (yh - (cy - h)) * k2, 'o', 1.6) + line(xo, cy, xs + 15, cy + (yh - cy) * k2, 'b', 1.6);
-      if (blur) for (let j = -3; j <= 3; j++) s += candleSvg(xs + 15, by + j * 4, ty + j * 4, 22, .12);
-      else s += candleSvg(xs + 15, by, ty, 20, 1);
+      const ty = (cy - h) + (yh - (cy - h)) * k, by = cy + (yh - cy) * k;      // 火焰、燭底的光各自直線穿過針孔，分別落在像的火焰尖端與燭底
+      const rays = line(xo, cy - h, xs, ty, 'o', 1.8) + line(xo, cy, xs, by, 'b', 1.8) + `<circle cx="${xs}" cy="${ty}" r="3" fill="${COL.o}"/><circle cx="${xs}" cy="${by}" r="3" fill="${COL.b}"/>`;
+      if (blur) for (let j = -3; j <= 3; j++) s += candleSvg(xs, by + j * 4, ty + j * 4, 22, .12);
+      else s += candleSvg(xs, by, ty, 20, 1);
+      s += rays;                                               // 光線畫在像的上面，看得到線接到像
     });
     setG(host, s);
     const r = round(S.v / S.u, 2);
