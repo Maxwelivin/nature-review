@@ -2408,12 +2408,12 @@ function viewCard(id, from) {
   body = body.replace(/\{\{sim:(\w+)(?::(\w+))?\}\}/g, (_, n, m) => `<div class="sim" data-sim="${n}" data-mode="${m || ''}"></div>`);
   let h = `<div class="rcard"><div class="row" style="margin:0"><a class="btn" href="#/review">← 複習地圖</a><span class="chip ${t.ch === 4 ? 'c4' : ''}">${t.id}｜${secName(t.sec)}</span><span class="st ${st.cls}">${st.txt}</span></div>
     <h2>我能${t.can}</h2><p class="lc">學習內容 ${t.lc}</p>`;
-  if (from && TASK[from]) h += `<div class="rv-box">你是從任務 <b>${from}</b> 過來的。看完下面的重點，按最底下的按鈕就能回去繼續做題（連對進度會保留）。</div>`;
+  if (from === id) h += `<div class="rv-box">你是從任務 <b>${from}</b> 過來的。看完下面的重點，按最底下的按鈕就能回去繼續做題（連對進度會保留）。</div>`;
   h += body;
   if (c && c.traps && c.traps.length) h += `<div class="trap"><b>⚠ 容易搞錯</b><ul>${c.traps.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
   if (c && c.quick) h += c.quick.map(([q, a]) => `<details class="qc"><summary>自我檢查：${q}</summary><p>${a}</p></details>`).join('');
   h += `<div class="card" style="text-align:center"><p style="margin:0 0 8px"><b>讀完了嗎？</b>去做題檢查自己有沒有真的懂。</p><div class="row" style="justify-content:center"><a class="btn ok" href="#/t/${id}">${from === id || st.cls === 'go' || st.hint ? '✅ 我看懂了，回去做題' : '🎯 去做這個概念的題目'}</a></div></div>`;
-  h += `<div class="nav2">${prev ? `<a class="btn" href="#/r/${prev.id}${from ? '?from=' + from : ''}">← ${prev.id} ${prev.can.slice(0, 12)}…</a>` : '<span></span>'}${next ? `<a class="btn" href="#/r/${next.id}${from ? '?from=' + from : ''}">${next.id} ${next.can.slice(0, 12)}… →</a>` : ''}</div></div>`;
+  h += `<div class="nav2">${prev ? `<a class="btn" href="#/r/${prev.id}">← ${prev.id} ${prev.can.slice(0, 12)}…</a>` : '<span></span>'}${next ? `<a class="btn" href="#/r/${next.id}">${next.id} ${next.can.slice(0, 12)}… →</a>` : ''}</div></div>`;
   host.innerHTML = h;
   $$('.sim[data-sim]', host).forEach(el => { const f = SIMS[el.dataset.sim]; if (f) f(el); else el.innerHTML = '<p class="muted">（模擬準備中）</p>'; });
   const key = id + '|' + (from || '');
