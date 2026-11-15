@@ -353,7 +353,7 @@ function lensRaySvg({ kind, ray, showOut = false }) {
   if (ray === 'parallel') {
     y1 = cy - 60; inLine = arrow(40, y1, cx, y1, 'o');
     if (kind === 'convex') { const dx = f, dy = 60; out = arrow(cx, y1, cx + dx * 1.6, y1 + dy * 1.6, 'r'); }
-    else { out = arrow(cx, y1, cx + f * 1.5, y1 - 60 * 1.5, 'r'); back = line(cx, y1, cx - f, cy, 'r', 1.6, 'stroke-dasharray="5 4"'); }
+    else { out = arrow(cx, y1, cx + f * .85, y1 - 60 * .85, 'r'); back = line(cx, y1, cx - f, cy, 'r', 1.6, 'stroke-dasharray="5 4"'); }
   } else if (ray === 'center') {
     inLine = arrow(50, cy - 70, cx, cy, 'o'); out = arrow(cx, cy, cx + 200, cy + 77.8, 'r');
   } else if (ray === 'focus') {
@@ -1639,6 +1639,16 @@ function dragOn(svg, onMove) {
 }
 let AC = null;
 const audioCtx = () => { if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { } } if (AC && AC.state === 'suspended') AC.resume(); return AC; };
+const stopFns = new Set();                   // 換頁時要關掉的聲音
+const stopAllSounds = () => stopFns.forEach(fn => { try { fn(); } catch (e) { } });
+const bellStrike = (ac, vol) => {            // 敲一下鈴：幾個不成整數倍的泛音，各自慢慢衰減，聽起來像「叮～」
+  if (vol < .01) return; const t0 = ac.currentTime;
+  [[1, 1], [2.76, .55], [5.4, .3], [8.93, .15]].forEach(([m, a]) => {
+    const o = ac.createOscillator(), g = ac.createGain(); o.type = 'sine'; o.frequency.value = 880 * m;
+    g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(a * vol * .22, t0 + .006); g.gain.exponentialRampToValueAtTime(.0001, t0 + 1.5);
+    o.connect(g); g.connect(ac.destination); o.start(t0); o.stop(t0 + 1.6);
+  });
+};
 const svgOpen = (w, h, k = 'svg') => `<svg viewBox="0 0 ${w} ${h}" data-k="${k}"><defs>${arrowDefs()}</defs><g data-k="g"></g></svg>`;
 const SIM_TXT_K = 1.35;   // 手機上圖會縮小，圖內文字統一放大，確保可讀
 const setG = (host, s) => { Q(host, 'g').innerHTML = s.replace(/font-size="([\d.]+)"/g, (m, n) => `font-size="${Math.round(n * SIM_TXT_K * 10) / 10}"`); };
@@ -1746,9 +1756,13 @@ SIMS.simVacuum = host => {
     if (gain) gain.gain.value = snd ? vol * .18 : 0;
   };
   Q(host, 'P').oninput = upd;
+  let bellT = null;
+  const stopBell = () => { snd = false; clearInterval(bellT); bellT = null; };
+  stopFns.add(stopBell);
   Q(host, 'snd').onclick = () => {
     snd = !snd; Q(host, 'snd').textContent = snd ? '🔇 關掉聲音' : '🔊 聽聽看';
-    if (snd && !osc) { const ac = audioCtx(); if (!ac) return; osc = ac.createOscillator(); gain = ac.createGain(); osc.type = 'sine'; osc.frequency.value = 880; osc.connect(gain); gain.connect(ac.destination); osc.start(); }
+    if (snd) { const ac = audioCtx(); if (!ac) return; const hit = () => { if (!host.isConnected) return stopBell(); bellStrike(ac, VOL(P())); }; hit(); bellT = setInterval(hit, 1300); }
+    else stopBell();
     upd();
   };
   loop(host, t => {
@@ -1776,6 +1790,7 @@ SIMS.simVacuum = host => {
 SIMS.simSound3 = host => {
   const mode = host.dataset.mode || 'all';
   const S = { amp: .6, cyc: 4, shape: 'sine', noise: false }; let snd = false, osc = null, gain = null, nz = null;
+  stopFns.add(() => { snd = false; try { osc && osc.stop(); } catch (e) { } try { nz && nz.stop(); } catch (e) { } osc = null; nz = null; });
   const obs = { amp: '拖曳「振幅」：波愈高，聲音愈大聲（響度）。注意音調沒有變。', freq: '拖曳「頻率」：同樣時間內波愈多，音調愈高。注意音量沒有變。', shape: '切換「波形」：音調和音量一樣，但聽起來（音色）不同，波的形狀也不同。', all: '分別調整三個控制，找出「波的高度、疏密、形狀」各自改變了聲音的哪一項。', noise: '比較「樂音」與「噪音」的波形：哪一個有規律？' }[mode];
   const ctl = (mode === 'amp' || mode === 'all' ? rng(host, '振幅（響度）', 'A', .1, 1, .1, .6) : '') + (mode === 'freq' || mode === 'all' ? rng(host, '頻率（音調）', 'F', 2, 10, 1, 4) : '') +
     (mode === 'shape' || mode === 'all' ? `<label>波形（音色）<select data-k="W"><option value="sine">圓滑的波</option><option value="tri">三角波</option><option value="sq">方波</option><option value="saw">鋸齒波</option></select></label>` : '') +
@@ -1787,7 +1802,7 @@ SIMS.simSound3 = host => {
     if (mode === 'amp') { S.cyc = 4; S.shape = 'sine'; } if (mode === 'freq') { S.amp = .6; S.shape = 'sine'; } if (mode === 'shape') { S.amp = .6; S.cyc = 4; }
     const out = Q(host, 'out'); const nm = { sine: '圓滑的波', tri: '三角波', sq: '方波', saw: '鋸齒波' }[S.shape];
     out.innerHTML = mode === 'noise' ? (S.noise ? '噪音：波形<b>沒有規律</b>，聽起來吵雜刺耳。' : '樂音：波形<b>有規律</b>，聽起來和諧悅耳。') : `響度（音量）看<b>振幅</b>＝${S.amp}；音調看<b>頻率</b>＝${S.cyc}（同樣時間內的波數）；音色看<b>波形</b>＝${nm}。`;
-    if (gain) gain.gain.value = snd ? S.amp * .16 : 0; if (osc) { osc.frequency.value = 55 * S.cyc; osc.type = { sine: 'sine', tri: 'triangle', sq: 'square', saw: 'sawtooth' }[S.shape]; }
+    if (gain) gain.gain.value = snd ? S.amp * (S.noise ? .1 : S.shape === 'sine' || S.shape === 'tri' ? .16 : .06) : 0; if (osc) { osc.frequency.value = 180 + 90 * S.cyc; osc.type = { sine: 'sine', tri: 'triangle', sq: 'square', saw: 'sawtooth' }[S.shape]; }
   };
   $$('input,select', host).forEach(i => i.oninput = read);
   $$('[data-n]', host).forEach(b => b.onclick = () => { S.noise = b.dataset.n === '1'; $$('[data-n]', host).forEach(x => x.classList.toggle('on', x === b)); S.amp = .75; S.cyc = 3; S.shape = S.noise ? 'noise' : 'sine'; if (S.noise) S.cyc = 3; read(); });
@@ -2000,6 +2015,9 @@ function refractCompare(host) {
       const P1 = { x: cx - R * a, y: cy - R * b }, P2 = { x: cx + R * a2, y: cy + R * b2 };
       const f = S.rev ? [P2, P1, 'r', 'o'] : [P1, P2, 'o', 'r'];
       s += arrow(f[0].x, f[0].y, cx + (f[0].x - cx) * .02, cy + (f[0].y - cy) * .02, f[2], 3) + arrow(cx, cy, f[1].x, f[1].y, f[3], 3);
+      { const a1 = d2r(S.th), r1 = 36, r2 = 56;       // 弧線標出入射角、折射角（都是和法線的夾角）
+        s += `<path d="M${cx},${cy - r1} A${r1},${r1} 0 0 0 ${(cx - r1 * Math.sin(a1)).toFixed(1)},${(cy - r1 * Math.cos(a1)).toFixed(1)}" fill="none" stroke="${COL.o}" stroke-width="3"/>` + text(cx - 8, cy - 44, `入射角 ${S.th}°`, 'o', 13, 'end', 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="4"');
+        s += `<path d="M${cx},${cy + r2} A${r2},${r2} 0 0 0 ${(cx + r2 * Math.sin(d2r(t2))).toFixed(1)},${(cy + r2 * Math.cos(d2r(t2))).toFixed(1)}" fill="none" stroke="${COL.r}" stroke-width="3"/>` + text(cx - 8, cy + 76, `折射角 ${Math.round(t2)}°`, 'r', 13, 'end', 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="4"'); }
       s += text(cx, 276 - 2, `折射角 ${Math.round(t2)}°`, 'r', 14, 'middle', 'font-weight="700"');
     });
     setG(host, s);
@@ -2408,6 +2426,7 @@ function route() {
   const raw = location.hash.replace(/^#\/?/, ''), [path, qs] = raw.split('?'), parts = path.split('/');
   const from = qs && (qs.match(/from=([A-Z]\d+)/) || [])[1];
   window.scrollTo(0, 0);
+  stopAllSounds();                                   // 換頁就停掉模擬裡正在播的聲音
   if (parts[0] === 'check') viewBoard();
   else if (parts[0] === 't') viewTask(parts[1]);
   else if (parts[0] === 'review') viewReviewMap();
