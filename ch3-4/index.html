@@ -1653,36 +1653,48 @@ SIMS.simWaveType = host => {
 /* --- 週期波：振幅、波長、頻率、週期、波速 --- */
 SIMS.simPeriodic = host => {
   const mode = host.dataset.mode || 'speed', V0 = 12; let slow = true, tt = 0, last = null;
-  const obsT = { shape: '拖曳「振幅」和「波長」，看看波峰、波谷、波長（紅色括號）、振幅（橙色箭頭）怎麼變。', freq: '拖曳「頻率」：頻率變大，波變得更密、週期變小。紅點一秒上下幾次，頻率就是幾赫（按「真實速度」數數看）。', speed: '同時調「頻率」和「波長」，看波速 v ＝ f × λ 怎麼算出來。', fixedv: '這是同一條繩子：波速固定 12 公分／秒。你只能改頻率，波長會自動跟著變。' };
+  const obsT = { shape: '繩子畫成一顆一顆串在一起的小球。波源先動，再一顆帶一顆把擾動往右傳。拖曳「振幅」和「波長」，看波長（紫色）和振幅（橙色）怎麼變。', freq: '波源帶動旁邊的小球，一顆傳一顆。拖曳「頻率」：頻率變大，波變得更密。大紅球一秒上下幾次，頻率就是幾赫（按「真實速度」數數看）。', speed: '看綠色虛線：擾動一顆傳一顆往右跑，它跑的快慢就是波速。調「頻率」和「波長」，看 v ＝ f × λ。小球只在原處上下動。', fixedv: '這是同一條繩子：波速固定 12 公分／秒（綠色虛線每次跑得一樣快）。你只能改頻率，波長會自動跟著變。' };
   const sl = (mode === 'shape' ? rng(host, '振幅 A（公分）', 'A', .5, 3, .5, 1.5) + rng(host, '波長 λ（公分）', 'L', 2, 8, 1, 6) : '') +
     (mode === 'freq' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 1) : '') +
     (mode === 'speed' ? rng(host, '頻率 f（赫）', 'F', .5, 5, .5, 2) + rng(host, '波長 λ（公分）', 'L', 2, 10, 1, 4) : '') +
     (mode === 'fixedv' ? rng(host, '頻率 f（赫）', 'F', .5, 6, .5, 2) : '');
-  simBox(host, '週期波模擬器', obsT[mode], `<div class="ctl">${sl}<span class="seg"><button data-s="1" class="on">🐢 慢動作（放慢 4 倍）</button><button data-s="0">真實速度</button></span></div>${svgOpen(500, 212)}<div class="out" data-k="out"></div>`);
+  simBox(host, '週期波模擬器', obsT[mode], `<div class="ctl">${sl}<span class="seg"><button data-s="1" class="on">🐢 慢動作（放慢 4 倍）</button><button data-s="0">真實速度</button></span><button class="btn" data-k="re">↺ 從頭開始</button></div>${svgOpen(512, 212)}<div class="out" data-k="out"></div>`);
   const st = { A: 1.5, L: 6, F: mode === 'shape' ? 1 : 1 };
   const read = () => { ['A', 'L', 'F'].forEach(k => { const e = Q(host, k); if (e) { st[k] = +e.value; Q(host, k + 'v').textContent = e.value; } }); if (mode === 'fixedv') st.L = V0 / st.F; if (mode === 'freq') { st.L = 6; } if (mode === 'speed') st.A = 1.5; if (mode === 'fixedv') st.A = 1.5; };
   $$('input', host).forEach(i => i.oninput = read); read();
-  const px = 32, ypx = 28, X0 = 22, cy = 105;
+  const px = 32, ypx = 28, X0 = 40, cy = 105, STEP = .25, NB = 57;       // 繩子＝57 顆串在一起的小球（每 0.25 公分一顆）
   loop(host, now => {
     if (last == null) last = now; tt += (now - last) * (slow ? .25 : 1); last = now;
-    const v = st.F * st.L;
+    const v = st.F * st.L, front = v * tt;                                  // front：擾動目前傳到的位置（公分）
+    const Y = x => x <= front ? st.A * Math.sin(2 * Math.PI * (front - x) / st.L) : 0;      // 波源先動，擾動一顆傳一顆往右；還沒傳到的小球不動
     let s = '';
-    for (let i = 0; i <= 14; i++) { s += line(X0 + i * px, 14, X0 + i * px, 196, '#eef1f5', 1) + (i % 2 === 0 ? text(X0 + i * px, 207, i, 'gr', 11) : ''); }
-    s += line(X0, cy, X0 + 14.4 * px, cy, 'k', 1.5);
-    let d = ''; for (let i = 0; i <= 288; i++) { const x = i / 288 * 14; d += (i ? 'L' : 'M') + (X0 + x * px).toFixed(1) + ',' + (cy - st.A * ypx * Math.sin(2 * Math.PI * (x - v * tt) / st.L)).toFixed(1); }
-    s += `<path d="${d}" fill="none" stroke="${COL.b}" stroke-width="3"/>`;
-    let xc = (((v * tt + st.L / 4) % st.L) + st.L) % st.L; if (xc < .3) xc += st.L;
-    const a = xc + st.L <= 14 ? xc : xc - st.L, b = a + st.L, yt = cy - st.A * ypx - 18;
-    if (a >= 0 && b <= 14.2) s += arrow(X0 + a * px + 3, yt, X0 + b * px - 3, yt, 'p', 2.2) + arrow(X0 + b * px - 3, yt, X0 + a * px + 3, yt, 'p', 2.2) + text(X0 + (a + b) / 2 * px, yt - 5, 'λ ＝ ' + st.L + ' 公分', 'p', 13);
-    const xa = xc + st.L <= 14 ? xc + st.L : xc; s += arrow(X0 + xa * px, cy - 1, X0 + xa * px, cy - st.A * ypx + 7, 'o', 2.6) + line(X0 + xa * px - 7, cy, X0 + xa * px + 7, cy, 'o', 2.6) + text(X0 + xa * px + 10, cy - st.A * ypx / 2 + 4, '振幅', 'o', 11, 'start', 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="4"');
-    const rx = 2, ry = cy - st.A * ypx * Math.sin(2 * Math.PI * (rx - v * tt) / st.L);
-    s += `<circle cx="${X0 + rx * px}" cy="${ry}" r="7" fill="${COL.r}"/>` + text(X0 + rx * px, cy + 44, '紅點', 'r', 12);
+    for (let i = 0; i <= 14; i += 2) s += line(X0 + i * px, 14, X0 + i * px, 196, '#eef1f5', 1) + text(X0 + i * px, 207, i, 'gr', 11);
+    s += line(X0, cy, X0 + 14.2 * px, cy, '#90a4ae', 1.2, 'stroke-dasharray="5 4"');
+    // 波長、振幅標示（只標已經傳到的波）
+    const c1 = front - st.L / 4, xc = c1 >= 0 ? c1 - Math.floor(c1 / st.L) * st.L : -1;      // 最靠左的波峰位置
+    if (xc >= 0) {
+      const hi = Math.min(14, c1), yt = cy - st.A * ypx - 16;
+      if (xc + st.L <= hi + 1e-6) s += arrow(X0 + xc * px + 3, yt, X0 + (xc + st.L) * px - 3, yt, 'p', 2.2) + arrow(X0 + (xc + st.L) * px - 3, yt, X0 + xc * px + 3, yt, 'p', 2.2) + text(X0 + (xc + st.L / 2) * px, yt - 5, 'λ ＝ ' + round(st.L, 2) + ' 公分', 'p', 13);
+      const xa = xc + st.L <= hi + 1e-6 ? xc + st.L : xc;
+      if (xa <= 14) s += arrow(X0 + xa * px, cy - 1, X0 + xa * px, cy - st.A * ypx + 9, 'o', 2.6) + text(X0 + xa * px + 10, cy - st.A * ypx / 2 + 4, '振幅', 'o', 11, 'start', 'font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="4"');
+    }
+    // 小球串
+    let pts = ''; const P = [];
+    for (let k = 0; k < NB; k++) { const x = k * STEP, p = [X0 + x * px, cy - Y(x) * ypx]; P.push(p); pts += p[0].toFixed(1) + ',' + p[1].toFixed(1) + ' '; }
+    s += `<polyline points="${pts}" fill="none" stroke="#b71c1c" stroke-width="1.5"/>`;
+    P.forEach((p, k) => { if (k && k !== 8) s += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${k % 8 === 0 ? 4.6 : 3.8}" fill="${k % 8 === 0 ? '#80deea' : '#e53935'}" stroke="${k % 8 === 0 ? '#00838f' : '#8e0000'}" stroke-width=".8"/>`; });
+    // 波源（最左邊，被上下帶動）與觀察用的大紅球
+    s += `<rect x="${X0 - 26}" y="${(P[0][1] - 7).toFixed(1)}" width="26" height="14" rx="4" fill="#607d8b"/><circle cx="${X0}" cy="${P[0][1].toFixed(1)}" r="5.5" fill="#ffca28" stroke="#b28704" stroke-width="1.2"/>` + line(X0 - 13, 30, X0 - 13, 180, '#b0bec5', 3) + text(X0 - 13, 196, '波源', 'k', 11, 'middle', 'font-weight="700"');
+    s += `<circle cx="${P[8][0]}" cy="${P[8][1].toFixed(1)}" r="7.5" fill="${COL.r}" stroke="#fff" stroke-width="1.5"/>` + text(P[8][0], cy + st.A * ypx + 22, '大紅球', 'r', 11, 'middle', 'font-weight="700"');
+    if (front < 14) s += line(X0 + front * px, cy - 60, X0 + front * px, cy + 60, 'g', 1.5, 'stroke-dasharray="3 4"') + text(X0 + front * px + 6, cy - 70, '← 擾動傳到這裡', 'g', 10.5, 'start', 'font-weight="700"');
     setG(host, s);
   });
   const o = Q(host, 'out'), upd = () => { read(); const T = round(1 / st.F, 3), v = round(st.F * st.L, 2);
     o.innerHTML = (mode === 'shape' ? `振幅 A ＝ ${st.A} 公分，波長 λ ＝ ${st.L} 公分（一個全波的長度）。` :
       `頻率 f ＝ <b>${st.F}</b> 赫（一秒 ${st.F} 個全波），週期 T ＝ 1 ÷ ${st.F} ＝ <b>${T}</b> 秒${mode === 'freq' ? '。' : `；波長 λ ＝ <b>${round(st.L, 2)}</b> 公分；<br>波速 v ＝ f × λ ＝ ${st.F} × ${round(st.L, 2)} ＝ <b>${v}</b> 公分／秒${mode === 'fixedv' ? '（固定不變）' : ''}。`}`); };
   $$('input', host).forEach(i => i.addEventListener('input', upd)); upd();
+  $$('input', host).forEach(i => i.addEventListener('input', () => { tt = 0; }));      // 改了設定就從靜止重新開始，看擾動怎麼傳出去
+  Q(host, 're').onclick = () => { tt = 0; };
   $$('[data-s]', host).forEach(b => b.onclick = () => { slow = b.dataset.s === '1'; $$('[data-s]', host).forEach(x => x.classList.toggle('on', x === b)); });
 };
 
