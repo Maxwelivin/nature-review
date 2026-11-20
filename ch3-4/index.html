@@ -1448,7 +1448,8 @@ card('C2', { body: () => `
 card('C3', { body: () => `
   ${kp('透明物體的顏色', '<p>看「<b>穿透過去的光</b>」。彩色玻璃紙只放行和自己同顏色的光，別的顏色的光會被它吃掉（吸收）；無色透明的玻璃紙什麼光都放行。</p>', true)}
   {{sim:simColor:filter}}
-  ${tbl(['光 ＼ 玻璃紙', '紅', '綠', '藍', '無色'], [['白光', '紅', '綠', '藍', '白'], ['紅光', '紅', '黑暗', '黑暗', '紅'], ['綠光', '黑暗', '綠', '黑暗', '綠'], ['藍光', '黑暗', '黑暗', '藍', '藍']])}`,
+  ${tbl(['光 ＼ 玻璃紙', '紅', '綠', '藍', '無色'], [['白光', '紅', '綠', '藍', '白'], ['紅光', '紅', '黑暗', '黑暗', '紅'], ['綠光', '黑暗', '綠', '黑暗', '綠'], ['藍光', '黑暗', '黑暗', '藍', '藍']])}
+  <p class="muted">對照：<b>透明物體</b>看「穿透過去的光」；<b>不透明物體</b>（C4）看「反射回來的光」，光穿不過去。</p>`,
   traps: ['紅光射向綠玻璃紙，後面「沒有光」，不是變成黃光。'],
   quick: [['白光通過藍色玻璃紙，看到什麼？', '藍光。']] });
 
@@ -1456,7 +1457,8 @@ card('C4', { body: () => `
   ${kp('不透明物體的顏色', '<p>看「<b>反射的光</b>」：色紙只反射和自己同色的色光、吸收其他色光；白紙反射所有色光；黑紙吸收所有色光。</p>', true)}
   {{sim:simColor:paper}}
   ${tbl(['光 ＼ 色紙', '紅紙', '綠紙', '藍紙', '白紙', '黑紙'], [['白光', '紅', '綠', '藍', '白', '黑'], ['紅光', '紅', '黑', '黑', '紅', '黑'], ['綠光', '黑', '綠', '黑', '綠', '黑'], ['藍光', '黑', '黑', '藍', '藍', '黑']])}
-  <p>所以在紅光下，白底紅圓的旗子整面都是紅色，圖案就看不出來了。</p>`,
+  <p>所以在紅光下，白底紅圓的旗子整面都是紅色，圖案就看不出來了。</p>
+  <p class="muted">對照：<b>不透明物體</b>看「反射回來的光」；<b>透明物體</b>（C3）看「穿透過去的光」。</p>`,
   traps: ['白紙在藍光下是藍色，不是白色（它只是把看到的光都反射出來）。', '黑紙在任何色光下都是黑色。'],
   quick: [['綠光照射紅紙，紅紙看起來是什麼顏色？', '黑色（紅紙不反射綠光）。']] });
 
@@ -2059,32 +2061,73 @@ SIMS.simColor = host => {
   const SET = { '白': 'RGB', '紅': 'R', '綠': 'G', '藍': 'B', '無色': 'RGB', '黑': '' };
   const HEX = s => `rgb(${s.includes('R') ? 255 : 0},${s.includes('G') ? 255 : 0},${s.includes('B') ? 255 : 0})`;
   const NAME = { '': '黑色（沒有光）', R: '紅色', G: '綠色', B: '藍色', RG: '黃色', GB: '青色', RB: '洋紅色', RGB: '白色' };
-  simBox(host, filter ? '色光穿過玻璃紙' : '色光照在色紙上', filter ? '白光、紅光、綠光、藍光分別通過各色玻璃紙，通過後是什麼光？' : '同一張色紙，在不同顏色的光下看起來一樣嗎？注意下面三個小方塊：哪些色光被反射？',
-    `<div class="ctl"><b>光：</b><span class="seg" data-k="sl">${LIGHTS.map((x, i) => `<button data-l="${x}" class="${i ? '' : 'on'}">${x}光</button>`).join('')}</span><b>${filter ? '玻璃紙：' : '色紙：'}</b><span class="seg" data-k="sp">${ITEMS.map((x, i) => `<button data-p="${x}" class="${i ? '' : 'on'}">${x}${x === '無色' ? '（透明）' : filter ? '色' : '紙'}</button>`).join('')}</span></div>${svgOpen(520, 230)}<div class="out" data-k="out"></div>`);
-  const draw = () => {
-    const ls = SET[S.l], ps = SET[S.p], rs = [...ls].filter(c => ps.includes(c)).join('');
-    let s = `<rect x="10" y="10" width="500" height="210" fill="#222"/>`;
-    s += `<circle cx="60" cy="110" r="26" fill="${S.l === '白' ? '#fff' : HEX(ls)}"/>` + text(60, 160, S.l + '光', '#fff', 13);
-    s += `<polygon points="86,100 ${filter ? 190 : 250},${filter ? 70 : 90} ${filter ? 190 : 250},${filter ? 150 : 130} 86,120" fill="${S.l === '白' ? '#fff' : HEX(ls)}" opacity=".35"/>`;
-    const pc = S.p === '無色' ? 'rgba(255,255,255,.25)' : S.p === '白' ? '#fff' : S.p === '黑' ? '#000' : HEX(SET[S.p]);
-    if (filter) {
-      s += `<rect x="190" y="50" width="22" height="120" fill="${pc}" stroke="#fff" stroke-width="2" opacity="${S.p === '無色' ? 1 : .85}"/>` + text(201, 190, '玻璃紙', '#fff', 13);
-      s += `<polygon points="212,${rs ? 70 : 85} 360,${rs ? 60 : 85} 360,${rs ? 160 : 135} 212,${rs ? 150 : 135}" fill="${rs ? HEX(rs) : 'none'}" opacity=".45"/>`;
-      s += `<rect x="370" y="60" width="110" height="100" rx="8" fill="${rs ? HEX(rs) : '#050505'}" stroke="#777" stroke-width="2"/>` + text(425, 184, '穿過後看到', '#fff', 13);
-    } else {
-      s += `<rect x="250" y="55" width="26" height="110" fill="${pc}" stroke="#bbb" stroke-width="2"/>` + text(263, 184, S.p + '紙', '#fff', 13);
-      s += `<polygon points="276,${rs ? 80 : 95} 400,${rs ? 100 : 105} 400,${rs ? 130 : 125} 276,${rs ? 140 : 125}" fill="${rs ? HEX(rs) : 'none'}" opacity=".5"/>`;
-      s += `<circle cx="430" cy="115" r="18" fill="#fff"/><circle cx="436" cy="115" r="7" fill="#222"/>` + text(430, 160, '眼睛看到', '#fff', 13);
-      s += `<rect x="395" y="30" width="70" height="26" rx="6" fill="${rs ? HEX(rs) : '#050505'}" stroke="#777" stroke-width="2"/>`;
-    }
-    ['R', 'G', 'B'].forEach((c, i) => { const on = ls.includes(c), pass = rs.includes(c), x = 330 + i * 50; s += `<rect x="${x}" y="188" width="30" height="22" rx="4" fill="${on ? HEX(c) : '#333'}" opacity="${pass ? 1 : on ? .3 : .15}" stroke="#fff" stroke-width="${pass ? 3 : 1}"/>` + text(x + 15, 204, c === 'R' ? '紅' : c === 'G' ? '綠' : '藍', '#fff', 12); });
-    setG(host, s);
-    const why = filter ? (S.p === '無色' ? '無色透明玻璃紙讓所有色光穿透。' : `${S.p}色玻璃紙只讓${S.p}光穿透，其他色光被吸收。`) : (S.p === '白' ? '白紙反射所有色光。' : S.p === '黑' ? '黑紙吸收所有色光。' : `${S.p}紙只反射${S.p}光，其他色光被吸收。`);
-    Q(host, 'out').innerHTML = `${S.l}光 ${filter ? '穿過' : '照到'} ${S.p}${filter ? (S.p === '無色' ? '（透明）' : '色') + '玻璃紙' : '紙'}：${why}<br>${filter ? '穿過去的' : '反射出來的'}光是 → <b>${NAME[rs] || '黑色'}</b>${rs ? '' : '（沒有光，看起來是黑的）'}。`;
+  const LC = { R: '#ff5a5a', G: '#3df06a', B: '#6f8dff' };
+  simBox(host, filter ? '色光穿過玻璃紙（透明物體）' : '色光照在色紙上（不透明物體）', filter ? '白光其實是紅、綠、藍三種色光疊在一起。看每一道色光：誰穿過玻璃紙？誰被吸收？' : '白光是紅、綠、藍三種色光疊在一起。看每一道色光：誰被色紙反射到眼睛？誰被吸收？',
+    `<div class="ctl"><b>光：</b><span class="seg" data-k="sl">${LIGHTS.map((x, i) => `<button data-l="${x}" class="${i ? '' : 'on'}">${x}光</button>`).join('')}</span><b>${filter ? '玻璃紙：' : '色紙：'}</b><span class="seg" data-k="sp">${ITEMS.map((x, i) => `<button data-p="${x}" class="${i ? '' : 'on'}">${x}${x === '無色' ? '（透明）' : filter ? '色' : '紙'}</button>`).join('')}</span></div>${svgOpen(520, 250)}<div class="out" data-k="out"></div>`);
+  // 幾何：filter＝光由左向右直直穿過；paper＝光由左上斜射到紙，再反射到右上的眼睛
+  const LANES = ['R', 'G', 'B'], FY = [88, 128, 168], FX0 = 78, FXF = 236, FXS = 420;
+  const PX = [205, 255, 305], PY = 188, PD = 118;                         // 色紙上的三個入射點；入射／反射角都是 45°
+  const along = (path, u) => {                                           // 沿折線取 u（0～1）處的位置
+    const L = path.slice(1).map((p, i) => Math.hypot(p[0] - path[i][0], p[1] - path[i][1])), T = L.reduce((a, b) => a + b, 0);
+    let d = u * T, i = 0; while (i < L.length - 1 && d > L[i]) { d -= L[i]; i++; }
+    const f = L[i] ? d / L[i] : 0; return [path[i][0] + (path[i + 1][0] - path[i][0]) * f, path[i][1] + (path[i + 1][1] - path[i][1]) * f];
   };
-  $$('[data-l]', host).forEach(b => b.onclick = () => { S.l = b.dataset.l; $$('[data-l]', host).forEach(x => x.classList.toggle('on', x === b)); draw(); });
-  $$('[data-p]', host).forEach(b => b.onclick = () => { S.p = b.dataset.p; $$('[data-p]', host).forEach(x => x.classList.toggle('on', x === b)); draw(); });
-  draw();
+  const info = () => { const ls = SET[S.l], ps = SET[S.p], rs = [...ls].filter(c => ps.includes(c)).join(''); return { ls, ps, rs }; };
+  const draw = t => {
+    const { ls, rs } = info();
+    let s = `<rect x="10" y="10" width="500" height="230" rx="10" fill="#1d1f24"/>`;
+    s += text(260, 32, filter ? '看「穿透過去」的光' : '看「反射回來」的光', '#ffd54f', 13, 'middle', 'font-weight="700"');
+    const pc = S.p === '無色' ? 'rgba(255,255,255,.28)' : S.p === '白' ? '#fff' : S.p === '黑' ? '#000' : HEX(SET[S.p]);
+    const paths = {}, hit = {};
+    LANES.forEach((c, i) => {
+      if (!ls.includes(c)) return;
+      const pass = rs.includes(c);
+      if (filter) {
+        paths[c] = pass ? [[FXF - 80, FY[i]], [FXF, FY[i]], [FXS, FY[i]]] : [[FXF - 80, FY[i]], [FXF, FY[i]]]; hit[c] = [FXF, FY[i]];
+        s += `<rect x="${FX0}" y="${FY[i] - 9}" width="${FXF - FX0}" height="18" fill="${LC[c]}" opacity=".16"/>`;
+        s += pass ? `<rect x="${FXF + 18}" y="${FY[i] - 9}" width="${FXS - FXF - 18}" height="18" fill="${LC[c]}" opacity=".16"/>` : `<line x1="${FXF + 22}" y1="${FY[i]}" x2="${FXS - 4}" y2="${FY[i]}" stroke="#777" stroke-width="1.4" stroke-dasharray="4 5"/>` + text(FXF + 34, FY[i] + 5, '被吸收', '#9aa4b0', 11, 'start');
+      } else {
+        const sx = PX[i] - PD, ex = PX[i] + PD;
+        paths[c] = pass ? [[sx, PY - PD], [PX[i], PY], [ex, PY - PD]] : [[sx, PY - PD], [PX[i], PY]]; hit[c] = [PX[i], PY];
+        s += line(sx, PY - PD, PX[i], PY, LC[c], 14, 'opacity=".16"') + (pass ? line(PX[i], PY, ex, PY - PD, LC[c], 14, 'opacity=".16"') : '');
+      }
+    });
+    // 物體：玻璃紙（透明、光穿過）／色紙（不透光、光彈回）
+    if (filter) s += `<rect x="${FXF}" y="56" width="18" height="152" fill="${pc}" stroke="#fff" stroke-width="2" opacity="${S.p === '無色' ? 1 : .85}"/>` + text(FXF + 9, 226, '玻璃紙', '#fff', 11);
+    else s += `<rect x="160" y="${PY}" width="200" height="16" rx="3" fill="${pc}" stroke="#bbb" stroke-width="2"/>` + text(150, PY + 13, S.p + '紙', '#fff', 11, 'end');
+    // 流動的光點；被吸收的光在物體表面變淡、停住，並閃一圈
+    LANES.forEach(c => {
+      if (!paths[c]) return;
+      const pass = rs.includes(c), N = 6;
+      for (let k = 0; k < N; k++) {
+        const u = (t * .2 + k / N) % 1, p = along(paths[c], u);
+        const a = pass ? 1 : Math.max(0, Math.min(1, (1 - u) / .25));
+        s += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4.6" fill="${LC[c]}" opacity="${a.toFixed(2)}"/>`;
+      }
+      if (!pass) {
+        const h = hit[c], ph = (t * 1.6) % 1;
+        s += `<circle cx="${h[0]}" cy="${h[1]}" r="${(5 + ph * 12).toFixed(1)}" fill="none" stroke="${LC[c]}" stroke-width="2" opacity="${(.8 * (1 - ph)).toFixed(2)}"/>`;
+        if (!filter) s += text(h[0], 232, '被吸收', LC[c], 10, 'middle', 'font-weight="700"');
+      }
+    });
+    // 光源
+    const lc = S.l === '白' ? '#fff' : HEX(ls);
+    if (filter) s += `<circle cx="48" cy="128" r="24" fill="${lc}"/>` + text(48, 172, S.l + '光', '#fff', 12) + `<polygon points="72,118 ${FX0},${FY[0] - 9} ${FX0},${FY[2] + 9} 72,138" fill="${lc}" opacity=".18"/>`;
+    else s += `<rect x="62" y="63" width="${PX[2] - PD - 62}" height="14" fill="${lc}" opacity=".14"/><circle cx="44" cy="62" r="22" fill="${lc}"/>` + text(44, 104, S.l + '光', '#fff', 12);
+    // 看到的結果：螢幕（穿透）／眼睛（反射）
+    const rc = rs ? HEX(rs) : '#050505';
+    if (filter) s += `<rect x="${FXS}" y="52" width="84" height="160" rx="8" fill="${rc}" stroke="#888" stroke-width="2"/>` + text(FXS + 42, 232, '螢幕上看到', '#fff', 11);
+    else s += `<circle cx="470" cy="60" r="19" fill="#fff"/><circle cx="476" cy="60" r="7.5" fill="#222"/>` + text(470, 96, '眼睛看到', '#fff', 11) + `<rect x="440" y="106" width="60" height="34" rx="6" fill="${rc}" stroke="#888" stroke-width="2"/>`;
+    setG(host, s);
+  };
+  const out = () => {
+    const { rs } = info();
+    const why = filter ? (S.p === '無色' ? '無色透明玻璃紙讓所有色光穿透。' : `${S.p}色玻璃紙只讓${S.p}光穿透，其他色光被吸收。`) : (S.p === '白' ? '白紙反射所有色光。' : S.p === '黑' ? '黑紙吸收所有色光。' : `${S.p}紙只反射${S.p}光，其他色光被吸收。`);
+    Q(host, 'out').innerHTML = `${S.l}光 ${filter ? '穿過' : '照到'} ${S.p}${filter ? (S.p === '無色' ? '（透明）' : '色') + '玻璃紙' : '紙'}：${why}<br>${filter ? '穿過去的' : '反射出來的'}光是 → <b>${NAME[rs] || '黑色'}</b>${rs ? '' : '（沒有光，看起來是黑的）'}。<br><span class="muted">${filter ? '透明物體：光「穿過去」，看穿過去的光。' : '不透明物體：光「彈回來」，看反射回來的光；光穿不過去。'}</span>`;
+  };
+  $$('[data-l]', host).forEach(b => b.onclick = () => { S.l = b.dataset.l; $$('[data-l]', host).forEach(x => x.classList.toggle('on', x === b)); out(); });
+  $$('[data-p]', host).forEach(b => b.onclick = () => { S.p = b.dataset.p; $$('[data-p]', host).forEach(x => x.classList.toggle('on', x === b)); out(); });
+  out(); loop(host, draw);
 };
 function colorMix(host) {
   simBox(host, '色光混合', '紅、綠、藍三盞燈照在同一面白牆上。開關不同的燈，重疊的地方是什麼顏色？',
