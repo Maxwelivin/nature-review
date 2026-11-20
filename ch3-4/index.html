@@ -2061,69 +2061,81 @@ SIMS.simColor = host => {
   const SET = { '白': 'RGB', '紅': 'R', '綠': 'G', '藍': 'B', '無色': 'RGB', '黑': '' };
   const HEX = s => `rgb(${s.includes('R') ? 255 : 0},${s.includes('G') ? 255 : 0},${s.includes('B') ? 255 : 0})`;
   const NAME = { '': '黑色（沒有光）', R: '紅色', G: '綠色', B: '藍色', RG: '黃色', GB: '青色', RB: '洋紅色', RGB: '白色' };
-  const LC = { R: '#ff5a5a', G: '#3df06a', B: '#6f8dff' };
-  simBox(host, filter ? '色光穿過玻璃紙（透明物體）' : '色光照在色紙上（不透明物體）', filter ? '白光其實是紅、綠、藍三種色光疊在一起。看每一道色光：誰穿過玻璃紙？誰被吸收？' : '白光是紅、綠、藍三種色光疊在一起。看每一道色光：誰被色紙反射到眼睛？誰被吸收？',
+  // 白光含有各種色光；這裡畫七種代表（波長：紅最長、紫最短）。g＝它對應的三原色（課本簡化：彩色玻璃紙／色紙只讓「同色」的光通過／反射）
+  const SPEC = [{ n: '紅', c: '#ff4d4d', g: 'R', lam: 34 }, { n: '橙', c: '#ff9a3c', g: '', lam: 31 }, { n: '黃', c: '#ffe14d', g: '', lam: 29 }, { n: '綠', c: '#3df06a', g: 'G', lam: 27 },
+    { n: '藍', c: '#4aa3ff', g: 'B', lam: 25 }, { n: '靛', c: '#6a6aff', g: '', lam: 23 }, { n: '紫', c: '#b36bff', g: '', lam: 21 }];
+  const LIT = { '白': [0, 1, 2, 3, 4, 5, 6], '紅': [0], '綠': [3], '藍': [4] };
+  simBox(host, filter ? '色光穿過玻璃紙（透明物體）' : '色光照在色紙上（不透明物體）', filter ? '光是一道道的波。白光含有各種色光（圖中畫七種）。看每一道色光的波：誰穿過玻璃紙？誰被吸收？' : '光是一道道的波。白光含有各種色光（圖中畫七種）。看每一道色光的波：誰被色紙反射到眼睛？誰被吸收？',
     `<div class="ctl"><b>光：</b><span class="seg" data-k="sl">${LIGHTS.map((x, i) => `<button data-l="${x}" class="${i ? '' : 'on'}">${x}光</button>`).join('')}</span><b>${filter ? '玻璃紙：' : '色紙：'}</b><span class="seg" data-k="sp">${ITEMS.map((x, i) => `<button data-p="${x}" class="${i ? '' : 'on'}">${x}${x === '無色' ? '（透明）' : filter ? '色' : '紙'}</button>`).join('')}</span></div>${svgOpen(520, 250)}<div class="out" data-k="out"></div>`);
-  // 幾何：filter＝光由左向右直直穿過；paper＝光由左上斜射到紙，再反射到右上的眼睛
-  const LANES = ['R', 'G', 'B'], FY = [88, 128, 168], FX0 = 78, FXF = 236, FXS = 420;
-  const PX = [205, 255, 305], PY = 188, PD = 118;                         // 色紙上的三個入射點；入射／反射角都是 45°
-  const along = (path, u) => {                                           // 沿折線取 u（0～1）處的位置
-    const L = path.slice(1).map((p, i) => Math.hypot(p[0] - path[i][0], p[1] - path[i][1])), T = L.reduce((a, b) => a + b, 0);
-    let d = u * T, i = 0; while (i < L.length - 1 && d > L[i]) { d -= L[i]; i++; }
-    const f = L[i] ? d / L[i] : 0; return [path[i][0] + (path[i + 1][0] - path[i][0]) * f, path[i][1] + (path[i + 1][1] - path[i][1]) * f];
+  const passes = i => S.p === '無色' || S.p === '白' ? true : S.p === '黑' ? false : SPEC[i].g !== '' && SET[S.p].includes(SPEC[i].g);
+  const info = () => {
+    const lit = LIT[S.l], pass = lit.filter(passes), gs = [...new Set(pass.map(i => SPEC[i].g).filter(Boolean))];
+    const rs = ['R', 'G', 'B'].filter(c => gs.includes(c)).join('');
+    return { lit, pass, rs };
   };
-  const info = () => { const ls = SET[S.l], ps = SET[S.p], rs = [...ls].filter(c => ps.includes(c)).join(''); return { ls, ps, rs }; };
+  // 幾何
+  const FY = i => 62 + i * 24, FX0 = 66, FXF = 236, FXS = 420;                         // 穿透：七道波由左向右
+  const H0 = 150, HS = 16, PY = 196, A0 = 84, B0 = 120;                                // 反射：入射點 H_k，入射／反射角都是 45°，波束垂直於傳播方向
+  const Hk = i => [H0 + HS * i, PY], Sk = i => [H0 + HS * i - (A0 + HS / 2 * i), PY - (A0 + HS / 2 * i)], Ek = i => [H0 + HS * i + (B0 - HS / 2 * i), PY - (B0 - HS / 2 * i)];
+  const EC = [308, 86], ER = 39;                                                        // 眼睛（大小剛好罩住反射後的波束）
+  const wave = (path, color, lam, A, t, fade) => {                                     // 沿折線畫一道行進中的波；fade＝true 時，波在最後 40 像素變弱（被吸收）
+    const L = path.slice(1).map((p, i) => Math.hypot(p[0] - path[i][0], p[1] - path[i][1])), T = L.reduce((a, b) => a + b, 0);
+    let pts = '', seg = 0, acc = 0;
+    for (let d = 0; d <= T; d += 3) {
+      while (seg < L.length - 1 && d > acc + L[seg]) { acc += L[seg]; seg++; }
+      const f = (d - acc) / L[seg], a = path[seg], b = path[seg + 1], dx = (b[0] - a[0]) / L[seg], dy = (b[1] - a[1]) / L[seg];
+      const env = fade ? Math.max(0, Math.min(1, (T - d) / 40)) : 1, off = A * env * Math.sin(2 * Math.PI * (d - 70 * t) / lam);
+      pts += (a[0] + (b[0] - a[0]) * f - dy * off).toFixed(1) + ',' + (a[1] + (b[1] - a[1]) * f + dx * off).toFixed(1) + ' ';
+    }
+    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`;
+  };
   const draw = t => {
-    const { ls, rs } = info();
+    const { lit, pass, rs } = info();
     let s = `<rect x="10" y="10" width="500" height="230" rx="10" fill="#1d1f24"/>`;
-    s += text(260, 32, filter ? '看「穿透過去」的光' : '看「反射回來」的光', '#ffd54f', 13, 'middle', 'font-weight="700"');
+    s += text(260, 30, filter ? '看「穿透過去」的光波' : '看「反射回來」的光波', '#ffd54f', 13, 'middle', 'font-weight="700"');
     const pc = S.p === '無色' ? 'rgba(255,255,255,.28)' : S.p === '白' ? '#fff' : S.p === '黑' ? '#000' : HEX(SET[S.p]);
-    const paths = {}, hit = {};
-    LANES.forEach((c, i) => {
-      if (!ls.includes(c)) return;
-      const pass = rs.includes(c);
+    const lc = S.l === '白' ? '#fff' : SPEC[LIT[S.l][0]].c;
+    const rings = [];
+    // 物體
+    if (filter) s += `<rect x="${FXF}" y="44" width="18" height="180" fill="${pc}" stroke="#fff" stroke-width="2" opacity="${S.p === '無色' ? 1 : .85}"/>` + text(FXF + 9, 240, '玻璃紙', '#fff', 11);
+    else s += `<rect x="116" y="${PY}" width="170" height="16" rx="3" fill="${pc}" stroke="#bbb" stroke-width="2"/>` + text(108, PY + 13, S.p + '紙', '#fff', 11, 'end');
+    // 光源：波從光源邊緣出發
+    if (filter) {
+      const y1 = FY(lit[0]) - 12, y2 = FY(lit[lit.length - 1]) + 12;
+      s += `<rect x="46" y="${y1}" width="20" height="${y2 - y1}" rx="5" fill="${lc}"/>` + text(40, (y1 + y2) / 2 + 5, S.l + '光', '#fff', 12, 'end');
+    } else {
+      const a = Sk(lit[0]), b = Sk(lit[lit.length - 1]);
+      s += line(a[0] - 4, a[1] + 4, b[0] + 4, b[1] - 4, lc, 12, 'stroke-linecap="round"') + text(a[0] - 12, a[1] + 22, S.l + '光', '#fff', 12, 'end');
+    }
+    // 每一道色光的波
+    lit.forEach(i => {
+      const sp = SPEC[i], ok = pass.includes(i);
       if (filter) {
-        paths[c] = pass ? [[FXF - 80, FY[i]], [FXF, FY[i]], [FXS, FY[i]]] : [[FXF - 80, FY[i]], [FXF, FY[i]]]; hit[c] = [FXF, FY[i]];
-        s += `<rect x="${FX0}" y="${FY[i] - 9}" width="${FXF - FX0}" height="18" fill="${LC[c]}" opacity=".16"/>`;
-        s += pass ? `<rect x="${FXF + 18}" y="${FY[i] - 9}" width="${FXS - FXF - 18}" height="18" fill="${LC[c]}" opacity=".16"/>` : `<line x1="${FXF + 22}" y1="${FY[i]}" x2="${FXS - 4}" y2="${FY[i]}" stroke="#777" stroke-width="1.4" stroke-dasharray="4 5"/>` + text(FXF + 34, FY[i] + 5, '被吸收', '#9aa4b0', 11, 'start');
+        const y = FY(i);
+        s += wave(ok ? [[FX0, y], [FXS, y]] : [[FX0, y], [FXF, y]], sp.c, sp.lam, 5, t, !ok);
+        if (!ok) { rings.push([FXF, y, sp.c]); s += line(FXF + 22, y, FXS - 6, y, '#6b7480', 1.2, 'stroke-dasharray="3 5"'); }
       } else {
-        const sx = PX[i] - PD, ex = PX[i] + PD;
-        paths[c] = pass ? [[sx, PY - PD], [PX[i], PY], [ex, PY - PD]] : [[sx, PY - PD], [PX[i], PY]]; hit[c] = [PX[i], PY];
-        s += line(sx, PY - PD, PX[i], PY, LC[c], 14, 'opacity=".16"') + (pass ? line(PX[i], PY, ex, PY - PD, LC[c], 14, 'opacity=".16"') : '');
+        const sx = Sk(i), h = Hk(i), e = Ek(i);
+        s += wave(ok ? [sx, h, e] : [sx, h], sp.c, sp.lam, 3.2, t, !ok);
+        if (!ok) rings.push([h[0], h[1], sp.c]);
       }
     });
-    // 物體：玻璃紙（透明、光穿過）／色紙（不透光、光彈回）
-    if (filter) s += `<rect x="${FXF}" y="56" width="18" height="152" fill="${pc}" stroke="#fff" stroke-width="2" opacity="${S.p === '無色' ? 1 : .85}"/>` + text(FXF + 9, 226, '玻璃紙', '#fff', 11);
-    else s += `<rect x="160" y="${PY}" width="200" height="16" rx="3" fill="${pc}" stroke="#bbb" stroke-width="2"/>` + text(150, PY + 13, S.p + '紙', '#fff', 11, 'end');
-    // 流動的光點；被吸收的光在物體表面變淡、停住，並閃一圈
-    LANES.forEach(c => {
-      if (!paths[c]) return;
-      const pass = rs.includes(c), N = 6;
-      for (let k = 0; k < N; k++) {
-        const u = (t * .2 + k / N) % 1, p = along(paths[c], u);
-        const a = pass ? 1 : Math.max(0, Math.min(1, (1 - u) / .25));
-        s += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4.6" fill="${LC[c]}" opacity="${a.toFixed(2)}"/>`;
-      }
-      if (!pass) {
-        const h = hit[c], ph = (t * 1.6) % 1;
-        s += `<circle cx="${h[0]}" cy="${h[1]}" r="${(5 + ph * 12).toFixed(1)}" fill="none" stroke="${LC[c]}" stroke-width="2" opacity="${(.8 * (1 - ph)).toFixed(2)}"/>`;
-        if (!filter) s += text(h[0], 232, '被吸收', LC[c], 10, 'middle', 'font-weight="700"');
-      }
-    });
-    // 光源
-    const lc = S.l === '白' ? '#fff' : HEX(ls);
-    if (filter) s += `<circle cx="48" cy="128" r="24" fill="${lc}"/>` + text(48, 172, S.l + '光', '#fff', 12) + `<polygon points="72,118 ${FX0},${FY[0] - 9} ${FX0},${FY[2] + 9} 72,138" fill="${lc}" opacity=".18"/>`;
-    else s += `<rect x="62" y="63" width="${PX[2] - PD - 62}" height="14" fill="${lc}" opacity=".14"/><circle cx="44" cy="62" r="22" fill="${lc}"/>` + text(44, 104, S.l + '光', '#fff', 12);
+    rings.forEach(([x, y, c]) => { const ph = (t * 1.4 + x * .01) % 1; s += `<circle cx="${x}" cy="${y}" r="${(4 + ph * 9).toFixed(1)}" fill="none" stroke="${c}" stroke-width="1.8" opacity="${(.85 * (1 - ph)).toFixed(2)}"/>`; });
+    if (rings.length) s += text(22, 46, '○＝被吸收（波變弱、停下來）', '#9aa4b0', 10, 'start');
     // 看到的結果：螢幕（穿透）／眼睛（反射）
     const rc = rs ? HEX(rs) : '#050505';
-    if (filter) s += `<rect x="${FXS}" y="52" width="84" height="160" rx="8" fill="${rc}" stroke="#888" stroke-width="2"/>` + text(FXS + 42, 232, '螢幕上看到', '#fff', 11);
-    else s += `<circle cx="470" cy="60" r="19" fill="#fff"/><circle cx="476" cy="60" r="7.5" fill="#222"/>` + text(470, 96, '眼睛看到', '#fff', 11) + `<rect x="440" y="106" width="60" height="34" rx="6" fill="${rc}" stroke="#888" stroke-width="2"/>`;
+    if (filter) s += `<rect x="${FXS}" y="44" width="84" height="180" rx="8" fill="${rc}" stroke="#888" stroke-width="2"/>` + text(FXS + 42, 240, '螢幕上看到', '#fff', 11);
+    else {
+      const px = EC[0] - 9, py = EC[1] + 9;
+      s += `<circle cx="${EC[0]}" cy="${EC[1]}" r="${ER}" fill="#f4f4f4" stroke="#999" stroke-width="2"/><circle cx="${px}" cy="${py}" r="13" fill="#222"/><circle cx="${px - 3}" cy="${py - 3}" r="3.5" fill="#fff"/>`;
+      s += text(EC[0] + ER + 8, EC[1] - 6, '眼睛看到', '#fff', 11, 'start') + `<rect x="${EC[0] + ER + 8}" y="${EC[1]}" width="60" height="34" rx="6" fill="${rc}" stroke="#888" stroke-width="2"/>`;
+    }
     setG(host, s);
   };
   const out = () => {
     const { rs } = info();
     const why = filter ? (S.p === '無色' ? '無色透明玻璃紙讓所有色光穿透。' : `${S.p}色玻璃紙只讓${S.p}光穿透，其他色光被吸收。`) : (S.p === '白' ? '白紙反射所有色光。' : S.p === '黑' ? '黑紙吸收所有色光。' : `${S.p}紙只反射${S.p}光，其他色光被吸收。`);
-    Q(host, 'out').innerHTML = `${S.l}光 ${filter ? '穿過' : '照到'} ${S.p}${filter ? (S.p === '無色' ? '（透明）' : '色') + '玻璃紙' : '紙'}：${why}<br>${filter ? '穿過去的' : '反射出來的'}光是 → <b>${NAME[rs] || '黑色'}</b>${rs ? '' : '（沒有光，看起來是黑的）'}。<br><span class="muted">${filter ? '透明物體：光「穿過去」，看穿過去的光。' : '不透明物體：光「彈回來」，看反射回來的光；光穿不過去。'}</span>`;
+    Q(host, 'out').innerHTML = `${S.l}光 ${filter ? '穿過' : '照到'} ${S.p}${filter ? (S.p === '無色' ? '（透明）' : '色') + '玻璃紙' : '紙'}：${why}<br>${filter ? '穿過去的' : '反射出來的'}光是 → <b>${NAME[rs] || '黑色'}</b>${rs ? '' : '（沒有光，看起來是黑的）'}。<br><span class="muted">${filter ? '透明物體：光「穿過去」，看穿過去的光。' : '不透明物體：光「彈回來」，看反射回來的光；光穿不過去。'}${S.l === '白' ? '　白光含有各種色光，圖中畫七種當代表（紅波長最長、紫最短）。' : ''}</span>`;
   };
   $$('[data-l]', host).forEach(b => b.onclick = () => { S.l = b.dataset.l; $$('[data-l]', host).forEach(x => x.classList.toggle('on', x === b)); out(); });
   $$('[data-p]', host).forEach(b => b.onclick = () => { S.p = b.dataset.p; $$('[data-p]', host).forEach(x => x.classList.toggle('on', x === b)); out(); });
